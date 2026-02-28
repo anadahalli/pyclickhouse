@@ -1,0 +1,25 @@
+[project]
+name = "pyclickhouse"
+version = "0.1.0"
+description = "Async ClickHouse Pydantic ORM"
+authors = ["Ashwath Nadahalli <anadahalli@gmail.com>"]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "asynch>=0.3.1",
+    "prqlc>=0.13.10",
+    "pydantic>=2.12.5",
+    "pydantic-settings>=2.13.1",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.2.0",
+    "ipython>=9.10.0",
+    "jupyter>=1.1.1",
+    "pytest>=9.0.2",
+    "pytest-watcher>=0.6.3",
+    "ruff>=0.15.4",
+    "testcontainers>=4.14.1",
+    "ty>=0.0.19",
+]
