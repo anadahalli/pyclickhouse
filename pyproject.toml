@@ -46,3 +46,11 @@ asyncio_mode = "auto"
 console_output_style = "count"
 addopts = ["--pdbcls=IPython.terminal.debugger:TerminalPdb", "--no-header"]
 testpaths = ["tests"]
+
+[tool.uv.build-backend]
+module-name = "pyclickhouse"
+module-root = ""
+
+[build-system]
+requires = ["uv_build>=0.10.0,<0.11.0"]
+build-backend = "uv_build"
