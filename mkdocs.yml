@@ -1,0 +1,48 @@
+site_name: pyclickhouse
+# site_url: https://
+
+repo_name: anadahalli/pyclickhouse
+repo_url: https://github.com/anadahalli/pyclickhouse
+
+theme:
+  name: material
+  features:
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotate
+    - content.code.copy
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            annotations_path: brief
+            docstring_section_style: spacy
+            show_root_heading: true
+            show_signature_annotations: true
+            separate_signature: true
+            show_signature_type_parameters: true
+            signature_crossrefs: true
+            show_docstring_raises: true
+            # summary: true
+
+nav:
+  - Home: index.md
+  - Reference:
+      - Database: reference/database.md

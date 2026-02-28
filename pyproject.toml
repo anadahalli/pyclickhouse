@@ -4,7 +4,10 @@ version = "0.1.0"
 description = "Python async ClickHouse ORM using Pydantic"
 authors = [{name = "Ashwath Nadahalli", email = "anadahalli@gmail.com"}]
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 requires-python = ">=3.12"
+
 dependencies = [
     "asynch>=0.3.1",
     "prqlc>=0.13.10",
@@ -12,8 +15,15 @@ dependencies = [
     "pydantic-settings>=2.13.1",
 ]
 
+classifiers = []
+
+[project.urls]
+Homepage = "https://github.com/anadahalli/pyclickhouse"
+Repository = "https://github.com/anadahalli/pyclickhouse"
+
 [dependency-groups]
 dev = [
+    { include-group = "docs"},
     "ipykernel>=7.2.0",
     "ipython>=9.10.0",
     "jupyter>=1.1.1",
@@ -23,3 +33,14 @@ dev = [
     "testcontainers>=4.14.1",
     "ty>=0.0.19",
 ]
+docs = [
+    "mkdocs>=1.6.1",
+    "mkdocs-material>=9.7.3",
+    "mkdocstrings-python>=2.0.3",
+]
+tests = []
+
+[tool.pytest]
+console_output_style = "count"
+addopts = ["--pdbcls=IPython.terminal.debugger:TerminalPdb", "--no-header"]
+testpaths = ["tests"]
