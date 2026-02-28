@@ -3,7 +3,7 @@ from typing import Any, Self
 
 from pydantic.fields import FieldInfo
 
-from .types import get_default_type
+from .types import get_clickhouse_type
 
 
 @dataclass
@@ -61,7 +61,7 @@ class Column:
         column._field = field
 
         if column.type is None:
-            column.type = get_default_type(field.annotation)
+            column.type = get_clickhouse_type(field.annotation)
 
         if column.name is None:
             column.name = name
