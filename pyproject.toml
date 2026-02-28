@@ -1,8 +1,8 @@
 [project]
 name = "pyclickhouse"
 version = "0.1.0"
-description = "Async ClickHouse Pydantic ORM"
-authors = ["Ashwath Nadahalli <anadahalli@gmail.com>"]
+description = "Python async ClickHouse ORM using Pydantic"
+authors = [{name = "Ashwath Nadahalli", email = "anadahalli@gmail.com"}]
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
