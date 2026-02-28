@@ -3,15 +3,23 @@ from typing import ClassVar
 
 
 class Engine:
-    _engine: ClassVar
+    name: ClassVar
 
     def to_sql(self) -> str:
         raise NotImplementedError()
 
 
 @dataclass(kw_only=True)
+class Memory(Engine):
+    name: ClassVar = "Memory"
+
+    def to_sql(self) -> str:
+        return self.name
+
+
+@dataclass(kw_only=True)
 class MergeTree(Engine):
-    _engine: ClassVar = "MergeTree()"
+    name: ClassVar = "MergeTree()"
 
     order_by: str | None = None
     partition_by: str | None = None
@@ -31,4 +39,4 @@ class MergeTree(Engine):
         if self.primary_key is not None:
             parts.append(f"PRIMARY KEY {self.primary_key}")
 
-        return f"ENGINE = {self._engine} {' '.join(parts)}".strip()
+        return f"{self.name} {' '.join(parts)}".strip()

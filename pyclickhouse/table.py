@@ -3,10 +3,12 @@ from typing import TYPE_CHECKING, Any, ClassVar, Self
 from pydantic import BaseModel
 from pydantic._internal._model_construction import ModelMetaclass
 
+from pyclickhouse.utils import pascal_to_snake
+
 from .column import Column
 from .config import TableConfig
+from .engine import Engine
 from .expression import Expression
-from .utils import pascal_to_snake
 
 
 class TableMeta(ModelMetaclass):
@@ -26,20 +28,22 @@ class TableMeta(ModelMetaclass):
 
 
 class Table(BaseModel, metaclass=TableMeta):
-    table_config: ClassVar[TableConfig] = TableConfig()
-    table_columns: ClassVar[dict[str, Column]] = {}
+    table_config: ClassVar[TableConfig]
+    table_engine: ClassVar[Engine]
+    table_columns: ClassVar[dict[str, Column]]
 
     @classmethod
     def __pydantic_init_subclass__(cls: type[Self], **kwargs: Any) -> None:
         cls.model_config["from_attributes"] = True
 
-        if cls.table_config.name is None:
-            cls.table_config.name = pascal_to_snake(cls.__name__)
+        cls.table_config = TableConfig.from_model(cls)
 
         cls.table_columns = {
             name: Column.from_field(name, field)
             for name, field in cls.model_fields.items()
         }
+
+        cls.table_config.registry.register_table(cls)
 
     @classmethod
     def model_columns(cls) -> dict[str, Column]:
@@ -47,7 +51,7 @@ class Table(BaseModel, metaclass=TableMeta):
 
     @classmethod
     def get_table_name(cls) -> str:
-        return cls.table_config.name or ""
+        return cls.table_config.name or pascal_to_snake(cls.__name__)
 
     @classmethod
     def to_create_sql(cls) -> str:
@@ -55,7 +59,7 @@ class Table(BaseModel, metaclass=TableMeta):
         columns = cls.table_columns
 
         create = f"CREATE TABLE IF NOT EXISTS {config.name}"
-        engine = config.engine.to_sql()
+        engine = f"ENGINE = {config.engine.to_sql()}"
         columns: list[str] = [col.to_sql() for col in columns.values()]
         options: list[str] = []
 

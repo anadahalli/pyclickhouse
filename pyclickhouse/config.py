@@ -4,6 +4,8 @@ from typing import Self
 from pydantic import BaseModel
 
 from .engine import Engine, MergeTree
+from .registry import Registry, default_registry
+from .utils import pascal_to_snake
 
 
 @dataclass
@@ -21,18 +23,16 @@ class TableConfig:
     indexes: dict[str, str] = field(default_factory=dict)
     projections: dict[str, str] = field(default_factory=dict)
 
+    registry: Registry = field(default=default_registry)
+
     @classmethod
     def from_model(cls, model: type[BaseModel]) -> Self:
-        class_vars = vars(model).values()
+        table_engine: Engine = getattr(model, "table_engine", MergeTree())
+        table_name: str = pascal_to_snake(model.__name__)
 
-        config: TableConfig = next(
-            (cnf for cnf in class_vars if isinstance(cnf, TableConfig)), cls()
-        )
-
-        if config.engine is None:
-            config.engine = MergeTree()
+        config: TableConfig = getattr(model, "table_config", cls(engine=table_engine))
 
         if config.name is None:
-            config.name = model.__name__.lower()
+            config.name = table_name
 
         return config
