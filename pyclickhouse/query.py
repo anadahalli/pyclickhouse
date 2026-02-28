@@ -1,10 +1,12 @@
 from typing import Any, Self
 
 import prqlc
+from pydantic import BaseModel, create_model
 
 from .column import Column
 from .expression import Expression
 from .table import Table
+from .types import get_python_type
 
 
 class Query:
@@ -120,3 +122,17 @@ class Query:
 
     def join(self) -> Self:
         return self
+
+
+class Result(BaseModel):
+    pass
+
+
+def create_result_model(name: str, columns: Any) -> type[BaseModel]:
+    fields: dict[str, Any] = {}
+
+    for col_name, col_type in columns:
+        fields[col_name] = get_python_type(col_type)
+
+    model: type[BaseModel] = create_model(name, **fields)
+    return model
