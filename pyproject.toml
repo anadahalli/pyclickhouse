@@ -28,6 +28,7 @@ dev = [
     "ipython>=9.10.0",
     "jupyter>=1.1.1",
     "pytest>=9.0.2",
+    "pytest-asyncio>=1.3.0",
     "pytest-watcher>=0.6.3",
     "ruff>=0.15.4",
     "testcontainers>=4.14.1",
@@ -41,6 +42,7 @@ docs = [
 tests = []
 
 [tool.pytest]
+asyncio_mode = "auto"
 console_output_style = "count"
 addopts = ["--pdbcls=IPython.terminal.debugger:TerminalPdb", "--no-header"]
 testpaths = ["tests"]
