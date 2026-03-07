@@ -3,7 +3,7 @@ from typing import Any, Callable, Self
 
 from pydantic.fields import FieldInfo
 
-from .types import ClickHouseType, get_clickhouse_type, get_python_type
+from .types import ClickHouseType, get_clickhouse_type
 
 
 @dataclass
@@ -26,9 +26,6 @@ class Column:
         if not column.type:
             column.type = get_clickhouse_type(info.annotation)
         return column
-
-    def to_field(self) -> tuple[str, type]:
-        return self.name, get_python_type(str(self.type))
 
     @classmethod
     def from_sql(cls, **kwargs: Any) -> Self:

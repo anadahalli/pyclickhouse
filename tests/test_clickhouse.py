@@ -1,8 +1,9 @@
 from pydantic import BaseModel
 
 from pyclickhouse.clickhouse import ClickHouse, ModelResult
+from pyclickhouse.engines import Memory, MergeTree
 from pyclickhouse.query import Query
-from pyclickhouse.table import Table, TableConfig
+from pyclickhouse.table import table
 
 from .container import ClickHouseContainer
 
@@ -17,23 +18,25 @@ class TestClickHouse:
         db = ClickHouse(clickhouse.get_url())
 
         class Model(BaseModel):
-            key: str
-            val: int
+            name: str
+            value: int
 
-        table = Table.from_model(
-            Model, config=TableConfig(engine="MergeTree", order_by="key")
+        model = table(
+            Model,
+            name="test",
+            engine=MergeTree(order_by="name"),
         )
 
         async with db:
             assert await db.show_tables() == []
 
-            assert await db.create_table(table)
-            assert await db.show_tables() == ["model"]
+            assert await db.create_table(model)
+            assert await db.show_tables() == ["test"]
 
-            dtable = await db.get_table(table._table_name)
-            assert dtable._table_columns == table._table_columns
+            dtable = await db.get_table(model._name)
+            assert dtable._columns == model._columns
 
-            assert await db.drop_table(table)
+            assert await db.drop_table(model)
             assert await db.show_tables() == []
 
     async def test_table_insert(self, clickhouse: ClickHouseContainer) -> None:
@@ -46,16 +49,16 @@ class TestClickHouse:
         async with db:
             data = Data(key="one", val=1)
 
-            table = Table.from_model(Data)
-            assert await db.create_table(table)
+            model = table(Data)
+            assert await db.create_table(model)
             assert await db.insert(data) == 1
-            result = await db.execute(f"SELECT * FROM {table._table_name}")
+            result = await db.execute(f"SELECT * FROM {model._name}")
             assert await result.fetchone() == data.model_dump()
 
-            table = Table.from_model(Data, name="new")
-            assert await db.create_table(table)
-            assert await db.insert(data, table=table) == 1
-            result = await db.execute(f"SELECT * FROM {table._table_name}")
+            model = table(Data, name="new")
+            assert await db.create_table(model)
+            assert await db.insert(data, table=model) == 1
+            result = await db.execute(f"SELECT * FROM {model._name}")
             assert await result.fetchone() == data.model_dump()
 
     async def test_table_query(self, clickhouse: ClickHouseContainer) -> None:
@@ -69,17 +72,17 @@ class TestClickHouse:
             key: str
             val: int
 
-        table = Table.from_model(Store)
+        model = table(Store, engine=Memory())
 
         async with db:
-            assert await db.create_table(table)
+            assert await db.create_table(model)
 
             assert await db.insert(Store(key="one", val=1)) == 1
             assert await db.insert(Store(key="two", val=2)) == 1
             assert await db.insert(Store(key="three", val=3)) == 1
             assert await db.insert(Store(key="four", val=4)) == 1
 
-            query = Query(table).sort(table.val)
+            query = Query(model).sort(model.val)
 
             result = await db.query(query, model=Store)
             assert isinstance(result, ModelResult)
