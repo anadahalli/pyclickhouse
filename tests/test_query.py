@@ -1,191 +1,142 @@
-from typing import Annotated
-
 import pytest
+from pydantic import BaseModel
 
-from pyclickhouse import Column, F, MergeTree, Query, Table, TableConfig
+from pyclickhouse.fields import Aggregate, F
+from pyclickhouse.query import Query
+from pyclickhouse.table import Table
 
 
 class TestQuery:
-    def test_query_builder(self) -> None:
-        class Model(Table):
-            table_config = TableConfig(
-                engine=MergeTree(order_by="value"),
-                name="test_table",
-            )
+    def test_query(self) -> None:
+        class Model(BaseModel):
+            key: str
+            val: int
 
-            name: Annotated[str, Column(type="String", name="name")]
-            value: Annotated[int, Column(type="UInt32", name="value")]
+        table = Table.from_model(Model)
+
+        q = Query(table="test", database="db", schema="sc")
+        assert q.pipeline == ["from sc.db.test"]
+        assert str(q) == "SELECT * FROM sc.db.test"
+        q = Query(table=table, database="db", schema="sc")
+        assert str(q) == "SELECT * FROM sc.db.model"
+        q = Query(table=table, schema="sc")
+        assert str(q) == "SELECT * FROM sc.model"
+        q = Query(table=table, database="db")
+        assert str(q) == "SELECT * FROM db.model"
 
         # base
-        query = Query(Model)
-        prql = "from test_table"
-        sql = "SELECT * FROM test_table"
-        assert query._build() == prql
-        assert query._compile() == sql
-        assert str(query) == sql
+        q = Query(table)
+        assert q.pipeline == ["from model"]
+        assert str(q) == "SELECT * FROM model"
 
         # select
-        query = Query(Model)
-        query = query.select(Model.name, Model.value)
-        prql = "from test_table | select {name, value}"
-        sql = "SELECT name, value FROM test_table"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        query = Query(Model)
-        query = query.select(Model.name, val=Model.value)
-        prql = "from test_table | select {name, val = value}"
-        sql = "SELECT name, value AS val FROM test_table"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        query = Query(Model)
-        query = query.select()
-        prql = "from test_table"
-        sql = "SELECT * FROM test_table"
-        assert query._build() == prql
-        assert query._compile() == sql
+        with pytest.raises(ValueError):
+            q.select()
+        s = q.select(table.key)
+        assert s.pipeline == ["from model", "select {key}"]
+        assert str(s) == "SELECT `key` FROM model"
+        s = q.select(table.val)
+        assert s.pipeline == ["from model", "select {val}"]
+        assert str(s) == "SELECT val FROM model"
+        s = q.select(table.key, table.val)
+        assert s.pipeline == ["from model", "select {key, val}"]
+        assert str(s) == "SELECT `key`, val FROM model"
+        s = q.select(value=table.val)
+        assert s.pipeline == ["from model", "select {value = val}"]
+        assert str(s) == "SELECT val AS value FROM model"
+        s = q.select(table.key, value=table.val)
+        assert s.pipeline == ["from model", "select {key, value = val}"]
+        assert str(s) == "SELECT `key`, val AS value FROM model"
 
         # derive
-        query = Query(Model)
-        query = query.derive(new_name=Model.name, new_value=Model.value + 10)
-        prql = "from test_table | derive {new_name = name, new_value = value + 10}"
-        sql = "SELECT *, name AS new_name, value + 10 AS new_value FROM test_table"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        query = Query(Model)
-        query.select(Model.name)
-        query = query.derive(new_name=Model.name)
-        prql = "from test_table | select {name} | derive {new_name = name}"
-        sql = "SELECT name, name AS new_name FROM test_table"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        # filter
-        query = Query(Model)
-        query.filter(Model.value > 10)
-        prql = "from test_table | filter (value > 10)"
-        sql = "SELECT * FROM test_table WHERE value > 10"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        query = Query(Model)
-        query.filter(Model.name == "test")
-        prql = 'from test_table | filter (name == "test")'
-        sql = "SELECT * FROM test_table WHERE name = 'test'"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        query = Query(Model)
-        query.filter(Model.name == "test")
-        query.filter(Model.value > 10)
-        prql = 'from test_table | filter (name == "test") | filter (value > 10)'
-        sql = "SELECT * FROM test_table WHERE name = 'test' AND value > 10"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        query = Query(Model)
-        query.filter(F.count(Model.value) > 10)
-        prql = 'from test_table | filter (s"count(value)" > 10)'
-        sql = "SELECT * FROM test_table WHERE count(value) > 10"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        # TODO: AND & OR
+        with pytest.raises(ValueError):
+            q.derive()
+        s = q.derive(new_value=table.val + 1)
+        assert s.pipeline == ["from model", "derive {new_value = val + 1}"]
+        assert str(s) == "SELECT *, val + 1 AS new_value FROM model"
+        s = q.derive(new_value=table.val * 10)
+        assert s.pipeline == ["from model", "derive {new_value = val * 10}"]
+        assert str(s) == "SELECT *, val * 10 AS new_value FROM model"
 
         # sort
-        query = Query(Model)
-        query.sort(Model.name)
-        prql = "from test_table | sort {name}"
-        sql = "SELECT * FROM test_table ORDER BY name"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        query = Query(Model)
-        query.sort(Model.name, Model.value)
-        prql = "from test_table | sort {name, value}"
-        sql = "SELECT * FROM test_table ORDER BY name, value"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        query = Query(Model)
-        query.sort(-Model.value)
-        prql = "from test_table | sort {-value}"
-        sql = "SELECT * FROM test_table ORDER BY value DESC"
-        assert query._build() == prql
-        assert query._compile() == sql
+        with pytest.raises(ValueError):
+            q.sort()
+        s = q.sort(table.val)
+        assert s.pipeline == ["from model", "sort {val}"]
+        assert str(s) == "SELECT * FROM model ORDER BY val"
+        s = q.sort(-table.val)
+        assert s.pipeline == ["from model", "sort {-val}"]
+        assert str(s) == "SELECT * FROM model ORDER BY val DESC"
 
         # take
         with pytest.raises(ValueError):
-            Query(Model).take()
-            Query(Model).take(10, start=100)
-            Query(Model).take(10, end=100)
-            Query(Model).take(10, start=10, end=100)
+            q.take()
+            q.take(1, start=1)
+            q.take(1, end=10)
+            q.take(1, start=1, end=10)
+        s = q.take(1)
+        assert s.pipeline == ["from model", "take 1"]
+        assert str(s) == "SELECT * FROM model LIMIT 1"
+        s = q.take(start=10)
+        assert s.pipeline == ["from model", "take 10.."]
+        assert str(s) == "SELECT * FROM model OFFSET 9"
+        s = q.take(end=10)
+        assert s.pipeline == ["from model", "take ..10"]
+        assert str(s) == "SELECT * FROM model LIMIT 10"
+        s = q.take(start=10, end=20)
+        assert s.pipeline == ["from model", "take 10..20"]
+        assert str(s) == "SELECT * FROM model LIMIT 11 OFFSET 9"
 
-        query = Query(Model)
-        query.take(1)
-        prql = "from test_table | take 1"
-        sql = "SELECT * FROM test_table LIMIT 1"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        query = Query(Model)
-        query.take(start=10)
-        prql = "from test_table | take 10.."
-        sql = "SELECT * FROM test_table OFFSET 9"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        query = Query(Model)
-        query.take(end=10)
-        prql = "from test_table | take ..10"
-        sql = "SELECT * FROM test_table LIMIT 10"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        query = Query(Model)
-        query.take(start=10, end=20)
-        prql = "from test_table | take 10..20"
-        sql = "SELECT * FROM test_table LIMIT 11 OFFSET 9"
-        assert query._build() == prql
-        assert query._compile() == sql
+        # filter
+        s = q.filter(table.val == 10)
+        assert s.pipeline == ["from model", "filter (val == 10)"]
+        assert str(s) == "SELECT * FROM model WHERE val = 10"
+        s = q.filter(table.val != 10)
+        assert s.pipeline == ["from model", "filter (val != 10)"]
+        assert str(s) == "SELECT * FROM model WHERE val <> 10"
+        s = q.filter(table.val >= 10)
+        assert s.pipeline == ["from model", "filter (val >= 10)"]
+        assert str(s) == "SELECT * FROM model WHERE val >= 10"
+        s = q.filter((table.val == 10) | (table.val == 20))
+        assert s.pipeline == ["from model", "filter (val == 10 || val == 20)"]
+        assert str(s) == "SELECT * FROM model WHERE val = 10 OR val = 20"
+        s = q.filter((table.key == "test") & (table.val == 10))
+        assert s.pipeline == ["from model", "filter (key == 'test' && val == 10)"]
+        assert str(s) == "SELECT * FROM model WHERE `key` = 'test' AND val = 10"
 
         # aggregate
-        query = Query(Model)
-        query.aggregate(F.avg(Model.value))
-        prql = 'from test_table | aggregate {s"avg(value)"}'
-        sql = "SELECT avg(value) FROM test_table"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        query = Query(Model)
-        query.aggregate(val=F.avg(Model.value))
-        prql = 'from test_table | aggregate {val = s"avg(value)"}'
-        sql = "SELECT avg(value) AS val FROM test_table"
-        assert query._build() == prql
-        assert query._compile() == sql
+        s = q.aggregate(F.count())
+        assert s.pipeline == ["from model", "aggregate {s'count()'}"]
+        assert str(s) == "SELECT count() FROM model"
+        s = q.aggregate(F.count(table.val))
+        assert s.pipeline == ["from model", "aggregate {s'count(val)'}"]
+        assert str(s) == "SELECT count(val) FROM model"
+        s = q.aggregate(total=F.sum(table.val))
+        assert s.pipeline == ["from model", "aggregate {total = s'sum(val)'}"]
+        assert str(s) == "SELECT sum(val) AS total FROM model"
 
         # group
-        query = Query(Model)
-        query.group(Model.name, val=F.avg(Model.value))
-        prql = 'from test_table | group {name} (aggregate {val = s"avg(value)"})'
-        sql = "SELECT name, avg(value) AS val FROM test_table GROUP BY name"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        query = Query(Model)
-        query.group(n=Model.name, val=F.avg(Model.value))
-        prql = 'from test_table | group {n = name} (aggregate {val = s"avg(value)"})'
-        sql = "SELECT name AS n, avg(value) AS val FROM test_table GROUP BY name"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        query = Query(Model)
-        query.group(Model.name, F.avg(Model.value))
-        prql = 'from test_table | group {name} (aggregate {s"avg(value)"})'
-        sql = "SELECT name, avg(value) FROM test_table GROUP BY name"
-        assert query._build() == prql
-        assert query._compile() == sql
-
-        # window
+        s = q.group(table.key)
+        assert s.pipeline == ["from model", "group {key} (aggregate {})"]
+        assert str(s) == "SELECT `key` FROM model GROUP BY `key`"
+        s = q.group(value=table.val)
+        assert s.pipeline == ["from model", "group {value = val} (aggregate {})"]
+        assert str(s) == "SELECT val AS value FROM model GROUP BY val"
+        s = q.group(table.key, Aggregate(F.count()))
+        assert s.pipeline == ["from model", "group {key} (aggregate {s'count()'})"]
+        assert str(s) == "SELECT `key`, count() FROM model GROUP BY `key`"
+        s = q.group(table.key, total=Aggregate(F.sum(table.val)))
+        assert s.pipeline == [
+            "from model",
+            "group {key} (aggregate {total = s'sum(val)'})",
+        ]
+        assert str(s) == "SELECT `key`, sum(val) AS total FROM model GROUP BY `key`"
+        s = q.group(name=table.key, total=Aggregate(F.sum(table.val)))
+        assert s.pipeline == [
+            "from model",
+            "group {name = key} (aggregate {total = s'sum(val)'})",
+        ]
+        assert (
+            str(s)
+            == "SELECT `key` AS name, sum(val) AS total FROM model GROUP BY `key`"
+        )

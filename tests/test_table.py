@@ -1,108 +1,105 @@
 from typing import Annotated, ClassVar
 
-import pytest
+from pydantic import BaseModel
 
-from pyclickhouse import (
-    Column,
-    Expression,
-    MergeTree,
-    Registry,
-    Table,
-    TableConfig,
-    default_registry,
-)
+from pyclickhouse.engines import MergeTree
+from pyclickhouse.fields import Column
+from pyclickhouse.table import Table, TableConfig
 
 
 class TestTable:
-    def test_table_initialize(self) -> None:
-        class BaseTable(Table):
-            table_engine: ClassVar = MergeTree(order_by="key")
+    def test_table_from_model(self) -> None:
+        class Model(BaseModel):
             key: str
+            val: int
 
-        assert BaseTable.table_config == TableConfig(
-            engine=MergeTree(order_by="key"),
-            name="base_table",
-        )
-
-        class Model(Table):
-            table_config = TableConfig(
-                engine=MergeTree(order_by="value"),
-                name="test_table",
-            )
-
-            name: Annotated[str, Column(type="String", name="name")]
-            value: Annotated[int, Column(type="UInt32", name="value")]
-
-        assert Model.table_config == TableConfig(
-            engine=MergeTree(order_by="value"),
-            name="test_table",
-        )
-        columns = {
-            "name": Column(
-                type="String",
-                name="name",
-                nullable=None,
-                default=None,
-                materialized=None,
-                alias=None,
-                codec=None,
-                ttl=None,
-                comment=None,
-            ),
-            "value": Column(
-                type="UInt32",
-                name="value",
-                nullable=None,
-                default=None,
-                materialized=None,
-                alias=None,
-                codec=None,
-                ttl=None,
-                comment=None,
-            ),
+        table = Table.from_model(Model)
+        assert isinstance(table, Table)
+        assert table._table_model == Model
+        assert table._table_name == "model"
+        assert table._table_config == TableConfig()
+        assert table._table_columns == {
+            "key": Column(name="key", type="String"),
+            "val": Column(name="val", type="Int32"),
         }
-        assert Model.table_columns == columns
 
-    def test_table_registry(self) -> None:
-        class First(Table):
-            key: int
+        class ModelConfig(BaseModel):
+            table_config: ClassVar = TableConfig(
+                engine=MergeTree(),
+                order_by="name",
+            )
+            name: str
 
-        assert default_registry.get_table(First.get_table_name()) == First
+        table = Table.from_model(ModelConfig)
+        assert isinstance(table, Table)
+        assert table._table_model == ModelConfig
+        assert table._table_name == "model_config"
+        assert table._table_config == TableConfig(
+            engine=MergeTree(),
+            order_by="name",
+        )
+        assert table._table_columns == {
+            "name": Column(name="name", type="String"),
+        }
 
-        new_registry = Registry()
+        class ModelColumns(BaseModel):
+            name: Annotated[str, Column(name="new_name")]
+            value: Annotated[int, Column(type="Int8")]
 
-        class Second(Table):
-            table_config = TableConfig(registry=new_registry)
-            key: int
+        table = Table.from_model(ModelColumns)
+        assert isinstance(table, Table)
+        assert table._table_model == ModelColumns
+        assert table._table_name == "model_columns"
+        assert table._table_config == TableConfig()
+        assert table._table_columns == {
+            "name": Column(name="new_name", type="String"),
+            "value": Column(name="value", type="Int8"),
+        }
 
-        assert new_registry.get_table(Second.get_table_name()) == Second
-        assert new_registry.get_table(First.get_table_name()) is None
-        assert new_registry.tables == {Second.get_table_name(): Second}
+    def test_table_from_database(self) -> None:
+        columns = [
+            {
+                "name": "key",
+                "type": "String",
+                "default_type": "",
+                "default_expression": "",
+                "comment": "",
+                "codec_expression": "",
+                "ttl_expression": "",
+            },
+            {
+                "name": "val",
+                "type": "Int32",
+                "default_type": "",
+                "default_expression": "",
+                "comment": "",
+                "codec_expression": "",
+                "ttl_expression": "",
+            },
+        ]
+        engine_full = "MergeTree ORDER BY key SETTINGS index_granularity = 8192"
 
-    def test_table_to_create_sql(self) -> None:
-        class Model(Table):
-            name: Annotated[str, Column(type="String")]
-            value: int
+        table = Table.from_database(name="model", engine=engine_full, columns=columns)
+        assert table._table_name == "model"
+        assert table._table_config == TableConfig(
+            engine="MergeTree",
+            order_by="key",
+            settings={"index_granularity": "8192"},
+        )
+        assert table._table_columns == {
+            "key": Column(name="key", type="String"),
+            "val": Column(name="val", type="Int32"),
+        }
 
-        sql = "CREATE TABLE IF NOT EXISTS model (name String, value Int32) ENGINE = MergeTree() ORDER BY tuple()"
-        assert Model.to_create_sql() == sql
+    def test_table_to_sql(self) -> None:
+        class Model(BaseModel):
+            key: str
+            val: int
 
-    def test_table_to_insert_sql(self) -> None:
-        class Model(Table):
-            name: Annotated[str, Column(type="String")]
-            value: int
-
-        sql = "INSERT INTO model (name, value) VALUES"
-        model = Model(name="test", value=1)
-        assert model.to_insert_sql() == sql
-
-    def test_table_column_access(self) -> None:
-        class Model(Table):
-            name: Annotated[str, Column(type="String")]
-            value: int
-
-        with pytest.raises(AttributeError):
-            Model.unknown  # type: ignore
-
-        assert isinstance(Model.name, Expression)
-        assert isinstance(Model.value, Expression)
+        table = Table.from_model(Model)
+        create_sql = "CREATE TABLE IF NOT EXISTS model (key String, val Int32) ENGINE = MergeTree ORDER BY tuple()"
+        assert table.to_create_sql() == create_sql
+        drop_sql = "DROP TABLE IF EXISTS model"
+        assert table.to_drop_sql() == drop_sql
+        insert_sql = "INSERT INTO model (key, val) VALUES"
+        assert table.to_insert_sql() == insert_sql
