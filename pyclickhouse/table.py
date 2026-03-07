@@ -4,7 +4,7 @@ from typing import Any, Self
 
 from pydantic import BaseModel, create_model
 
-from .engines import Engine
+from .engines import Engine, MergeTree
 from .fields import Column, Expression
 from .types import get_python_type
 from .utils import pascal_to_snake
@@ -52,33 +52,36 @@ class TableConfig:
 
 
 class Table:
-    _table_model: type[BaseModel]
-    _table_name: str
-    _table_config: TableConfig
-    _table_columns: dict[str, Column]
+    _model: type[BaseModel]
+    _name: str
+    _engine: Engine | str
+    _columns: dict[str, Column]
+    _comment: str | None
 
     def __init__(
         self,
         model: type[BaseModel],
         name: str,
-        config: TableConfig,
+        engine: Engine | str,
         columns: dict[str, Column],
+        comment: str | None = None,
     ) -> None:
-        self._table_model = model
-        self._table_name = name
-        self._table_config = config
-        self._table_columns = columns
+        self._model = model
+        self._name = name
+        self._engine = engine
+        self._columns = columns
+        self._comment = comment
 
     def __repr__(self) -> str:
-        return f"Table({self._table_name})"
+        return f"Table({self._name})"
 
     def __str__(self) -> str:
-        return self._table_name
+        return self._name
 
     def __getattr__(self, name: str) -> Expression:
-        if name not in self._table_columns:
-            raise AttributeError(f"Table({self._table_name}) has no column '{name}'")
-        return Expression(self._table_columns[name])
+        if name not in self._columns:
+            raise AttributeError(f"Table({self._name}) has no column '{name}'")
+        return Expression(self._columns[name])
 
     @classmethod
     def from_model(
@@ -86,61 +89,65 @@ class Table:
         model: type[BaseModel],
         *,
         name: str | None = None,
-        config: TableConfig | None = None,
+        engine: Engine | str | None = None,
+        comment: str | None = None,
     ) -> Self:
-        table_name = name or pascal_to_snake(model.__name__)
-        table_config = config or TableConfig.from_model(model)
-        table_columns = {}
-        for name, info in model.model_fields.items():
-            table_columns[name] = Column.from_field(name, info)
+        name = name or pascal_to_snake(model.__name__)
+        engine = engine or MergeTree()
+        columns = {
+            name: Column.from_field(name, info)
+            for name, info in model.model_fields.items()
+        }
         table = cls(
             model=model,
-            name=table_name,
-            config=table_config,
-            columns=table_columns,
+            name=name,
+            engine=engine,
+            columns=columns,
         )
         return table
 
     @classmethod
-    def from_database(
-        cls, name: str, engine: str, columns: list[dict[str, str]]
+    def from_sql(
+        cls,
+        name: str,
+        engine_sql: str,
+        columns_sql: list[dict[str, str]],
     ) -> Self:
-        table_columns: dict[str, Column] = {
-            col["name"]: Column(**col) for col in columns
-        }
-        table_config = TableConfig.from_database(engine)
-        table_model: type[BaseModel] = create_dynamic_model(name, table_columns)
+        columns = {col["name"]: Column(**col) for col in columns_sql}
+        model = create_dynamic_model(name, columns)
         return cls(
-            model=table_model,
+            model=model,
             name=name,
-            config=table_config,
-            columns=table_columns,
+            engine=engine_sql,
+            columns=columns,
         )
 
     def to_create_sql(self, database: str | None = None) -> str:
-        table_name = f"{database}.{self._table_name}" if database else self._table_name
-        table_columns = ", ".join(
-            [col.to_sql() for col in self._table_columns.values()]
-        )
-        table_engine = self._table_config.to_sql()
-        return f"CREATE TABLE IF NOT EXISTS {table_name} ({table_columns}) {table_engine}".strip()
-
-    def to_drop_sql(self, database: str | None = None) -> str:
-        table_name = f"{database}.{self._table_name}" if database else self._table_name
-        return f"DROP TABLE IF EXISTS {table_name}"
+        table_name = f"{database}.{self._name}" if database else self._name
+        table_columns = ", ".join([col.to_sql() for col in self._columns.values()])
+        table_engine = str(self._engine)
+        return f"{table_name} ({table_columns}) ENGINE = {table_engine}".strip()
 
     def to_insert_sql(self, database: str | None = None) -> str:
-        table_name = f"{database}.{self._table_name}" if database else self._table_name
-        columns = ", ".join(self._table_columns.keys())
-        return f"INSERT INTO {table_name} ({columns}) VALUES".strip()
+        table_name = f"{database}.{self._name}" if database else self._name
+        columns = ", ".join(self._columns.keys())
+        return f"{table_name} ({columns}) VALUES".strip()
+
+
+def table(
+    model: type[BaseModel],
+    *,
+    name: str | None = None,
+    engine: Engine | str | None = None,
+    comment: str | None = None,
+) -> Table:
+    return Table.from_model(model, name=name, engine=engine, comment=comment)
 
 
 def create_dynamic_model(name: str, columns: dict[str, Column]) -> type[BaseModel]:
     fields: dict[str, Any] = {}
-
     for col_name, col in columns.items():
-        fields[col_name] = get_python_type(col.type)
-
+        fields[col_name] = get_python_type(str(col.type))
     model: type[BaseModel] = create_model(name, **fields)
     return model
 

@@ -71,16 +71,19 @@ class ClickHouse(Connection):
             await cursor.execute(query, args, context)
         return cursor
 
-    async def create_table(self, table: Table) -> bool:
-        result = await self.execute(table.to_create_sql())
+    async def create_table(self, table: Table, database: str | None = None) -> bool:
+        query = f"CREATE TABLE {table.to_create_sql(database or self.database)}"
+        result = await self.execute(query)
         return bool(result.rowcount)
 
-    async def drop_table(self, table: Table) -> bool:
-        result = await self.execute(table.to_drop_sql())
+    async def drop_table(self, table: Table | str, database: str | None = None) -> bool:
+        table_name = table._name if isinstance(table, Table) else table
+        query = f"DROP TABLE {database or self.database}.{table_name}"
+        result = await self.execute(query)
         return bool(result.rowcount)
 
     async def show_tables(self) -> list[str]:
-        result = await self.execute("SHOW TABLES")
+        result = await self.execute(f"SHOW TABLES FROM {self.database}")
         return [res["name"] for res in await result.fetchall()]
 
     async def get_table(self, name: str) -> Table:
@@ -90,11 +93,17 @@ class ClickHouse(Connection):
         result = await self.execute(query)
         engine_full = await result.fetchone()
         engine = engine_full.get("engine_full", "")
-        return Table.from_database(name=name, engine=engine, columns=columns)
+        return Table.from_sql(name=name, engine_sql=engine, columns_sql=columns)
 
-    async def insert(self, data: BaseModel, *, table: Table | None = None) -> int:
+    async def insert(
+        self,
+        data: BaseModel,
+        *,
+        table: Table | None = None,
+        database: str | None = None,
+    ) -> int:
         table = table or Table.from_model(type(data))
-        query = table.to_insert_sql()
+        query = f"INSERT INTO {table.to_insert_sql(database or self.database)}"
         args = data.model_dump()
         result = await self.execute(query, args=[args])
         return result.rowcount
