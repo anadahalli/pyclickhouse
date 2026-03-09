@@ -59,80 +59,123 @@ class MergeTree(Engine):
         return " ".join(parts)
 
 
-# @dataclass
-# class ReplacingMergeTree(Engine):
-#     ver: str | None = None
-#     is_deleted: str | None = None
-#     order_by: str | None = None
-#     primary_key: str | None = None
-#     partition_by: str | None = None
-#     sample_by: str | None = None
-#     settings: dict[str, Any] = field(default_factory=dict)
+@dataclass(kw_only=True)
+class ReplacingMergeTree(Engine):
+    ver: str | None = None
+    is_deleted: str | None = None
+    order_by: str | None = None
+    primary_key: str | None = None
+    partition_by: str | None = None
+    sample_by: str | None = None
+    settings: dict[str, Any] | None = None
+
+    def to_sql(self) -> str:
+        args: list[str] = []
+        if self.ver is not None:
+            args.append(self.ver)
+        if self.is_deleted is not None:
+            args.append(self.is_deleted)
+        parts: list[str] = []
+        parts.append(f"ReplacingMergeTree({', '.join(args)})")
+        parts.append(f"ORDER BY {self.order_by}")
+        if self.primary_key is not None:
+            parts.append(f"PRIMARY KEY {self.primary_key}")
+        if self.partition_by is not None:
+            parts.append(f"PARTITION BY {self.partition_by}")
+        if self.sample_by is not None:
+            parts.append(f"SAMPLE BY {self.sample_by}")
+        if self.settings:
+            parts.append(comma_join(self.settings, prefix="SETTINGS"))
+        return " ".join(parts)
 
 
-# class CoalescingMergeTree(Engine):
-#     columns: str | None = None
-#     order_by: str | None = None
-#     partition_by: str | None = None
-#     sample_by: str | None = None
-#     settings: dict[str, Any] = field(default_factory=dict)
+@dataclass(kw_only=True)
+class CoalescingMergeTree(Engine):
+    columns: str | None = None
+    order_by: str | None = None
+    partition_by: str | None = None
+    sample_by: str | None = None
+    settings: dict[str, Any] | None = None
+
+    def to_sql(self) -> str:
+        raise NotImplementedError()
 
 
-# class SummingMergeTree(Engine):
-#     columns: str | None = None
-#     order_by: str | None = None
-#     partition_by: str | None = None
-#     sample_by: str | None = None
-#     settings: dict[str, Any] = field(default_factory=dict)
+@dataclass(kw_only=True)
+class SummingMergeTree(Engine):
+    columns: str | None = None
+    order_by: str | None = None
+    partition_by: str | None = None
+    sample_by: str | None = None
+    settings: dict[str, Any] | None = None
 
 
-# class AggregatingMergeTree(Engine):
-#     ttl: str | None = None
-#     order_by: str | None = None
-#     partition_by: str | None = None
-#     sample_by: str | None = None
-#     settings: dict[str, Any] = field(default_factory=dict)
+@dataclass(kw_only=True)
+class AggregatingMergeTree(Engine):
+    ttl: str | None = None
+    order_by: str | None = None
+    partition_by: str | None = None
+    sample_by: str | None = None
+    settings: dict[str, Any] | None = None
+
+    def to_sql(self) -> str:
+        raise NotImplementedError()
 
 
-# class CollapsingMergeTree(Engine):
-#     sign: str
-#     order_by: str | None = None
-#     partition_by: str | None = None
-#     sample_by: str | None = None
-#     settings: dict[str, Any] = field(default_factory=dict)
+@dataclass(kw_only=True)
+class CollapsingMergeTree(Engine):
+    sign: str
+    order_by: str | None = None
+    partition_by: str | None = None
+    sample_by: str | None = None
+    settings: dict[str, Any] | None = None
+
+    def to_sql(self) -> str:
+        raise NotImplementedError()
 
 
-# class VersionedCollapsingMergeTree(Engine):
-#     sign: str
-#     version: str
-#     order_by: str | None = None
-#     partition_by: str | None = None
-#     sample_by: str | None = None
-#     settings: dict[str, Any] = field(default_factory=dict)
+@dataclass(kw_only=True)
+class VersionedCollapsingMergeTree(Engine):
+    sign: str
+    version: str
+    order_by: str | None = None
+    partition_by: str | None = None
+    sample_by: str | None = None
+    settings: dict[str, Any] | None = None
+
+    def to_sql(self) -> str:
+        raise NotImplementedError()
 
 
-# # integrations
+# integrations
 
 
-# class Kafka(Engine):
-#     kafka_broker_list: str
-#     kafka_topic_list: str
-#     kafka_group_name: str
-#     kafka_format: str
-#     settings: dict[str, Any] = field(default_factory=dict)
+@dataclass(kw_only=True)
+class Kafka(Engine):
+    broker_list: str
+    topic_list: str
+    group_name: str
+    format: str
+    settings: dict[str, Any] | None = None
 
-#     def to_sql(self) -> str:
-#         args = [
-#             f"'{arg}'" if isinstance(arg, str) else str(arg)
-#             for arg in asdict(self).values()
-#         ]
-#         return f"Kafka({', '.join(args)})"
+    def to_sql(self) -> str:
+        parts: list[str] = []
+        parts.append(
+            f"Kafka('{self.broker_list}', '{self.topic_list}', '{self.group_name}', '{self.format}'"
+        )
+        if self.settings:
+            parts.append(comma_join(self.settings, prefix="SETTINGS"))
+        return " ".join(parts)
 
 
-# class PostgreSQL(Engine):
-#     host_port: str
-#     database: str
-#     table: str
-#     user: str
-#     password: str
-#     schema: str | None = None
+@dataclass(kw_only=True)
+class PostgreSQL(Engine):
+    host_port: str
+    database: str
+    table: str
+    user: str
+    password: str
+    schema: str | None = None
+
+    def to_sql(self) -> str:
+        raise NotImplementedError()
