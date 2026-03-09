@@ -1,7 +1,9 @@
 from typing import TYPE_CHECKING, Any
 
 from .fields import Column
+from .registry import Registry, registry
 from .table import Table
+from .types import Lifecycle
 from .utils import comma_join
 
 if TYPE_CHECKING:
@@ -111,6 +113,11 @@ class Admin:
         cluster: str | None = None,
         sync: bool = False,
     ) -> bool:
+        if isinstance(table, Table):
+            if table.get_lifecycle() in [Lifecycle.protected, Lifecycle.external]:
+                print(f"Table({table.get_name()}) is not managed")
+                return False
+
         parts: list[str] = []
         parts.append("DROP TABLE")
         if if_exists:
@@ -264,8 +271,14 @@ class Admin:
         pass
 
     # registry
-    async def create_from_registry(self, registry) -> None:
-        pass
+    async def create_all(self, registry: Registry = registry) -> None:
+        for table in registry.list_tables():
+            if table.get_lifecycle() != Lifecycle.external:
+                print(f"Create Table({table.get_name()})")
+                await self.create_table(table)
 
-    async def drop_from_registry(self, registry) -> None:
-        pass
+    async def drop_all(self, registry: Registry = registry) -> None:
+        for table in registry.list_tables():
+            if table.get_lifecycle() not in [Lifecycle.protected, Lifecycle.external]:
+                print(f"Drop Table({table.get_name()})")
+                await self.drop_table(table)

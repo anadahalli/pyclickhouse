@@ -19,5 +19,8 @@ class Registry:
     def get_table(self, name: str) -> Table | None:
         return self._tables.get(name)
 
+    def list_tables(self) -> list[Table]:
+        return list(self._tables.values())
+
 
 registry = Registry()

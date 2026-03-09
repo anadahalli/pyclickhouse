@@ -56,6 +56,9 @@ class Table:
     def get_columns(self) -> dict[str, Column]:
         return self._columns
 
+    def get_lifecycle(self) -> Lifecycle:
+        return self._lifecycle
+
     @classmethod
     def from_sql(
         cls,

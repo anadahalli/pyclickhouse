@@ -4,7 +4,9 @@ from pydantic import BaseModel
 from pyclickhouse.admin import Admin
 from pyclickhouse.client import HttpClient
 from pyclickhouse.fields import Column
+from pyclickhouse.registry import Registry
 from pyclickhouse.table import Table
+from pyclickhouse.types import Lifecycle
 
 
 @pytest.fixture
@@ -62,6 +64,8 @@ class TestAdmin:
         db_table = await admin.get_table("model")
         assert db_table.get_columns() == table.get_columns()
 
+        assert await admin.drop_table(table)
+
     async def test_alter_table(self, admin: Admin) -> None:
         class Base(BaseModel):
             first: str
@@ -99,8 +103,33 @@ class TestAdmin:
         db_table = await admin.get_table("base")
         assert db_table.get_columns() == table.get_columns()
 
+        assert await admin.drop_table(table)
+
     async def test_view(self, admin: Admin) -> None:
         pass
 
     async def test_registry(self, admin: Admin) -> None:
-        pass
+        registry = Registry()
+
+        class First(BaseModel):
+            name: str
+
+        managed = Table(First, registry=registry, lifecycle=Lifecycle.managed)
+
+        class Second(BaseModel):
+            value: int
+
+        protected = Table(Second, registry=registry, lifecycle=Lifecycle.protected)
+
+        class Third(BaseModel):
+            val: float
+
+        external = Table(Third, registry=registry, lifecycle=Lifecycle.external)
+
+        assert registry.list_tables() == [managed, protected, external]
+        await admin.create_all(registry)
+        assert await admin.show_tables() == ["first", "second"]
+
+        assert await admin.create_table(external)
+        await admin.drop_all(registry)
+        assert await admin.show_tables() == ["second", "third"]
