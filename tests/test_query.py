@@ -12,7 +12,7 @@ class TestQuery:
             key: str
             val: int
 
-        table = Table.from_model(Model)
+        table = Table(Model)
 
         q = Query(table="test", database="db", schema="sc")
         assert q.pipeline == ["from sc.db.test"]
