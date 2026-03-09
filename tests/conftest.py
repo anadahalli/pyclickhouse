@@ -15,7 +15,7 @@ def clickhouse() -> Iterator[ClickHouseContainer]:
 
 @pytest.fixture
 async def native_client(clickhouse: ClickHouseContainer) -> AsyncIterator[NativeClient]:
-    async with NativeClient(clickhouse.get_native_url(), echo=True) as client:
+    async with NativeClient(clickhouse.get_native_url()) as client:
         yield client
 
 

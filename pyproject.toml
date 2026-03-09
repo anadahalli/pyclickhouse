@@ -11,6 +11,7 @@ requires-python = ">=3.12"
 dependencies = [
     "asynch>=0.3.1",
     "clickhouse-connect>=0.13.0",
+    "loguru>=0.7.3",
     "prqlc>=0.13.10",
     "pydantic>=2.12.5",
     "pydantic-settings>=2.13.1",

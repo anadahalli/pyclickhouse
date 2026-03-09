@@ -4,7 +4,7 @@ from .fields import Column
 from .registry import Registry, registry
 from .table import Table
 from .types import Lifecycle
-from .utils import comma_join
+from .utils import comma_join, logger
 
 if TYPE_CHECKING:
     from .client import Client
@@ -115,7 +115,10 @@ class Admin:
     ) -> bool:
         if isinstance(table, Table):
             if table.get_lifecycle() in [Lifecycle.protected, Lifecycle.external]:
-                print(f"Table({table.get_name()}) is not managed")
+                logger.info(
+                    "Cant not drop table. Table({table}) is not managed",
+                    table=table.get_name(),
+                )
                 return False
 
         parts: list[str] = []
@@ -272,13 +275,15 @@ class Admin:
 
     # registry
     async def create_all(self, registry: Registry = registry) -> None:
+        logger.info("Creating tables from registry...")
         for table in registry.list_tables():
             if table.get_lifecycle() != Lifecycle.external:
-                print(f"Create Table({table.get_name()})")
+                logger.info("Create Table({table})", table=table.get_name())
                 await self.create_table(table)
 
     async def drop_all(self, registry: Registry = registry) -> None:
+        logger.info("Dropping tables from registry...")
         for table in registry.list_tables():
             if table.get_lifecycle() not in [Lifecycle.protected, Lifecycle.external]:
-                print(f"Drop Table({table.get_name()})")
+                logger.info("Drop Table({table})", table=table.get_name())
                 await self.drop_table(table)

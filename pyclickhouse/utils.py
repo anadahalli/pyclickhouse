@@ -1,5 +1,20 @@
 import re
+import sys
 from typing import Any
+
+from loguru import logger
+
+# logging
+logger.bind(name="pyclickhouse")
+logger.configure(
+    handlers=[
+        {
+            "sink": sys.stdout,
+            "colorize": True,
+            "format": "<level>{level: <8}</level> <green>{time}</green> {message}",
+        },
+    ],
+)
 
 
 def pascal_to_snake(name: str) -> str:
