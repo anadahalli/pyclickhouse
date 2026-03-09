@@ -7,7 +7,7 @@ from testcontainers.core.wait_strategies import HttpWaitStrategy
 class ClickHouseContainer(DockerContainer):
     def __init__(
         self,
-        image: str = "clickhouse:latest",
+        image: str = "clickhouse/clickhouse-server:latest",
         **kwargs: Any,
     ) -> None:
         super().__init__(image, **kwargs)
@@ -21,11 +21,6 @@ class ClickHouseContainer(DockerContainer):
 
     def _configure(self) -> None:
         pass
-
-    def get_url(self) -> str:
-        host = self.get_container_host_ip()
-        port = self.get_exposed_port(9000)
-        return f"clickhouse://default:default@{host}:{port}/default"
 
     def get_native_url(self) -> str:
         host = self.get_container_host_ip()
