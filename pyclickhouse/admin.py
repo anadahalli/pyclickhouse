@@ -151,41 +151,67 @@ class Admin:
         result = await self.client.query(show_create)
         return result.values()[0]
 
-    async def alter_table(
+    async def diff_table(
         self,
         table: Table,
         *,
         database: str | None = None,
-    ) -> bool:
+    ) -> dict[str, list[Column]]:
         # table from the database
         db_table = await self.get_table(table.get_name())
 
+        # columns
         local = table.get_columns().values()
         remote = db_table.get_columns().values()
 
+        # column names
         local_names = set(col.name for col in local)
         remote_names = set(col.name for col in remote)
 
         # find changes to local table
-        to_drop = remote_names - local_names
-        to_add = local_names - remote_names
-        to_modify = []
-        for this, that in zip(local, remote):
-            if this != that:
-                to_modify.append(this)
+        operations = {
+            "drop_column": [],
+            "add_column": [],
+            "modify_column": [],
+        }
 
         # Drop columns
-        for name in to_drop:
+        for name in remote_names - local_names:
             for column in [col for col in remote if col.name == name]:
-                await self.drop_column(table, column)
+                operations["drop_column"].append(column)
 
         # Add columns
-        for name in to_add:
+        for name in local_names - remote_names:
             for column in [col for col in local if col.name == name]:
-                await self.add_column(table, column)
+                operations["add_column"].append(column)
 
         # Modify columns
-        for column in to_modify:
+        for this, that in zip(local, remote):
+            if this != that:
+                operations["modify_column"].append(this)
+
+        return operations
+
+    async def alter_table(
+        self,
+        table: Table,
+        operations: dict[str, list[Column]] | None = None,
+        *,
+        database: str | None = None,
+    ) -> bool:
+        if operations is None:
+            operations = await self.diff_table(table)
+
+        # Drop columns
+        for column in operations["drop_column"]:
+            await self.drop_column(table, column)
+
+        # Add columns
+        for column in operations["add_column"]:
+            await self.add_column(table, column)
+
+        # Modify columns
+        for column in operations["modify_column"]:
             await self.modify_column(table, column)
 
         return True
