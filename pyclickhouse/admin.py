@@ -1,16 +1,20 @@
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
-from .client import Client
 from .fields import Column
 from .table import Table
 from .utils import comma_join
 
+if TYPE_CHECKING:
+    from .client import Client
+
 
 class Admin:
+    client: Client
+
     def __init__(
         self,
         client: Client,
-        database: str,
+        database: str | None = None,
         cluster: str | None = None,
     ) -> None:
         self.client = client
@@ -20,8 +24,8 @@ class Admin:
     # database
     async def show_databases(self) -> list[str]:
         query = "SHOW DATABASES"
-        print(query)
-        return []
+        result = await self.client.query(query)
+        return result.values()
 
     async def create_datbase(
         self,
@@ -47,7 +51,7 @@ class Admin:
         if comment:
             parts.append(f"COMMENT {comment}")
         query = " ".join(parts)
-        print(query)
+        await self.client.command(query)
         return True
 
     async def drop_datbase(
@@ -68,14 +72,14 @@ class Admin:
         if sync:
             parts.append("SYNC")
         query = " ".join(parts)
-        print(query)
+        await self.client.command(query)
         return True
 
     # table
     async def show_tables(self) -> list[str]:
         query = f"SHOW TABLES FROM {self.database}"
-        result = await self.client.command(query)
-        return [res["name"] for res in await result.fetchall()]
+        result = await self.client.query(query)
+        return [res["name"] for res in result.rows]
 
     async def create_table(
         self,
@@ -207,8 +211,8 @@ class Admin:
         pass
 
     # registry
-    async def create_registry(self, registry) -> None:
+    async def create_from_registry(self, registry) -> None:
         pass
 
-    async def drop_registry(self, registry) -> None:
+    async def drop_from_registry(self, registry) -> None:
         pass

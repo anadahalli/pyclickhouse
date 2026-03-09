@@ -1,10 +1,4 @@
-from pyclickhouse.client import (
-    Client,
-    HttpClient,
-    NativeClient,
-    QueryResult,
-    QuerySummary,
-)
+from pyclickhouse.client import Client, HttpClient, NativeClient, QueryResult
 
 
 async def test_http_client(http_client: HttpClient) -> None:
@@ -31,13 +25,11 @@ async def run_client_tests(client: Client, table: str) -> None:
         {"name": "4"},
     ]
     result = await client.insert(table, data=data)
-    assert isinstance(result, QuerySummary)
-    assert result.row_count == 4
+    assert result == 4
 
     # query
     query_sql = f"SELECT name FROM {table} ORDER BY name"
     result = await client.query(query_sql)
     assert isinstance(result, QueryResult)
-    assert result.column_names == ("name",)
-    assert result.column_types == ("String",)
-    assert result.rows == data
+    assert result.columns == {"name": "String"}
+    assert result.rows == [("1",), ("2",), ("3",), ("4",)]

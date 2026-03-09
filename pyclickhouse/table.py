@@ -5,17 +5,11 @@ from pydantic import BaseModel, create_model
 from .engines import Engine, MergeTree
 from .fields import Column, Expression
 from .registry import Registry, registry
-from .types import get_python_type
+from .types import Lifecycle, get_python_type
 from .utils import pascal_to_snake
 
 
 class Table:
-    _model: type[BaseModel]
-    _name: str
-    _engine: Engine | str
-    _columns: dict[str, Column]
-    _comment: str | None
-
     def __init__(
         self,
         model: type[BaseModel],
@@ -24,6 +18,7 @@ class Table:
         engine: Engine | str | None = None,
         columns: dict[str, Column] | None = None,
         comment: str | None = None,
+        lifecycle: Lifecycle = Lifecycle.managed,
         registry: Registry = registry,
     ) -> None:
         self._model = model
@@ -34,6 +29,7 @@ class Table:
             for name, info in model.model_fields.items()
         }
         self._comment = comment
+        self._lifecycle = lifecycle
         self._registry = registry
         registry.register_table(self)
 

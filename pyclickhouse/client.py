@@ -1,9 +1,11 @@
 from abc import ABC, abstractmethod
 from typing import Any, Iterable, Literal, Self, Sequence, cast
 
-from asynch import Connection, Cursor, DictCursor
+from asynch import Connection, Cursor
 from clickhouse_connect import create_client
 from clickhouse_connect.driver.asyncclient import AsyncClient
+
+from .admin import Admin
 
 
 def create_http_client(url: str, **kwargs: Any) -> AsyncClient:
@@ -14,22 +16,17 @@ def create_native_client(url: str, **kwargs: Any) -> Connection:
     return Connection(dsn=url, **kwargs)
 
 
-class QuerySummary:
-    def __init__(self, row_count: int, summary: dict[str, Any] = {}) -> None:
-        self.row_count = row_count
-        self.summary = summary
-
-
 class QueryResult:
     def __init__(
         self,
-        column_names: tuple[str, ...],
-        column_types: tuple[str, ...],
-        rows: list[dict[str, Any]],
+        columns: dict[str, str],
+        rows: list[tuple[Any, ...]],
     ) -> None:
-        self.column_names = column_names
-        self.column_types = column_types
+        self.columns = columns
         self.rows = rows
+
+    def values(self) -> list[Any]:
+        return list(item for row in self.rows for item in row)
 
 
 class Client(ABC):
@@ -41,6 +38,10 @@ class Client(ABC):
 
     @abstractmethod
     async def ping(self) -> bool: ...
+
+    @property
+    @abstractmethod
+    def database(self) -> str: ...
 
     @abstractmethod
     async def command(
@@ -55,14 +56,15 @@ class Client(ABC):
         self,
         table: str,
         data: Sequence[dict[str, Any]],
+        *,
         columns: Iterable[str] = "*",
-    ) -> QuerySummary: ...
+    ) -> int: ...
 
     @abstractmethod
     async def query(
         self,
         query: str,
-        args: Any | None = None,
+        args: dict[str, Any] | None = None,
     ) -> QueryResult: ...
 
     async def __aenter__(self) -> Self:
@@ -77,23 +79,39 @@ class Client(ABC):
     ) -> None:
         await self.close()
 
+    def admin(
+        self,
+        database: str | None = None,
+        cluster: str | None = None,
+    ) -> Admin:
+        return Admin(self, database=database or self.database, cluster=cluster)
+
 
 class HttpClient(Client):
-    client: AsyncClient
+    _client: AsyncClient | None = None
 
     def __init__(self, url: str, **kwargs: Any):
         self.url = url
         self.options = kwargs
-        self.client = create_http_client(url, **kwargs)
+
+    @property
+    def client(self) -> AsyncClient:
+        if self._client is None:
+            self._client = create_http_client(self.url, **self.options)
+        return self._client
 
     async def connect(self) -> None:
-        pass
+        assert self.client is not None
 
     async def close(self) -> None:
         await self.client.close()
 
     async def ping(self) -> bool:
         return await self.client.ping()
+
+    @property
+    def database(self) -> str:
+        return self.client.client.database or "__default__"
 
     async def command(
         self,
@@ -108,16 +126,17 @@ class HttpClient(Client):
         self,
         table: str,
         data: Sequence[dict[str, Any]],
+        *,
         columns: Iterable[str] = "*",
-    ) -> QuerySummary:
+    ) -> int:
         rows = [list(row.values()) for row in data]
         result = await self.client.insert(table, data=rows, column_names=columns)
-        return QuerySummary(row_count=result.written_rows, summary=result.summary)
+        return result.written_rows
 
     async def query(
         self,
         query: str,
-        args: Any = None,
+        args: dict[str, Any] | None = None,
     ) -> QueryResult:
         result = await self.client.query(
             query=query,
@@ -125,12 +144,8 @@ class HttpClient(Client):
         )
         column_names = result.column_names
         column_types = tuple(map(lambda c: c.name, result.column_types))
-        rows = list(result.named_results())
-        return QueryResult(
-            column_names=column_names,
-            column_types=column_types,
-            rows=rows,
-        )
+        rows = list(tuple(row) for row in result.result_rows)
+        return QueryResult(rows=rows, columns=dict(zip(column_names, column_types)))
 
 
 class NativeClient(Client):
@@ -150,13 +165,17 @@ class NativeClient(Client):
     async def ping(self) -> bool:
         return await self.client._connection.ping()
 
+    @property
+    def database(self) -> str:
+        return self.client.database
+
     async def execute(
         self,
         query: str,
         args: Any = None,
         context: Any = None,
     ) -> Cursor:
-        cursor = self.client.cursor(DictCursor)
+        cursor = self.client.cursor()
         async with cursor:
             await cursor.execute(query, args, context)
         return cursor
@@ -174,28 +193,24 @@ class NativeClient(Client):
         self,
         table: str,
         data: Sequence[dict[str, Any]],
+        *,
         columns: Iterable[str] = "*",
-    ) -> QuerySummary:
+    ) -> int:
         query = f"INSERT INTO {table} ({columns}) VALUES"
         rows = data
         cursor = await self.execute(query, args=rows)
-        row_count = cast(int, cursor._rowcount)
-        return QuerySummary(row_count=row_count)
+        return cursor.rowcount
 
     async def query(
         self,
         query: str,
-        args: Any = None,
+        args: dict[str, Any] | None = None,
     ) -> QueryResult:
         cursor = await self.execute(query, args)
         column_names = cast(tuple[str, ...], cursor._columns)
         column_types = cast(tuple[str, ...], cursor._types)
-        rows = await cursor.fetchall()
-        return QueryResult(
-            column_names=column_names,
-            column_types=column_types,
-            rows=rows,
-        )
+        rows = cast(list[tuple[Any, ...]], await cursor.fetchall())
+        return QueryResult(rows=rows, columns=dict(zip(column_names, column_types)))
 
 
 def get_client(

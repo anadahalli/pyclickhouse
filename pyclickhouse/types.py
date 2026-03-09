@@ -1,4 +1,5 @@
 from datetime import date, datetime, time, timedelta
+from enum import StrEnum, auto
 from typing import Any
 
 type_map: dict[type, str] = {
@@ -50,3 +51,9 @@ def get_python_type(return_type: str) -> type:
             return py_type
 
     return str
+
+
+class Lifecycle(StrEnum):
+    managed = auto()
+    protected = auto()
+    external = auto()
