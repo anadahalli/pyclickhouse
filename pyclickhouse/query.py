@@ -39,8 +39,7 @@ class Query:
         return self.compile()
 
     def _table_name(self) -> str:
-        names = [self.schema, self.database, str(self.table)]
-        return ".".join(filter(None, names))
+        return ".".join(filter(None, [self.schema, self.database, str(self.table)]))
 
     def _from_args(self, *args: Any) -> list[str]:
         return [str(col) for col in args]

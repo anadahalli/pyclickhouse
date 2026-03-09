@@ -3,12 +3,12 @@ from typing import Any, Callable, Self
 
 from pydantic.fields import FieldInfo
 
-from .types import ClickHouseType, get_clickhouse_type
+from .types import get_clickhouse_type
 
 
 @dataclass
 class Column:
-    type: ClickHouseType | str = ""
+    type: str = ""
     name: str = ""
     _: KW_ONLY
     default_type: str = ""

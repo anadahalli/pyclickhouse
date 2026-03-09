@@ -5,7 +5,6 @@ from pydantic import BaseModel
 from pydantic.fields import FieldInfo
 
 from pyclickhouse.fields import Column
-from pyclickhouse.types import String
 
 
 class TestColumn:
@@ -17,10 +16,6 @@ class TestColumn:
             Column(type="String", name="test", default_type="DEFAULT")
 
         column = Column("String", "test")
-        column.to_sql() == "test String"
-        str(column) == "test"
-
-        column = Column(String(), "test")
         column.to_sql() == "test String"
         str(column) == "test"
 
