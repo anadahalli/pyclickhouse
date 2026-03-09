@@ -28,6 +28,10 @@ class QueryResult:
     def values(self) -> list[Any]:
         return list(item for row in self.rows for item in row)
 
+    def items(self) -> list[dict[str, Any]]:
+        column_names = self.columns.keys()
+        return [dict(zip(column_names, row)) for row in self.rows]
+
 
 class Client(ABC):
     @abstractmethod

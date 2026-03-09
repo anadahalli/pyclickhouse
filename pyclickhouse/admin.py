@@ -51,8 +51,7 @@ class Admin:
         if comment:
             parts.append(f"COMMENT {comment}")
         query = " ".join(parts)
-        await self.client.command(query)
-        return True
+        return await self.client.command(query)
 
     async def drop_datbase(
         self,
@@ -72,14 +71,13 @@ class Admin:
         if sync:
             parts.append("SYNC")
         query = " ".join(parts)
-        await self.client.command(query)
-        return True
+        return await self.client.command(query)
 
     # table
     async def show_tables(self) -> list[str]:
         query = f"SHOW TABLES FROM {self.database}"
         result = await self.client.query(query)
-        return [res["name"] for res in result.rows]
+        return result.values()
 
     async def create_table(
         self,
@@ -101,8 +99,7 @@ class Admin:
         parts.append(f"({columns})")
         parts.append(f"ENGINE = {engine or table.get_engine()}")
         query = " ".join(parts)
-        print(query)
-        return True
+        return await self.client.command(query)
 
     async def drop_table(
         self,
@@ -127,33 +124,7 @@ class Admin:
         if sync:
             parts.append("SYNC")
         query = " ".join(parts)
-        print(query)
-        return True
-
-    async def alter_table(
-        self,
-        table: Table,
-        *,
-        database: str | None = None,
-    ) -> bool:
-        # to_drop: list[Column] = []
-        to_add: list[Column] = []
-        to_modify: list[Column] = []
-        db_table = await self.get_table(table._name)
-
-        to_drop = set(db_table._columns.values()) - set(table._columns.values())
-
-        # Drop columns
-        for column in to_drop:
-            await self.drop_column(column, table)
-        # Add columns
-        for column in to_add:
-            await self.add_column(column, table)
-        # Modify columns
-        for column in to_modify:
-            await self.modify_column(column, table)
-
-        return True
+        return await self.client.command(query)
 
     async def get_table(
         self,
@@ -161,41 +132,97 @@ class Admin:
         *,
         database: str | None = None,
     ) -> Table:
-        result = await self.execute(f"DESC TABLE {self.database}.{name}")
-        columns = await result.fetchall()
-        query = f"SELECT engine_full FROM system.tables WHERE database = '{self.database}' AND table = '{name}'"
-        result = await self.execute(query)
-        engine_full = await result.fetchone()
-        engine = engine_full.get("engine_full", "")
-        return Table.from_sql(name=name, engine_sql=engine, columns_sql=columns)
+        database = database or self.database
+        describe_query = f"DESC TABLE {database}.{name}"
+        engine_query = f"SELECT engine_full FROM system.tables WHERE database = '{database}' AND table = '{name}'"
+        result = await self.client.query(describe_query)
+        columns = result.items()
+        result = await self.client.query(engine_query)
+        engine = result.values()[0]
+        return Table.from_sql(name=name, columns=columns, engine=engine)
+
+    async def show_create_table(
+        self,
+        name: str,
+        *,
+        database: str | None = None,
+    ) -> str:
+        show_create = f"SHOW CREATE TABLE {database or self.database}.{name}"
+        result = await self.client.query(show_create)
+        return result.values()[0]
+
+    async def alter_table(
+        self,
+        table: Table,
+        *,
+        database: str | None = None,
+    ) -> bool:
+        # table from the database
+        db_table = await self.get_table(table.get_name())
+
+        local = table.get_columns().values()
+        remote = db_table.get_columns().values()
+
+        local_names = set(col.name for col in local)
+        remote_names = set(col.name for col in remote)
+
+        # find changes to local table
+        to_drop = remote_names - local_names
+        to_add = local_names - remote_names
+        to_modify = []
+        for this, that in zip(local, remote):
+            if this != that:
+                to_modify.append(this)
+
+        # Drop columns
+        for name in to_drop:
+            for column in [col for col in remote if col.name == name]:
+                await self.drop_column(table, column)
+
+        # Add columns
+        for name in to_add:
+            for column in [col for col in local if col.name == name]:
+                await self.add_column(table, column)
+
+        # Modify columns
+        for column in to_modify:
+            await self.modify_column(table, column)
+
+        return True
+
+    async def copy_table(
+        self,
+        table: Table,
+        *,
+        name: str,
+        database: str | None = None,
+    ) -> bool:
+        raise NotImplementedError()
 
     # column
     async def add_column(
         self,
-        column: Column,
         table: Table,
+        column: Column,
     ) -> bool:
-        query = f"ALTER TABLE {table._name} ADD COLUMN {column.to_sql()}"
-        result = await self.execute(query)
-        return bool(result.rowcount)
+        query = f"ALTER TABLE {table.get_name()} ADD COLUMN {column.to_sql()}"
+        return await self.client.command(query)
 
     async def drop_column(
         self,
-        column: Column,
         table: Table,
+        column: Column,
     ) -> bool:
-        query = f"ALTER TABLE {table._name} DROP COLUMN {column.name}"
-        result = await self.execute(query)
-        return bool(result.rowcount)
+        query = f"ALTER TABLE {table.get_name()} DROP COLUMN {column.name}"
+        return await self.client.command(query)
 
     async def modify_column(
         self,
-        column: Column,
         table: Table,
+        column: Column,
     ) -> bool:
-        query = f"ALTER TABLE {table._name} MODIFY COLUMN {column.to_sql()}"
-        result = await self.execute(query)
-        return bool(result.rowcount)
+        query = f"ALTER TABLE {table.get_name()} MODIFY COLUMN {column.to_sql()}"
+        return await self.client.command(query)
 
     # view
     async def show_views(self) -> None:
