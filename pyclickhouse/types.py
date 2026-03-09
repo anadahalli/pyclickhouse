@@ -1,8 +1,7 @@
-from abc import ABC
 from datetime import date, datetime, time, timedelta
-from typing import Any, ClassVar, Self
+from typing import Any
 
-PYTHON_TO_CLICKHOUSE: dict[type, str] = {
+type_map: dict[type, str] = {
     int: "Int32",
     str: "String",
     float: "Float64",
@@ -11,130 +10,43 @@ PYTHON_TO_CLICKHOUSE: dict[type, str] = {
     date: "Date",
     time: "Time",
     timedelta: "Interval",
-    Any: "String",
-}
-
-CLICKHOUSE_TO_PYTHON: dict[str, type] = {
-    "String": str,
-    "Int32": int,
+    dict: "JSON",
 }
 
 
 def get_clickhouse_type(field_type: Any | type[Any]) -> str:
-    return PYTHON_TO_CLICKHOUSE.get(field_type, "String")
+    return type_map.get(field_type, "String")
+
+
+# from clickhouse types to python type
+prefix_map: dict[str, type] = {
+    # Boolean
+    "Bool": bool,
+    # Int
+    "Int": int,
+    "UInt": int,
+    # Float
+    "Float": float,
+    # Decimal
+    "Decimal": float,
+    # String
+    "String": str,
+    "FixedString": str,
+    # Temporal
+    "DateTime": datetime,
+    "Date": date,
+    "Time": time,
+    # Enum
+    # UUID
+    # Network
+    # Special
+    "JSON": dict,
+}
 
 
 def get_python_type(return_type: str) -> type:
-    return CLICKHOUSE_TO_PYTHON.get(return_type, str)
+    for prefix, py_type in prefix_map.items():
+        if return_type.startswith(prefix):
+            return py_type
 
-
-class ClickHouseType(ABC):
-    base_type: ClassVar[str]
-    python_type: ClassVar[type]
-
-    def __init_subclass__(cls, registered: bool = True) -> None:
-        if registered:
-            cls.base_type = cls.__name__
-            type_map[cls.base_type] = cls
-
-    def __init__(self, inner_type: Self | None = None) -> None:
-        self.inner_type = inner_type
-
-    def __str__(self) -> str:
-        return self.to_sql()
-
-    def to_sql(self) -> str:
-        if self.inner_type:
-            return f"{self.base_type}({str(self.inner_type)})"
-        return self.base_type
-
-
-type_map: dict[str, type[ClickHouseType]] = {}
-
-
-class StringType(ClickHouseType, ABC, registered=False):
-    python_type = str
-
-
-class IntType(ClickHouseType, ABC, registered=False):
-    python_type = int
-
-
-class FloatType(ClickHouseType, ABC, registered=False):
-    python_type = float
-
-
-class BoolType(ClickHouseType, ABC, registered=False):
-    python_type = bool
-
-
-class DateType(ClickHouseType, ABC, registered=False):
-    python_type = date
-
-
-class TimeType(ClickHouseType, ABC, registered=False):
-    python_type = time
-
-
-class DateTimeType(ClickHouseType, ABC, registered=False):
-    python_type = datetime
-
-
-class ContainerType(ClickHouseType, ABC, registered=False):
-    pass
-
-
-# String
-class String(StringType):
-    pass
-
-
-# FixedString
-class FixedString(StringType):
-    pass
-
-
-# Numeric
-# Int8
-# ...
-# BigInt
-# Float
-# ...
-# Boolean
-# Enum
-# ...
-# Decimal
-# ...
-# BigDecimal
-# Interval
-# ...
-
-# Bool
-
-# Temporal
-# Date
-# Date32
-# DateTime
-# DateTime64
-# Time
-# Time64
-
-
-# Container
-# Array
-# Tuple
-# Map
-# Nested
-
-
-class LowCardinality(ContainerType):
-    python_type = str
-
-
-# Network
-# IPv4
-# IPv6
-
-# Special
-# UUID
-# JSON
+    return str

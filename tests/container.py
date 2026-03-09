@@ -8,12 +8,11 @@ class ClickHouseContainer(DockerContainer):
     def __init__(
         self,
         image: str = "clickhouse:latest",
-        port: int = 9000,
         **kwargs: Any,
     ) -> None:
         super().__init__(image, **kwargs)
-        self.port = port
-        self.with_exposed_ports(port, 8123)
+        self.with_exposed_ports(8123)
+        self.with_exposed_ports(9000)
         self.with_env("CLICKHOUSE_USER", "default")
         self.with_env("CLICKHOUSE_PASSWORD", "default")
         self.with_env("CLICKHOUSE_DB", "default")
@@ -25,5 +24,15 @@ class ClickHouseContainer(DockerContainer):
 
     def get_url(self) -> str:
         host = self.get_container_host_ip()
-        port = self.get_exposed_port(self.port)
+        port = self.get_exposed_port(9000)
+        return f"clickhouse://default:default@{host}:{port}/default"
+
+    def get_native_url(self) -> str:
+        host = self.get_container_host_ip()
+        port = self.get_exposed_port(9000)
+        return f"clickhouse://default:default@{host}:{port}/default"
+
+    def get_http_url(self) -> str:
+        host = self.get_container_host_ip()
+        port = self.get_exposed_port(8123)
         return f"clickhouse://default:default@{host}:{port}/default"

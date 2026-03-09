@@ -6,6 +6,7 @@ from pydantic import BaseModel, create_model
 
 from .engines import Engine, MergeTree
 from .fields import Column, Expression
+from .registry import Registry, registry
 from .types import get_python_type
 from .utils import pascal_to_snake
 
@@ -61,16 +62,23 @@ class Table:
     def __init__(
         self,
         model: type[BaseModel],
-        name: str,
-        engine: Engine | str,
-        columns: dict[str, Column],
+        *,
+        name: str | None = None,
+        engine: Engine | str | None = None,
+        columns: dict[str, Column] | None = None,
         comment: str | None = None,
+        registry: Registry = registry,
     ) -> None:
         self._model = model
-        self._name = name
-        self._engine = engine
-        self._columns = columns
+        self._name: str = name or pascal_to_snake(model.__name__)
+        self._engine: Engine | str = engine or MergeTree()
+        self._columns: dict[str, Column] = columns or {
+            name: Column.from_field(name, info)
+            for name, info in model.model_fields.items()
+        }
         self._comment = comment
+        self._registry = registry
+        registry.register_table(self)
 
     def __repr__(self) -> str:
         return f"Table({self._name})"
@@ -82,6 +90,18 @@ class Table:
         if name not in self._columns:
             raise AttributeError(f"Table({self._name}) has no column '{name}'")
         return Expression(self._columns[name])
+
+    def get_model(self) -> type[BaseModel]:
+        return self._model
+
+    def get_name(self) -> str:
+        return self._name
+
+    def get_engine(self) -> str:
+        return str(self._engine)
+
+    def get_columns(self) -> dict[str, Column]:
+        return self._columns
 
     @classmethod
     def from_model(
@@ -140,8 +160,11 @@ def table(
     name: str | None = None,
     engine: Engine | str | None = None,
     comment: str | None = None,
+    registry: Registry = registry,
 ) -> Table:
-    return Table.from_model(model, name=name, engine=engine, comment=comment)
+    table = Table.from_model(model, name=name, engine=engine, comment=comment)
+    registry.register_table(table)
+    return table
 
 
 def create_dynamic_model(name: str, columns: dict[str, Column]) -> type[BaseModel]:
