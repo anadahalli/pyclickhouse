@@ -1,7 +1,7 @@
 [project]
 name = "pyclickhouse"
 version = "0.1.0"
-description = "Python async ClickHouse ORM using Pydantic"
+description = "A modern async Python ORM for ClickHouse"
 authors = [{name = "Ashwath Nadahalli", email = "anadahalli@gmail.com"}]
 readme = "README.md"
 license = "MIT"
@@ -16,12 +16,6 @@ dependencies = [
     "pydantic>=2.12.5",
     "pydantic-settings>=2.13.1",
 ]
-
-classifiers = []
-
-[project.urls]
-Homepage = "https://github.com/anadahalli/pyclickhouse"
-Repository = "https://github.com/anadahalli/pyclickhouse"
 
 [dependency-groups]
 dev = [
@@ -40,8 +34,30 @@ tests = [
     "testcontainers>=4.14.1",
 ]
 docs = [
+    "mkdocstrings-python>=2.0.3",
     "zensical>=0.0.24",
 ]
+
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Framework :: AsyncIO",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: SQL",
+    "Programming Language :: PRQL",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Database",
+    "Typing :: Typed",
+]
+
+[project.urls]
+Homepage = "https://github.com/anadahalli/pyclickhouse"
+Repository = "https://github.com/anadahalli/pyclickhouse"
 
 [tool.pytest]
 asyncio_mode = "auto"

@@ -10,6 +10,18 @@ from .utils import pascal_to_snake
 
 
 class Table:
+    """
+    Create a new table from a Pydantic model.
+
+    Args:
+        model: The Pydantic model to create the table from.
+        name: The name of the table. Defaults to the snake_case version of the model name.
+        engine: The engine to use for the table. Defaults to MergeTree().
+        columns: The columns to use for the table. Defaults to the columns defined in the model.
+        comment: The comment to use for the table. Defaults to None.
+        lifecycle: The lifecycle to use for the table. Defaults to Lifecycle.managed.
+    """
+
     def __init__(
         self,
         model: type[BaseModel],
@@ -66,6 +78,17 @@ class Table:
         columns: list[dict[str, str]],
         engine: str,
     ) -> Self:
+        """
+        Create a new table from a SQL table definition.
+
+        Args:
+            name: The name of the table.
+            columns: The columns of the table.
+            engine: The engine to use for the table.
+
+        Returns:
+            A new Table instance.
+        """
         table_columns: dict[str, Column] = {
             col["name"]: Column(**col) for col in columns
         }

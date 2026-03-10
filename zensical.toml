@@ -4,10 +4,25 @@ site_description = "Python async ClickHouse ORM using Pydantic"
 site_author = "Ashwath Nadahalli <anadahalli@gmail.com>"
 # site_url = ""
 copyright = "Copyright &copy; 2026 The authors"
-# nav = [
-#   { "Get started" = "index.md" },
-#   { "Markdown in 5min" = "markdown.md" },
-# ]
+
+nav = [
+  { "Overview" = "index.md" },
+  { "Concepts" = [
+      "concepts/client.md",
+      "concepts/table.md",
+      "concepts/view.md",
+      "concepts/registry.md",
+      "concepts/engine.md",
+      "concepts/query.md",
+      "concepts/admin.md",
+      "concepts/writer.md",
+      "concepts/reader.md",
+  ]},
+  { "References" = [
+      "references/client.md",
+      "references/table.md",
+  ]},
+]
 
 #extra_css = ["stylesheets/extra.css"]
 #extra_javascript = ["javascripts/extra.js"]
@@ -29,22 +44,22 @@ features = [
     "content.tabs.link",
     "content.tooltips",
     # "header.autohide",
-    # "navigation.expand",
+    "navigation.expand",
     "navigation.footer",
     "navigation.indexes",
     "navigation.instant",
     "navigation.instant.prefetch",
-    #"navigation.instant.progress",
+    "navigation.instant.progress",
     "navigation.path",
     #"navigation.prune",
     "navigation.sections",
-    #"navigation.tabs",
-    #"navigation.tabs.sticky",
+    "navigation.tabs",
+    "navigation.tabs.sticky",
     "navigation.top",
     "navigation.tracking",
     "search.highlight",
     # "toc.follow",
-    #"toc.integrate",
+    # "toc.integrate",
 ]
 
 [[project.theme.palette]]
@@ -68,3 +83,22 @@ code = "Jetbrains Mono"
 #[[project.extra.social]]
 #icon = "fontawesome/brands/github"
 #link = "https://github.com/user/repo"
+
+[project.markdown_extensions.pymdownx.highlight]
+anchor_linenums = true
+
+[project.markdown_extensions.pymdownx.superfences]
+
+[project.markdown_extensions.pymdownx.snippets]
+
+[project.markdown_extensions.pymdownx.tabbed]
+alternate_style = true
+
+[project.plugins.mkdocstrings.handlers.python]
+inventories = ["https://docs.python.org/3/objects.inv"]
+paths = ["pyclickhouse"]
+
+[project.plugins.mkdocstrings.handlers.python.options]
+docstring_style = "google"
+inherited_members = true
+show_source = false

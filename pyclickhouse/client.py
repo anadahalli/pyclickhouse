@@ -46,18 +46,30 @@ class QueryResult:
 
 
 class Client(ABC):
-    @abstractmethod
-    async def connect(self) -> None: ...
+    """
+    A ClickHouse client that provides asynchronous database operations.
+    """
 
     @abstractmethod
-    async def close(self) -> None: ...
+    async def connect(self) -> None:
+        """Connect to the ClickHouse database."""
+        ...
 
     @abstractmethod
-    async def ping(self) -> bool: ...
+    async def close(self) -> None:
+        """Close the connection to the ClickHouse database."""
+        ...
+
+    @abstractmethod
+    async def ping(self) -> bool:
+        """Ping the ClickHouse database to check if the connection is alive."""
+        ...
 
     @property
     @abstractmethod
-    def database(self) -> str: ...
+    def database(self) -> str:
+        """Get the name of the current database."""
+        ...
 
     @abstractmethod
     async def command(
@@ -65,7 +77,23 @@ class Client(ABC):
         query: str,
         args: Any | None = None,
         context: Any | None = None,
-    ) -> bool: ...
+    ) -> bool:
+        """
+        Execute a command on the ClickHouse database.
+
+        Args:
+            query: The SQL command to execute.
+            args: Optional arguments to pass to the command.
+            context: Optional context to pass to the command.
+
+        Returns:
+            True if the command was executed successfully, False otherwise.
+
+        Raises:
+            Exception: If the command execution fails.
+
+        """
+        ...
 
     @abstractmethod
     async def insert(
@@ -76,14 +104,47 @@ class Client(ABC):
         columns: Iterable[str] = "*",
         database: str | None = None,
         **kwargs: Any,
-    ) -> int: ...
+    ) -> int:
+        """
+        Insert data into a table.
+
+        Args:
+            table: The name of the table to insert into.
+            data: The data to insert.
+            columns: Optional columns to insert into.
+            database: Optional database to insert into.
+            **kwargs: Optional keyword arguments to pass to the insert operation.
+
+        Returns:
+            The number of rows inserted.
+
+        Raises:
+            Exception: If the insert operation fails.
+
+        """
+        ...
 
     @abstractmethod
     async def query(
         self,
         query: str,
         args: dict[str, Any] | None = None,
-    ) -> QueryResult: ...
+    ) -> QueryResult:
+        """
+        Execute a query on the ClickHouse database.
+
+        Args:
+            query: The SQL query to execute.
+            args: Optional arguments to pass to the query.
+
+        Returns:
+            The result of the query.
+
+        Raises:
+            Exception: If the query execution fails.
+
+        """
+        ...
 
     async def __aenter__(self) -> Self:
         await self.connect()
@@ -102,6 +163,16 @@ class Client(ABC):
         database: str | None = None,
         cluster: str | None = None,
     ) -> Admin:
+        """
+        Return an Admin instance for the given database and cluster.
+
+        Args:
+            database: Optional database to use.
+            cluster: Optional cluster to use.
+
+        Returns:
+            An Admin instance.
+        """
         return Admin(
             client=self,
             database=database or self.database,
@@ -116,6 +187,18 @@ class Client(ABC):
         batch_size: int = 1000,
         database: str | None = None,
     ) -> Writer:
+        """
+        Return a Writer instance for the given table.
+
+        Args:
+            table: The table to write to.
+            batch: Whether to use batch inserts.
+            batch_size: The batch size to use for inserts.
+            database: Optional database to use.
+
+        Returns:
+            A Writer instance.
+        """
         return Writer(
             client=self,
             table=table,
@@ -132,6 +215,18 @@ class Client(ABC):
         response_model: type[BaseModel] | None = None,
         database: str | None = None,
     ) -> Reader:
+        """
+        Return a Reader instance for the given query.
+
+        Args:
+            query: The query to read from.
+            args_model: Optional model for query arguments.
+            response_model: Optional model for query response.
+            database: Optional database to use.
+
+        Returns:
+            A Reader instance.
+        """
         return Reader(
             client=self,
             query=query,
