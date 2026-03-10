@@ -22,5 +22,8 @@ class Registry:
     def list_tables(self) -> list[Table]:
         return list(self._tables.values())
 
+    def clear(self) -> None:
+        self._tables.clear()
+
 
 registry = Registry()

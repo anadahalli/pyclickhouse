@@ -4,9 +4,14 @@ from typing import Any, Iterable, Literal, Self, Sequence, cast
 from asynch import Connection, Cursor
 from clickhouse_connect import create_client
 from clickhouse_connect.driver.asyncclient import AsyncClient
+from pydantic import BaseModel
 
 from .admin import Admin
+from .query import Query
+from .reader import Reader
+from .table import Table
 from .utils import clean_query_param_types
+from .writer import Writer
 
 
 def create_http_client(url: str, **kwargs: Any) -> AsyncClient:
@@ -32,6 +37,12 @@ class QueryResult:
     def items(self) -> list[dict[str, Any]]:
         column_names = self.columns.keys()
         return [dict(zip(column_names, row)) for row in self.rows]
+
+    def first(self) -> Any:
+        if rows := self.rows:
+            if row := rows[0]:
+                return row[0]
+        return None
 
 
 class Client(ABC):
@@ -91,7 +102,43 @@ class Client(ABC):
         database: str | None = None,
         cluster: str | None = None,
     ) -> Admin:
-        return Admin(self, database=database or self.database, cluster=cluster)
+        return Admin(
+            client=self,
+            database=database or self.database,
+            cluster=cluster,
+        )
+
+    def writer(
+        self,
+        table: Table,
+        *,
+        batch: bool = True,
+        batch_size: int = 1000,
+        database: str | None = None,
+    ) -> Writer:
+        return Writer(
+            client=self,
+            table=table,
+            batch=batch,
+            batch_size=batch_size,
+            database=database,
+        )
+
+    def reader(
+        self,
+        query: Query,
+        *,
+        args_model: type[BaseModel] | None = None,
+        response_model: type[BaseModel] | None = None,
+        database: str | None = None,
+    ) -> Reader:
+        return Reader(
+            client=self,
+            query=query,
+            args_model=args_model,
+            response_model=response_model,
+            database=database,
+        )
 
 
 class HttpClient(Client):
@@ -143,6 +190,7 @@ class HttpClient(Client):
             table=table_name,
             data=data,
             column_names=columns,
+            database=database,
             **kwargs,
         )
         return result.written_rows
