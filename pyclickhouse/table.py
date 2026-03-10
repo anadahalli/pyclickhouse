@@ -57,18 +57,23 @@ class Table:
         return Expression(self._columns[name])
 
     def get_model(self) -> type[BaseModel]:
+        """Get the model associated with this table."""
         return self._model
 
     def get_name(self) -> str:
+        """Get the name of this table."""
         return self._name
 
     def get_engine(self) -> str:
+        """Get the engine of this table."""
         return str(self._engine)
 
     def get_columns(self) -> dict[str, Column]:
+        """Get the columns of this table."""
         return self._columns
 
     def get_lifecycle(self) -> Lifecycle:
+        """Get the lifecycle of this table."""
         return self._lifecycle
 
     @classmethod
@@ -80,6 +85,8 @@ class Table:
     ) -> Self:
         """
         Create a new table from a SQL table definition.
+
+        A dynamic pydantic model is created based on the columns.
 
         Args:
             name: The name of the table.

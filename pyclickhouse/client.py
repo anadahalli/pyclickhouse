@@ -377,9 +377,20 @@ class NativeClient(Client):
 def get_client(
     url: str,
     *,
-    mode: Literal["native", "http"] = "native",
+    mode: Literal["native", "http"] = "http",
     **kwargs: Any,
 ) -> Client:
+    """
+    Get a ClickHouse client for the given URL and mode.
+
+    Args:
+        url: The URL of the ClickHouse server.
+        mode: The mode of the client, either "native" or "http".
+        **kwargs: Additional keyword arguments for the client.
+
+    Returns:
+        A ClickHouse client.
+    """
     if mode == "http":
         return HttpClient(url=url, **kwargs)
     return NativeClient(url=url, **kwargs)

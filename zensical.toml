@@ -21,6 +21,12 @@ nav = [
   { "References" = [
       "references/client.md",
       "references/table.md",
+      "references/query.md",
+      "references/admin.md",
+      "references/writer.md",
+      "references/reader.md",
+      "references/engines.md",
+      "references/fields.md",
   ]},
 ]
 
@@ -100,5 +106,12 @@ paths = ["pyclickhouse"]
 
 [project.plugins.mkdocstrings.handlers.python.options]
 docstring_style = "google"
+docstring_section_style = "table"
 inherited_members = true
 show_source = false
+show_root_heading = true
+show_root_full_path = false
+show_symbol_type_heading = true
+show_symbol_type_toc = true
+type_parameter_headings = true
+merge_init_into_class = true

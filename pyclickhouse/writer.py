@@ -10,6 +10,16 @@ if TYPE_CHECKING:
 
 
 class Writer:
+    """Writer for inserting data into a ClickHouse table.
+
+    Args:
+        client: The ClickHouse client.
+        table: The table to write to.
+        batch: Whether to batch insert records.
+        batch_size: The number of records to insert in a batch.
+        database: The database to write to.
+    """
+
     _client: Client
     _table: Table
 
@@ -43,10 +53,12 @@ class Writer:
 
     @property
     def written_rows(self) -> int:
+        """The number of rows written to the table."""
         return self._count
 
     @property
     def queue_length(self) -> int:
+        """The number of records in the queue."""
         return len(self._records)
 
     def _serialize(self, data: BaseModel) -> Sequence[Any]:
@@ -66,12 +78,21 @@ class Writer:
         self._count += count
 
     async def flush(self) -> None:
+        """Flushes the records in the queue to the table."""
         while len(self._records):
             items = self._get_next_batch()
             data = [self._serialize(item) for item in items]
             await self._insert(data)
 
     async def insert(self, data: BaseModel) -> None:
+        """Inserts a record into the queue.
+
+        If `batch` is `True`, the record is inserted immediately;
+        otherwise, it is queued for batch insertion.
+
+        Args:
+            data: The record to insert.
+        """
         if not isinstance(data, self._table_model):
             raise TypeError(f"Expected {str(self._table_model)}, got {str(type(data))}")
 

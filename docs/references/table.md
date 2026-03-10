@@ -1,7 +1,5 @@
 ::: table.Table
     options:
-      show_source: false
-      heading_level: 2
       members:
         - from_sql
         - get_model

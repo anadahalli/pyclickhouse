@@ -2,8 +2,6 @@
 
 A modern async Python ORM for ClickHouse
 
----
-
 ## Features
 * Async first design: non-blocking API built around async/await
 * Pluggable drivers: choose between `clickhouse-connect` or `asynch`
@@ -12,13 +10,9 @@ A modern async Python ORM for ClickHouse
 * Query builder: build expressive and composable queries using `prql`
 * Batch writer: Validate and insert data in batches
 
----
-
 ## Documentation
 
 Documentation is available at [docs/index.md](docs/index.md)
-
----
 
 ## Installation
 
@@ -33,8 +27,6 @@ using `pip`
 ```sh
 pip install pyclickhouse
 ```
-
----
 
 ## Quickstart
 
@@ -83,15 +75,12 @@ if __name__ == "__main__":
     import asyncio
     asyncio.run(main())
 ```
----
 
 ## Roadmap
 
 * Support complex datatypes: Nested, Array, Tuple, JSON
 * Support table joins and windows
 * Support for file based migrations
-
----
 
 ## License
 [MIT License](LICENSE)

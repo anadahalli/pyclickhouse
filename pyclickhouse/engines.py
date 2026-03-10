@@ -5,6 +5,8 @@ from .utils import comma_join
 
 
 class Engine:
+    """Base class for ClickHouse engines."""
+
     def __init_subclass__(cls, **kwargs: Any) -> None:
         engine_map[cls.__name__] = cls
 
@@ -12,6 +14,7 @@ class Engine:
         return self.to_sql().strip()
 
     def to_sql(self) -> str:
+        """Returns the SQL representation of the engine."""
         raise NotImplementedError()
 
 
@@ -20,6 +23,13 @@ engine_map: dict[str, type[Engine]] = {}
 
 @dataclass(kw_only=True)
 class Memory(Engine):
+    """
+    Memory engine.
+
+    Args:
+        settings: dictionary of engine settings.
+    """
+
     settings: dict[str, Any] | None = None
 
     def to_sql(self) -> str:
@@ -35,6 +45,18 @@ class Memory(Engine):
 
 @dataclass(kw_only=True)
 class MergeTree(Engine):
+    """
+    MergeTree engine.
+
+    Args:
+        order_by: by expression.
+        primary_key: primary key expression.
+        partition_by: partition by expression.
+        sample_by: sample by expression.
+        ttl: TTL expression.
+        settings: dictionary of engine settings.
+    """
+
     order_by: str = "tuple()"
     primary_key: str | None = None
     partition_by: str | None = None
@@ -61,6 +83,19 @@ class MergeTree(Engine):
 
 @dataclass(kw_only=True)
 class ReplacingMergeTree(Engine):
+    """
+    ReplacingMergeTree engine.
+
+    Args:
+        ver: version column.
+        is_deleted: deleted column.
+        order_by: order by expression.
+        primary_key: primary key expression.
+        partition_by: partition by expression.
+        sample_by: sample by expression.
+        settings: dictionary of engine settings.
+    """
+
     ver: str | None = None
     is_deleted: str | None = None
     order_by: str | None = None
@@ -91,6 +126,16 @@ class ReplacingMergeTree(Engine):
 
 @dataclass(kw_only=True)
 class CoalescingMergeTree(Engine):
+    """CoalescingMergeTree engine.
+
+    Args:
+        columns: columns expression.
+        order_by: order by expression.
+        partition_by: partition by expression.
+        sample_by: sample by expression.
+        settings: dictionary of engine settings.
+    """
+
     columns: str | None = None
     order_by: str | None = None
     partition_by: str | None = None
@@ -103,6 +148,16 @@ class CoalescingMergeTree(Engine):
 
 @dataclass(kw_only=True)
 class SummingMergeTree(Engine):
+    """SummingMergeTree engine.
+
+    Args:
+        columns: columns expression.
+        order_by: order by expression.
+        partition_by: partition by expression.
+        sample_by: sample by expression.
+        settings: dictionary of engine settings.
+    """
+
     columns: str | None = None
     order_by: str | None = None
     partition_by: str | None = None
@@ -112,7 +167,17 @@ class SummingMergeTree(Engine):
 
 @dataclass(kw_only=True)
 class AggregatingMergeTree(Engine):
-    ttl: str | None = None
+    """AggregatingMergeTree engine.
+
+    Args:
+        columns: columns expression.
+        order_by: order by expression.
+        partition_by: partition by expression.
+        sample_by: sample by expression.
+        settings: dictionary of engine settings.
+    """
+
+    columns: str | None = None
     order_by: str | None = None
     partition_by: str | None = None
     sample_by: str | None = None
@@ -124,6 +189,16 @@ class AggregatingMergeTree(Engine):
 
 @dataclass(kw_only=True)
 class CollapsingMergeTree(Engine):
+    """CollapsingMergeTree engine.
+
+    Args:
+        sign: sign column expression.
+        order_by: order by expression.
+        partition_by: partition by expression.
+        sample_by: sample by expression.
+        settings: dictionary of engine settings.
+    """
+
     sign: str
     order_by: str | None = None
     partition_by: str | None = None
@@ -136,6 +211,17 @@ class CollapsingMergeTree(Engine):
 
 @dataclass(kw_only=True)
 class VersionedCollapsingMergeTree(Engine):
+    """VersionedCollapsingMergeTree engine.
+
+    Args:
+        sign: sign column expression.
+        version: version column expression.
+        order_by: order by expression.
+        partition_by: partition by expression.
+        sample_by: sample by expression.
+        settings: dictionary of engine settings.
+    """
+
     sign: str
     version: str
     order_by: str | None = None
@@ -152,6 +238,16 @@ class VersionedCollapsingMergeTree(Engine):
 
 @dataclass(kw_only=True)
 class Kafka(Engine):
+    """Kafka engine.
+
+    Args:
+        broker_list: broker list.
+        topic_list: topic list.
+        group_name: group name.
+        format: format.
+        settings: dictionary of engine settings.
+    """
+
     broker_list: str
     topic_list: str
     group_name: str
@@ -170,6 +266,17 @@ class Kafka(Engine):
 
 @dataclass(kw_only=True)
 class PostgreSQL(Engine):
+    """PostgreSQL engine.
+
+    Args:
+        host_port: host and port.
+        database: database name.
+        table: table name.
+        user: user name.
+        password: password.
+        schema: schema name.
+    """
+
     host_port: str
     database: str
     table: str

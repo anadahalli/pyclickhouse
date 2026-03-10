@@ -15,6 +15,15 @@ options = prqlc.CompileOptions(
 
 @dataclass(frozen=True)
 class Query:
+    """A query builder for ClickHouse.
+
+    Args:
+        table: The table to query.
+        database: The database to query from.
+        schema: The schema to query from.
+        pipeline: The pipeline of steps to execute.
+    """
+
     table: Table | str
     _: KW_ONLY
     database: str | None = None
@@ -27,9 +36,19 @@ class Query:
             self.pipeline.append(step)
 
     def build(self) -> str:
+        """Build the full PRQL query
+
+        Returns:
+            The full PRQL query.
+        """
         return " | ".join(self.pipeline)
 
     def compile(self) -> str:
+        """Compile the PRQL query to SQL
+
+        Returns:
+            The compiled SQL query.
+        """
         return prqlc.compile(self.build(), options=options)
 
     def __repr__(self) -> str:
@@ -54,34 +73,85 @@ class Query:
         return ", ".join(items)
 
     def select(self, *args: Any, **kwargs: Any) -> Self:
+        """Select columns from the table.
+
+        Args:
+            *args: Column names to select.
+            **kwargs: Column name-value pairs to select.
+
+        Returns:
+            A new `Query` with the select step added.
+        """
         if items := [*self._from_args(*args), *self._from_kwargs(**kwargs)]:
             step = f"select {{{self._join(items)}}}"
             return self._copy(step)
         raise ValueError("select requires at least one argument")
 
     def derive(self, **kwargs: Any) -> Self:
+        """Derive new columns from existing ones.
+
+        Args:
+            **kwargs: Column name-expression pairs to derive.
+
+        Returns:
+            A new `Query` with the derive step added.
+        """
         if items := [*self._from_kwargs(**kwargs)]:
             step = f"derive {{{self._join(items)}}}"
             return self._copy(step)
         raise ValueError("derive requires at least one argument")
 
     def sort(self, *args: Any) -> Self:
+        """Sort the table by the given columns.
+
+        Args:
+            *args: Column names to sort by.
+
+        Returns:
+            A new `Query` with the sort step added.
+        """
         if items := [*self._from_args(*args)]:
             step = f"sort {{{self._join(items)}}}"
             return self._copy(step)
         raise ValueError("sort requires at least one argument")
 
     def filter(self, expression: Any) -> Self:
+        """Filter the table by the given expression.
+
+        Args:
+            expression: The expression to filter by.
+
+        Returns:
+            A new `Query` with the filter step added.
+        """
         step = f"filter ({str(expression)})"
         return self._copy(step)
 
     def aggregate(self, *args: Any, **kwargs: Any) -> Self:
+        """Aggregate the table by the given columns.
+
+        Args:
+            *args: Column names to aggregate by.
+            **kwargs: Aggregate name-expression pairs.
+
+        Returns:
+            A new `Query` with the aggregate step added.
+        """
         if items := [*self._from_args(*args), *self._from_kwargs(**kwargs)]:
             step = f"aggregate {{{self._join(items)}}}"
             return self._copy(step)
         raise ValueError("aggregate requires at least one argument")
 
     def group(self, *args: Any, **kwargs: Any) -> Self:
+        """Group the table by the given columns and aggregate.
+
+        Args:
+            *args: Column names to group by.
+            **kwargs: Aggregate name-expression pairs.
+
+        Returns:
+            A new `Query` with the group step added.
+        """
         groups: list[str] = []
         aggregates: list[str] = []
 
@@ -108,6 +178,16 @@ class Query:
         start: int | None = None,
         end: int | None = None,
     ) -> Self:
+        """Take a subset of the table by row index.
+
+        Args:
+            n: Number of rows to take.
+            start: Starting row index (inclusive).
+            end: Ending row index (exclusive).
+
+        Returns:
+            A new `Query` with the take step added.
+        """
         if n is None:
             if start is None and end is None:
                 raise ValueError("either n or (start or end) must be specified")

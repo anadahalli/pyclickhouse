@@ -11,6 +11,14 @@ if TYPE_CHECKING:
 
 
 class Admin:
+    """Provides administrative operations for the ClickHouse database.
+
+    Args:
+        client: The ClickHouse client to use for operations.
+        database: The database to operate on.
+        cluster: The cluster to operate on.
+    """
+
     client: Client
     database: str
     cluster: str | None
@@ -27,6 +35,7 @@ class Admin:
 
     # database
     async def show_databases(self) -> list[str]:
+        """Show all databases"""
         query = "SHOW DATABASES"
         result = await self.client.query(query)
         return result.values()
@@ -41,6 +50,7 @@ class Admin:
         settings: dict[str, Any] | None = None,
         comment: str | None = None,
     ) -> bool:
+        """Create a new database."""
         parts: list[str] = []
         parts.append("CREATE DATABASE")
         if if_not_exists:
@@ -65,6 +75,7 @@ class Admin:
         cluster: str | None = None,
         sync: bool = False,
     ) -> bool:
+        """Drop a database."""
         parts: list[str] = []
         parts.append("DROP DATABASE")
         if if_exists:
@@ -79,6 +90,7 @@ class Admin:
 
     # table
     async def show_tables(self) -> list[str]:
+        """Show all tables in the database."""
         query = f"SHOW TABLES FROM {self.database}"
         result = await self.client.query(query)
         return result.values()
@@ -92,6 +104,7 @@ class Admin:
         cluster: str | None = None,
         engine: str | None = None,
     ) -> bool:
+        """Create a new table."""
         table_name = f"{database or self.database}.{table.get_name()}"
         parts: list[str] = []
         parts.append("CREATE TABLE")
@@ -116,6 +129,7 @@ class Admin:
         cluster: str | None = None,
         sync: bool = False,
     ) -> bool:
+        """Drop a table."""
         if isinstance(table, Table):
             if table.get_lifecycle() in [Lifecycle.protected, Lifecycle.external]:
                 logger.info(
@@ -146,6 +160,7 @@ class Admin:
         *,
         database: str | None = None,
     ) -> Table:
+        """Get a table by name."""
         database = database or self.database
         describe_query = f"DESC TABLE {database}.{name}"
         engine_query = f"SELECT engine_full FROM system.tables WHERE database = '{database}' AND table = '{name}'"
@@ -161,6 +176,7 @@ class Admin:
         *,
         database: str | None = None,
     ) -> str:
+        """Show the create table statement for a given table."""
         table_name = f"{database or self.database}.{name}"
         show_create = f"SHOW CREATE TABLE {table_name}"
         result = await self.client.query(show_create)
@@ -172,6 +188,7 @@ class Admin:
         *,
         database: str | None = None,
     ) -> dict[str, list[Column]]:
+        """Compare a local table with a table in the database and return the differences."""
         # table from the database
         db_table = await self.get_table(table.get_name(), database=database)
 
@@ -214,6 +231,7 @@ class Admin:
         *,
         database: str | None = None,
     ) -> bool:
+        """Alter a table by applying a set of operations."""
         if operations is None:
             operations = await self.diff_table(table)
 
@@ -237,6 +255,7 @@ class Admin:
         *,
         database: str | None = None,
     ) -> bool:
+        """Truncate a table."""
         database = database or self.database
         table_name = table.get_name() if isinstance(table, Table) else table
         query = f"TRUNCATE TABLE {database}.{table_name}"
@@ -250,6 +269,7 @@ class Admin:
         name: str,
         database: str | None = None,
     ) -> bool:
+        """Copy a table to a new table."""
         raise NotImplementedError()
 
     # column
@@ -260,6 +280,7 @@ class Admin:
         *,
         database: str | None = None,
     ) -> bool:
+        """Add a column to a table."""
         table_name = f"{database or self.database}.{table.get_name()}"
         query = f"ALTER TABLE {table_name} ADD COLUMN {column.to_sql()}"
         return await self.client.command(query)
@@ -271,6 +292,7 @@ class Admin:
         *,
         database: str | None = None,
     ) -> bool:
+        """Drop a column from a table."""
         table_name = f"{database or self.database}.{table.get_name()}"
         query = f"ALTER TABLE {table_name} DROP COLUMN {column.name}"
         return await self.client.command(query)
@@ -282,6 +304,7 @@ class Admin:
         *,
         database: str | None = None,
     ) -> bool:
+        """Modify a column in a table."""
         table_name = f"{database or self.database}.{table.get_name()}"
         query = f"ALTER TABLE {table_name} DROP COLUMN {column.name}"
         query = f"ALTER TABLE {table_name} MODIFY COLUMN {column.to_sql()}"
@@ -289,15 +312,19 @@ class Admin:
 
     # view
     async def show_views(self) -> None:
+        """Show all views."""
         pass
 
     async def create_view(self) -> None:
+        """Create a new view."""
         pass
 
     async def drop_view(self) -> None:
+        """Drop a view."""
         pass
 
     async def get_view(self) -> None:
+        """Get a view by name."""
         pass
 
     # registry
@@ -307,6 +334,7 @@ class Admin:
         *,
         database: str | None = None,
     ) -> None:
+        """Create all tables and views from the registry."""
         logger.info("Creating tables from registry...")
         for table in registry.list_tables():
             if table.get_lifecycle() != Lifecycle.external:
@@ -319,6 +347,7 @@ class Admin:
         *,
         database: str | None = None,
     ) -> None:
+        """Drop all tables and views from the registry."""
         logger.info("Dropping tables from registry...")
         for table in registry.list_tables():
             if table.get_lifecycle() not in [Lifecycle.protected, Lifecycle.external]:

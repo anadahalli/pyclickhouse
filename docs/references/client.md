@@ -1,7 +1,12 @@
+# Client
+
+::: client.get_client
+
+---
+
 ::: client.Client
     options:
       show_source: false
-      heading_level: 2
       members:
         - connect
         - close

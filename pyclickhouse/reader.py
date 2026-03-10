@@ -9,6 +9,16 @@ if TYPE_CHECKING:
 
 
 class Reader:
+    """Reads data from the ClickHouse database using a given query.
+
+    Args:
+        client: The ClickHouse client to use.
+        query: The query to execute.
+        args_model: The model to use for query arguments.
+        response_model: The model to use for the response.
+        database: The database to use.
+    """
+
     _client: Client
     _query: Query
 
@@ -30,6 +40,7 @@ class Reader:
 
     @property
     def read_rows(self) -> int:
+        """Returns the number of rows read from the database."""
         return self._count
 
     def _get_model(self, columns: dict[str, str]) -> type[BaseModel]:
@@ -62,6 +73,14 @@ class Reader:
         skip: int | None = None,
         limit: int | None = None,
     ) -> list[BaseModel | dict]:
+        """
+        Executes the query and returns the results as a list of models or dicts.
+
+        Args:
+            args: The query arguments as a model or dict.
+            skip: The number of rows to skip.
+            limit: The maximum number of rows to return.
+        """
         query = self._query
 
         if skip is not None or limit is not None:

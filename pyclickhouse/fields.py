@@ -8,6 +8,23 @@ from .types import get_clickhouse_type
 
 @dataclass
 class Column:
+    """
+    ClickHouse column.
+
+    Args:
+        type: The ClickHouse type of the column.
+        name: The name of the column.
+        default_type: The default type of the column.
+        default_expression: The default expression of the column.
+        comment: The comment of the column.
+        codec_expression: The codec expression of the column.
+        ttl_expression: The TTL expression of the column.
+
+    Examples:
+        >>> Column(type="String", name="name")
+        Column(type='String', name='name', default_type='', default_expression='', comment='', codec_expression='', ttl_expression='')
+    """
+
     type: str = ""
     name: str = ""
     _: KW_ONLY
@@ -19,6 +36,14 @@ class Column:
 
     @classmethod
     def from_field(cls, name: str, info: FieldInfo) -> Self:
+        """
+        Create a `Column` instance from a `pydantic.Field`.
+
+        Args:
+            name: Name of the column.
+            info: `pydantic.FieldInfo` instance.
+        """
+
         meta = [col for col in info.metadata if isinstance(col, Column)]
         column = meta[0] if meta else cls()
         if not column.name:
@@ -29,9 +54,21 @@ class Column:
 
     @classmethod
     def from_sql(cls, **kwargs: Any) -> Self:
+        """
+        Create a `Column` instance from a SQL column definition.
+
+        Args:
+            **kwargs: Column definition keyword arguments.
+        """
         return cls(**kwargs)
 
     def to_sql(self) -> str:
+        """
+        Convert the column to a SQL column definition.
+
+        Returns:
+            SQL column definition as a string.
+        """
         parts: list[str] = []
         if not self.name:
             raise ValueError("name is required")
@@ -56,6 +93,18 @@ class Column:
 
 
 class Param:
+    """
+    ClickHouse parameter used in queries for parameterized values.
+
+    Args:
+        name: Name of the parameter.
+        type: ClickHouse type.
+
+    Examples:
+        >>> Param("name", str)
+        Param(name, str)
+    """
+
     def __init__(self, name: str, type: type = str) -> None:
         self.name = name
         self.type = get_clickhouse_type(type)
@@ -66,6 +115,10 @@ class Param:
 
 
 class Expression:
+    """
+    ClickHouse Query expression with support for different operations.
+    """
+
     def __init__(self, value: str | Column | Param | "Expression") -> None:
         self._value = value
         self._other: str | Column | Param | None = None
@@ -157,6 +210,8 @@ class Expression:
 
 
 class Function:
+    """ClickHouse function"""
+
     def __getattr__(self, name: str) -> Callable[..., Expression]:
         def wrapper(*args: Any) -> Expression:
             params = ", ".join(map(str, args))
@@ -170,6 +225,8 @@ F = Function()
 
 
 class Aggregate:
+    """ClickHouse Aggregate"""
+
     def __init__(self, value: str | Expression) -> None:
         self.value = value
 
