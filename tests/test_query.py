@@ -1,7 +1,7 @@
 import pytest
 from pydantic import BaseModel
 
-from pyclickhouse.fields import Aggregate, F
+from pyclickhouse.fields import Aggregate, F, Param
 from pyclickhouse.query import Query
 from pyclickhouse.table import Table
 
@@ -14,6 +14,7 @@ class TestQuery:
 
         table = Table(Model)
 
+        # database and schema
         q = Query(table="test", database="db", schema="sc")
         assert q.pipeline == ["from sc.db.test"]
         assert str(q) == "SELECT * FROM sc.db.test"
@@ -140,3 +141,12 @@ class TestQuery:
             str(s)
             == "SELECT `key` AS name, sum(val) AS total FROM model GROUP BY `key`"
         )
+
+        # params
+        q = Query(table)
+        s = q.filter(table.val >= Param("val", int))
+        assert s.pipeline == ["from model", "filter (val >= s'{{val:Int32}}')"]
+        assert str(s) == "SELECT * FROM model WHERE val >= {val:Int32}"
+        s = q.filter(table.key == Param("name"))
+        assert s.pipeline == ["from model", "filter (key == s'{{name:String}}')"]
+        assert str(s) == "SELECT * FROM model WHERE `key` = {name:String}"

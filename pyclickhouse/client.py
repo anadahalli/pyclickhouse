@@ -6,6 +6,7 @@ from clickhouse_connect import create_client
 from clickhouse_connect.driver.asyncclient import AsyncClient
 
 from .admin import Admin
+from .utils import clean_query_param_types
 
 
 def create_http_client(url: str, **kwargs: Any) -> AsyncClient:
@@ -59,9 +60,11 @@ class Client(ABC):
     async def insert(
         self,
         table: str,
-        data: Sequence[dict[str, Any]],
+        data: Sequence[Sequence[Any]],
         *,
         columns: Iterable[str] = "*",
+        database: str | None = None,
+        **kwargs: Any,
     ) -> int: ...
 
     @abstractmethod
@@ -129,12 +132,19 @@ class HttpClient(Client):
     async def insert(
         self,
         table: str,
-        data: Sequence[dict[str, Any]],
+        data: Sequence[Sequence[Any]],
         *,
         columns: Iterable[str] = "*",
+        database: str | None = None,
+        **kwargs: Any,
     ) -> int:
-        rows = [list(row.values()) for row in data]
-        result = await self.client.insert(table, data=rows, column_names=columns)
+        table_name = f"{database or self.database}.{table}"
+        result = await self.client.insert(
+            table=table_name,
+            data=data,
+            column_names=columns,
+            **kwargs,
+        )
         return result.written_rows
 
     async def query(
@@ -196,13 +206,16 @@ class NativeClient(Client):
     async def insert(
         self,
         table: str,
-        data: Sequence[dict[str, Any]],
+        data: Sequence[Sequence[Any]],
         *,
         columns: Iterable[str] = "*",
+        database: str | None = None,
+        **kwargs: Any,
     ) -> int:
-        query = f"INSERT INTO {table} ({columns}) VALUES"
-        rows = data
-        cursor = await self.execute(query, args=rows)
+        table_name = f"{database or self.database}.{table}"
+        table_columns = ", ".join(columns) if columns != "*" else columns
+        query = f"INSERT INTO {table_name} ({table_columns}) VALUES"
+        cursor = await self.execute(query, args=data)
         return cursor.rowcount
 
     async def query(
@@ -210,6 +223,7 @@ class NativeClient(Client):
         query: str,
         args: dict[str, Any] | None = None,
     ) -> QueryResult:
+        query = clean_query_param_types(query)
         cursor = await self.execute(query, args)
         column_names = cast(tuple[str, ...], cursor._columns)
         column_types = cast(tuple[str, ...], cursor._types)

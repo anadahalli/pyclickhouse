@@ -35,3 +35,7 @@ def comma_join(
     if prefix:
         return f"{prefix} {joined}"
     return joined
+
+
+def clean_query_param_types(text: str) -> str:
+    return re.sub(pattern=r"\{([^:]+):[^}]+\}", repl=r"{\1}", string=text)

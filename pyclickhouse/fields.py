@@ -55,10 +55,20 @@ class Column:
         return self.name
 
 
+class Param:
+    def __init__(self, name: str, type: type = str) -> None:
+        self.name = name
+        self.type = get_clickhouse_type(type)
+
+    def __str__(self) -> str:
+        value = f"{self.name}:{self.type}"
+        return "s'{{" + value + "}}'"
+
+
 class Expression:
-    def __init__(self, value: str | Column | "Expression") -> None:
+    def __init__(self, value: str | Column | Param | "Expression") -> None:
         self._value = value
-        self._other: str | Column | None = None
+        self._other: str | Column | Param | None = None
         self._operator: str | None = None
         self._prefix: str | None = None
 
@@ -67,7 +77,9 @@ class Expression:
         if self._other is not None and self._operator is not None:
             value = str(self._value)
             operator = self._operator
-            if isinstance(self._other, str):
+            if isinstance(self._other, Param):
+                other = str(self._other)
+            elif isinstance(self._other, str):
                 other = f"'{self._other}'"
             else:
                 other = str(self._other)
