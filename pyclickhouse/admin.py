@@ -12,6 +12,8 @@ if TYPE_CHECKING:
 
 class Admin:
     client: Client
+    database: str
+    cluster: str | None
 
     def __init__(
         self,
@@ -20,7 +22,7 @@ class Admin:
         cluster: str | None = None,
     ) -> None:
         self.client = client
-        self.database = database
+        self.database = database or client.database
         self.cluster = cluster
 
     # database
@@ -90,11 +92,12 @@ class Admin:
         cluster: str | None = None,
         engine: str | None = None,
     ) -> bool:
+        table_name = f"{database or self.database}.{table.get_name()}"
         parts: list[str] = []
         parts.append("CREATE TABLE")
         if if_not_exists:
             parts.append("IF NOT EXISTS")
-        parts.append(f"{database or self.database}.{table.get_name()}")
+        parts.append(table_name)
         if cluster or self.cluster:
             parts.append(f"ON CLUSTER {cluster or self.cluster}")
         columns = ", ".join([col.to_sql() for col in table.get_columns().values()])
@@ -121,14 +124,15 @@ class Admin:
                 )
                 return False
 
+        name = table.get_name() if isinstance(table, Table) else table
+        table_name = f"{database or self.database}.{name}"
         parts: list[str] = []
         parts.append("DROP TABLE")
         if if_exists:
             parts.append("IF EXISTS")
         if if_empty:
             parts.append("IF EMPTY")
-        name = table.get_name() if isinstance(table, Table) else table
-        parts.append(f"{database or self.database}.{name}")
+        parts.append(table_name)
         if cluster:
             parts.append(f"ON CLUSTER {cluster}")
         if sync:
@@ -157,7 +161,8 @@ class Admin:
         *,
         database: str | None = None,
     ) -> str:
-        show_create = f"SHOW CREATE TABLE {database or self.database}.{name}"
+        table_name = f"{database or self.database}.{name}"
+        show_create = f"SHOW CREATE TABLE {table_name}"
         result = await self.client.query(show_create)
         return result.values()[0]
 
@@ -168,7 +173,7 @@ class Admin:
         database: str | None = None,
     ) -> dict[str, list[Column]]:
         # table from the database
-        db_table = await self.get_table(table.get_name())
+        db_table = await self.get_table(table.get_name(), database=database)
 
         # columns
         local = table.get_columns().values()
@@ -214,16 +219,28 @@ class Admin:
 
         # Drop columns
         for column in operations["drop_column"]:
-            await self.drop_column(table, column)
+            await self.drop_column(table, column, database=database)
 
         # Add columns
         for column in operations["add_column"]:
-            await self.add_column(table, column)
+            await self.add_column(table, column, database=database)
 
         # Modify columns
         for column in operations["modify_column"]:
-            await self.modify_column(table, column)
+            await self.modify_column(table, column, database=database)
 
+        return True
+
+    async def truncate_table(
+        self,
+        table: Table | str,
+        *,
+        database: str | None = None,
+    ) -> bool:
+        database = database or self.database
+        table_name = table.get_name() if isinstance(table, Table) else table
+        query = f"TRUNCATE TABLE {database}.{table_name}"
+        await self.client.command(query)
         return True
 
     async def copy_table(
@@ -240,24 +257,34 @@ class Admin:
         self,
         table: Table,
         column: Column,
+        *,
+        database: str | None = None,
     ) -> bool:
-        query = f"ALTER TABLE {table.get_name()} ADD COLUMN {column.to_sql()}"
+        table_name = f"{database or self.database}.{table.get_name()}"
+        query = f"ALTER TABLE {table_name} ADD COLUMN {column.to_sql()}"
         return await self.client.command(query)
 
     async def drop_column(
         self,
         table: Table,
         column: Column,
+        *,
+        database: str | None = None,
     ) -> bool:
-        query = f"ALTER TABLE {table.get_name()} DROP COLUMN {column.name}"
+        table_name = f"{database or self.database}.{table.get_name()}"
+        query = f"ALTER TABLE {table_name} DROP COLUMN {column.name}"
         return await self.client.command(query)
 
     async def modify_column(
         self,
         table: Table,
         column: Column,
+        *,
+        database: str | None = None,
     ) -> bool:
-        query = f"ALTER TABLE {table.get_name()} MODIFY COLUMN {column.to_sql()}"
+        table_name = f"{database or self.database}.{table.get_name()}"
+        query = f"ALTER TABLE {table_name} DROP COLUMN {column.name}"
+        query = f"ALTER TABLE {table_name} MODIFY COLUMN {column.to_sql()}"
         return await self.client.command(query)
 
     # view
@@ -274,16 +301,26 @@ class Admin:
         pass
 
     # registry
-    async def create_all(self, registry: Registry = registry) -> None:
+    async def create_all(
+        self,
+        registry: Registry = registry,
+        *,
+        database: str | None = None,
+    ) -> None:
         logger.info("Creating tables from registry...")
         for table in registry.list_tables():
             if table.get_lifecycle() != Lifecycle.external:
                 logger.info("Create Table({table})", table=table.get_name())
-                await self.create_table(table)
+                await self.create_table(table, database=database)
 
-    async def drop_all(self, registry: Registry = registry) -> None:
+    async def drop_all(
+        self,
+        registry: Registry = registry,
+        *,
+        database: str | None = None,
+    ) -> None:
         logger.info("Dropping tables from registry...")
         for table in registry.list_tables():
             if table.get_lifecycle() not in [Lifecycle.protected, Lifecycle.external]:
                 logger.info("Drop Table({table})", table=table.get_name())
-                await self.drop_table(table)
+                await self.drop_table(table, database=database)

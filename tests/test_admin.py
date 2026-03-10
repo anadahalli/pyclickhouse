@@ -15,6 +15,11 @@ def admin(http_client: HttpClient) -> Admin:
 
 
 class TestAdmin:
+    async def test_client(self, http_client: HttpClient) -> None:
+        admin = http_client.admin()
+        assert isinstance(admin, Admin)
+        assert admin.client is http_client
+
     async def test_database(self, admin: Admin) -> None:
         assert admin.client.database in await admin.show_databases()
 
