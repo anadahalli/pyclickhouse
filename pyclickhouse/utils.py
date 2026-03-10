@@ -5,7 +5,6 @@ from typing import Any
 from loguru import logger
 
 # logging
-logger.bind(name="pyclickhouse")
 logger.configure(
     handlers=[
         {
@@ -15,6 +14,8 @@ logger.configure(
         },
     ],
 )
+logger.bind(name="pyclickhouse")
+logger.disable(name="pyclickhouse")
 
 
 def pascal_to_snake(name: str) -> str:
