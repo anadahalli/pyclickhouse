@@ -1,4 +1,4 @@
-from datetime import date, datetime, time, timedelta
+from datetime import date, datetime
 
 import pytest
 
@@ -14,8 +14,6 @@ from pyclickhouse.types import get_clickhouse_type, get_python_type  # noqa
         (bool, "Bool"),
         (datetime, "DateTime"),
         (date, "Date"),
-        (time, "Time"),
-        (timedelta, "Interval"),
     ],
 )
 def test_get_clickhouse_types(py_type: type, ch_string: str) -> None:

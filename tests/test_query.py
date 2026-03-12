@@ -104,6 +104,12 @@ class TestQuery:
         s = q.filter((table.key == "test") & (table.val == 10))
         assert s.pipeline == ["from model", "filter (key == 'test' && val == 10)"]
         assert str(s) == "SELECT * FROM model WHERE `key` = 'test' AND val = 10"
+        s = q.filter(table.val.is_in([1, 2, 3]))
+        assert s.pipeline == ["from model", "filter ((val | in [1, 2, 3]))"]
+        assert str(s) == "SELECT * FROM model WHERE val IN (1, 2, 3)"
+        s = q.filter(table.val.is_not_in([1, 2, 3]))
+        assert s.pipeline == ["from model", "filter (!(val | in [1, 2, 3]))"]
+        assert str(s) == "SELECT * FROM model WHERE NOT val IN (1, 2, 3)"
 
         # aggregate
         s = q.aggregate(F.count())

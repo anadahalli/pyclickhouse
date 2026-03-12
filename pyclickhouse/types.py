@@ -3,13 +3,13 @@ from enum import StrEnum, auto
 from typing import Any
 
 type_map: dict[type, str] = {
-    int: "Int32",
     str: "String",
+    int: "Int32",
     float: "Float64",
     bool: "Bool",
     datetime: "DateTime",
     date: "Date",
-    time: "Time",
+    # time: "Time",
     timedelta: "Interval",
     dict: "JSON",
 }

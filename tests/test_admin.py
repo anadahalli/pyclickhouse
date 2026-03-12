@@ -1,12 +1,16 @@
 import pytest
 from pydantic import BaseModel
 
-from pyclickhouse.admin import Admin
-from pyclickhouse.client import HttpClient
-from pyclickhouse.fields import Column
-from pyclickhouse.registry import Registry
-from pyclickhouse.table import Table
-from pyclickhouse.types import Lifecycle
+from pyclickhouse import (
+    Admin,
+    Column,
+    HttpClient,
+    Lifecycle,
+    Query,
+    Registry,
+    Table,
+    View,
+)
 
 
 @pytest.fixture
@@ -110,10 +114,7 @@ class TestAdmin:
 
         assert await admin.drop_table(table)
 
-    async def test_view(self, admin: Admin) -> None:
-        pass
-
-    async def test_registry(self, admin: Admin) -> None:
+    async def test_table_registry(self, admin: Admin) -> None:
         registry = Registry()
 
         class First(BaseModel):
@@ -138,3 +139,56 @@ class TestAdmin:
         assert await admin.create_table(external)
         await admin.drop_all(registry)
         assert await admin.show_tables() == ["second", "third"]
+        assert await admin.drop_table(protected, force=True)
+        assert await admin.drop_table(external, force=True)
+
+    async def test_view(self, http_client: HttpClient) -> None:
+        client = http_client
+        admin = client.admin()
+        registry = Registry()
+
+        assert await admin.show_views() == []
+
+        View(
+            name="basic_view",
+            select="SELECT number FROM system.numbers LIMIT 100",
+            registry=registry,
+        )
+
+        class Model(BaseModel):
+            name: str
+            value: int
+
+        source = Table(
+            Model,
+            name="source_table",
+            engine="Memory",
+            registry=registry,
+        )
+        target = Table(
+            Model,
+            name="target_table",
+            engine="Memory",
+            registry=registry,
+        )
+
+        View(
+            name="simple_view",
+            select=Query(source),
+            table=target,
+            registry=registry,
+        )
+
+        await admin.create_all(registry)
+        assert await admin.show_tables() == ["source_table", "target_table"]
+        assert await admin.show_views() == ["basic_view", "simple_view"]
+
+        basic_sql = "SELECT * from basic_view LIMIT 6"
+        result = await client.query(basic_sql)
+        assert result.values() == [0, 1, 2, 3, 4, 5]
+
+        data = [("one", 1), ("two", 2), ("three", 3), ("four", 4)]
+        assert await client.insert(table=source.get_name(), data=data) == 8
+
+        result = await client.query("SELECT * FROM target_table")
+        assert result.rows == data

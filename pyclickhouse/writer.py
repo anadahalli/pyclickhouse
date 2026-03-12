@@ -12,6 +12,9 @@ if TYPE_CHECKING:
 class Writer:
     """Writer for inserting data into a ClickHouse table.
 
+    If `batch` is `True`, the records are inserted immediately;
+    otherwise, it is queued for batch insertion.
+
     Args:
         client: The ClickHouse client.
         table: The table to write to.
@@ -82,21 +85,25 @@ class Writer:
         while len(self._records):
             items = self._get_next_batch()
             data = [self._serialize(item) for item in items]
+            # print("writer", data)
             await self._insert(data)
 
-    async def insert(self, data: BaseModel) -> None:
-        """Inserts a record into the queue.
+    async def insert(self, *items: BaseModel) -> None:
+        """Inserts records into the table or queue them.
 
         If `batch` is `True`, the record is inserted immediately;
         otherwise, it is queued for batch insertion.
 
         Args:
-            data: The record to insert.
+            items: Records to insert.
         """
-        if not isinstance(data, self._table_model):
-            raise TypeError(f"Expected {str(self._table_model)}, got {str(type(data))}")
+        for item in items:
+            if not isinstance(item, self._table_model):
+                raise TypeError(
+                    f"Expected {str(self._table_model)}, got {str(type(item))}"
+                )
 
-        self._records.append(data)
+            self._records.append(item)
 
         if not self._batch:
             await self.flush()

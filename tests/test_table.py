@@ -71,6 +71,3 @@ class TestTable:
             "key": Column(name="key", type="String"),
             "val": Column(name="val", type="Int32"),
         }
-
-    def test_table_registry(self) -> None:
-        pass

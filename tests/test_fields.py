@@ -4,7 +4,7 @@ import pytest
 from pydantic import BaseModel
 from pydantic.fields import FieldInfo
 
-from pyclickhouse.fields import Column
+from pyclickhouse.fields import Column, Expression, F
 
 
 class TestColumn:
@@ -99,12 +99,67 @@ class TestColumn:
 
 
 class TestExpression:
-    pass
+    def test_expression(self) -> None:
+        f = Expression("test")
+        assert str(f) == "test"
+
+        c = Column(type="String", name="name")
+        e = Expression(c.name)
+        assert str(e) == "name"
+
+        # prefix
+        assert str(-e) == "-name"
+        assert str(+e) == "+name"
+
+        # comparision
+        assert str(e > 10) == "name > 10"
+        assert str(e > f) == "name > test"
+        assert str(e >= 10) == "name >= 10"
+        assert str(e >= f) == "name >= test"
+        assert str(e < 10) == "name < 10"
+        assert str(e < f) == "name < test"
+        assert str(e <= 10) == "name <= 10"
+        assert str(e <= f) == "name <= test"
+        assert str(e == 10) == "name == 10"
+        assert str(e == f) == "name == test"
+        assert str(e != 10) == "name != 10"
+        assert str(e != f) == "name != test"
+
+        # airthmetic
+        assert str(e + 10) == "name + 10"
+        assert str(e + f) == "name + test"
+        assert str(e - 10) == "name - 10"
+        assert str(e - f) == "name - test"
+        assert str(e * 10) == "name * 10"
+        assert str(e * f) == "name * test"
+        assert str(e / 10) == "name / 10"
+        assert str(e / f) == "name / test"
+
+        # logical
+        assert str(e & 10) == "name && 10"
+        assert str(e & f) == "name && test"
+        assert str(e | 10) == "name || 10"
+        assert str(e | f) == "name || test"
+        assert str(~e) == "!name"
+        assert str(~f) == "!test"
+
+        # contains
+        assert str(e.is_in([1, 2, 3])) == "(name | in [1, 2, 3])"
+        assert str(e.is_in(f)) == "(name | in test)"
+        assert str(e.is_not_in([1, 2, 3])) == "!(name | in [1, 2, 3])"
+        assert str(e.is_not_in(f)) == "!(name | in test)"
 
 
 class TestFunction:
-    pass
+    def test_function(self) -> None:
+        e = Expression("test")
+        assert F.count(e).to_sql() == "s'count(test)'"
+        assert F.toInt32(F.count(e)).to_sql() == "s'toInt32(count(test))'"
 
 
 class TestAggregate:
+    pass
+
+
+class TestParam:
     pass

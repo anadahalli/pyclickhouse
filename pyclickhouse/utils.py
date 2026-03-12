@@ -22,6 +22,12 @@ def pascal_to_snake(name: str) -> str:
     return re.sub("([a-z0-9])([A-Z])", r"\1_\2", name).lower()
 
 
+def escape(value: Any) -> str:
+    if isinstance(value, str):
+        return f"'{value}'"
+    return value
+
+
 def comma_join(
     data: dict[str, Any],
     *,

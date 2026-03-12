@@ -3,7 +3,7 @@ from typing import Any, Self
 
 import prqlc
 
-from .fields import Aggregate, Expression
+from .fields import Aggregate, Expression, Function
 from .table import Table
 
 options = prqlc.CompileOptions(
@@ -60,11 +60,20 @@ class Query:
     def _table_name(self) -> str:
         return ".".join(filter(None, [self.schema, self.database, str(self.table)]))
 
+    def _stringify(self, value: Any) -> str:
+        if isinstance(value, Aggregate):
+            return str(value)
+        if isinstance(value, Expression):
+            return str(value)
+        if isinstance(value, Function):
+            return value.to_sql()
+        return value
+
     def _from_args(self, *args: Any) -> list[str]:
-        return [str(col) for col in args]
+        return [self._stringify(col) for col in args]
 
     def _from_kwargs(self, **kwargs: Any) -> list[str]:
-        return [f"{key} = {str(val)}" for key, val in kwargs.items()]
+        return [f"{key} = {self._stringify(val)}" for key, val in kwargs.items()]
 
     def _copy(self, step: str) -> Self:
         return replace(self, pipeline=[*self.pipeline, step])
@@ -157,14 +166,14 @@ class Query:
 
         for col in args:
             if isinstance(col, Aggregate):
-                aggregates.append(str(col))
-            elif isinstance(col, Expression):
-                groups.append(str(col))
+                aggregates.append(self._stringify(col))
+            else:
+                groups.append(self._stringify(col))
         for name, col in kwargs.items():
             if isinstance(col, Aggregate):
-                aggregates.append(f"{name} = {str(col)}")
-            elif isinstance(col, Expression):
-                groups.append(f"{name} = {str(col)}")
+                aggregates.append(f"{name} = {self._stringify(col)}")
+            else:
+                groups.append(f"{name} = {self._stringify(col)}")
 
         group = f"group {{{self._join(groups)}}}"
         aggregate = f"aggregate {{{self._join(aggregates)}}}"

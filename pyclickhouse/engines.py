@@ -40,6 +40,14 @@ class Memory(Engine):
         return " ".join(parts)
 
 
+@dataclass(kw_only=True)
+class Null(Engine):
+    """Null engine."""
+
+    def to_sql(self) -> str:
+        return "Null"
+
+
 # MergeTree Family
 
 
@@ -170,21 +178,32 @@ class AggregatingMergeTree(Engine):
     """AggregatingMergeTree engine.
 
     Args:
-        columns: columns expression.
         order_by: order by expression.
         partition_by: partition by expression.
         sample_by: sample by expression.
         settings: dictionary of engine settings.
     """
 
-    columns: str | None = None
     order_by: str | None = None
     partition_by: str | None = None
     sample_by: str | None = None
+    ttl: str | None = None
     settings: dict[str, Any] | None = None
 
     def to_sql(self) -> str:
-        raise NotImplementedError()
+        parts: list[str] = []
+        parts.append("AggregatingMergeTree()")
+        if self.order_by is not None:
+            parts.append(f"ORDER BY {self.order_by}")
+        if self.partition_by is not None:
+            parts.append(f"PARTITION BY {self.partition_by}")
+        if self.sample_by is not None:
+            parts.append(f"SAMPLE BY {self.sample_by}")
+        if self.ttl is not None:
+            parts.append(f"TTL {self.ttl}")
+        if self.settings:
+            parts.append(comma_join(self.settings, prefix="SETTINGS"))
+        return " ".join(parts)
 
 
 @dataclass(kw_only=True)

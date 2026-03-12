@@ -15,6 +15,8 @@ from .writer import Writer
 
 
 def create_http_client(url: str, **kwargs: Any) -> AsyncClient:
+    kwargs["utc_tz_aware"] = "schema"
+    kwargs["show_clickhouse_errors"] = True
     return AsyncClient(client=create_client(dsn=url, **kwargs))
 
 
@@ -37,6 +39,10 @@ class QueryResult:
     def items(self) -> list[dict[str, Any]]:
         column_names = self.columns.keys()
         return [dict(zip(column_names, row)) for row in self.rows]
+
+    def first_item(self) -> dict[str, Any] | None:
+        items = self.items()
+        return items[0] if items else None
 
     def first(self) -> Any:
         if rows := self.rows:

@@ -5,6 +5,7 @@ from .registry import Registry, registry
 from .table import Table
 from .types import Lifecycle
 from .utils import comma_join, logger
+from .view import View
 
 if TYPE_CHECKING:
     from .client import Client
@@ -89,9 +90,14 @@ class Admin:
         return await self.client.command(query)
 
     # table
-    async def show_tables(self) -> list[str]:
+    async def show_tables(self, *, database: str | None = None) -> list[str]:
         """Show all tables in the database."""
-        query = f"SHOW TABLES FROM {self.database}"
+        parts: list[str] = []
+        parts.append("SELECT name FROM system.tables")
+        parts.append(f"WHERE database = '{database or self.database}'")
+        parts.append("AND engine NOT IN ['View', 'MaterializedView']")
+        parts.append("AND name NOT LIKE '.inner%'")
+        query = " ".join(parts)
         result = await self.client.query(query)
         return result.values()
 
@@ -117,6 +123,7 @@ class Admin:
         parts.append(f"({columns})")
         parts.append(f"ENGINE = {engine or table.get_engine()}")
         query = " ".join(parts)
+        logger.debug(query)
         return await self.client.command(query)
 
     async def drop_table(
@@ -128,10 +135,14 @@ class Admin:
         database: str | None = None,
         cluster: str | None = None,
         sync: bool = False,
+        force: bool = False,
     ) -> bool:
         """Drop a table."""
         if isinstance(table, Table):
-            if table.get_lifecycle() in [Lifecycle.protected, Lifecycle.external]:
+            if (
+                table.get_lifecycle() in [Lifecycle.protected, Lifecycle.external]
+                and not force
+            ):
                 logger.info(
                     "Cant not drop table. Table({table}) is not managed",
                     table=table.get_name(),
@@ -311,19 +322,125 @@ class Admin:
         return await self.client.command(query)
 
     # view
-    async def show_views(self) -> None:
-        """Show all views."""
-        pass
+    async def show_views(self, *, database: str | None = None) -> list[str]:
+        """Show all views in the database."""
+        parts: list[str] = []
+        parts.append("SELECT name FROM system.tables")
+        parts.append(f"WHERE database = '{database or self.database}'")
+        parts.append("AND engine IN ['View', 'MaterializedView']")
+        query = " ".join(parts)
+        result = await self.client.query(query)
+        return result.values()
 
-    async def create_view(self) -> None:
+    async def create_simple_view(
+        self,
+        view: View,
+        *,
+        replace: bool = True,
+        database: str | None = None,
+    ) -> bool:
+        view_name = f"{database or self.database}.{view.get_name()}"
+        select_query = str(view.select)
+        parts: list[str] = []
+        parts.append("CREATE")
+        if replace:
+            parts.append("OR REPLACE")
+        parts.append("VIEW")
+        parts.append(view_name)
+        parts.append("AS")
+        parts.append(select_query)
+        query = " ".join(parts)
+        logger.debug(query)
+        return await self.client.command(query)
+
+    async def create_materialized_view(
+        self,
+        view: View,
+        table: Table,
+        *,
+        if_not_exists: bool = True,
+        database: str | None = None,
+    ) -> bool:
+        view_name = f"{database or self.database}.{view.get_name()}"
+        table_name = f"{database or self.database}.{table.get_name()}"
+        select_query = str(view.select)
+        parts: list[str] = []
+        parts.append("CREATE MATERIALIZED VIEW")
+        if if_not_exists:
+            parts.append("IF NOT EXISTS")
+        parts.append(view_name)
+        parts.append(f"TO {table_name}")
+        parts.append("AS")
+        parts.append(select_query)
+        query = " ".join(parts)
+        logger.debug(query)
+        return await self.client.command(query)
+
+    async def create_view(
+        self,
+        view: View,
+        *,
+        if_not_exists: bool = True,
+        replace: bool = True,
+        database: str | None = None,
+    ) -> bool:
         """Create a new view."""
-        pass
+        if view.table is not None:
+            return await self.create_materialized_view(
+                view,
+                table=view.table,
+                if_not_exists=if_not_exists,
+                database=database,
+            )
+        else:
+            return await self.create_simple_view(
+                view,
+                replace=replace,
+                database=database,
+            )
 
-    async def drop_view(self) -> None:
+    async def drop_view(
+        self,
+        view: View | str,
+        *,
+        if_exists: bool = True,
+        database: str | None = None,
+        cluster: str | None = None,
+        sync: bool = False,
+        force: bool = False,
+    ) -> bool:
         """Drop a view."""
-        pass
+        if isinstance(view, View):
+            if (
+                view.get_lifecycle() in [Lifecycle.protected, Lifecycle.external]
+                and not force
+            ):
+                logger.info(
+                    "Cant not drop table. View({view}) is not managed",
+                    view=view.get_name(),
+                )
+                return False
 
-    async def get_view(self) -> None:
+        name = view.get_name() if isinstance(view, View) else view
+        view_name = f"{database or self.database}.{name}"
+        parts: list[str] = []
+        parts.append("DROP VIEW")
+        if if_exists:
+            parts.append("IF EXISTS")
+        parts.append(view_name)
+        if cluster:
+            parts.append(f"ON CLUSTER {cluster}")
+        if sync:
+            parts.append("SYNC")
+        query = " ".join(parts)
+        return await self.client.command(query)
+
+    async def get_view(
+        self,
+        name: str,
+        *,
+        database: str | None = None,
+    ) -> None:
         """Get a view by name."""
         pass
 
@@ -335,11 +452,17 @@ class Admin:
         database: str | None = None,
     ) -> None:
         """Create all tables and views from the registry."""
-        logger.info("Creating tables from registry...")
+        logger.info("Creating tables and views from registry...")
+
         for table in registry.list_tables():
             if table.get_lifecycle() != Lifecycle.external:
-                logger.info("Create Table({table})", table=table.get_name())
+                logger.info("Creating Table({table})", table=table.get_name())
                 await self.create_table(table, database=database)
+
+        for view in registry.list_views():
+            if table.get_lifecycle() != Lifecycle.external:
+                logger.info("Creating View({view})", view=view.get_name())
+                await self.create_view(view, database=database)
 
     async def drop_all(
         self,
@@ -348,8 +471,14 @@ class Admin:
         database: str | None = None,
     ) -> None:
         """Drop all tables and views from the registry."""
-        logger.info("Dropping tables from registry...")
+        logger.info("Dropping tables and views from registry...")
+
         for table in registry.list_tables():
             if table.get_lifecycle() not in [Lifecycle.protected, Lifecycle.external]:
-                logger.info("Drop Table({table})", table=table.get_name())
+                logger.info("Dropping Table({table})", table=table.get_name())
                 await self.drop_table(table, database=database)
+
+        for view in registry.list_views():
+            if table.get_lifecycle() not in [Lifecycle.protected, Lifecycle.external]:
+                logger.info("Dropping View({view})", view=view.get_name())
+                await self.drop_view(view, database=database)

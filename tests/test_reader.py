@@ -4,24 +4,30 @@ import pytest
 from clickhouse_connect.driver.exceptions import DatabaseError
 from pydantic import BaseModel
 
-from pyclickhouse.client import HttpClient
-from pyclickhouse.fields import Aggregate, F, Param
-from pyclickhouse.query import Query
-from pyclickhouse.reader import Reader
-from pyclickhouse.table import Table
+from pyclickhouse import (
+    Aggregate,
+    F,
+    HttpClient,
+    Param,
+    Query,
+    Reader,
+    Registry,
+    Table,
+)
 
 
 class TestReader:
     async def test_reader(self, http_client: HttpClient) -> None:
         client = http_client
+        registry = Registry()
         admin = client.admin()
 
         class Store(BaseModel):
             name: str
             value: int
 
-        table = Table(Store, name="test_reader")
-        await admin.create_all()
+        table = Table(Store, name="test_reader", registry=registry)
+        await admin.create_all(registry)
 
         writer = client.writer(table)
 

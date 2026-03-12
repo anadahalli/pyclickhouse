@@ -54,7 +54,7 @@ class Table:
     def __getattr__(self, name: str) -> Expression:
         if name not in self._columns:
             raise AttributeError(f"Table({self._name}) has no column '{name}'")
-        return Expression(self._columns[name])
+        return Expression(self._columns[name].name)
 
     def get_model(self) -> type[BaseModel]:
         """Get the model associated with this table."""

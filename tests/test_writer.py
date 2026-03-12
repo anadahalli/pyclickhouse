@@ -3,23 +3,26 @@ from collections import deque
 import pytest
 from pydantic import BaseModel
 
-from pyclickhouse.admin import Admin
-from pyclickhouse.client import HttpClient
-from pyclickhouse.table import Table
-from pyclickhouse.writer import Writer
+from pyclickhouse import (
+    HttpClient,
+    Registry,
+    Table,
+    Writer,
+)
 
 
 class TestWriter:
     async def test_writer(self, http_client: HttpClient) -> None:
         client = http_client
+        registry = Registry()
 
         class Data(BaseModel):
             name: str
             value: int
 
-        table = Table(Data)
-        admin = Admin(client)
-        await admin.create_all()
+        table = Table(Data, name="writer", registry=registry)
+
+        await client.admin().create_all(registry)
 
         writer = client.writer(table)
         assert isinstance(writer, Writer)
@@ -52,4 +55,4 @@ class TestWriter:
 
         query = f"SELECT count(*) FROM {table.get_name()}"
         result = await client.query(query)
-        assert result.first() == batch_size + 1
+        assert result.rows[0][0] == batch_size + 1

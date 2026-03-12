@@ -4,6 +4,7 @@ from typing import Any, Callable, Self
 from pydantic.fields import FieldInfo
 
 from .types import get_clickhouse_type
+from .utils import escape
 
 
 @dataclass
@@ -92,69 +93,37 @@ class Column:
         return self.name
 
 
-class Param:
-    """
-    ClickHouse parameter used in queries for parameterized values.
-
-    Args:
-        name: Name of the parameter.
-        type: ClickHouse type.
-
-    Examples:
-        >>> Param("name", str)
-        Param(name, str)
-    """
-
-    def __init__(self, name: str, type: type = str) -> None:
-        self.name = name
-        self.type = get_clickhouse_type(type)
-
-    def __str__(self) -> str:
-        value = f"{self.name}:{self.type}"
-        return "s'{{" + value + "}}'"
-
-
 class Expression:
     """
     ClickHouse Query expression with support for different operations.
     """
 
-    def __init__(self, value: str | Column | Param | "Expression") -> None:
-        self._value = value
-        self._other: str | Column | Param | None = None
-        self._operator: str | None = None
-        self._prefix: str | None = None
+    def __init__(self, value: str) -> None:
+        self.value = value
 
-    @property
-    def value(self) -> str:
-        if self._other is not None and self._operator is not None:
-            value = str(self._value)
-            operator = self._operator
-            if isinstance(self._other, Param):
-                other = str(self._other)
-            elif isinstance(self._other, str):
-                other = f"'{self._other}'"
-            else:
-                other = str(self._other)
-            return f"{value} {operator} {other}"
-        elif self._prefix is not None:
-            return f"{self._prefix}{str(self._value)}"
-        return str(self._value)
-
-    def to_sql(self) -> str:
-        return self.value
+    # def to_sql(self) -> str:
+    #     if self._other is not None and self._operator is not None:
+    #         value = str(self._value)
+    #         operator = self._operator
+    #         if isinstance(self._other, Param):
+    #             other = str(self._other)
+    #         elif isinstance(self._other, str):
+    #             other = f"'{self._other}'"
+    #         else:
+    #             other = str(self._other)
+    #         return f"{value} {operator} {other}"
+    #     elif self._prefix is not None:
+    #         return f"{self._prefix}{str(self._value)}"
+    #     return str(self._value)
 
     def __str__(self) -> str:
-        return self.value
+        return str(self.value)
 
     def _operation(self, operator: str, other: Any) -> Self:
-        self._operator = operator
-        self._other = other
-        return self
+        return type(self)(f"{str(self.value)} {operator} {str(escape(other))}")
 
     def _prefixer(self, prefix: str) -> Self:
-        self._prefix = prefix
-        return self
+        return type(self)(f"{prefix}{str(self.value)}")
 
     # comparision operators: lt, le, gt, ge, eq, ne
     def __lt__(self, other: Any) -> Self:
@@ -188,47 +157,85 @@ class Expression:
     def __truediv__(self, other: Any) -> Self:
         return self._operation("/", other)
 
-    # logical operators: and, or, invert, contains
-    def __contains__(self, other: Any) -> str:
-        return f"{self.value} IN {other}"
+    # logical operators: and, or, invert
+    def __and__(self, other: Any) -> Self:
+        return self._operation("&&", other)
 
-    def __and__(self, other: Any) -> str:
-        return f"{self.value} && {other}"
-
-    def __or__(self, other: Any) -> str:
-        return f"{self.value} || {other}"
+    def __or__(self, other: Any) -> Self:
+        return self._operation("||", other)
 
     def __invert__(self) -> Self:
         return self._prefixer("!")
 
-    # unary operators: neg, pos, abs
+    # unary operators: neg, pos
     def __neg__(self) -> Self:
         return self._prefixer("-")
 
     def __pos__(self) -> Self:
         return self._prefixer("+")
 
+    # containes
+    def is_in(self, other: Any) -> Self:
+        return type(self)(f"({str(self.value)} | in {str(other)})")
+
+    def is_not_in(self, other: Any) -> Self:
+        return type(self)(f"!({str(self.value)} | in {str(other)})")
+
+
+class Param:
+    """
+    ClickHouse parameter used in queries for parameterized values.
+
+    Args:
+        name: Name of the parameter.
+        type: ClickHouse type.
+
+    Examples:
+        >>> Param("name", str)
+        Param(name, str)
+    """
+
+    def __init__(self, name: str, type: type = str) -> None:
+        self.name = name
+        self.type = get_clickhouse_type(type)
+
+    def __str__(self) -> str:
+        value = f"{self.name}:{self.type}"
+        return "s'{{" + value + "}}'"
+
 
 class Function:
-    """ClickHouse function"""
-
-    def __getattr__(self, name: str) -> Callable[..., Expression]:
-        def wrapper(*args: Any) -> Expression:
-            params = ", ".join(map(str, args))
-            value = f"s'{name}({params})'"
-            return Expression(value)
-
-        return wrapper
-
-
-F = Function()
-
-
-class Aggregate:
-    """ClickHouse Aggregate"""
-
-    def __init__(self, value: str | Expression) -> None:
+    def __init__(self, value: str | "Function") -> None:
         self.value = value
 
     def __str__(self) -> str:
         return str(self.value)
+
+    def to_sql(self) -> str:
+        if isinstance(self.value, Function):
+            return str(self.value)
+        return f"s'{str(self.value)}'"
+
+
+class Aggregate:
+    def __init__(self, value: str | Function) -> None:
+        self.value = value
+
+    def __str__(self) -> str:
+        if isinstance(self.value, Function):
+            return self.value.to_sql()
+        return str(self.value)
+
+
+class FunctionWrapper:
+    """ClickHouse function"""
+
+    def __getattr__(self, name: str) -> Callable[..., Function]:
+        def wrapper(*args: Any) -> Function:
+            params = ", ".join(map(str, args))
+            return Function(f"{name}({params})")
+
+        return wrapper
+
+
+F = FunctionWrapper()
