@@ -25,6 +25,14 @@ def create_native_client(url: str, **kwargs: Any) -> Connection:
 
 
 class QueryResult:
+    """
+    Represents the result of a query.
+
+    Args:
+        columns: A dictionary mapping column names to their types.
+        rows: A list of tuples representing the rows of the query result.
+    """
+
     def __init__(
         self,
         columns: dict[str, str],
@@ -34,9 +42,11 @@ class QueryResult:
         self.rows = rows
 
     def values(self) -> list[Any]:
+        """Returns a list of all values in the query result."""
         return list(item for row in self.rows for item in row)
 
     def items(self) -> list[dict[str, Any]]:
+        """Returns a list of dictionaries with column names as keys and row values as values."""
         column_names = self.columns.keys()
         return [dict(zip(column_names, row)) for row in self.rows]
 

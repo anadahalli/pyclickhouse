@@ -10,7 +10,7 @@ from .utils import escape
 @dataclass
 class Column:
     """
-    ClickHouse column.
+    Represents a ClickHouse column. Can be manually constructed or created from a `pydantic.Field`.
 
     Args:
         type: The ClickHouse type of the column.
@@ -95,26 +95,29 @@ class Column:
 
 class Expression:
     """
-    ClickHouse Query expression with support for different operations.
+    ClickHouse Query expression with support for operations.
+
+    Accessing the columns on a table returns an Expression object.
+
+    Supports the following operations:
+        * Arithmetic: +, -, *, /
+        * Comparison: <, <=, >, >=, ==, !=
+        * Logical: &&, ||
+        * Negation: !
+        * Unary: +, -
+        * Containment: in, not_in
+
+    Examples:
+        >>> Expression("column") + 1
+        column + 1
+        >>> Expression("column") > Expression("other)
+        column > other
+        >>> Expression("column").is_in([1, 2, 3])
+        column | in [1, 2, 3]
     """
 
     def __init__(self, value: str) -> None:
         self.value = value
-
-    # def to_sql(self) -> str:
-    #     if self._other is not None and self._operator is not None:
-    #         value = str(self._value)
-    #         operator = self._operator
-    #         if isinstance(self._other, Param):
-    #             other = str(self._other)
-    #         elif isinstance(self._other, str):
-    #             other = f"'{self._other}'"
-    #         else:
-    #             other = str(self._other)
-    #         return f"{value} {operator} {other}"
-    #     elif self._prefix is not None:
-    #         return f"{self._prefix}{str(self._value)}"
-    #     return str(self._value)
 
     def __str__(self) -> str:
         return str(self.value)
@@ -186,13 +189,17 @@ class Param:
     """
     ClickHouse parameter used in queries for parameterized values.
 
+    Requires a type for the parameter, which is used by ClickHouse to infer the type of the parameter.
+
     Args:
         name: Name of the parameter.
-        type: ClickHouse type.
+        type: ClickHouse type. Defaults to `str`.
 
     Examples:
         >>> Param("name", str)
         Param(name, str)
+        >>> str(Param("name", str))
+        {{ name:String }}
     """
 
     def __init__(self, name: str, type: type = str) -> None:
@@ -205,6 +212,17 @@ class Param:
 
 
 class Function:
+    """ClickHouse dynamic function used in queries as fallback for PRQL expressions.
+
+    Created using the `F` object. Used to created PRQL s-strings.
+
+    Examples:
+        >>> Function("sum(value)").to_sql()
+        s'sum(value)'
+        >>> Function(F.toDate("value")).to_sql()
+        s'toDate(value)'
+    """
+
     def __init__(self, value: str | "Function") -> None:
         self.value = value
 
@@ -218,6 +236,17 @@ class Function:
 
 
 class Aggregate:
+    """ClickHouse Aggregate function used in group by expressions.
+
+    Used to distinguish between aggregate and non-aggregate functions in group by.
+
+    Examples:
+        >>> Aggregate("value")
+        Aggregate(value)
+        >>> Aggregate(F.sum("value"))
+        Aggregate(sum(value))
+    """
+
     def __init__(self, value: str | Function) -> None:
         self.value = value
 
@@ -228,7 +257,17 @@ class Aggregate:
 
 
 class FunctionWrapper:
-    """ClickHouse function"""
+    """ClickHouse function wrapper for building dynamic functions.
+
+    Not to be used directly. Create a new wrapper using the `F` object.
+    `F.<function>(<args>)`
+
+    Examples:
+        >>> F.count("value")
+        Function("count(value)")
+        >>> F.toDate("column")
+        Function("sum(value)")
+    """
 
     def __getattr__(self, name: str) -> Callable[..., Function]:
         def wrapper(*args: Any) -> Function:

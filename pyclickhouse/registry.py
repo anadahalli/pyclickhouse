@@ -45,4 +45,4 @@ class Registry:
 
 
 # default global registry
-registry = Registry()
+default_registry = Registry()

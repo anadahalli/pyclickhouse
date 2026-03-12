@@ -3,7 +3,7 @@ from .client import HttpClient, NativeClient, get_client
 from .fields import Aggregate, Column, Expression, F, Function, Param
 from .query import Query
 from .reader import Reader
-from .registry import Registry, registry
+from .registry import Registry, default_registry
 from .table import Table
 from .types import Lifecycle
 from .view import View
@@ -27,7 +27,7 @@ __all__ = [
     "Table",
     "table",
     "Registry",
-    "registry",
+    "default_registry",
     "Lifecycle",
     "View",
     "Writer",

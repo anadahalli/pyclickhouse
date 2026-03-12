@@ -18,3 +18,7 @@
         - admin
         - writer
         - reader
+
+---
+
+::: client.QueryResult

@@ -49,7 +49,7 @@ async def main() -> None:
     
     async with client:
         # create table
-        await client.admin().create_table(table)
+        await client.admin().create_all()
         
         # insert 
         async with client.writer(table) as writer:

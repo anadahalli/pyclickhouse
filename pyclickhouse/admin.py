@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING, Any
 
 from .fields import Column
-from .registry import Registry, registry
+from .registry import Registry, default_registry
 from .table import Table
 from .types import Lifecycle
 from .utils import comma_join, logger
@@ -339,6 +339,7 @@ class Admin:
         replace: bool = True,
         database: str | None = None,
     ) -> bool:
+        """Create a new simple view."""
         view_name = f"{database or self.database}.{view.get_name()}"
         select_query = str(view.select)
         parts: list[str] = []
@@ -361,6 +362,7 @@ class Admin:
         if_not_exists: bool = True,
         database: str | None = None,
     ) -> bool:
+        """Create a new materialized view."""
         view_name = f"{database or self.database}.{view.get_name()}"
         table_name = f"{database or self.database}.{table.get_name()}"
         select_query = str(view.select)
@@ -447,11 +449,11 @@ class Admin:
     # registry
     async def create_all(
         self,
-        registry: Registry = registry,
+        registry: Registry = default_registry,
         *,
         database: str | None = None,
     ) -> None:
-        """Create all tables and views from the registry."""
+        """Create all managed and protected tables and views from the registry."""
         logger.info("Creating tables and views from registry...")
 
         for table in registry.list_tables():
@@ -466,11 +468,11 @@ class Admin:
 
     async def drop_all(
         self,
-        registry: Registry = registry,
+        registry: Registry = default_registry,
         *,
         database: str | None = None,
     ) -> None:
-        """Drop all tables and views from the registry."""
+        """Drop all managed tables and views from the registry."""
         logger.info("Dropping tables and views from registry...")
 
         for table in registry.list_tables():

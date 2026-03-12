@@ -4,7 +4,7 @@ from pydantic import BaseModel, create_model
 
 from .engines import Engine, MergeTree
 from .fields import Column, Expression
-from .registry import Registry, registry
+from .registry import Registry, default_registry
 from .types import Lifecycle, get_python_type
 from .utils import pascal_to_snake
 
@@ -20,6 +20,7 @@ class Table:
         columns: The columns to use for the table. Defaults to the columns defined in the model.
         comment: The comment to use for the table. Defaults to None.
         lifecycle: The lifecycle to use for the table. Defaults to Lifecycle.managed.
+        registry: The registry to use for the table. Defaults to the global registry.
     """
 
     def __init__(
@@ -31,7 +32,7 @@ class Table:
         columns: dict[str, Column] | None = None,
         comment: str | None = None,
         lifecycle: Lifecycle = Lifecycle.managed,
-        registry: Registry = registry,
+        registry: Registry = default_registry,
     ) -> None:
         self._model = model
         self._name: str = name or pascal_to_snake(model.__name__)
