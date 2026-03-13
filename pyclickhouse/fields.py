@@ -3,7 +3,7 @@ from typing import Any, Callable, Self
 
 from pydantic.fields import FieldInfo
 
-from .types import get_clickhouse_type
+from .types import get_ch_type_from_annotation
 from .utils import escape
 
 
@@ -50,7 +50,7 @@ class Column:
         if not column.name:
             column.name = name
         if not column.type:
-            column.type = get_clickhouse_type(info.annotation)
+            column.type = get_ch_type_from_annotation(info.annotation)
         return column
 
     @classmethod
@@ -204,7 +204,7 @@ class Param:
 
     def __init__(self, name: str, type: type = str) -> None:
         self.name = name
-        self.type = get_clickhouse_type(type)
+        self.type = get_ch_type_from_annotation(type)
 
     def __str__(self) -> str:
         value = f"{self.name}:{self.type}"

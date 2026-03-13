@@ -1,3 +1,4 @@
+from enum import Enum
 from typing import Annotated
 
 import pytest
@@ -96,6 +97,39 @@ class TestColumn:
             codec_expression="ZSTD(1)",
             ttl_expression="now() + INTERVAL 1 MONTH",
         )
+
+    def test_column_datatypes(self) -> None:
+        # str
+        c = Column.from_field("test", FieldInfo(annotation=str))
+        assert c.type == "String"
+        assert c.to_sql() == "test String"
+        # int
+        c = Column.from_field("test", FieldInfo(annotation=int | None))
+        assert c.type == "Nullable(Int64)"
+        assert c.to_sql() == "test Nullable(Int64)"
+        # list
+        c = Column.from_field("test", FieldInfo(annotation=list[str]))
+        assert c.type == "Array(String)"
+        assert c.to_sql() == "test Array(String)"
+        # tuple
+        c = Column.from_field("test", FieldInfo(annotation=tuple[str, int]))
+        assert c.type == "Tuple(String, Int64)"
+        assert c.to_sql() == "test Tuple(String, Int64)"
+        # dict
+        c = Column.from_field("test", FieldInfo(annotation=dict[str, int]))
+        assert c.type == "Map(String, Int64)"
+        assert c.to_sql() == "test Map(String, Int64)"
+
+        # enum
+        class States(Enum):
+            open = 1
+            closed = 2
+
+        c = Column.from_field("test", FieldInfo(annotation=States))
+        assert c.type == "Enum('open', 'closed')"
+        assert c.to_sql() == "test Enum('open', 'closed')"
+
+        # nested
 
 
 class TestExpression:

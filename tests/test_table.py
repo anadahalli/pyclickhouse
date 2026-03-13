@@ -1,3 +1,4 @@
+from datetime import date, datetime
 from typing import Annotated
 
 from pydantic import BaseModel
@@ -18,7 +19,7 @@ class TestTable:
         assert model._model == Model
         assert model._columns == {
             "name": Column(name="name", type="String"),
-            "value": Column(name="value", type="Int32"),
+            "value": Column(name="value", type="Int64"),
         }
         assert model._name == "model"
         assert model._engine == MergeTree()
@@ -71,3 +72,23 @@ class TestTable:
             "key": Column(name="key", type="String"),
             "val": Column(name="val", type="Int32"),
         }
+
+    def test_table_datatypes(self) -> None:
+        class Model(BaseModel):
+            name: str
+            count: int
+            value: float | None
+            is_active: bool | None
+            created_at: datetime
+            start_date: date
+
+        table = Table(Model, name="test")
+
+        columns = table.get_columns()
+
+        assert columns["name"].type == "String"
+        assert columns["count"].type == "Int64"
+        assert columns["value"].type == "Nullable(Float64)"
+        assert columns["is_active"].type == "Nullable(Bool)"
+        assert columns["created_at"].type == "DateTime"
+        assert columns["start_date"].type == "Date"

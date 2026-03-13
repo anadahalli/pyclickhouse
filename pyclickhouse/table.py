@@ -5,7 +5,7 @@ from pydantic import BaseModel, create_model
 from .engines import Engine, MergeTree
 from .fields import Column, Expression
 from .registry import Registry, default_registry
-from .types import Lifecycle, get_python_type
+from .types import Lifecycle, get_python_type_from_ch_string
 from .utils import pascal_to_snake
 
 
@@ -102,7 +102,7 @@ class Table:
         }
         fields: dict[str, Any] = {}
         for col_name, col in table_columns.items():
-            fields[col_name] = get_python_type(str(col.type))
+            fields[col_name] = get_python_type_from_ch_string(str(col.type))
         model: type[BaseModel] = create_model(name, **fields)
         return cls(
             model=model,

@@ -151,8 +151,8 @@ class TestQuery:
         # params
         q = Query(table)
         s = q.filter(table.val >= Param("val", int))
-        assert s.pipeline == ["from model", "filter (val >= s'{{val:Int32}}')"]
-        assert str(s) == "SELECT * FROM model WHERE val >= {val:Int32}"
+        assert s.pipeline == ["from model", "filter (val >= s'{{val:Int64}}')"]
+        assert str(s) == "SELECT * FROM model WHERE val >= {val:Int64}"
         s = q.filter(table.key == Param("name"))
         assert s.pipeline == ["from model", "filter (key == s'{{name:String}}')"]
         assert str(s) == "SELECT * FROM model WHERE `key` = {name:String}"
