@@ -241,22 +241,28 @@ class Admin:
         operations: dict[str, list[Column]] | None = None,
         *,
         database: str | None = None,
+        drop_columns: bool = True,
+        add_columns: bool = True,
+        modify_columns: bool = True,
     ) -> bool:
         """Alter a table by applying a set of operations."""
         if operations is None:
             operations = await self.diff_table(table)
 
         # Drop columns
-        for column in operations["drop_column"]:
-            await self.drop_column(table, column, database=database)
+        if drop_columns:
+            for column in operations["drop_column"]:
+                await self.drop_column(table, column, database=database)
 
         # Add columns
-        for column in operations["add_column"]:
-            await self.add_column(table, column, database=database)
+        if add_columns:
+            for column in operations["add_column"]:
+                await self.add_column(table, column, database=database)
 
         # Modify columns
-        for column in operations["modify_column"]:
-            await self.modify_column(table, column, database=database)
+        if modify_columns:
+            for column in operations["modify_column"]:
+                await self.modify_column(table, column, database=database)
 
         return True
 
@@ -452,35 +458,152 @@ class Admin:
         registry: Registry = default_registry,
         *,
         database: str | None = None,
+        if_not_exists: bool = True,
     ) -> None:
-        """Create all managed and protected tables and views from the registry."""
+        """Create all managed and protected tables and views from the registry.
+
+        Args:
+            registry: The registry to create tables and views from.
+            database: The database to create tables and views in.
+            if_not_exists: Whether to create tables and views if they already exist.
+        """
+
         logger.info("Creating tables and views from registry...")
 
         for table in registry.list_tables():
             if table.get_lifecycle() != Lifecycle.external:
                 logger.info("Creating Table({table})", table=table.get_name())
-                await self.create_table(table, database=database)
+                await self.create_table(
+                    table,
+                    database=database,
+                    if_not_exists=if_not_exists,
+                )
 
         for view in registry.list_views():
             if table.get_lifecycle() != Lifecycle.external:
                 logger.info("Creating View({view})", view=view.get_name())
-                await self.create_view(view, database=database)
+                await self.create_view(
+                    view,
+                    database=database,
+                    if_not_exists=if_not_exists,
+                )
 
     async def drop_all(
         self,
         registry: Registry = default_registry,
         *,
         database: str | None = None,
+        if_exists: bool = True,
     ) -> None:
-        """Drop all managed tables and views from the registry."""
+        """Drop all managed tables and views from the registry.
+
+        Args:
+            registry: The registry to drop tables and views from.
+            database: The database to drop tables and views from.
+            if_exists: Whether to drop tables and views if they do not exist.
+        """
         logger.info("Dropping tables and views from registry...")
 
         for table in registry.list_tables():
             if table.get_lifecycle() not in [Lifecycle.protected, Lifecycle.external]:
                 logger.info("Dropping Table({table})", table=table.get_name())
-                await self.drop_table(table, database=database)
+                await self.drop_table(
+                    table,
+                    database=database,
+                    if_exists=if_exists,
+                )
 
         for view in registry.list_views():
             if table.get_lifecycle() not in [Lifecycle.protected, Lifecycle.external]:
                 logger.info("Dropping View({view})", view=view.get_name())
-                await self.drop_view(view, database=database)
+                await self.drop_view(
+                    view,
+                    database=database,
+                    if_exists=if_exists,
+                )
+
+    async def migrate_table(
+        self,
+        table: Table,
+        *,
+        database: str | None = None,
+        force: bool = False,
+    ) -> bool:
+        """Migrate a table to the latest schema.
+
+        Args:
+            table: The table to migrate.
+            database: The database to migrate the table to.
+            force: Whether to force the migration even if the table is not managed.
+        """
+        should_migrate = False
+        add_columns = True
+        drop_columns = True
+        modify_columns = True
+
+        if table.get_lifecycle() == Lifecycle.external and force:
+            should_migrate = True
+
+        if table.get_lifecycle() == Lifecycle.protected:
+            should_migrate = True
+            if not force:
+                drop_columns = False
+                modify_columns = False
+
+        if table.get_lifecycle() == Lifecycle.managed:
+            should_migrate = True
+
+        if should_migrate:
+            logger.info("Migrating Table({table})", table=table.get_name())
+            await self.alter_table(
+                table,
+                database=database,
+                add_columns=add_columns,
+                drop_columns=drop_columns,
+                modify_columns=modify_columns,
+            )
+            return True
+
+        return False
+
+    async def migrate_view(
+        self,
+        view: View,
+        *,
+        database: str | None = None,
+        force: bool = False,
+    ) -> bool:
+        """Migrate a view to the latest schema.
+
+        Args:
+            view: The view to migrate.
+            database: The database to migrate the view to.
+            force: Whether to force the migration even if the view is not managed.
+        """
+        raise NotImplementedError()
+
+    async def migrate_all(
+        self,
+        registry: Registry = default_registry,
+        *,
+        database: str | None = None,
+        create_all: bool = True,
+        force: bool = False,
+    ) -> None:
+        """Migrate all managed tables and views from the registry.
+
+        Args:
+            registry: The registry to migrate tables and views from.
+            database: The database to migrate tables and views to.
+            force: Whether to force the migration even if the table or view is not managed.
+        """
+        if create_all:
+            await self.create_all(registry, database=database)
+
+        logger.info("Migrating tables and views from registry...")
+
+        for table in registry.list_tables():
+            await self.migrate_table(table, database=database, force=force)
+
+        for view in registry.list_views():
+            pass
