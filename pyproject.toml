@@ -14,7 +14,23 @@ dependencies = [
     "loguru>=0.7.3",
     "prqlc>=0.13.10",
     "pydantic>=2.12.5",
-    "pydantic-settings>=2.13.1",
+]
+
+classifiers = [
+    "Development Status :: 3 Alpha",
+    "Intended Audience :: Developers",
+    "Framework :: AsyncIO",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: SQL",
+    "Programming Language :: PRQL",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Database",
+    "Typing :: Typed",
 ]
 
 [dependency-groups]
@@ -38,36 +54,25 @@ docs = [
     "zensical>=0.0.24",
 ]
 
-classifiers = [
-    "Development Status :: 3 - Alpha",
-    "Intended Audience :: Developers",
-    "Framework :: AsyncIO",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-    "Programming Language :: SQL",
-    "Programming Language :: PRQL",
-    "Programming Language :: Python :: 3.12",
-    "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: 3.14",
-    "Programming Language :: Python :: Implementation :: CPython",
-    "Topic :: Software Development :: Libraries :: Python Modules",
-    "Topic :: Database",
-    "Typing :: Typed",
-]
-
 [project.urls]
 Homepage = "https://github.com/anadahalli/pyclickhouse"
 Repository = "https://github.com/anadahalli/pyclickhouse"
 
 [tool.pytest]
+testpaths = ["tests"]
 asyncio_mode = "auto"
 console_output_style = "count"
-addopts = ["--pdbcls=IPython.terminal.debugger:TerminalPdb", "--no-header"]
-testpaths = ["tests"]
+addopts = [
+    "--pdbcls=IPython.terminal.debugger:TerminalPdb",
+    "--no-header",
+]
+filterwarnings = [
+    "ignore:The 'u' type code is deprecated and will be removed in Python 3.16",
+]
 
 [tool.uv.build-backend]
 module-name = "pyclickhouse"
-module-root = ""
+module-root = "src"
 
 [build-system]
 requires = ["uv_build>=0.10.0,<0.11.0"]

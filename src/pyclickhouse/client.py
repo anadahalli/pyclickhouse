@@ -15,7 +15,7 @@ from .writer import Writer
 
 
 def create_http_client(url: str, **kwargs: Any) -> AsyncClient:
-    kwargs["utc_tz_aware"] = "schema"
+    kwargs["tz_mode"] = "schema"
     kwargs["show_clickhouse_errors"] = True
     return AsyncClient(client=create_client(dsn=url, **kwargs))
 
