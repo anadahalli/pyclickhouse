@@ -40,7 +40,7 @@ class Admin:
         cluster: str | None = None,
     ) -> None:
         self.client = client
-        self.database = database or client.database
+        self.database = database or client.database or "__default__"
         self.cluster = cluster
 
     # database
