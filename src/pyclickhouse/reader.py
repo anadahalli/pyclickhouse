@@ -1,114 +1,158 @@
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, AsyncGenerator
 
-from pydantic import BaseModel, create_model
+from clickhouse_connect.driver.common import StreamContext
+from clickhouse_connect.driver.query import QueryContext, QueryResult
+from pydantic import BaseModel
 
-from .query import Query
+from pyclickhouse.query import Query
+from pyclickhouse.table import Table
+from pyclickhouse.view import View
 
 if TYPE_CHECKING:
-    from .client import Client, QueryResult
+    from pyclickhouse.client import Client
 
 
-class Reader:
-    """Reads data from the ClickHouse database using a given query.
+class Reader[T: BaseModel, R: BaseModel]:
+    """Reads data from the ClickHouse database using a given query."""
 
-    Args:
-        client: The ClickHouse client to use.
-        query: The query to execute.
-        args_model: The model to use for query arguments.
-        response_model: The model to use for the response.
-        database: The database to use.
-    """
-
-    _client: Client
-    _query: Query
+    client: Client
+    select: str | Query | Table | View
+    model: type[T] | None
+    parameters: type[R] | None
+    context: QueryContext | None
 
     def __init__(
         self,
         client: Client,
-        query: Query,
+        select: str | Query | Table | View,
         *,
-        args_model: type[BaseModel] | None = None,
-        response_model: type[BaseModel] | None = None,
-        database: str | None = None,
+        model: type[T] | None = None,
+        parameters: type[R] | None = None,
+        stream: bool = True,
+        max_block_size: int = 65536,
+        settings: dict[str, Any] | None = None,
+        transport_settings: dict[str, str] | None = None,
     ) -> None:
-        self._client = client
-        self._query = query
-        self._args_model = args_model
-        self._response_model = response_model
-        self._database = database
-        self._count: int = 0
+        """
+        Initializes a new Reader instance.
+
+        Args:
+            client: The ClickHouse client to use.
+            query: The query to execute.
+            model: The model to use for the response.
+            param: The model to use for query parameters.
+            database: The database to read from. Defaults to client database.
+            settings: The settings to use for the insert. Defaults to None.
+            transport_settings: The transport settings to use for the insert. Defaults to None.
+        """
+
+        self.client = client
+        self.select = select
+        self.model = model
+        self.parameters = parameters
+        self.stream = stream
+        self.max_block_size = max_block_size
+        self.settings = settings
+        self.transport_settings = transport_settings
+
+        self._read_rows: int = 0
+        self.context = None
 
     @property
     def read_rows(self) -> int:
         """Returns the number of rows read from the database."""
-        return self._count
+        return self._read_rows
 
-    def _get_model(self, columns: dict[str, str]) -> type[BaseModel]:
-        if self._response_model is None:
-            fields = {}
-            return create_model("Response", **fields)
-        return self._response_model
+    def _create_context(self) -> QueryContext:
+        return self.client.create_query_context(
+            query=self._get_query_string(self.select),
+            parameters={},
+            settings=self.settings,
+            transport_settings=self.transport_settings,
+        )
 
-    def _deserialize(
-        self, row: tuple[Any, ...], columns: dict[str, str]
-    ) -> BaseModel | dict:
-        data = dict(zip(columns.keys(), row))
-        if self._response_model:
-            return self._response_model.model_validate(data)
+    def _get_query_string(self, select: str | Query | Table | View) -> str:
+        if isinstance(select, Table):
+            return Query(select).compile()
+
+        if isinstance(select, View):
+            if select.table:
+                return Query(select.table).compile()
+            return Query(select.get_name()).compile()
+
+        if isinstance(select, Query):
+            return select.compile()
+
+        return select
+
+    def _deserialize(self, data: dict[str, Any]) -> T | dict:
+        if self.model:
+            return self.model.model_validate(data)
         return data
 
-    def _to_model(self, result: QueryResult) -> list[BaseModel | dict]:
-        return [self._deserialize(row, result.columns) for row in result.rows]
-
-    async def _execute(
+    async def _query(
         self,
-        query: str,
-        args: dict[str, Any] | None = None,
-    ) -> QueryResult:
-        return await self._client.query(query, args)
+        parameters: dict[str, Any] | None = None,
+    ) -> QueryResult | StreamContext:
+        if self.context is None:
+            self.context = self._create_context()
+
+        if self.stream:
+            return await self.client.query_row_block_stream(
+                context=self.context,
+                parameters=parameters,
+            )
+
+        return await self.client.query(
+            context=self.context,
+            parameters=parameters,
+        )
 
     async def query(
         self,
-        args: BaseModel | dict[str, Any] | None = None,
-        skip: int | None = None,
-        limit: int | None = None,
-    ) -> list[BaseModel | dict]:
+        parameters: R | dict[str, Any] | None = None,
+    ) -> AsyncGenerator[T | dict[str, Any], None]:
         """
         Executes the query and returns the results as a list of models or dicts.
-
-        Args:
-            args: The query arguments as a model or dict.
-            skip: The number of rows to skip.
-            limit: The maximum number of rows to return.
         """
-        query = self._query
+        if isinstance(parameters, BaseModel):
+            if self.parameters and not isinstance(parameters, self.parameters):
+                raise TypeError(
+                    f"Invalid parameters type, not an instance of {type(self.parameters)}"
+                )
+            parameters = parameters.model_dump()
 
-        if skip is not None or limit is not None:
-            start, end = None, None
-            if limit is not None:
-                assert isinstance(limit, int)
-                end = skip + limit if skip is not None else limit
-            if skip is not None:
-                assert isinstance(skip, int)
-                start = skip + 1
-            query = query.take(start=start, end=end)
+        result = await self._query(parameters)
 
-        sql = query.compile()
+        if isinstance(result, StreamContext):
+            column_names = getattr(result.source, "column_names")
+            with result:
+                for block in result:
+                    for row in block:
+                        data = dict(zip(column_names, row))
+                        item = self._deserialize(data)
+                        self._read_rows += 1
+                        yield item
 
-        query_args: dict[str, Any] | None = None
-        if args:
-            if isinstance(args, BaseModel):
-                if self._args_model and not isinstance(args, self._args_model):
-                    args_model = self._args_model.__name__
-                    raise TypeError(
-                        f"Invalid args type, not an instance of {args_model}"
-                    )
-                query_args = args.model_dump()
-            else:
-                query_args = args
+        else:
+            block = result.named_results()
+            for row in block:
+                item = self._deserialize(row)
+                self._read_rows += 1
+                yield item
 
-        result = await self._execute(query=sql, args=query_args)
-        items = self._to_model(result)
+    # async def _get_response_model(self) -> type[BaseModel]:
+    #     if isinstance(self.select, Table):
+    #         return self.select.get_model()
 
-        self._count += len(items)
-        return items
+    #     elif isinstance(self.select, View):
+    #         if self.select.table:
+    #             return self.select.table.get_model()
+    #         else:
+    #             table = await self.client.admin().get_table(self.select.get_name())
+    #             return table.get_model()
+    #     elif isinstance(self.select, Query):
+    #         model = await self.client.admin().create_model(self.select, "Response")
+    #         return model
+    #     else:
+    #         raise TypeError(f"Unsupported type for select: {type(self.select)}")

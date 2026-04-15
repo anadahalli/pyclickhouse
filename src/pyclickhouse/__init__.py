@@ -1,5 +1,5 @@
 from .admin import Admin
-from .client import HttpClient, NativeClient, get_client
+from .client import Client, create_async_client
 from .fields import Aggregate, Column, Expression, F, Function, Param
 from .query import Query
 from .reader import Reader
@@ -13,9 +13,8 @@ __version__ = "0.1.0"
 
 __all__ = [
     "Admin",
-    "get_client",
-    "HttpClient",
-    "NativeClient",
+    "Client",
+    "create_async_client",
     "Aggregate",
     "Column",
     "Expression",

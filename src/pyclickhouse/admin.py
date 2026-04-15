@@ -1,14 +1,23 @@
 from typing import TYPE_CHECKING, Any
 
-from .fields import Column
-from .registry import Registry, default_registry
-from .table import Table
-from .types import Lifecycle
-from .utils import comma_join, logger
-from .view import View
+from pydantic import BaseModel
+
+from pyclickhouse.fields import Column
+from pyclickhouse.query import Query
+from pyclickhouse.registry import Registry, default_registry
+from pyclickhouse.table import Table
+from pyclickhouse.types import Lifecycle
+from pyclickhouse.utils import comma_join, create_model_from_sql, logger
+from pyclickhouse.view import View
 
 if TYPE_CHECKING:
     from .client import Client
+
+
+class AdminError(Exception):
+    """Base exception for administrative errors."""
+
+    pass
 
 
 class Admin:
@@ -39,7 +48,7 @@ class Admin:
         """Show all databases"""
         query = "SHOW DATABASES"
         result = await self.client.query(query)
-        return result.values()
+        return list(result.result_columns[0])
 
     async def create_datbase(
         self,
@@ -50,7 +59,7 @@ class Admin:
         engine: str | None = None,
         settings: dict[str, Any] | None = None,
         comment: str | None = None,
-    ) -> bool:
+    ) -> None:
         """Create a new database."""
         parts: list[str] = []
         parts.append("CREATE DATABASE")
@@ -66,7 +75,7 @@ class Admin:
         if comment:
             parts.append(f"COMMENT {comment}")
         query = " ".join(parts)
-        return await self.client.command(query)
+        await self.client.command(query)
 
     async def drop_datbase(
         self,
@@ -75,7 +84,7 @@ class Admin:
         if_exists: bool = True,
         cluster: str | None = None,
         sync: bool = False,
-    ) -> bool:
+    ) -> None:
         """Drop a database."""
         parts: list[str] = []
         parts.append("DROP DATABASE")
@@ -87,7 +96,7 @@ class Admin:
         if sync:
             parts.append("SYNC")
         query = " ".join(parts)
-        return await self.client.command(query)
+        await self.client.command(query)
 
     # table
     async def show_tables(self, *, database: str | None = None) -> list[str]:
@@ -99,7 +108,7 @@ class Admin:
         parts.append("AND name NOT LIKE '.inner%'")
         query = " ".join(parts)
         result = await self.client.query(query)
-        return result.values()
+        return list(result.result_columns[0]) if result.result_columns else []
 
     async def create_table(
         self,
@@ -109,7 +118,7 @@ class Admin:
         database: str | None = None,
         cluster: str | None = None,
         engine: str | None = None,
-    ) -> bool:
+    ) -> None:
         """Create a new table."""
         table_name = f"{database or self.database}.{table.get_name()}"
         parts: list[str] = []
@@ -124,7 +133,7 @@ class Admin:
         parts.append(f"ENGINE = {engine or table.get_engine()}")
         query = " ".join(parts)
         logger.debug(query)
-        return await self.client.command(query)
+        await self.client.command(query)
 
     async def drop_table(
         self,
@@ -136,20 +145,15 @@ class Admin:
         cluster: str | None = None,
         sync: bool = False,
         force: bool = False,
-    ) -> bool:
+    ) -> None:
         """Drop a table."""
         if isinstance(table, Table):
-            if (
-                table.get_lifecycle() in [Lifecycle.protected, Lifecycle.external]
-                and not force
-            ):
-                logger.info(
-                    "Cant not drop table. Table({table}) is not managed",
-                    table=table.get_name(),
-                )
-                return False
+            if table.get_lifecycle() != Lifecycle.managed and not force:
+                raise AdminError(f"Can not drop non managed table: {table.get_name()}")
+            name = table.get_name()
+        else:
+            name = table
 
-        name = table.get_name() if isinstance(table, Table) else table
         table_name = f"{database or self.database}.{name}"
         parts: list[str] = []
         parts.append("DROP TABLE")
@@ -163,7 +167,7 @@ class Admin:
         if sync:
             parts.append("SYNC")
         query = " ".join(parts)
-        return await self.client.command(query)
+        await self.client.command(query)
 
     async def get_table(
         self,
@@ -174,11 +178,11 @@ class Admin:
         """Get a table by name."""
         database = database or self.database
         describe_query = f"DESC TABLE {database}.{name}"
-        engine_query = f"SELECT engine_full FROM system.tables WHERE database = '{database}' AND table = '{name}'"
         result = await self.client.query(describe_query)
-        columns = result.items()
-        result = await self.client.query(engine_query)
-        engine = result.values()[0]
+        columns = list(result.named_results())
+        engine_query = f"SELECT engine_full FROM system.tables WHERE database = '{database}' AND table = '{name}'"
+        result = await self.client.command(engine_query)
+        engine = str(result)
         return Table.from_sql(name=name, columns=columns, engine=engine)
 
     async def show_create_table(
@@ -190,8 +194,8 @@ class Admin:
         """Show the create table statement for a given table."""
         table_name = f"{database or self.database}.{name}"
         show_create = f"SHOW CREATE TABLE {table_name}"
-        result = await self.client.query(show_create)
-        return result.values()[0]
+        result = await self.client.command(show_create)
+        return str(result)
 
     async def diff_table(
         self,
@@ -244,7 +248,7 @@ class Admin:
         drop_columns: bool = True,
         add_columns: bool = True,
         modify_columns: bool = True,
-    ) -> bool:
+    ) -> None:
         """Alter a table by applying a set of operations."""
         if operations is None:
             operations = await self.diff_table(table)
@@ -264,20 +268,17 @@ class Admin:
             for column in operations["modify_column"]:
                 await self.modify_column(table, column, database=database)
 
-        return True
-
     async def truncate_table(
         self,
         table: Table | str,
         *,
         database: str | None = None,
-    ) -> bool:
+    ) -> None:
         """Truncate a table."""
         database = database or self.database
         table_name = table.get_name() if isinstance(table, Table) else table
         query = f"TRUNCATE TABLE {database}.{table_name}"
         await self.client.command(query)
-        return True
 
     async def copy_table(
         self,
@@ -296,11 +297,11 @@ class Admin:
         column: Column,
         *,
         database: str | None = None,
-    ) -> bool:
+    ) -> None:
         """Add a column to a table."""
         table_name = f"{database or self.database}.{table.get_name()}"
         query = f"ALTER TABLE {table_name} ADD COLUMN {column.to_sql()}"
-        return await self.client.command(query)
+        await self.client.command(query)
 
     async def drop_column(
         self,
@@ -308,11 +309,11 @@ class Admin:
         column: Column,
         *,
         database: str | None = None,
-    ) -> bool:
+    ) -> None:
         """Drop a column from a table."""
         table_name = f"{database or self.database}.{table.get_name()}"
         query = f"ALTER TABLE {table_name} DROP COLUMN {column.name}"
-        return await self.client.command(query)
+        await self.client.command(query)
 
     async def modify_column(
         self,
@@ -320,12 +321,12 @@ class Admin:
         column: Column,
         *,
         database: str | None = None,
-    ) -> bool:
+    ) -> None:
         """Modify a column in a table."""
         table_name = f"{database or self.database}.{table.get_name()}"
         query = f"ALTER TABLE {table_name} DROP COLUMN {column.name}"
         query = f"ALTER TABLE {table_name} MODIFY COLUMN {column.to_sql()}"
-        return await self.client.command(query)
+        await self.client.command(query)
 
     # view
     async def show_views(self, *, database: str | None = None) -> list[str]:
@@ -336,7 +337,7 @@ class Admin:
         parts.append("AND engine IN ['View', 'MaterializedView']")
         query = " ".join(parts)
         result = await self.client.query(query)
-        return result.values()
+        return list(result.result_columns[0]) if result.result_columns else []
 
     async def create_simple_view(
         self,
@@ -344,7 +345,7 @@ class Admin:
         *,
         replace: bool = True,
         database: str | None = None,
-    ) -> bool:
+    ) -> None:
         """Create a new simple view."""
         view_name = f"{database or self.database}.{view.get_name()}"
         select_query = str(view.select)
@@ -358,7 +359,7 @@ class Admin:
         parts.append(select_query)
         query = " ".join(parts)
         logger.debug(query)
-        return await self.client.command(query)
+        await self.client.command(query)
 
     async def create_materialized_view(
         self,
@@ -367,7 +368,7 @@ class Admin:
         *,
         if_not_exists: bool = True,
         database: str | None = None,
-    ) -> bool:
+    ) -> None:
         """Create a new materialized view."""
         view_name = f"{database or self.database}.{view.get_name()}"
         table_name = f"{database or self.database}.{table.get_name()}"
@@ -382,7 +383,7 @@ class Admin:
         parts.append(select_query)
         query = " ".join(parts)
         logger.debug(query)
-        return await self.client.command(query)
+        await self.client.command(query)
 
     async def create_view(
         self,
@@ -391,17 +392,17 @@ class Admin:
         if_not_exists: bool = True,
         replace: bool = True,
         database: str | None = None,
-    ) -> bool:
+    ) -> None:
         """Create a new view."""
         if view.table is not None:
-            return await self.create_materialized_view(
+            await self.create_materialized_view(
                 view,
                 table=view.table,
                 if_not_exists=if_not_exists,
                 database=database,
             )
         else:
-            return await self.create_simple_view(
+            await self.create_simple_view(
                 view,
                 replace=replace,
                 database=database,
@@ -416,18 +417,12 @@ class Admin:
         cluster: str | None = None,
         sync: bool = False,
         force: bool = False,
-    ) -> bool:
+    ) -> None:
         """Drop a view."""
-        if isinstance(view, View):
-            if (
-                view.get_lifecycle() in [Lifecycle.protected, Lifecycle.external]
-                and not force
-            ):
-                logger.info(
-                    "Cant not drop table. View({view}) is not managed",
-                    view=view.get_name(),
-                )
-                return False
+        if isinstance(view, View) and (
+            view.get_lifecycle() != Lifecycle.managed and not force
+        ):
+            raise AdminError(f"Cannot drop non managed view: {view.get_name()}")
 
         name = view.get_name() if isinstance(view, View) else view
         view_name = f"{database or self.database}.{name}"
@@ -441,7 +436,7 @@ class Admin:
         if sync:
             parts.append("SYNC")
         query = " ".join(parts)
-        return await self.client.command(query)
+        await self.client.command(query)
 
     async def get_view(
         self,
@@ -450,7 +445,7 @@ class Admin:
         database: str | None = None,
     ) -> None:
         """Get a view by name."""
-        pass
+        raise NotImplementedError()
 
     # registry
     async def create_all(
@@ -607,3 +602,11 @@ class Admin:
 
         for view in registry.list_views():
             pass
+
+    async def create_model(self, query: Query | str, name: str) -> type[BaseModel]:
+        """Create a Pydantic model for the result of a given query"""
+        query = query.compile() if isinstance(query, Query) else query
+        describe_query = f"DESC (SELECT * FROM ({query}) LIMIT 0)"
+        result = await self.client.query(describe_query)
+        columns = list(result.named_results())
+        return create_model_from_sql(name, columns)

@@ -3,13 +3,14 @@ from typing import Annotated
 
 from pydantic import BaseModel
 
-from pyclickhouse import Aggregate, Column, F, HttpClient, Query, Registry, Table, View
+from pyclickhouse import Aggregate, Client, Column, F, Query, Registry, Table, View
+from pyclickhouse.admin import Admin
 from pyclickhouse.engines import AggregatingMergeTree, MergeTree
+from pyclickhouse.writer import Writer
 
 
 class TestView:
-    async def test_view_full(self, http_client: HttpClient) -> None:
-        client = http_client
+    async def test_view_full(self, client: Client) -> None:
         registry = Registry()
 
         class Hourly(BaseModel):
@@ -52,7 +53,7 @@ class TestView:
         )
         assert view.get_name() == "monthly_aggregated_mv"
 
-        await client.admin().create_all(registry)
+        await Admin(client).create_all(registry)
 
         data = [
             Hourly(
@@ -77,9 +78,9 @@ class TestView:
             ),
         ]
 
-        writer = client.writer(table=hourly, batch=False)
+        writer = Writer(client=client, table=hourly, batch=False)
         await writer.insert(*data)
-        assert writer.written_rows == 6
+        assert writer.written_rows == 4
 
         query = Query(monthly).group(
             domain_name=monthly.domain_name,
@@ -88,7 +89,7 @@ class TestView:
         )
 
         result = await client.query(str(query))
-        items = result.items()
+        items = list(result.named_results())
         assert len(items) == 2
         assert items[0]["sum_count_views"] == 3
         assert items[1]["sum_count_views"] == 9

@@ -10,10 +10,12 @@ requires-python = ">=3.12"
 
 dependencies = [
     "asynch>=0.3.1",
-    "clickhouse-connect>=0.13.0",
+    "clickhouse-connect[async]==0.12.0rc1",
+    "clickhouse-driver>=0.2.10",
     "loguru>=0.7.3",
     "prqlc>=0.13.10",
     "pydantic>=2.12.5",
+    "pydantic-settings>=2.13.1",
 ]
 
 classifiers = [
@@ -39,6 +41,7 @@ dev = [
     { include-group = "docs"},
     "ipykernel>=7.2.0",
     "ipython>=9.10.0",
+    "jinja2>=3.1.6",
     "jupyter>=1.1.1",
     "ruff>=0.15.4",
     "ty>=0.0.19",

@@ -1,25 +1,45 @@
-from typing import AsyncIterator, Iterator
+from typing import Any, AsyncIterator, Iterator
 
-import pytest
+from pytest import fixture
+from testcontainers.core.container import DockerContainer
+from testcontainers.core.wait_strategies import HttpWaitStrategy
 
-from pyclickhouse.client import HttpClient, NativeClient
+from pyclickhouse.client import Client, create_async_client
 
-from .container import ClickHouseContainer
+CLICKHOUSE_IMAGE = "clickhouse/clickhouse-server:latest"
 
 
-@pytest.fixture(scope="session")
+class ClickHouseContainer(DockerContainer):
+    def __init__(self, image: str = CLICKHOUSE_IMAGE, **kwargs: Any) -> None:
+        super().__init__(image, **kwargs)
+        # self.with_exposed_ports(9000)
+        self.with_exposed_ports(8123)
+        self.with_env("CLICKHOUSE_USER", "default")
+        self.with_env("CLICKHOUSE_PASSWORD", "default")
+        self.with_env("CLICKHOUSE_DB", "default")
+        self._wait_strategy = HttpWaitStrategy(8123).for_status_code(200)
+
+    def get_config(self) -> dict[str, Any]:
+        host = self.get_container_host_ip()
+        port = self.get_exposed_port(8123)
+        return {
+            "host": host,
+            "port": port,
+            "username": "default",
+            "password": "default",
+            "database": "default",
+        }
+
+
+@fixture(scope="session")
 def clickhouse() -> Iterator[ClickHouseContainer]:
     with ClickHouseContainer() as container:
         yield container
 
 
-@pytest.fixture
-async def native_client(clickhouse: ClickHouseContainer) -> AsyncIterator[NativeClient]:
-    async with NativeClient(clickhouse.get_native_url()) as client:
-        yield client
+@fixture
+async def client(clickhouse: ClickHouseContainer) -> AsyncIterator[Client]:
+    async_client = create_async_client(**clickhouse.get_config())
 
-
-@pytest.fixture
-async def http_client(clickhouse: ClickHouseContainer) -> AsyncIterator[HttpClient]:
-    async with HttpClient(clickhouse.get_http_url()) as client:
-        yield client
+    async with async_client:
+        yield async_client

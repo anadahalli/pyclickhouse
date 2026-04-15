@@ -16,6 +16,10 @@ class View:
         registry: The registry to register the view with. Defaults to the global registry.
     """
 
+    name: str
+    select: Query | str
+    table: Table | None
+
     def __init__(
         self,
         name: str,

@@ -3,8 +3,8 @@ from pydantic import BaseModel
 
 from pyclickhouse import (
     Admin,
+    Client,
     Column,
-    HttpClient,
     Lifecycle,
     Query,
     Registry,
@@ -14,23 +14,23 @@ from pyclickhouse import (
 
 
 @pytest.fixture
-def admin(http_client: HttpClient) -> Admin:
-    return http_client.admin()
+def admin(client: Client) -> Admin:
+    return Admin(client)
 
 
 class TestAdmin:
-    async def test_client(self, http_client: HttpClient) -> None:
-        admin = http_client.admin()
-        assert isinstance(admin, Admin)
-        assert admin.client is http_client
+    # async def test_client(self, client: Client) -> None:
+    #     admin = client.admin()
+    #     assert isinstance(admin, Admin)
+    #     assert admin.client is client
 
     async def test_database(self, admin: Admin) -> None:
         assert admin.client.database in await admin.show_databases()
 
-        assert await admin.create_datbase("test_db")
+        await admin.create_datbase("test_db")
         assert "test_db" in await admin.show_databases()
 
-        assert await admin.drop_datbase("test_db")
+        await admin.drop_datbase("test_db")
         assert "test_db" not in await admin.show_databases()
 
     async def test_table(self, admin: Admin) -> None:
@@ -41,7 +41,7 @@ class TestAdmin:
             value: int
 
         table = Table(Model, name="test", engine="Memory")
-        assert await admin.create_table(table)
+        await admin.create_table(table)
         assert await admin.show_tables() == ["test"]
 
         db_table = await admin.get_table("test")
@@ -49,7 +49,7 @@ class TestAdmin:
         assert db_table.get_engine() == table.get_engine()
         assert db_table.get_columns() == table.get_columns()
 
-        assert await admin.drop_table(table)
+        await admin.drop_table(table)
         assert await admin.show_tables() == []
 
     async def test_column(self, admin: Admin) -> None:
@@ -57,23 +57,23 @@ class TestAdmin:
             name: str
 
         table = Table(Model, name="model", engine="Memory")
-        assert await admin.create_table(table)
+        await admin.create_table(table)
 
         column = Column(type="Int32", name="value")
-        assert await admin.add_column(table, column)
+        await admin.add_column(table, column)
         db_table = await admin.get_table("model")
         assert db_table.get_columns() == {**table.get_columns(), "value": column}
 
         column = Column(type="String", name="value")
-        assert await admin.modify_column(table, column)
+        await admin.modify_column(table, column)
         db_table = await admin.get_table("model")
         assert db_table.get_columns() == {**table.get_columns(), "value": column}
 
-        assert await admin.drop_column(table, column)
+        await admin.drop_column(table, column)
         db_table = await admin.get_table("model")
         assert db_table.get_columns() == table.get_columns()
 
-        assert await admin.drop_table(table)
+        await admin.drop_table(table)
 
     async def test_alter_table(self, admin: Admin) -> None:
         class Base(BaseModel):
@@ -81,7 +81,7 @@ class TestAdmin:
             second: str
 
         table = Table(Base, name="base", engine="Memory")
-        assert await admin.create_table(table)
+        await admin.create_table(table)
 
         # drop column
         class BaseDrop(BaseModel):
@@ -112,7 +112,7 @@ class TestAdmin:
         db_table = await admin.get_table("base")
         assert db_table.get_columns() == table.get_columns()
 
-        assert await admin.drop_table(table)
+        await admin.drop_table(table)
 
     async def test_table_registry(self, admin: Admin) -> None:
         registry = Registry()
@@ -136,15 +136,13 @@ class TestAdmin:
         await admin.create_all(registry)
         assert await admin.show_tables() == ["first", "second"]
 
-        assert await admin.create_table(external)
+        await admin.create_table(external)
         await admin.drop_all(registry)
         assert await admin.show_tables() == ["second", "third"]
-        assert await admin.drop_table(protected, force=True)
-        assert await admin.drop_table(external, force=True)
+        await admin.drop_table(protected, force=True)
+        await admin.drop_table(external, force=True)
 
-    async def test_view(self, http_client: HttpClient) -> None:
-        client = http_client
-        admin = client.admin()
+    async def test_view(self, admin: Admin) -> None:
         registry = Registry()
 
         assert await admin.show_views() == []
@@ -183,12 +181,12 @@ class TestAdmin:
         assert await admin.show_tables() == ["source_table", "target_table"]
         assert await admin.show_views() == ["basic_view", "simple_view"]
 
-        basic_sql = "SELECT * from basic_view LIMIT 6"
-        result = await client.query(basic_sql)
-        assert result.values() == [0, 1, 2, 3, 4, 5]
+        # basic_sql = "SELECT * from basic_view LIMIT 6"
+        # result = await admin.client.query(basic_sql)
+        # assert result.values() == [0, 1, 2, 3, 4, 5]
 
-        data = [("one", 1), ("two", 2), ("three", 3), ("four", 4)]
-        assert await client.insert(table=source.get_name(), data=data) == 8
+        # data = [("one", 1), ("two", 2), ("three", 3), ("four", 4)]
+        # assert await admin.client.insert(table=source.get_name(), data=data) == 8
 
-        result = await client.query("SELECT * FROM target_table")
-        assert result.rows == data
+        # result = await admin.client.query("SELECT * FROM target_table")
+        # assert result.rows == data

@@ -3,6 +3,9 @@ import sys
 from typing import Any
 
 from loguru import logger
+from pydantic import BaseModel, create_model
+
+from pyclickhouse.types import get_python_type_from_ch_string
 
 # logging
 logger.configure(
@@ -46,3 +49,10 @@ def comma_join(
 
 def clean_query_param_types(text: str) -> str:
     return re.sub(pattern=r"\{([^:]+):[^}]+\}", repl=r"{\1}", string=text)
+
+
+def create_model_from_sql(name: str, columns: list[dict[str, str]]) -> type[BaseModel]:
+    fields: dict[str, Any] = {}
+    for col in columns:
+        fields[col["name"]] = get_python_type_from_ch_string(str(col["type"]))
+    return create_model(name, **fields)

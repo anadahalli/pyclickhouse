@@ -9,7 +9,7 @@ from .types import Lifecycle, get_python_type_from_ch_string
 from .utils import pascal_to_snake
 
 
-class Table:
+class Table[T: BaseModel]:
     """
     Create a new table from a Pydantic model.
 
@@ -25,7 +25,7 @@ class Table:
 
     def __init__(
         self,
-        model: type[BaseModel],
+        model: type[T],
         *,
         name: str | None = None,
         engine: Engine | str | None = None,
@@ -57,7 +57,7 @@ class Table:
             raise AttributeError(f"Table({self._name}) has no column '{name}'")
         return Expression(self._columns[name].name)
 
-    def get_model(self) -> type[BaseModel]:
+    def get_model(self) -> type[T]:
         """Get the model associated with this table."""
         return self._model
 
@@ -103,7 +103,7 @@ class Table:
         fields: dict[str, Any] = {}
         for col_name, col in table_columns.items():
             fields[col_name] = get_python_type_from_ch_string(str(col.type))
-        model: type[BaseModel] = create_model(name, **fields)
+        model: type[T] = create_model(name, **fields)
         return cls(
             model=model,
             name=name,
