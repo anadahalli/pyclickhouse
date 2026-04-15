@@ -1,13 +1,14 @@
-from .admin import Admin
-from .client import Client, create_async_client
-from .fields import Aggregate, Column, Expression, F, Function, Param
-from .query import Query
-from .reader import Reader
-from .registry import Registry, default_registry
-from .table import Table
-from .types import Lifecycle
-from .view import View
-from .writer import Writer
+from pyclickhouse.admin import Admin
+from pyclickhouse.client import Client, create_async_client
+from pyclickhouse.fields import Aggregate, Column, Expression, Function, Param
+from pyclickhouse.functions import F
+from pyclickhouse.query import Query
+from pyclickhouse.reader import Reader
+from pyclickhouse.registry import Registry, default_registry
+from pyclickhouse.table import Table
+from pyclickhouse.types import Lifecycle
+from pyclickhouse.view import View
+from pyclickhouse.writer import Writer
 
 __version__ = "0.1.0"
 
@@ -18,9 +19,9 @@ __all__ = [
     "Aggregate",
     "Column",
     "Expression",
-    "F",
     "Function",
     "Param",
+    "F",
     "Query",
     "Reader",
     "Table",

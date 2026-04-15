@@ -1,0 +1,38 @@
+from typing import Any, Callable
+
+from pyclickhouse import Function
+
+
+def to_args(args: dict[str, Any]) -> list[Any]:
+    return [v for v in args.values() if v is not None]
+
+
+class FunctionWrapper:
+    """Auto generated ClickHouse functions."""
+
+    # fallback for undefined functions
+    def __getattr__(self, name: str) -> Callable[..., Function]:
+        def wrapper(*args: Any) -> Function:
+            return Function(name, *args)
+
+        return wrapper
+    {% for fn in functions %}
+    @staticmethod
+    def {{ fn.safe_name }}({{ fn.args }}) -> Function:
+        """
+        {% if fn.syntax -%}
+        {{- fn.syntax | indent(8, False) -}}
+        {%- endif %}
+
+        {% if fn.arguments -%}
+        Args:
+        {{ fn.arguments | indent(8, False) }}
+        {%- endif %}
+        {% if fn.returns -%}
+        {{ fn.returns | indent(8, False) }}
+        {%- endif %}
+        """
+        return Function("{{ fn.name }}", *to_args(locals()))
+    {% endfor %}
+
+F = FunctionWrapper()
