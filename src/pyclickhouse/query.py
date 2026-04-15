@@ -1,9 +1,9 @@
-from dataclasses import KW_ONLY, dataclass, field, replace
+from dataclasses import dataclass, field, replace
 from typing import TYPE_CHECKING, Any, Self
 
 import prqlc
 
-from pyclickhouse.fields import Aggregate, Expression, Function
+from pyclickhouse.fields import Aggregate
 
 if TYPE_CHECKING:
     from pyclickhouse.table import Table
@@ -22,20 +22,15 @@ class Query:
 
     Args:
         table: The table to query.
-        database: The database to query from.
-        schema: The schema to query from.
         pipeline: The pipeline of steps to execute.
     """
 
     table: Table | View | str
-    _: KW_ONLY
-    database: str | None = None
-    schema: str | None = None
     pipeline: list[str] = field(default_factory=list)
 
     def __post_init__(self) -> None:
         if not self.pipeline:
-            step = f"from {self._table_name()}"
+            step = f"from {self.table}"
             self.pipeline.append(step)
 
     def build(self) -> str:
@@ -60,17 +55,15 @@ class Query:
     def __str__(self) -> str:
         return self.compile()
 
-    def _table_name(self) -> str:
-        return ".".join(filter(None, [self.schema, self.database, str(self.table)]))
-
     def _stringify(self, value: Any) -> str:
-        if isinstance(value, Aggregate):
-            return str(value)
-        if isinstance(value, Expression):
-            return str(value)
-        if isinstance(value, Function):
-            return value.to_sql()
-        return value
+        # if isinstance(value, Aggregate):
+        #     return str(value)
+        # if isinstance(value, Expression):
+        #     return str(value)
+        # if isinstance(value, Function):
+        #     # return value.to_sql()
+        #     return value.to_sql()
+        return str(value)
 
     def _from_args(self, *args: Any) -> list[str]:
         return [self._stringify(col) for col in args]
@@ -95,6 +88,7 @@ class Query:
             A new `Query` with the select step added.
         """
         if items := [*self._from_args(*args), *self._from_kwargs(**kwargs)]:
+            print(items)
             step = f"select {{{self._join(items)}}}"
             return self._copy(step)
         raise ValueError("select requires at least one argument")

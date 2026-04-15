@@ -6,69 +6,68 @@ from pyclickhouse.query import Query
 from pyclickhouse.table import Table
 
 
+class Model(BaseModel):
+    name: str
+    value: int
+
+
+table = Table(Model, name="model")
+
+
 class TestQuery:
-    def test_query(self) -> None:
-        class Model(BaseModel):
-            key: str
-            val: int
-
-        table = Table(Model)
-
-        # database and schema
-        q = Query(table="test", database="db", schema="sc")
-        assert q.pipeline == ["from sc.db.test"]
-        assert str(q) == "SELECT * FROM sc.db.test"
-        q = Query(table=table, database="db", schema="sc")
-        assert str(q) == "SELECT * FROM sc.db.model"
-        q = Query(table=table, schema="sc")
-        assert str(q) == "SELECT * FROM sc.model"
-        q = Query(table=table, database="db")
-        assert str(q) == "SELECT * FROM db.model"
-
+    def test_query_base(self) -> None:
         # base
         q = Query(table)
         assert q.pipeline == ["from model"]
         assert str(q) == "SELECT * FROM model"
 
+    def test_query_select(self) -> None:
+        q = Query(table)
         # select
         with pytest.raises(ValueError):
             q.select()
-        s = q.select(table.key)
-        assert s.pipeline == ["from model", "select {key}"]
-        assert str(s) == "SELECT `key` FROM model"
-        s = q.select(table.val)
-        assert s.pipeline == ["from model", "select {val}"]
-        assert str(s) == "SELECT val FROM model"
-        s = q.select(table.key, table.val)
-        assert s.pipeline == ["from model", "select {key, val}"]
-        assert str(s) == "SELECT `key`, val FROM model"
-        s = q.select(value=table.val)
-        assert s.pipeline == ["from model", "select {value = val}"]
-        assert str(s) == "SELECT val AS value FROM model"
-        s = q.select(table.key, value=table.val)
-        assert s.pipeline == ["from model", "select {key, value = val}"]
-        assert str(s) == "SELECT `key`, val AS value FROM model"
+        s = q.select(table.name)
+        assert s.pipeline == ["from model", "select {model.name}"]
+        assert str(s) == "SELECT name FROM model"
+        s = q.select(table.value)
+        assert s.pipeline == ["from model", "select {model.value}"]
+        assert str(s) == "SELECT value FROM model"
+        s = q.select(table.name, table.value)
+        assert s.pipeline == ["from model", "select {model.name, model.value}"]
+        assert str(s) == "SELECT name, value FROM model"
+        s = q.select(val=table.value)
+        assert s.pipeline == ["from model", "select {val = model.value}"]
+        assert str(s) == "SELECT value AS val FROM model"
+        s = q.select(table.name, val=table.value)
+        assert s.pipeline == ["from model", "select {model.name, val = model.value}"]
+        assert str(s) == "SELECT name, value AS val FROM model"
 
+    def test_query_derive(self) -> None:
+        q = Query(table)
         # derive
         with pytest.raises(ValueError):
             q.derive()
-        s = q.derive(new_value=table.val + 1)
-        assert s.pipeline == ["from model", "derive {new_value = val + 1}"]
-        assert str(s) == "SELECT *, val + 1 AS new_value FROM model"
-        s = q.derive(new_value=table.val * 10)
-        assert s.pipeline == ["from model", "derive {new_value = val * 10}"]
-        assert str(s) == "SELECT *, val * 10 AS new_value FROM model"
+        s = q.derive(new_value=table.value + 1)
+        assert s.pipeline == ["from model", "derive {new_value = model.value + 1}"]
+        assert str(s) == "SELECT *, value + 1 AS new_value FROM model"
+        s = q.derive(new_value=table.value * 10)
+        assert s.pipeline == ["from model", "derive {new_value = model.value * 10}"]
+        assert str(s) == "SELECT *, value * 10 AS new_value FROM model"
 
+    def test_query_sort(self) -> None:
+        q = Query(table)
         # sort
         with pytest.raises(ValueError):
             q.sort()
-        s = q.sort(table.val)
-        assert s.pipeline == ["from model", "sort {val}"]
-        assert str(s) == "SELECT * FROM model ORDER BY val"
-        s = q.sort(-table.val)
-        assert s.pipeline == ["from model", "sort {-val}"]
-        assert str(s) == "SELECT * FROM model ORDER BY val DESC"
+        s = q.sort(table.value)
+        assert s.pipeline == ["from model", "sort {model.value}"]
+        assert str(s) == "SELECT * FROM model ORDER BY value"
+        s = q.sort(-table.value)
+        assert s.pipeline == ["from model", "sort {-model.value}"]
+        assert str(s) == "SELECT * FROM model ORDER BY value DESC"
 
+    def test_query_take(self) -> None:
+        q = Query(table)
         # take
         with pytest.raises(ValueError):
             q.take()
@@ -88,71 +87,92 @@ class TestQuery:
         assert s.pipeline == ["from model", "take 10..20"]
         assert str(s) == "SELECT * FROM model LIMIT 11 OFFSET 9"
 
+    def test_query_filter(self) -> None:
+        q = Query(table)
         # filter
-        s = q.filter(table.val == 10)
-        assert s.pipeline == ["from model", "filter (val == 10)"]
-        assert str(s) == "SELECT * FROM model WHERE val = 10"
-        s = q.filter(table.val != 10)
-        assert s.pipeline == ["from model", "filter (val != 10)"]
-        assert str(s) == "SELECT * FROM model WHERE val <> 10"
-        s = q.filter(table.val >= 10)
-        assert s.pipeline == ["from model", "filter (val >= 10)"]
-        assert str(s) == "SELECT * FROM model WHERE val >= 10"
-        s = q.filter((table.val == 10) | (table.val == 20))
-        assert s.pipeline == ["from model", "filter (val == 10 || val == 20)"]
-        assert str(s) == "SELECT * FROM model WHERE val = 10 OR val = 20"
-        s = q.filter((table.key == "test") & (table.val == 10))
-        assert s.pipeline == ["from model", "filter (key == 'test' && val == 10)"]
-        assert str(s) == "SELECT * FROM model WHERE `key` = 'test' AND val = 10"
-        s = q.filter(table.val.is_in([1, 2, 3]))
-        assert s.pipeline == ["from model", "filter ((val | in [1, 2, 3]))"]
-        assert str(s) == "SELECT * FROM model WHERE val IN (1, 2, 3)"
-        s = q.filter(table.val.is_not_in([1, 2, 3]))
-        assert s.pipeline == ["from model", "filter (!(val | in [1, 2, 3]))"]
-        assert str(s) == "SELECT * FROM model WHERE NOT val IN (1, 2, 3)"
+        s = q.filter(table.value == 10)
+        assert s.pipeline == ["from model", "filter (model.value == 10)"]
+        assert str(s) == "SELECT * FROM model WHERE value = 10"
+        s = q.filter(table.value != 10)
+        assert s.pipeline == ["from model", "filter (model.value != 10)"]
+        assert str(s) == "SELECT * FROM model WHERE value <> 10"
+        s = q.filter(table.value >= 10)
+        assert s.pipeline == ["from model", "filter (model.value >= 10)"]
+        assert str(s) == "SELECT * FROM model WHERE value >= 10"
+        s = q.filter((table.value == 10) | (table.value == 20))
+        assert s.pipeline == [
+            "from model",
+            "filter (model.value == 10 || model.value == 20)",
+        ]
+        assert str(s) == "SELECT * FROM model WHERE value = 10 OR value = 20"
+        s = q.filter((table.name == "test") & (table.value == 10))
+        assert s.pipeline == [
+            "from model",
+            "filter (model.name == 'test' && model.value == 10)",
+        ]
+        assert str(s) == "SELECT * FROM model WHERE name = 'test' AND value = 10"
+        s = q.filter(table.value.is_in([1, 2, 3]))
+        assert s.pipeline == ["from model", "filter ((model.value | in [1, 2, 3]))"]
+        assert str(s) == "SELECT * FROM model WHERE value IN (1, 2, 3)"
+        s = q.filter(table.value.is_not_in([1, 2, 3]))
+        assert s.pipeline == ["from model", "filter (!(model.value | in [1, 2, 3]))"]
+        assert str(s) == "SELECT * FROM model WHERE NOT value IN (1, 2, 3)"
 
+    def test_query_aggregate(self) -> None:
+        q = Query(table)
         # aggregate
         s = q.aggregate(F.count())
         assert s.pipeline == ["from model", "aggregate {s'count()'}"]
         assert str(s) == "SELECT count() FROM model"
-        s = q.aggregate(F.count(table.val))
-        assert s.pipeline == ["from model", "aggregate {s'count(val)'}"]
-        assert str(s) == "SELECT count(val) FROM model"
-        s = q.aggregate(total=F.sum(table.val))
-        assert s.pipeline == ["from model", "aggregate {total = s'sum(val)'}"]
-        assert str(s) == "SELECT sum(val) AS total FROM model"
+        s = q.aggregate(F.count(table.value))
+        assert s.pipeline == ["from model", "aggregate {s'count(model.value)'}"]
+        assert str(s) == "SELECT count(model.value) FROM model"
+        s = q.aggregate(total=F.sum(table.value))
+        assert s.pipeline == ["from model", "aggregate {total = s'sum(model.value)'}"]
+        assert str(s) == "SELECT sum(model.value) AS total FROM model"
 
+    def test_query_group(self) -> None:
+        q = Query(table)
         # group
-        s = q.group(table.key)
-        assert s.pipeline == ["from model", "group {key} (aggregate {})"]
-        assert str(s) == "SELECT `key` FROM model GROUP BY `key`"
-        s = q.group(value=table.val)
-        assert s.pipeline == ["from model", "group {value = val} (aggregate {})"]
-        assert str(s) == "SELECT val AS value FROM model GROUP BY val"
-        s = q.group(table.key, Aggregate(F.count()))
-        assert s.pipeline == ["from model", "group {key} (aggregate {s'count()'})"]
-        assert str(s) == "SELECT `key`, count() FROM model GROUP BY `key`"
-        s = q.group(table.key, total=Aggregate(F.sum(table.val)))
+        s = q.group(table.name)
+        assert s.pipeline == ["from model", "group {model.name} (aggregate {})"]
+        assert str(s) == "SELECT name FROM model GROUP BY name"
+        s = q.group(val=table.value)
+        assert s.pipeline == ["from model", "group {val = model.value} (aggregate {})"]
+        assert str(s) == "SELECT value AS val FROM model GROUP BY value"
+        s = q.group(table.name, Aggregate(F.count()))
         assert s.pipeline == [
             "from model",
-            "group {key} (aggregate {total = s'sum(val)'})",
+            "group {model.name} (aggregate {s'count()'})",
         ]
-        assert str(s) == "SELECT `key`, sum(val) AS total FROM model GROUP BY `key`"
-        s = q.group(name=table.key, total=Aggregate(F.sum(table.val)))
+        assert str(s) == "SELECT name, count() FROM model GROUP BY name"
+        s = q.group(table.name, total=Aggregate(F.sum(table.value)))
         assert s.pipeline == [
             "from model",
-            "group {name = key} (aggregate {total = s'sum(val)'})",
+            "group {model.name} (aggregate {total = s'sum(model.value)'})",
         ]
         assert (
-            str(s)
-            == "SELECT `key` AS name, sum(val) AS total FROM model GROUP BY `key`"
+            str(s) == "SELECT name, sum(model.value) AS total FROM model GROUP BY name"
+        )
+        s = q.group(name=table.name, total=Aggregate(F.sum(table.value)))
+        assert s.pipeline == [
+            "from model",
+            "group {name = model.name} (aggregate {total = s'sum(model.value)'})",
+        ]
+        assert (
+            str(s) == "SELECT name, sum(model.value) AS total FROM model GROUP BY name"
         )
 
+    def test_query_params(self) -> None:
+        q = Query(table)
         # params
         q = Query(table)
-        s = q.filter(table.val >= Param("val", int))
-        assert s.pipeline == ["from model", "filter (val >= s'{{val:Int64}}')"]
-        assert str(s) == "SELECT * FROM model WHERE val >= {val:Int64}"
-        s = q.filter(table.key == Param("name"))
-        assert s.pipeline == ["from model", "filter (key == s'{{name:String}}')"]
-        assert str(s) == "SELECT * FROM model WHERE `key` = {name:String}"
+        s = q.filter(table.value >= Param("value", int))
+        assert s.pipeline == [
+            "from model",
+            "filter (model.value >= s'{{value:Int64}}')",
+        ]
+        assert str(s) == "SELECT * FROM model WHERE value >= {value:Int64}"
+        s = q.filter(table.name == Param("name"))
+        assert s.pipeline == ["from model", "filter (model.name == s'{{name:String}}')"]
+        assert str(s) == "SELECT * FROM model WHERE name = {name:String}"

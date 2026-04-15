@@ -223,16 +223,27 @@ class Function:
         s'toDate(value)'
     """
 
-    def __init__(self, value: str | "Function") -> None:
-        self.value = value
+    def __init__(self, name: str, *args: Any) -> None:
+        self.name = name
+        self.args = args
 
     def __str__(self) -> str:
-        return str(self.value)
+        return self.to_sql()
 
-    def to_sql(self) -> str:
-        if isinstance(self.value, Function):
-            return str(self.value)
-        return f"s'{str(self.value)}'"
+    def serialize(self, value: Any) -> str:
+        if isinstance(value, Expression):
+            return str(value)
+        elif isinstance(value, type(self)):
+            return value.to_sql(s_string=False)
+        elif isinstance(value, str):
+            return f"'{value}'"
+        else:
+            return str(value)
+
+    def to_sql(self, s_string: bool = True) -> str:
+        args = ", ".join(map(self.serialize, self.args))
+        value = f"{self.name}({args})"
+        return f"s'{value}'" if s_string else value
 
 
 class Aggregate:
@@ -271,8 +282,7 @@ class FunctionWrapper:
 
     def __getattr__(self, name: str) -> Callable[..., Function]:
         def wrapper(*args: Any) -> Function:
-            params = ", ".join(map(str, args))
-            return Function(f"{name}({params})")
+            return Function(name, *args)
 
         return wrapper
 
