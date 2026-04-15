@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Any
 
-from .utils import comma_join
+from pyclickhouse.utils import comma_join
 
 
 class Engine:

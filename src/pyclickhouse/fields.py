@@ -3,8 +3,8 @@ from typing import Any, Callable, Self
 
 from pydantic.fields import FieldInfo
 
-from .types import get_ch_type_from_annotation
-from .utils import escape
+from pyclickhouse.types import get_ch_type_from_annotation
+from pyclickhouse.utils import escape
 
 
 @dataclass

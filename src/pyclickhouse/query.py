@@ -1,10 +1,13 @@
 from dataclasses import KW_ONLY, dataclass, field, replace
-from typing import Any, Self
+from typing import TYPE_CHECKING, Any, Self
 
 import prqlc
 
-from .fields import Aggregate, Expression, Function
-from .table import Table
+from pyclickhouse.fields import Aggregate, Expression, Function
+
+if TYPE_CHECKING:
+    from pyclickhouse.table import Table
+    from pyclickhouse.view import View
 
 options = prqlc.CompileOptions(
     target="sql.clickhouse",
@@ -24,7 +27,7 @@ class Query:
         pipeline: The pipeline of steps to execute.
     """
 
-    table: Table | str
+    table: Table | View | str
     _: KW_ONLY
     database: str | None = None
     schema: str | None = None

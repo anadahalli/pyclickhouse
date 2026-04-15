@@ -1,7 +1,7 @@
-from .query import Query
-from .registry import Registry, default_registry
-from .table import Table
-from .types import Lifecycle
+from pyclickhouse.query import Query
+from pyclickhouse.registry import Registry, default_registry
+from pyclickhouse.table import Table
+from pyclickhouse.types import Lifecycle
 
 
 class View:
@@ -35,6 +35,9 @@ class View:
         self._lifecycle = lifecycle
         self._registry = registry
         registry.register_view(self)
+
+    def __str__(self) -> str:
+        return self.get_name()
 
     @property
     def is_materialized(self) -> bool:

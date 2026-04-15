@@ -1,8 +1,8 @@
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from .table import Table
-    from .view import View
+    from pyclickhouse.table import Table
+    from pyclickhouse.view import View
 
 
 class Registry:

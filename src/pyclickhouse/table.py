@@ -2,11 +2,11 @@ from typing import Any, Self
 
 from pydantic import BaseModel, create_model
 
-from .engines import Engine, MergeTree
-from .fields import Column, Expression
-from .registry import Registry, default_registry
-from .types import Lifecycle, get_python_type_from_ch_string
-from .utils import pascal_to_snake
+from pyclickhouse.engines import Engine, MergeTree
+from pyclickhouse.fields import Column, Expression
+from pyclickhouse.registry import Registry, default_registry
+from pyclickhouse.types import Lifecycle, get_python_type_from_ch_string
+from pyclickhouse.utils import pascal_to_snake
 
 
 class Table[T: BaseModel]:
