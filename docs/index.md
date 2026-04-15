@@ -1,16 +1,15 @@
 # Overview
 
 A modern async Python ORM for ClickHouse
-
----
+___
 
 ## Features
-* Async first design: non-blocking API built around async/await
-* Pluggable drivers: choose between `clickhouse-connect` or `asynch`
-* Typed models: Define schemas with `pydantic` models for validation and serialization
-* Database management: create and manage tables/views
+* Async first design: non-blocking API built around async/await using `clickhouse_connect`
+* Data models: using `pydantic` models for table design, serialization and deserialization with auto data types
 * Query builder: build expressive and composable queries using `prql`
-* Batch writer: Validate and insert data in batches
+* Database admin: create and manage tables/views and migrations
+* Batch writer: Validate and insert data in batches to tables
+* Stream reader: Parameterize queries and deserialize results with support for streaming
 
 ---
 
@@ -39,13 +38,8 @@ A modern async Python ORM for ClickHouse
 
 ---
 
-## Roadmap
+## Next
 
-* Support complex datatypes: Nested, Array, Tuple, JSON
-* Support table joins and windows
-* Support for file based migrations
+Explore [Concepts](/concepts/client)
 
----
-
-## License
-[MIT License](LICENSE)
+Browse [References](/references/client)

@@ -8,6 +8,7 @@ copyright = "Copyright &copy; 2026 The authors"
 nav = [
   { "Overview" = "index.md" },
   { "Concepts" = [
+      # "concepts/index.md",
       "concepts/client.md",
       "concepts/admin.md",
       "concepts/reader.md",
@@ -19,6 +20,7 @@ nav = [
       "concepts/registry.md",
   ]},
   { "References" = [
+      # "references/index.md",
       "references/client.md",
       "references/admin.md",
       "references/reader.md",
@@ -28,6 +30,7 @@ nav = [
       "references/query.md",
       "references/engines.md",
       "references/fields.md",
+      "references/functions.md",
   ]},
 ]
 
@@ -94,8 +97,9 @@ code = "Jetbrains Mono"
 [project.markdown_extensions.pymdownx.highlight]
 anchor_linenums = true
 
+[project.markdown_extensions.admonition]
 [project.markdown_extensions.pymdownx.superfences]
-
+[project.markdown_extensions.pymdownx.details]
 [project.markdown_extensions.pymdownx.snippets]
 
 [project.markdown_extensions.pymdownx.tabbed]
@@ -103,7 +107,7 @@ alternate_style = true
 
 [project.plugins.mkdocstrings.handlers.python]
 inventories = ["https://docs.python.org/3/objects.inv"]
-paths = ["pyclickhouse"]
+paths = ["src/pyclickhouse"]
 
 [project.plugins.mkdocstrings.handlers.python.options]
 docstring_style = "google"
