@@ -70,7 +70,7 @@ addopts = [
     "--no-header",
 ]
 filterwarnings = [
-    "ignore:The 'u' type code is deprecated and will be removed in Python 3.16",
+    # "ignore:The 'u' type code is deprecated and will be removed in Python 3.16",
 ]
 
 [tool.uv.build-backend]
