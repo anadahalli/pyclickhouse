@@ -38,10 +38,11 @@ class Reader[T: BaseModel, R: BaseModel]:
 
         Args:
             client: The ClickHouse client to use.
-            query: The query to execute.
-            model: The model to use for the response.
-            param: The model to use for query parameters.
-            database: The database to read from. Defaults to client database.
+            select: The query to execute.
+            model: Optional model to use for the response data.
+            parameters: Optional model to use for validating parameters.
+            stream: Whether to stream the results. Defaults to True.
+            max_block_size: The maximum block size to use for streaming. Defaults to 65536.
             settings: The settings to use for the insert. Defaults to None.
             transport_settings: The transport settings to use for the insert. Defaults to None.
         """

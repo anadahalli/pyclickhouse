@@ -5,7 +5,8 @@ import pytest
 from pydantic import BaseModel
 from pydantic.fields import FieldInfo
 
-from pyclickhouse.fields import Column, Expression, F
+from pyclickhouse.fields import Column, Expression
+from pyclickhouse.functions import F
 
 
 class TestColumn:

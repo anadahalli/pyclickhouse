@@ -1,7 +1,8 @@
 import pytest
 from pydantic import BaseModel
 
-from pyclickhouse.fields import Aggregate, F, Param
+from pyclickhouse.fields import Aggregate, Param
+from pyclickhouse.functions import F
 from pyclickhouse.query import Query
 from pyclickhouse.table import Table
 

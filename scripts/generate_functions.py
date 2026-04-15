@@ -38,7 +38,13 @@ def _get_args(syntax: str) -> tuple[list[str], list[str]]:
 
 
 def _clean(item: str) -> str:
-    return item.replace(":::", "")
+    # for documentation
+    item = item.replace(":::", "")
+    # for warnings
+    item = item.replace("\\`", "\\\\`")
+    # for reference urls
+    item = item.replace("/sql-reference/", "https://clickhouse.com/docs/sql-reference/")
+    return item
 
 
 reserved_names = ["if", "in", "and", "not", "except", "lambda", "from", "or", "else"]

@@ -1,5 +1,5 @@
 from dataclasses import KW_ONLY, dataclass
-from typing import Any, Callable, Self
+from typing import Any, Self
 
 from pydantic.fields import FieldInfo
 
@@ -217,10 +217,10 @@ class Function:
     Created using the `F` object. Used to created PRQL s-strings.
 
     Examples:
-        >>> Function("sum(value)").to_sql()
+        >>> Function("sum", "value").to_sql()
         s'sum(value)'
-        >>> Function(F.toDate("value")).to_sql()
-        s'toDate(value)'
+        >>> Function(F.toDate(column)).to_sql()
+        s'toDate(column)'
     """
 
     def __init__(self, name: str, *args: Any) -> None:
@@ -262,29 +262,6 @@ class Aggregate:
         self.value = value
 
     def __str__(self) -> str:
-        if isinstance(self.value, Function):
-            return self.value.to_sql()
+        # if isinstance(self.value, Function):
+        #     return self.value.to_sql()
         return str(self.value)
-
-
-class FunctionWrapper:
-    """ClickHouse function wrapper for building dynamic functions.
-
-    Not to be used directly. Create a new wrapper using the `F` object.
-    `F.<function>(<args>)`
-
-    Examples:
-        >>> F.count("value")
-        Function("count(value)")
-        >>> F.toDate("column")
-        Function("sum(value)")
-    """
-
-    def __getattr__(self, name: str) -> Callable[..., Function]:
-        def wrapper(*args: Any) -> Function:
-            return Function(name, *args)
-
-        return wrapper
-
-
-F = FunctionWrapper()

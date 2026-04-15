@@ -5,5 +5,3 @@
 
 ::: fields.Expression
 ::: fields.Function
-
-::: fields.FunctionWrapper

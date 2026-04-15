@@ -25,7 +25,6 @@ class FunctionWrapper:
         {%- endif %}
 
         {% if fn.arguments -%}
-        Args:
         {{ fn.arguments | indent(8, False) }}
         {%- endif %}
         {% if fn.returns -%}
