@@ -199,6 +199,58 @@ async with client:
 
 ---
 
+## Development
+
+### Local Setup
+
+To set up the development environment:
+
+```sh
+# Clone the repository
+git clone https://github.com/anadahalli/pyclickhouse.git
+cd pyclickhouse
+
+# Install development dependencies
+uv sync --group dev
+```
+
+### Running Tests
+
+Execute the test suite with:
+
+```sh
+# Run all tests
+uv run pytest
+
+# Run tests with coverage
+uv run pytest --cov=pyclickhouse
+
+# Run a specific test file
+uv run pytest tests/test_client.py
+```
+
+### Contributing
+
+We welcome contributions! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Commit your changes (`git commit -m 'Add amazing feature'`)
+5. Push to the branch (`git push origin feature/amazing-feature`)
+6. Open a Pull Request
+
+Please ensure your code follows the project's style and includes tests for new functionality.
+
+### Issues and Feedback
+
+- **Bug Reports**: Please open an issue on [GitHub Issues](https://github.com/anadahalli/pyclickhouse/issues) with a clear description and steps to reproduce
+- **Feature Requests**: Submit feature requests through GitHub Issues
+- **Questions**: Use GitHub Discussions or open an issue for general questions
+- **Feedback**: We appreciate any feedback! Feel free to reach out through GitHub Issues
+
+---
+
 ## License
 
 [MIT License](https://github.com/anadahalli/pyclickhouse/blob/main/LICENSE)
