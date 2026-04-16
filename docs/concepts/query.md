@@ -1,9 +1,29 @@
-# Query 
+---
+title: Query Builder
+---
 
-A [PRQL](https://prql-lang.org/) query builder.
+Query builder using [PRQL](https://prql-lang.org/) to create expressive and flexible analytics queries.
+
+Data transformations/pipelines can be chained togethor with these method:
+
+* select
+* derive
+* filter
+* aggregate
+* group
+* sort
+* take
+
+Uses `prqlc` to compile to SQL string with support for parameterized queries.
+
+The order of operations matter as every operation will add a new pipeline to the query.
+
+---
+
+## Basic Usage
 
 ```py
-from pyclickhouse import Query, Aggregate, F, table
+from pyclickhouse import Query, Aggregate, Param, Table, F
 from pydantic import BaseModel
 
 # define our table model
@@ -12,7 +32,7 @@ class Store(BaseModel):
     value: int
 
 # create a table definition
-store = table(model=Store, name="store", ...)
+store = Table(model=Store, name="store")
 
 # query from table
 query = Query(store)
@@ -29,9 +49,27 @@ print(query.build())
 # from store | select {name}
 ```
 
-The order of operations matter as every operation will add a new pipeline to the query.
+---
 
-## Supported Operations
+## Parameters
+
+> SQL: `{<param_name>:<param_clickhouse_type>}}`
+
+> PRQL: `s'{<param_name>:<param_clickhouse_type>}`
+
+Add a parameter to a filterd value
+```py
+query.filter(store.value >= Param(value, int))
+```
+
+Provide parameter value during query
+```
+client.query(str(query), parameters={"value": 10})
+```
+
+---
+
+## Pipelines 
 
 ### Select
 Pick or compute columns

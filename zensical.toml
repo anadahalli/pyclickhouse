@@ -21,6 +21,7 @@ nav = [
   ]},
   { "References" = [
       # "references/index.md",
+      "references/settings.md",
       "references/client.md",
       "references/admin.md",
       "references/reader.md",
@@ -110,13 +111,16 @@ inventories = ["https://docs.python.org/3/objects.inv"]
 paths = ["src/pyclickhouse"]
 
 [project.plugins.mkdocstrings.handlers.python.options]
+filters = ["!^_"]
 docstring_style = "google"
 docstring_section_style = "table"
-inherited_members = true
+show_if_no_docstring = false
+inherited_members = false
 show_source = false
 show_root_heading = true
-show_root_full_path = false
+show_root_full_path = true
 show_symbol_type_heading = true
 show_symbol_type_toc = true
 type_parameter_headings = true
 merge_init_into_class = true
+# members = false

@@ -1,1 +1,7 @@
-# Table
+---
+title: Table
+---
+
+## Table
+
+## Column
