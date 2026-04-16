@@ -16,7 +16,7 @@ class FunctionWrapper:
             return Function(name, *args)
 
         return wrapper
-    
+
     @staticmethod
     def BLAKE3(message: Any) -> Function:
         """
@@ -27,7 +27,7 @@ class FunctionWrapper:
         Returns the 32-byte BLAKE3 hash of the input string as a fixed-length string. [`FixedString(32)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("BLAKE3", *to_args(locals()))
-    
+
     @staticmethod
     def CAST(x: Any, T: Any) -> Function:
         """
@@ -41,7 +41,7 @@ class FunctionWrapper:
         Returns the converted value with the target data type. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("CAST", *to_args(locals()))
-    
+
     @staticmethod
     def CRC32(s: Any) -> Function:
         """
@@ -52,7 +52,7 @@ class FunctionWrapper:
         Returns the CRC32 checksum of the string. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("CRC32", *to_args(locals()))
-    
+
     @staticmethod
     def CRC32IEEE(s: Any) -> Function:
         """
@@ -63,7 +63,7 @@ class FunctionWrapper:
         Returns the CRC32 checksum of the string. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("CRC32IEEE", *to_args(locals()))
-    
+
     @staticmethod
     def CRC64(s: Any) -> Function:
         """
@@ -74,7 +74,7 @@ class FunctionWrapper:
         Returns the CRC64 checksum of the string. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("CRC64", *to_args(locals()))
-    
+
     @staticmethod
     def DATE(expr: Any) -> Function:
         """
@@ -85,17 +85,17 @@ class FunctionWrapper:
         Returns a Date value. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("DATE", *to_args(locals()))
-    
+
     @staticmethod
     def FQDN() -> Function:
         """
         FQDN()
 
-        
+
         Returns the fully qualified domain name of the ClickHouse server. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("FQDN", *to_args(locals()))
-    
+
     @staticmethod
     def HMAC(mode: Any, message: Any, key: Any) -> Function:
         """
@@ -108,7 +108,7 @@ class FunctionWrapper:
         Returns a binary string containing the HMAC digest. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("HMAC", *to_args(locals()))
-    
+
     @staticmethod
     def IPv4CIDRToRange(ipv4: Any, cidr: Any) -> Function:
         """
@@ -120,7 +120,7 @@ class FunctionWrapper:
         Returns a tuple with two IPv4 addresses representing the subnet range. [`Tuple(IPv4, IPv4)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("IPv4CIDRToRange", *to_args(locals()))
-    
+
     @staticmethod
     def IPv4NumToString(num: Any) -> Function:
         """
@@ -131,7 +131,7 @@ class FunctionWrapper:
         Returns a number representing the MAC address, or `0` if the format is invalid. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("IPv4NumToString", *to_args(locals()))
-    
+
     @staticmethod
     def IPv4NumToStringClassC(num: Any) -> Function:
         """
@@ -142,7 +142,7 @@ class FunctionWrapper:
         Returns the IPv4 address string with xxx replacing the last octet. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("IPv4NumToStringClassC", *to_args(locals()))
-    
+
     @staticmethod
     def IPv4StringToNum(string: Any) -> Function:
         """
@@ -153,7 +153,7 @@ class FunctionWrapper:
         Returns theIPv4 address. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("IPv4StringToNum", *to_args(locals()))
-    
+
     @staticmethod
     def IPv4StringToNumOrDefault(string: Any) -> Function:
         """
@@ -164,7 +164,7 @@ class FunctionWrapper:
         Returns the IPv4 address, or `0` if invalid. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("IPv4StringToNumOrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def IPv4StringToNumOrNull(string: Any) -> Function:
         """
@@ -175,7 +175,7 @@ class FunctionWrapper:
         Returns the IPv4 address, or `NULL` if invalid. [`Nullable(UInt32)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("IPv4StringToNumOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def IPv4ToIPv6(x: Any) -> Function:
         """
@@ -186,7 +186,7 @@ class FunctionWrapper:
         Returns an IPv6 address in binary format. [`FixedString(16)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("IPv4ToIPv6", *to_args(locals()))
-    
+
     @staticmethod
     def IPv6CIDRToRange(ipv6: Any, cidr: Any) -> Function:
         """
@@ -198,7 +198,7 @@ class FunctionWrapper:
         Returns a tuple with two IPv6 addresses representing the subnet range. [`Tuple(IPv6, IPv6)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("IPv6CIDRToRange", *to_args(locals()))
-    
+
     @staticmethod
     def IPv6NumToString(x: Any) -> Function:
         """
@@ -209,7 +209,7 @@ class FunctionWrapper:
         Returns the IPv6 address string in text format. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("IPv6NumToString", *to_args(locals()))
-    
+
     @staticmethod
     def IPv6StringToNum(string: Any) -> Function:
         """
@@ -220,7 +220,7 @@ class FunctionWrapper:
         Returns theIPv6 address in binary format. [`FixedString(16)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("IPv6StringToNum", *to_args(locals()))
-    
+
     @staticmethod
     def IPv6StringToNumOrDefault(string: Any) -> Function:
         """
@@ -231,7 +231,7 @@ class FunctionWrapper:
         IPv6 address in binary format, or zero-filled FixedString(16) if invalid. [`FixedString(16)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("IPv6StringToNumOrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def IPv6StringToNumOrNull(string: Any) -> Function:
         """
@@ -242,7 +242,7 @@ class FunctionWrapper:
         Returns IPv6 address in binary format, or `NULL` if invalid. [`Nullable(FixedString(16))`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("IPv6StringToNumOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def JSONAllPaths(json: Any) -> Function:
         """
@@ -253,7 +253,7 @@ class FunctionWrapper:
         Returns an array of all paths in the JSON column. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("JSONAllPaths", *to_args(locals()))
-    
+
     @staticmethod
     def JSONAllPathsWithTypes(json: Any) -> Function:
         """
@@ -264,7 +264,7 @@ class FunctionWrapper:
         Returns a map of all paths and their data types in the JSON column. [`Map(String, String)`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("JSONAllPathsWithTypes", *to_args(locals()))
-    
+
     @staticmethod
     def JSONArrayLength(json: Any) -> Function:
         """
@@ -275,7 +275,7 @@ class FunctionWrapper:
         Returns the number of array elements if `json` is a valid JSON array string, otherwise returns `NULL`. [`Nullable(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("JSONArrayLength", *to_args(locals()))
-    
+
     @staticmethod
     def JSONDynamicPaths(json: Any) -> Function:
         """
@@ -286,7 +286,7 @@ class FunctionWrapper:
         Returns an array of dynamic paths in the JSON column. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("JSONDynamicPaths", *to_args(locals()))
-    
+
     @staticmethod
     def JSONDynamicPathsWithTypes(json: Any) -> Function:
         """
@@ -297,9 +297,11 @@ class FunctionWrapper:
         Returns a map of dynamic paths and their data types in the JSON column. [`Map(String, String)`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("JSONDynamicPathsWithTypes", *to_args(locals()))
-    
+
     @staticmethod
-    def JSONExtract(json: Any, indices_or_keys: Any | None = None, return_type: Any | None = None) -> Function:
+    def JSONExtract(
+        json: Any, indices_or_keys: Any | None = None, return_type: Any | None = None
+    ) -> Function:
         """
         JSONExtract(json[, indices_or_keys, ...], return_type)
 
@@ -310,7 +312,7 @@ class FunctionWrapper:
         Returns a value of specified ClickHouse data type if possible, otherwise returns the default value for that type.
         """
         return Function("JSONExtract", *to_args(locals()))
-    
+
     @staticmethod
     def JSONExtractArrayRaw(json: Any, indices_or_keys: Any | None = None) -> Function:
         """
@@ -322,9 +324,11 @@ class FunctionWrapper:
         Returns an array of strings with JSON array elements. If the part is not an array or does not exist, an empty array will be returned. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("JSONExtractArrayRaw", *to_args(locals()))
-    
+
     @staticmethod
-    def JSONExtractArrayRawCaseInsensitive(json: Any, indices_or_keys: Any | None = None) -> Function:
+    def JSONExtractArrayRawCaseInsensitive(
+        json: Any, indices_or_keys: Any | None = None
+    ) -> Function:
         """
         JSONExtractArrayRawCaseInsensitive(json [, indices_or_keys]...)
 
@@ -334,7 +338,7 @@ class FunctionWrapper:
         Returns an array of raw JSON strings. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("JSONExtractArrayRawCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
     def JSONExtractBool(json: Any, indices_or_keys: Any | None = None) -> Function:
         """
@@ -346,9 +350,11 @@ class FunctionWrapper:
         Returns a Bool value if it exists, otherwise returns `0`. [`Bool`](https://clickhouse.com/docs/sql-reference/data-types/boolean)
         """
         return Function("JSONExtractBool", *to_args(locals()))
-    
+
     @staticmethod
-    def JSONExtractBoolCaseInsensitive(json: Any, indices_or_keys: Any | None = None) -> Function:
+    def JSONExtractBoolCaseInsensitive(
+        json: Any, indices_or_keys: Any | None = None
+    ) -> Function:
         """
         JSONExtractBoolCaseInsensitive(json [, indices_or_keys]...)
 
@@ -358,9 +364,11 @@ class FunctionWrapper:
         Returns the extracted boolean value (1 for true, 0 for false), 0 if not found. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("JSONExtractBoolCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
-    def JSONExtractCaseInsensitive(json: Any, indices_or_keys: Any | None = None, return_type: Any | None = None) -> Function:
+    def JSONExtractCaseInsensitive(
+        json: Any, indices_or_keys: Any | None = None, return_type: Any | None = None
+    ) -> Function:
         """
         JSONExtractCaseInsensitive(json [, indices_or_keys...], return_type)
 
@@ -371,7 +379,7 @@ class FunctionWrapper:
         Returns the extracted value in the specified data type. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("JSONExtractCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
     def JSONExtractFloat(json: Any, indices_or_keys: Any | None = None) -> Function:
         """
@@ -383,9 +391,11 @@ class FunctionWrapper:
         Returns a Float value if it exists, otherwise returns `0`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("JSONExtractFloat", *to_args(locals()))
-    
+
     @staticmethod
-    def JSONExtractFloatCaseInsensitive(json: Any, indices_or_keys: Any | None = None) -> Function:
+    def JSONExtractFloatCaseInsensitive(
+        json: Any, indices_or_keys: Any | None = None
+    ) -> Function:
         """
         JSONExtractFloatCaseInsensitive(json [, indices_or_keys]...)
 
@@ -395,7 +405,7 @@ class FunctionWrapper:
         Returns the extracted Float value, 0 if not found or cannot be converted. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("JSONExtractFloatCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
     def JSONExtractInt(json: Any, indices_or_keys: Any | None = None) -> Function:
         """
@@ -407,9 +417,11 @@ class FunctionWrapper:
         Returns an Int value if it exists, otherwise returns `0`. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("JSONExtractInt", *to_args(locals()))
-    
+
     @staticmethod
-    def JSONExtractIntCaseInsensitive(json: Any, indices_or_keys: Any | None = None) -> Function:
+    def JSONExtractIntCaseInsensitive(
+        json: Any, indices_or_keys: Any | None = None
+    ) -> Function:
         """
         JSONExtractIntCaseInsensitive(json [, indices_or_keys]...)
 
@@ -419,7 +431,7 @@ class FunctionWrapper:
         Returns the extracted Int value, 0 if not found or cannot be converted. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("JSONExtractIntCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
     def JSONExtractKeys(json: Any, indices_or_keys: Any | None = None) -> Function:
         """
@@ -431,9 +443,11 @@ class FunctionWrapper:
         Returns an array with the keys of the JSON object. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("JSONExtractKeys", *to_args(locals()))
-    
+
     @staticmethod
-    def JSONExtractKeysAndValues(json: Any, indices_or_keys: Any | None = None, value_type: Any | None = None) -> Function:
+    def JSONExtractKeysAndValues(
+        json: Any, indices_or_keys: Any | None = None, value_type: Any | None = None
+    ) -> Function:
         """
         JSONExtractKeysAndValues(json[, indices_or_keys, ...], value_type)
 
@@ -444,9 +458,11 @@ class FunctionWrapper:
         Returns an array of tuples with the parsed key-value pairs. [`Array(Tuple(String, value_type))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("JSONExtractKeysAndValues", *to_args(locals()))
-    
+
     @staticmethod
-    def JSONExtractKeysAndValuesCaseInsensitive(json: Any, indices_or_keys: Any | None = None, value_type: Any | None = None) -> Function:
+    def JSONExtractKeysAndValuesCaseInsensitive(
+        json: Any, indices_or_keys: Any | None = None, value_type: Any | None = None
+    ) -> Function:
         """
         JSONExtractKeysAndValuesCaseInsensitive(json [, indices_or_keys...], value_type)
 
@@ -457,9 +473,11 @@ class FunctionWrapper:
         Returns an array of tuples containing key-value pairs. [`Array(Tuple(String, T))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("JSONExtractKeysAndValuesCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
-    def JSONExtractKeysAndValuesRaw(json: Any, indices_or_keys: Any | None = None) -> Function:
+    def JSONExtractKeysAndValuesRaw(
+        json: Any, indices_or_keys: Any | None = None
+    ) -> Function:
         """
         JSONExtractKeysAndValuesRaw(json[, indices_or_keys, ...])
 
@@ -469,9 +487,11 @@ class FunctionWrapper:
         Returns an array of tuples with parsed key-value pairs where values are unparsed strings. [`Array(Tuple(String, String))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("JSONExtractKeysAndValuesRaw", *to_args(locals()))
-    
+
     @staticmethod
-    def JSONExtractKeysAndValuesRawCaseInsensitive(json: Any, indices_or_keys: Any | None = None) -> Function:
+    def JSONExtractKeysAndValuesRawCaseInsensitive(
+        json: Any, indices_or_keys: Any | None = None
+    ) -> Function:
         """
         JSONExtractKeysAndValuesRawCaseInsensitive(json [, indices_or_keys]...)
 
@@ -480,10 +500,14 @@ class FunctionWrapper:
 
         Returns an array of tuples containing key-value pairs as raw strings. [`Array(Tuple(String, String))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
-        return Function("JSONExtractKeysAndValuesRawCaseInsensitive", *to_args(locals()))
-    
+        return Function(
+            "JSONExtractKeysAndValuesRawCaseInsensitive", *to_args(locals())
+        )
+
     @staticmethod
-    def JSONExtractKeysCaseInsensitive(json: Any, indices_or_keys: Any | None = None) -> Function:
+    def JSONExtractKeysCaseInsensitive(
+        json: Any, indices_or_keys: Any | None = None
+    ) -> Function:
         """
         JSONExtractKeysCaseInsensitive(json [, indices_or_keys]...)
 
@@ -493,7 +517,7 @@ class FunctionWrapper:
         Returns an array of keys from the JSON object. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("JSONExtractKeysCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
     def JSONExtractRaw(json: Any, indices_or_keys: Any | None = None) -> Function:
         """
@@ -505,9 +529,11 @@ class FunctionWrapper:
         Returns the part of JSON as an unparsed string. If the part does not exist or has a wrong type, an empty string will be returned. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("JSONExtractRaw", *to_args(locals()))
-    
+
     @staticmethod
-    def JSONExtractRawCaseInsensitive(json: Any, indices_or_keys: Any | None = None) -> Function:
+    def JSONExtractRawCaseInsensitive(
+        json: Any, indices_or_keys: Any | None = None
+    ) -> Function:
         """
         JSONExtractRawCaseInsensitive(json [, indices_or_keys]...)
 
@@ -517,7 +543,7 @@ class FunctionWrapper:
         Returns the raw JSON string of the extracted element. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("JSONExtractRawCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
     def JSONExtractString(json: Any, indices_or_keys: Any | None = None) -> Function:
         """
@@ -529,9 +555,11 @@ class FunctionWrapper:
         Returns a String value if it exists, otherwise returns an empty string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("JSONExtractString", *to_args(locals()))
-    
+
     @staticmethod
-    def JSONExtractStringCaseInsensitive(json: Any, indices_or_keys: Any | None = None) -> Function:
+    def JSONExtractStringCaseInsensitive(
+        json: Any, indices_or_keys: Any | None = None
+    ) -> Function:
         """
         JSONExtractStringCaseInsensitive(json [, indices_or_keys]...)
 
@@ -541,7 +569,7 @@ class FunctionWrapper:
         Returns the extracted string value, empty string if not found. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("JSONExtractStringCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
     def JSONExtractUInt(json: Any, indices_or_keys: Any | None = None) -> Function:
         """
@@ -553,9 +581,11 @@ class FunctionWrapper:
         Returns a UInt value if it exists, otherwise returns `0`. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("JSONExtractUInt", *to_args(locals()))
-    
+
     @staticmethod
-    def JSONExtractUIntCaseInsensitive(json: Any, indices_or_keys: Any | None = None) -> Function:
+    def JSONExtractUIntCaseInsensitive(
+        json: Any, indices_or_keys: Any | None = None
+    ) -> Function:
         """
         JSONExtractUIntCaseInsensitive(json [, indices_or_keys]...)
 
@@ -565,7 +595,7 @@ class FunctionWrapper:
         Returns the extracted UInt value, 0 if not found or cannot be converted. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("JSONExtractUIntCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
     def JSONHas(json: Any, indices_or_keys: Any | None = None) -> Function:
         """
@@ -577,7 +607,7 @@ class FunctionWrapper:
         Returns `1` if the value exists in `json`, otherwise `0` [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("JSONHas", *to_args(locals()))
-    
+
     @staticmethod
     def JSONKey(json: Any, indices_or_keys: Any | None = None) -> Function:
         """
@@ -589,7 +619,7 @@ class FunctionWrapper:
         Returns the key name at the specified position in the JSON object. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("JSONKey", *to_args(locals()))
-    
+
     @staticmethod
     def JSONLength(json: Any, indices_or_keys: Any | None = None) -> Function:
         """
@@ -601,7 +631,7 @@ class FunctionWrapper:
         Returns the length of the JSON array or JSON object, otherwise returns `0` if the value does not exist or has the wrong type. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("JSONLength", *to_args(locals()))
-    
+
     @staticmethod
     def JSONMergePatch(json1: Any, json2: Any | None = None) -> Function:
         """
@@ -612,7 +642,7 @@ class FunctionWrapper:
         Returns the merged JSON object string, if the JSON object strings are valid. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("JSONMergePatch", *to_args(locals()))
-    
+
     @staticmethod
     def JSONSharedDataPaths(json: Any) -> Function:
         """
@@ -623,7 +653,7 @@ class FunctionWrapper:
         Returns an array of paths stored in shared data structure in the JSON column. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("JSONSharedDataPaths", *to_args(locals()))
-    
+
     @staticmethod
     def JSONSharedDataPathsWithTypes(json: Any) -> Function:
         """
@@ -634,7 +664,7 @@ class FunctionWrapper:
         Returns a map of paths stored in shared data structure and their data types in the JSON column. [`Map(String, String)`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("JSONSharedDataPathsWithTypes", *to_args(locals()))
-    
+
     @staticmethod
     def JSONType(json: Any, indices_or_keys: Any | None = None) -> Function:
         """
@@ -646,7 +676,7 @@ class FunctionWrapper:
         Returns the type of a JSON value as a string, otherwise if the value doesn't exist it returns `Null=0` [`Enum`](https://clickhouse.com/docs/sql-reference/data-types/enum)
         """
         return Function("JSONType", *to_args(locals()))
-    
+
     @staticmethod
     def JSON_EXISTS(json: Any, path: Any) -> Function:
         """
@@ -658,7 +688,7 @@ class FunctionWrapper:
         Returns `1` if the value exists in the JSON document, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("JSON_EXISTS", *to_args(locals()))
-    
+
     @staticmethod
     def JSON_QUERY(json: Any, path: Any) -> Function:
         """
@@ -670,7 +700,7 @@ class FunctionWrapper:
         Returns the extracted JSON array or JSON object as a string, or an empty string if the value does not exist. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("JSON_QUERY", *to_args(locals()))
-    
+
     @staticmethod
     def JSON_VALUE(json: Any, path: Any) -> Function:
         """
@@ -682,7 +712,7 @@ class FunctionWrapper:
         Returns the extracted JSON scalar as a string, or an empty string if the value does not exist. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("JSON_VALUE", *to_args(locals()))
-    
+
     @staticmethod
     def L1Distance(vector1: Any, vector2: Any) -> Function:
         """
@@ -694,7 +724,7 @@ class FunctionWrapper:
         Returns the 1-norm distance. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("L1Distance", *to_args(locals()))
-    
+
     @staticmethod
     def L1Norm(vector: Any) -> Function:
         """
@@ -705,7 +735,7 @@ class FunctionWrapper:
         Returns the L1-norm or [taxicab geometry](https://en.wikipedia.org/wiki/Taxicab_geometry) distance. [`UInt*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Decimal`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("L1Norm", *to_args(locals()))
-    
+
     @staticmethod
     def L1Normalize(tuple: Any) -> Function:
         """
@@ -716,7 +746,7 @@ class FunctionWrapper:
         Returns the unit vector. [`Tuple(Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("L1Normalize", *to_args(locals()))
-    
+
     @staticmethod
     def L2Distance(vector1: Any, vector2: Any) -> Function:
         """
@@ -728,7 +758,7 @@ class FunctionWrapper:
         Returns the 2-norm distance. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("L2Distance", *to_args(locals()))
-    
+
     @staticmethod
     def L2DistanceTransposed(vector1: Any, vector2: Any, p: Any) -> Function:
         """
@@ -741,7 +771,7 @@ class FunctionWrapper:
         Returns the approximate 2-norm distance. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("L2DistanceTransposed", *to_args(locals()))
-    
+
     @staticmethod
     def L2Norm(vector: Any) -> Function:
         """
@@ -752,7 +782,7 @@ class FunctionWrapper:
         Returns the L2-norm or [Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance). [`UInt*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("L2Norm", *to_args(locals()))
-    
+
     @staticmethod
     def L2Normalize(tuple: Any) -> Function:
         """
@@ -763,7 +793,7 @@ class FunctionWrapper:
         Returns the unit vector. [`Tuple(Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("L2Normalize", *to_args(locals()))
-    
+
     @staticmethod
     def L2SquaredDistance(vector1: Any, vector2: Any) -> Function:
         """
@@ -775,7 +805,7 @@ class FunctionWrapper:
         Returns the sum of the squares of the difference between the corresponding elements of two vectors. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("L2SquaredDistance", *to_args(locals()))
-    
+
     @staticmethod
     def L2SquaredNorm(vector: Any) -> Function:
         """
@@ -786,7 +816,7 @@ class FunctionWrapper:
         Returns the L2-norm squared. [`UInt*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Decimal`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("L2SquaredNorm", *to_args(locals()))
-    
+
     @staticmethod
     def LinfDistance(vector1: Any, vector2: Any) -> Function:
         """
@@ -798,7 +828,7 @@ class FunctionWrapper:
         Returns the Infinity-norm distance. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("LinfDistance", *to_args(locals()))
-    
+
     @staticmethod
     def LinfNorm(vector: Any) -> Function:
         """
@@ -809,7 +839,7 @@ class FunctionWrapper:
         Returns the Linf-norm or the maximum absolute value. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("LinfNorm", *to_args(locals()))
-    
+
     @staticmethod
     def LinfNormalize(tuple: Any) -> Function:
         """
@@ -820,7 +850,7 @@ class FunctionWrapper:
         Returns the unit vector. [`Tuple(Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("LinfNormalize", *to_args(locals()))
-    
+
     @staticmethod
     def LpDistance(vector1: Any, vector2: Any, p: Any) -> Function:
         """
@@ -833,7 +863,7 @@ class FunctionWrapper:
         Returns the p-norm distance. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("LpDistance", *to_args(locals()))
-    
+
     @staticmethod
     def LpNorm(vector: Any, p: Any) -> Function:
         """
@@ -845,7 +875,7 @@ class FunctionWrapper:
         Returns the [Lp-norm](https://en.wikipedia.org/wiki/Norm_(mathematics)#p-norm). [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("LpNorm", *to_args(locals()))
-    
+
     @staticmethod
     def LpNormalize(tuple: Any, p: Any) -> Function:
         """
@@ -857,7 +887,7 @@ class FunctionWrapper:
         Returns the unit vector. [`Tuple(Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("LpNormalize", *to_args(locals()))
-    
+
     @staticmethod
     def MACNumToString(num: Any) -> Function:
         """
@@ -868,7 +898,7 @@ class FunctionWrapper:
         Returns a MAC address in format AA:BB:CC:DD:EE:FF. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("MACNumToString", *to_args(locals()))
-    
+
     @staticmethod
     def MACStringToNum(s: Any) -> Function:
         """
@@ -879,7 +909,7 @@ class FunctionWrapper:
         Returns a UInt64 number. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("MACStringToNum", *to_args(locals()))
-    
+
     @staticmethod
     def MACStringToOUI(s: Any) -> Function:
         """
@@ -890,7 +920,7 @@ class FunctionWrapper:
         First three octets as UInt64 number. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("MACStringToOUI", *to_args(locals()))
-    
+
     @staticmethod
     def MD4(s: Any) -> Function:
         """
@@ -901,7 +931,7 @@ class FunctionWrapper:
         Returns the MD4 hash of the given input string as a fixed-length string. [`FixedString(16)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("MD4", *to_args(locals()))
-    
+
     @staticmethod
     def MD5(s: Any) -> Function:
         """
@@ -912,7 +942,7 @@ class FunctionWrapper:
         Returns the MD5 hash of the given input string as a fixed-length string. [`FixedString(16)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("MD5", *to_args(locals()))
-    
+
     @staticmethod
     def RIPEMD160(s: Any) -> Function:
         """
@@ -923,7 +953,7 @@ class FunctionWrapper:
         Returns the RIPEMD160 hash of the given input string as a fixed-length string. [`FixedString(20)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("RIPEMD160", *to_args(locals()))
-    
+
     @staticmethod
     def SHA1(s: Any) -> Function:
         """
@@ -934,7 +964,7 @@ class FunctionWrapper:
         Returns the SHA1 hash of the given input string as a fixed-length string. [`FixedString(20)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("SHA1", *to_args(locals()))
-    
+
     @staticmethod
     def SHA224(s: Any) -> Function:
         """
@@ -945,7 +975,7 @@ class FunctionWrapper:
         Returns the SHA224 hash of the given input string as a fixed-length string. [`FixedString(28)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("SHA224", *to_args(locals()))
-    
+
     @staticmethod
     def SHA256(s: Any) -> Function:
         """
@@ -956,7 +986,7 @@ class FunctionWrapper:
         Returns the SHA256 hash of the given input string as a fixed-length string. [`FixedString(32)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("SHA256", *to_args(locals()))
-    
+
     @staticmethod
     def SHA384(s: Any) -> Function:
         """
@@ -967,7 +997,7 @@ class FunctionWrapper:
         Returns the SHA384 hash of the given input string as a fixed-length string. [`FixedString(48)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("SHA384", *to_args(locals()))
-    
+
     @staticmethod
     def SHA512(s: Any) -> Function:
         """
@@ -978,7 +1008,7 @@ class FunctionWrapper:
         Returns the SHA512 hash of the given input string as a fixed-length string. [`FixedString(64)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("SHA512", *to_args(locals()))
-    
+
     @staticmethod
     def SHA512_256(s: Any) -> Function:
         """
@@ -989,7 +1019,7 @@ class FunctionWrapper:
         Returns the SHA512_256 hash of the given input string as a fixed-length string. [`FixedString(32)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("SHA512_256", *to_args(locals()))
-    
+
     @staticmethod
     def ULIDStringToDateTime(ulid: Any, timezone: Any | None = None) -> Function:
         """
@@ -1001,7 +1031,7 @@ class FunctionWrapper:
         Timestamp with milliseconds precision. [`DateTime64(3)`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("ULIDStringToDateTime", *to_args(locals()))
-    
+
     @staticmethod
     def URLHash(url: Any, N: Any | None = None) -> Function:
         """
@@ -1013,7 +1043,7 @@ class FunctionWrapper:
         Returns the computed hash value of `url`. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("URLHash", *to_args(locals()))
-    
+
     @staticmethod
     def URLHierarchy(url: Any) -> Function:
         """
@@ -1024,7 +1054,7 @@ class FunctionWrapper:
         Returns an array of progressively longer URLs forming a hierarchy. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("URLHierarchy", *to_args(locals()))
-    
+
     @staticmethod
     def URLPathHierarchy(url: Any) -> Function:
         """
@@ -1035,17 +1065,17 @@ class FunctionWrapper:
         Returns an array of progressively longer URL path components forming a hierarchy. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("URLPathHierarchy", *to_args(locals()))
-    
+
     @staticmethod
     def UTCTimestamp() -> Function:
         """
         UTCTimestamp()
 
-        
+
         Returns the current date and time at the moment of query analysis. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("UTCTimestamp", *to_args(locals()))
-    
+
     @staticmethod
     def UUIDNumToString(binary: Any, variant: Any | None = None) -> Function:
         """
@@ -1057,9 +1087,9 @@ class FunctionWrapper:
         Returns the UUID as a string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("UUIDNumToString", *to_args(locals()))
-    
+
     @staticmethod
-    def UUIDStringToNum(string: Any, variant : Any | None =  1) -> Function:
+    def UUIDStringToNum(string: Any, variant: Any | None = 1) -> Function:
         """
         UUIDStringToNum(string[, variant = 1])
 
@@ -1069,9 +1099,9 @@ class FunctionWrapper:
         Returns the binary representation of `string`. [`FixedString(16)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("UUIDStringToNum", *to_args(locals()))
-    
+
     @staticmethod
-    def UUIDToNum(uuid: Any, variant : Any | None =  1) -> Function:
+    def UUIDToNum(uuid: Any, variant: Any | None = 1) -> Function:
         """
         UUIDToNum(uuid[, variant = 1])
 
@@ -1081,7 +1111,7 @@ class FunctionWrapper:
         Returns a binary representation of the UUID. [`FixedString(16)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("UUIDToNum", *to_args(locals()))
-    
+
     @staticmethod
     def UUIDv7ToDateTime(uuid: Any, timezone: Any | None = None) -> Function:
         """
@@ -1093,7 +1123,7 @@ class FunctionWrapper:
         Returns a timestamp with milliseconds precision. If the UUID is not a valid version 7 UUID, it returns `1970-01-01 00:00:00.000`. [`DateTime64(3)`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("UUIDv7ToDateTime", *to_args(locals()))
-    
+
     @staticmethod
     def YYYYMMDDToDate(YYYYMMDD: Any) -> Function:
         """
@@ -1104,7 +1134,7 @@ class FunctionWrapper:
         Returns a `Date` value from the provided arguments [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("YYYYMMDDToDate", *to_args(locals()))
-    
+
     @staticmethod
     def YYYYMMDDToDate32(YYYYMMDD: Any) -> Function:
         """
@@ -1115,9 +1145,11 @@ class FunctionWrapper:
         Returns a `Date32` value from the provided arguments [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32)
         """
         return Function("YYYYMMDDToDate32", *to_args(locals()))
-    
+
     @staticmethod
-    def YYYYMMDDhhmmssToDateTime(YYYYMMDDhhmmss: Any, timezone: Any | None = None) -> Function:
+    def YYYYMMDDhhmmssToDateTime(
+        YYYYMMDDhhmmss: Any, timezone: Any | None = None
+    ) -> Function:
         """
         YYYYMMDDhhmmssToDateTime(YYYYMMDDhhmmss[, timezone])
 
@@ -1127,9 +1159,11 @@ class FunctionWrapper:
         Returns a `DateTime` value from the provided arguments [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("YYYYMMDDhhmmssToDateTime", *to_args(locals()))
-    
+
     @staticmethod
-    def YYYYMMDDhhmmssToDateTime64(YYYYMMDDhhmmss: Any, precision: Any | None = None, timezone: Any | None = None) -> Function:
+    def YYYYMMDDhhmmssToDateTime64(
+        YYYYMMDDhhmmss: Any, precision: Any | None = None, timezone: Any | None = None
+    ) -> Function:
         """
         YYYYMMDDhhmmssToDateTime64(YYYYMMDDhhmmss[, precision[, timezone]])
 
@@ -1140,17 +1174,17 @@ class FunctionWrapper:
         Returns a `DateTime64` value from the provided arguments [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("YYYYMMDDhhmmssToDateTime64", *to_args(locals()))
-    
+
     @staticmethod
     def abs(x: Any) -> Function:
         """
         abs(x)
 
-        - `x` — Value to get the absolute value of 
+        - `x` — Value to get the absolute value of
         The absolute value of `x`
         """
         return Function("abs", *to_args(locals()))
-    
+
     @staticmethod
     def accurateCast(x: Any, T: Any) -> Function:
         """
@@ -1162,9 +1196,11 @@ class FunctionWrapper:
         Returns the converted value with the target data type. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("accurateCast", *to_args(locals()))
-    
+
     @staticmethod
-    def accurateCastOrDefault(x: Any, T: Any, default_value: Any | None = None) -> Function:
+    def accurateCastOrDefault(
+        x: Any, T: Any, default_value: Any | None = None
+    ) -> Function:
         """
         accurateCastOrDefault(x, T[, default_value])
 
@@ -1175,7 +1211,7 @@ class FunctionWrapper:
         Returns the converted value with the target data type, or the default value if conversion is not possible. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("accurateCastOrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def accurateCastOrNull(x: Any, T: Any) -> Function:
         """
@@ -1187,7 +1223,7 @@ class FunctionWrapper:
         Returns the converted value with the target data type, or `NULL` if conversion is not possible. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("accurateCastOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def acos(x: Any) -> Function:
         """
@@ -1198,7 +1234,7 @@ class FunctionWrapper:
         Returns the arc cosine of x [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("acos", *to_args(locals()))
-    
+
     @staticmethod
     def acosh(x: Any) -> Function:
         """
@@ -1209,7 +1245,7 @@ class FunctionWrapper:
         Returns the angle, in radians. Values from the interval: `0 ≤ acosh(x) < +∞`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("acosh", *to_args(locals()))
-    
+
     @staticmethod
     def addDate(datetime: Any, interval: Any) -> Function:
         """
@@ -1221,7 +1257,7 @@ class FunctionWrapper:
         Returns date or date with time obtained by adding `interval` to `datetime`. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("addDate", *to_args(locals()))
-    
+
     @staticmethod
     def addDays(datetime: Any, num: Any) -> Function:
         """
@@ -1233,7 +1269,7 @@ class FunctionWrapper:
         Returns `datetime` plus `num` days. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("addDays", *to_args(locals()))
-    
+
     @staticmethod
     def addHours(datetime: Any, num: Any) -> Function:
         """
@@ -1245,7 +1281,7 @@ class FunctionWrapper:
         Returns `datetime` plus `num` hours [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64(3)`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("addHours", *to_args(locals()))
-    
+
     @staticmethod
     def addInterval(interval_1: Any, interval_2: Any) -> Function:
         """
@@ -1257,7 +1293,7 @@ class FunctionWrapper:
         Returns a tuple of intervals [`Tuple(Interval)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("addInterval", *to_args(locals()))
-    
+
     @staticmethod
     def addMicroseconds(datetime: Any, num: Any) -> Function:
         """
@@ -1269,7 +1305,7 @@ class FunctionWrapper:
         Returns `date_time` plus `num` microseconds [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("addMicroseconds", *to_args(locals()))
-    
+
     @staticmethod
     def addMilliseconds(datetime: Any, num: Any) -> Function:
         """
@@ -1281,7 +1317,7 @@ class FunctionWrapper:
         Returns `datetime` plus `num` milliseconds [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("addMilliseconds", *to_args(locals()))
-    
+
     @staticmethod
     def addMinutes(datetime: Any, num: Any) -> Function:
         """
@@ -1293,7 +1329,7 @@ class FunctionWrapper:
         Returns `datetime` plus `num` minutes [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64(3)`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("addMinutes", *to_args(locals()))
-    
+
     @staticmethod
     def addMonths(datetime: Any, num: Any) -> Function:
         """
@@ -1305,7 +1341,7 @@ class FunctionWrapper:
         Returns `datetime` plus `num` months [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("addMonths", *to_args(locals()))
-    
+
     @staticmethod
     def addNanoseconds(datetime: Any, num: Any) -> Function:
         """
@@ -1317,7 +1353,7 @@ class FunctionWrapper:
         Returns `datetime` plus `num` nanoseconds [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("addNanoseconds", *to_args(locals()))
-    
+
     @staticmethod
     def addQuarters(datetime: Any, num: Any) -> Function:
         """
@@ -1329,7 +1365,7 @@ class FunctionWrapper:
         Returns `datetime` plus `num` quarters [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("addQuarters", *to_args(locals()))
-    
+
     @staticmethod
     def addSeconds(datetime: Any, num: Any) -> Function:
         """
@@ -1341,7 +1377,7 @@ class FunctionWrapper:
         Returns `datetime` plus `num` seconds [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64(3)`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("addSeconds", *to_args(locals()))
-    
+
     @staticmethod
     def addTupleOfIntervals(datetime: Any, intervals: Any) -> Function:
         """
@@ -1353,7 +1389,7 @@ class FunctionWrapper:
         Returns `date` with added `intervals` [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("addTupleOfIntervals", *to_args(locals()))
-    
+
     @staticmethod
     def addWeeks(datetime: Any, num: Any) -> Function:
         """
@@ -1365,7 +1401,7 @@ class FunctionWrapper:
         Returns `datetime` plus `num` weeks [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("addWeeks", *to_args(locals()))
-    
+
     @staticmethod
     def addYears(datetime: Any, num: Any) -> Function:
         """
@@ -1377,7 +1413,7 @@ class FunctionWrapper:
         Returns `datetime` plus `num` years [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("addYears", *to_args(locals()))
-    
+
     @staticmethod
     def addressToLine(address_of_binary_instruction: Any) -> Function:
         """
@@ -1388,7 +1424,7 @@ class FunctionWrapper:
         Returns a source code filename and line number delimited by a colon, for example, `/build/obj-x86_64-linux-gnu/../src/Common/ThreadPool.cpp:199`. Returns the name of a binary, if no debug information could be found, otherwise an empty string, if the address is not valid. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("addressToLine", *to_args(locals()))
-    
+
     @staticmethod
     def addressToLineWithInlines(address_of_binary_instruction: Any) -> Function:
         """
@@ -1399,7 +1435,7 @@ class FunctionWrapper:
         Returns an array whose first element is the source code filename and line number delimited by a colon. The second, third, etc. element list inline functions' source code filenames, line numbers and function names. If no debug information could be found, then an array with a single element equal to the name of the binary is returned, otherwise an empty array is returned if the address is not valid. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("addressToLineWithInlines", *to_args(locals()))
-    
+
     @staticmethod
     def addressToSymbol(address_of_binary_instruction: Any) -> Function:
         """
@@ -1410,9 +1446,11 @@ class FunctionWrapper:
         Returns the symbol from ClickHouse object files or an empty string, if the address is not valid. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("addressToSymbol", *to_args(locals()))
-    
+
     @staticmethod
-    def aes_decrypt_mysql(mode: Any, ciphertext: Any, key: Any, iv: Any | None = None) -> Function:
+    def aes_decrypt_mysql(
+        mode: Any, ciphertext: Any, key: Any, iv: Any | None = None
+    ) -> Function:
         """
         aes_decrypt_mysql(mode, ciphertext, key[, iv])
 
@@ -1424,9 +1462,11 @@ class FunctionWrapper:
         Returns the decrypted String. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("aes_decrypt_mysql", *to_args(locals()))
-    
+
     @staticmethod
-    def aes_encrypt_mysql(mode: Any, plaintext: Any, key: Any, iv: Any | None = None) -> Function:
+    def aes_encrypt_mysql(
+        mode: Any, plaintext: Any, key: Any, iv: Any | None = None
+    ) -> Function:
         """
         aes_encrypt_mysql(mode, plaintext, key[, iv])
 
@@ -1438,9 +1478,11 @@ class FunctionWrapper:
         Ciphertext binary string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("aes_encrypt_mysql", *to_args(locals()))
-    
+
     @staticmethod
-    def age(unit: Any, startdate: Any, enddate: Any, timezone: Any | None = None) -> Function:
+    def age(
+        unit: Any, startdate: Any, enddate: Any, timezone: Any | None = None
+    ) -> Function:
         """
         age('unit', startdate, enddate[, timezone])
 
@@ -1466,7 +1508,7 @@ class FunctionWrapper:
         Returns the difference between enddate and startdate expressed in unit. [`Int32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("age", *to_args(locals()))
-    
+
     @staticmethod
     def aggThrow(throw_prob: Any) -> Function:
         """
@@ -1477,7 +1519,7 @@ class FunctionWrapper:
         Returns an exception: `Code: 503. DB::Exception: Aggregate function aggThrow has thrown exception successfully`.
         """
         return Function("aggThrow", *to_args(locals()))
-    
+
     @staticmethod
     def alphaTokens(s: Any, max_substrings: Any | None = None) -> Function:
         """
@@ -1489,7 +1531,7 @@ class FunctionWrapper:
         Returns an array of selected substrings of `s`. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("alphaTokens", *to_args(locals()))
-    
+
     @staticmethod
     def analysisOfVariance(val: Any, group_no: Any) -> Function:
         """
@@ -1501,7 +1543,7 @@ class FunctionWrapper:
         Returns a tuple with the F-statistic and p-value. [`Tuple(Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("analysisOfVariance", *to_args(locals()))
-    
+
     @staticmethod
     def and_(val1: Any, val2: Any) -> Function:
         """
@@ -1516,7 +1558,7 @@ class FunctionWrapper:
                  [`Nullable(UInt8)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("and", *to_args(locals()))
-    
+
     @staticmethod
     def any(column: Any) -> Function:
         """
@@ -1528,7 +1570,7 @@ class FunctionWrapper:
              [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("any", *to_args(locals()))
-    
+
     @staticmethod
     def anyHeavy(column: Any) -> Function:
         """
@@ -1539,7 +1581,7 @@ class FunctionWrapper:
         Returns a frequently occurring value. The result is nondeterministic. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("anyHeavy", *to_args(locals()))
-    
+
     @staticmethod
     def anyLast(column: Any) -> Function:
         """
@@ -1550,27 +1592,17 @@ class FunctionWrapper:
         Returns the last value encountered. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("anyLast", *to_args(locals()))
-    
+
     @staticmethod
     def anyLast_respect_nulls(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("anyLast_respect_nulls", *to_args(locals()))
-    
+
     @staticmethod
     def any_respect_nulls(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("any_respect_nulls", *to_args(locals()))
-    
+
     @staticmethod
     def appendTrailingCharIfAbsent(s: Any, c: Any) -> Function:
         """
@@ -1582,7 +1614,7 @@ class FunctionWrapper:
         Returns string `s` with character `c` appended if `s` does not end with `c`. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("appendTrailingCharIfAbsent", *to_args(locals()))
-    
+
     @staticmethod
     def approx_top_k(N: Any, reserved: Any | None = None) -> Function:
         """
@@ -1593,7 +1625,7 @@ class FunctionWrapper:
         Returns an array of the approximately most frequent values and their counts, sorted in descending order of approximate frequency. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("approx_top_k", *to_args(locals()))
-    
+
     @staticmethod
     def approx_top_sum(N: Any, reserved: Any | None = None) -> Function:
         """
@@ -1605,7 +1637,7 @@ class FunctionWrapper:
         Returns an array of the approximately most frequent values and their counts, sorted in descending order of approximate frequency. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("approx_top_sum", *to_args(locals()))
-    
+
     @staticmethod
     def areaCartesian(object: Any) -> Function:
         """
@@ -1616,7 +1648,7 @@ class FunctionWrapper:
         Returns the area of the object. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("areaCartesian", *to_args(locals()))
-    
+
     @staticmethod
     def areaSpherical(object: Any) -> Function:
         """
@@ -1627,7 +1659,7 @@ class FunctionWrapper:
         Returns the area of the object. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("areaSpherical", *to_args(locals()))
-    
+
     @staticmethod
     def argAndMax(arg: Any, val: Any) -> Function:
         """
@@ -1639,7 +1671,7 @@ class FunctionWrapper:
         Returns a tuple containing the `arg` value that corresponds to maximum `val` value and the maximum `val` value. [`Tuple`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("argAndMax", *to_args(locals()))
-    
+
     @staticmethod
     def argAndMin(arg: Any, val: Any) -> Function:
         """
@@ -1651,7 +1683,7 @@ class FunctionWrapper:
         Returns a tuple containing the `arg` value that corresponds to minimum `val` value and the minimum `val` value. [`Tuple`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("argAndMin", *to_args(locals()))
-    
+
     @staticmethod
     def argMax(arg: Any, val: Any) -> Function:
         """
@@ -1663,7 +1695,7 @@ class FunctionWrapper:
         Returns the `arg` value that corresponds to maximum `val` value. Type matches `arg` type.
         """
         return Function("argMax", *to_args(locals()))
-    
+
     @staticmethod
     def argMin(arg: Any, val: Any) -> Function:
         """
@@ -1675,25 +1707,27 @@ class FunctionWrapper:
         Returns the `arg` value that corresponds to minimum `val` value. Type matches `arg` type.
         """
         return Function("argMin", *to_args(locals()))
-    
+
     @staticmethod
     def array(x1: Any, x2: Any | None = None, xN: Any | None = None) -> Function:
         """
         array(x1 [, x2, ..., xN])
 
-        - `x1` — Constant value of any type T. If only this argument is provided, the array will be of type T. - `[, x2, ..., xN]` — Additional N constant values sharing a common supertype with `x1` 
+        - `x1` — Constant value of any type T. If only this argument is provided, the array will be of type T. - `[, x2, ..., xN]` — Additional N constant values sharing a common supertype with `x1`
         Returns an array, where 'T' is the smallest common type out of the passed arguments. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("array", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayAUCPR(scores: Any, labels: Any, partial_offsets: Any | None = None) -> Function:
+    def arrayAUCPR(
+        scores: Any, labels: Any, partial_offsets: Any | None = None
+    ) -> Function:
         """
         arrayAUCPR(scores, labels[, partial_offsets])
 
         - `cores` — Scores prediction model gives. [`Array((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Array(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         - `labels` — Labels of samples, usually 1 for positive sample and 0 for negative sample. [`Array((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Array(Enum)`](https://clickhouse.com/docs/sql-reference/data-types/array)
-        - `partial_offsets` — 
+        - `partial_offsets` —
         - Optional. An [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array) of three non-negative integers for calculating a partial area under the PR curve (equivalent to a vertical band of the PR space) instead of the whole AUC. This option is useful for distributed computation of the PR AUC. The array must contain the following elements [`higher_partitions_tp`, `higher_partitions_fp`, `total_positives`].
             - `higher_partitions_tp`: The number of positive labels in the higher-scored partitions.
             - `higher_partitions_fp`: The number of negative labels in the higher-scored partitions.
@@ -1706,13 +1740,15 @@ class FunctionWrapper:
         - One partition could contain all scores in the range [0, 0.5).
         - Another partition could contain scores in the range [0.5, 1.0].
 
-         
+
         Returns area under the precision-recall (PR) curve. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("arrayAUCPR", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayAll(func: Any, x: Any, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayAll(
+        func: Any, x: Any, y1: Any | None = None, yN: Any | None = None
+    ) -> Function:
         """
         arrayAll(func(x[, y1, ..., yN]), source_arr[, cond1_arr, ... , condN_arr])
 
@@ -1723,9 +1759,14 @@ class FunctionWrapper:
         Returns `1` if the lambda function returns true for all elements, `0` otherwise [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("arrayAll", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayAvg(func: Any | None = None, x: Any | None = None, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayAvg(
+        func: Any | None = None,
+        x: Any | None = None,
+        y1: Any | None = None,
+        yN: Any | None = None,
+    ) -> Function:
         """
         arrayAvg([func(x[, y1, ..., yN])], source_arr[, cond1_arr, ... , condN_arr])
 
@@ -1736,7 +1777,7 @@ class FunctionWrapper:
         Returns the average of elements in the source array, or the average of elements of the lambda results if provided. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("arrayAvg", *to_args(locals()))
-    
+
     @staticmethod
     def arrayCompact(arr: Any) -> Function:
         """
@@ -1747,9 +1788,11 @@ class FunctionWrapper:
         Returns an array without duplicate values [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayCompact", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayConcat(arr1: Any, arr2: Any | None = None, arrN: Any | None = None) -> Function:
+    def arrayConcat(
+        arr1: Any, arr2: Any | None = None, arrN: Any | None = None
+    ) -> Function:
         """
         arrayConcat(arr1 [, arr2, ... , arrN])
 
@@ -1758,7 +1801,7 @@ class FunctionWrapper:
         Returns a single combined array from the provided array arguments. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayConcat", *to_args(locals()))
-    
+
     @staticmethod
     def arrayCount(func: Any | None = None, arr1: Any | None = None) -> Function:
         """
@@ -1770,9 +1813,14 @@ class FunctionWrapper:
         Returns the number of elements for which `func` returns true. Otherwise, returns the number of non-zero elements in the array. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("arrayCount", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayCumSum(func: Any | None = None, arr1: Any | None = None, arr2: Any | None = None, arrN: Any | None = None) -> Function:
+    def arrayCumSum(
+        func: Any | None = None,
+        arr1: Any | None = None,
+        arr2: Any | None = None,
+        arrN: Any | None = None,
+    ) -> Function:
         """
         arrayCumSum([func,] arr1[, arr2, ... , arrN])
 
@@ -1783,9 +1831,14 @@ class FunctionWrapper:
         Returns an array of the partial sums of the elements in the source array. The result type matches the input array's numeric type. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayCumSum", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayCumSumNonNegative(func: Any | None = None, arr1: Any | None = None, arr2: Any | None = None, arrN: Any | None = None) -> Function:
+    def arrayCumSumNonNegative(
+        func: Any | None = None,
+        arr1: Any | None = None,
+        arr2: Any | None = None,
+        arrN: Any | None = None,
+    ) -> Function:
         """
         arrayCumSumNonNegative([func,] arr1[, arr2, ... , arrN])
 
@@ -1796,7 +1849,7 @@ class FunctionWrapper:
         Returns an array of the partial sums of the elements in the source array, with any negative running sum replaced by zero. The result type matches the input array's numeric type. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayCumSumNonNegative", *to_args(locals()))
-    
+
     @staticmethod
     def arrayDifference(arr: Any) -> Function:
         """
@@ -1807,7 +1860,7 @@ class FunctionWrapper:
         Returns an array of differences between adjacent array elements [`UInt*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("arrayDifference", *to_args(locals()))
-    
+
     @staticmethod
     def arrayDistinct(arr: Any) -> Function:
         """
@@ -1818,7 +1871,7 @@ class FunctionWrapper:
         Returns an array containing the distinct elements [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayDistinct", *to_args(locals()))
-    
+
     @staticmethod
     def arrayDotProduct(v1: Any, v2: Any) -> Function:
         """
@@ -1836,17 +1889,17 @@ class FunctionWrapper:
          [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Decimal`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("arrayDotProduct", *to_args(locals()))
-    
+
     @staticmethod
     def arrayElement(arr: Any, n: Any) -> Function:
         """
         arrayElement(arr, n)
 
-        - `arr` — The array to search. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `n` — Position of the element to get. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint). 
+        - `arr` — The array to search. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `n` — Position of the element to get. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint).
         Returns a single combined array from the provided array arguments [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayElement", *to_args(locals()))
-    
+
     @staticmethod
     def arrayElementOrNull(arrays: Any) -> Function:
         """
@@ -1857,7 +1910,7 @@ class FunctionWrapper:
         Returns a single combined array from the provided array arguments. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayElementOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def arrayEnumerate(arr: Any) -> Function:
         """
@@ -1868,7 +1921,7 @@ class FunctionWrapper:
         Returns the array `[1, 2, 3, ..., length (arr)]`. [`Array(UInt32)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayEnumerate", *to_args(locals()))
-    
+
     @staticmethod
     def arrayEnumerateDense(arr: Any) -> Function:
         """
@@ -1879,9 +1932,11 @@ class FunctionWrapper:
         Returns an array of the same size as `arr`, indicating where each element first appears in the source array [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayEnumerateDense", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayEnumerateDenseRanked(clear_depth: Any, arr: Any, max_array_depth: Any) -> Function:
+    def arrayEnumerateDenseRanked(
+        clear_depth: Any, arr: Any, max_array_depth: Any
+    ) -> Function:
         """
         arrayEnumerateDenseRanked(clear_depth, arr, max_array_depth)
 
@@ -1892,9 +1947,11 @@ class FunctionWrapper:
         Returns an array denoting where each element first appears in the source array [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayEnumerateDenseRanked", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayEnumerateUniq(arr1: Any, arr2: Any | None = None, arrN: Any | None = None) -> Function:
+    def arrayEnumerateUniq(
+        arr1: Any, arr2: Any | None = None, arrN: Any | None = None
+    ) -> Function:
         """
         arrayEnumerateUniq(arr1[, arr2, ... , arrN])
 
@@ -1904,9 +1961,11 @@ class FunctionWrapper:
         Returns an array where each element is the position among elements with the same value or tuple. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayEnumerateUniq", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayEnumerateUniqRanked(clear_depth: Any, arr: Any, max_array_depth: Any) -> Function:
+    def arrayEnumerateUniqRanked(
+        clear_depth: Any, arr: Any, max_array_depth: Any
+    ) -> Function:
         """
         arrayEnumerateUniqRanked(clear_depth, arr, max_array_depth)
 
@@ -1917,7 +1976,7 @@ class FunctionWrapper:
         Returns an N-dimensional array the same size as `arr` with each element showing the position of that element in relation to other elements of the same value. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayEnumerateUniqRanked", *to_args(locals()))
-    
+
     @staticmethod
     def arrayExcept(source: Any, except_: Any) -> Function:
         """
@@ -1929,9 +1988,11 @@ class FunctionWrapper:
         Returns an array of the same type as the input array containing elements from `source` that weren't found in `except`.  [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayExcept", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayExists(func: Any, x: Any, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayExists(
+        func: Any, x: Any, y1: Any | None = None, yN: Any | None = None
+    ) -> Function:
         """
         arrayExists(func(x[, y1, ..., yN]), source_arr[, cond1_arr, ... , condN_arr])
 
@@ -1942,9 +2003,11 @@ class FunctionWrapper:
         Returns `1` if the lambda function returns true for at least one element, `0` otherwise [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("arrayExists", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayFill(func: Any, x: Any, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayFill(
+        func: Any, x: Any, y1: Any | None = None, yN: Any | None = None
+    ) -> Function:
         """
         arrayFill(func(x [, y1, ..., yN]), source_arr[, cond1_arr, ... , condN_arr])
 
@@ -1955,9 +2018,11 @@ class FunctionWrapper:
         Returns an array [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayFill", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayFilter(func: Any, x: Any, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayFilter(
+        func: Any, x: Any, y1: Any | None = None, yN: Any | None = None
+    ) -> Function:
         """
         arrayFilter(func(x[, y1, ..., yN]), source_arr[, cond1_arr, ... , condN_arr])]
 
@@ -1968,29 +2033,35 @@ class FunctionWrapper:
         Returns a subset of the source array [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayFilter", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayFirst(func: Any, x: Any, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayFirst(
+        func: Any, x: Any, y1: Any | None = None, yN: Any | None = None
+    ) -> Function:
         """
         arrayFirst(func(x[, y1, ..., yN]), source_arr[, cond1_arr, ... , condN_arr])
 
-        - `func(x[, y1, ..., yN])` — A lambda function which operates on elements of the source array (`x`) and condition arrays (`y`). [Lambda function](https://clickhouse.com/docs/sql-reference/functions/overview#arrow-operator-and-lambda). - `source_arr` — The source array to process. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `[, cond1_arr, ... , condN_arr]` — Optional. N condition arrays providing additional arguments to the lambda function. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). 
+        - `func(x[, y1, ..., yN])` — A lambda function which operates on elements of the source array (`x`) and condition arrays (`y`). [Lambda function](https://clickhouse.com/docs/sql-reference/functions/overview#arrow-operator-and-lambda). - `source_arr` — The source array to process. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `[, cond1_arr, ... , condN_arr]` — Optional. N condition arrays providing additional arguments to the lambda function. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array).
         Returns the first element of the source array for which `λ` is true, otherwise returns the default value of `T`.
         """
         return Function("arrayFirst", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayFirstIndex(func: Any, x: Any, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayFirstIndex(
+        func: Any, x: Any, y1: Any | None = None, yN: Any | None = None
+    ) -> Function:
         """
         arrayFirstIndex(func(x[, y1, ..., yN]), source_arr[, cond1_arr, ... , condN_arr])
 
-        - `func(x[, y1, ..., yN])` — A lambda function which operates on elements of the source array (`x`) and condition arrays (`y`). [Lambda function](https://clickhouse.com/docs/sql-reference/functions/overview#arrow-operator-and-lambda). - `source_arr` — The source array to process. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `[, cond1_arr, ... , condN_arr]` — Optional. N condition arrays providing additional arguments to the lambda function. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). 
+        - `func(x[, y1, ..., yN])` — A lambda function which operates on elements of the source array (`x`) and condition arrays (`y`). [Lambda function](https://clickhouse.com/docs/sql-reference/functions/overview#arrow-operator-and-lambda). - `source_arr` — The source array to process. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `[, cond1_arr, ... , condN_arr]` — Optional. N condition arrays providing additional arguments to the lambda function. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array).
         Returns the index of the first element of the source array for which `func` is true, otherwise returns `0` [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("arrayFirstIndex", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayFirstOrNull(func: Any, x: Any, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayFirstOrNull(
+        func: Any, x: Any, y1: Any | None = None, yN: Any | None = None
+    ) -> Function:
         """
         arrayFirstOrNull(func(x[, y1, ..., yN]), source_arr[, cond1_arr, ... , condN_arr])
 
@@ -2001,7 +2072,7 @@ class FunctionWrapper:
         Returns the first element of the source array for which `func` is true, otherwise returns `NULL`.
         """
         return Function("arrayFirstOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def arrayFlatten(arr: Any) -> Function:
         """
@@ -2012,29 +2083,36 @@ class FunctionWrapper:
         Returns a flattened array from the multidimensional array [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayFlatten", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayFold(λ: Any, acc: Any, x1: Any, x2: Any | None = None, x3: Any | None = None, xN: Any | None = None) -> Function:
+    def arrayFold(
+        λ: Any,
+        acc: Any,
+        x1: Any,
+        x2: Any | None = None,
+        x3: Any | None = None,
+        xN: Any | None = None,
+    ) -> Function:
         """
         arrayFold(λ(acc, x1 [, x2, x3, ... xN]), arr1 [, arr2, arr3, ... arrN], acc)
 
         - `λ(x, x1 [, x2, x3, ... xN])` — A lambda function `λ(acc, x1 [, x2, x3, ... xN]) → F(acc, x1 [, x2, x3, ... xN])` where `F` is an operation applied to `acc` and array values from `x` with the result of `acc` re-used. [`Lambda function`](https://clickhouse.com/docs/sql-reference/functions/overview#arrow-operator-and-lambda)
         - `arr1 [, arr2, arr3, ... arrN]` — N arrays over which to operate. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
-        - `acc` — Accumulator value with the same type as the return type of the Lambda function. 
+        - `acc` — Accumulator value with the same type as the return type of the Lambda function.
         Returns the final `acc` value.
         """
         return Function("arrayFold", *to_args(locals()))
-    
+
     @staticmethod
     def arrayIntersect(arr: Any, arr1: Any, arrN: Any) -> Function:
         """
         arrayIntersect(arr, arr1, ..., arrN)
 
-        - `arrN` — N arrays from which to make the new array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). 
+        - `arrN` — N arrays from which to make the new array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array).
         Returns an array with distinct elements that are present in all N arrays [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayIntersect", *to_args(locals()))
-    
+
     @staticmethod
     def arrayJaccardIndex(arr_x: Any, arr_y: Any) -> Function:
         """
@@ -2046,7 +2124,7 @@ class FunctionWrapper:
         Returns the Jaccard index of `arr_x` and `arr_y` [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("arrayJaccardIndex", *to_args(locals()))
-    
+
     @staticmethod
     def arrayJoin(arr: Any) -> Function:
         """
@@ -2057,19 +2135,23 @@ class FunctionWrapper:
         Returns a set of rows unfolded from `arr`.
         """
         return Function("arrayJoin", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayLast(func: Any, x: Any, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayLast(
+        func: Any, x: Any, y1: Any | None = None, yN: Any | None = None
+    ) -> Function:
         """
         arrayLast(func(x[, y1, ..., yN]), source[, cond1, ... , condN_arr])
 
-        - `func(x[, y1, ..., yN])` — A lambda function which operates on elements of the source array (`x`) and condition arrays (`y`). [Lambda function](https://clickhouse.com/docs/sql-reference/functions/overview#arrow-operator-and-lambda). - `source` — The source array to process. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `[, cond1, ... , condN]` — Optional. N condition arrays providing additional arguments to the lambda function. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). 
+        - `func(x[, y1, ..., yN])` — A lambda function which operates on elements of the source array (`x`) and condition arrays (`y`). [Lambda function](https://clickhouse.com/docs/sql-reference/functions/overview#arrow-operator-and-lambda). - `source` — The source array to process. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `[, cond1, ... , condN]` — Optional. N condition arrays providing additional arguments to the lambda function. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array).
         Returns the last element of the source array for which `func` is true, otherwise returns the default value of `T`.
         """
         return Function("arrayLast", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayLastIndex(func: Any, x: Any, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayLastIndex(
+        func: Any, x: Any, y1: Any | None = None, yN: Any | None = None
+    ) -> Function:
         """
         arrayLastIndex(func(x[, y1, ..., yN]), source_arr[, cond1_arr, ... , condN_arr])
 
@@ -2080,29 +2162,33 @@ class FunctionWrapper:
         Returns the index of the last element of the source array for which `func` is true, otherwise returns `0` [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("arrayLastIndex", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayLastOrNull(func: Any, x: Any, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayLastOrNull(
+        func: Any, x: Any, y1: Any | None = None, yN: Any | None = None
+    ) -> Function:
         """
         arrayLastOrNull(func(x[, y1, ..., yN]), source_arr[, cond1_arr, ... , condN_arr])
 
-        - `func(x [, y1, ..., yN])` — A lambda function which operates on elements of the source array (`x`) and condition arrays (`y`). [Lambda function](https://clickhouse.com/docs/sql-reference/functions/overview#arrow-operator-and-lambda). - `source_arr` — The source array to process. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `[, cond1_arr, ... , condN_arr]` — Optional. N condition arrays providing additional arguments to the lambda function. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). 
+        - `func(x [, y1, ..., yN])` — A lambda function which operates on elements of the source array (`x`) and condition arrays (`y`). [Lambda function](https://clickhouse.com/docs/sql-reference/functions/overview#arrow-operator-and-lambda). - `source_arr` — The source array to process. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `[, cond1_arr, ... , condN_arr]` — Optional. N condition arrays providing additional arguments to the lambda function. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array).
         Returns the last element of the source array for which `λ` is not true, otherwise returns `NULL`.
         """
         return Function("arrayLastOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def arrayLevenshteinDistance(from_: Any, to: Any) -> Function:
         """
         arrayLevenshteinDistance(from, to)
 
-        - `from` — The first array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `to` — The second array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). 
+        - `from` — The first array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `to` — The second array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array).
         Levenshtein distance between the first and the second arrays. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("arrayLevenshteinDistance", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayLevenshteinDistanceWeighted(from_: Any, to: Any, from_weights: Any, to_weights: Any) -> Function:
+    def arrayLevenshteinDistanceWeighted(
+        from_: Any, to: Any, from_weights: Any, to_weights: Any
+    ) -> Function:
         """
         arrayLevenshteinDistanceWeighted(from, to, from_weights, to_weights)
 
@@ -2112,7 +2198,7 @@ class FunctionWrapper:
         Levenshtein distance between the first and the second arrays with custom weights for each element [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("arrayLevenshteinDistanceWeighted", *to_args(locals()))
-    
+
     @staticmethod
     def arrayMap(func: Any, arr: Any) -> Function:
         """
@@ -2124,9 +2210,14 @@ class FunctionWrapper:
         Returns an array from the lambda results [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayMap", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayMax(func: Any | None = None, x: Any | None = None, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayMax(
+        func: Any | None = None,
+        x: Any | None = None,
+        y1: Any | None = None,
+        yN: Any | None = None,
+    ) -> Function:
         """
         arrayMax([func(x[, y1, ..., yN])], source_arr[, cond1_arr, ... , condN_arr])
 
@@ -2137,9 +2228,14 @@ class FunctionWrapper:
         Returns the maximum element in the source array, or the maximum element of the lambda results if provided.
         """
         return Function("arrayMax", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayMin(func: Any | None = None, x: Any | None = None, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayMin(
+        func: Any | None = None,
+        x: Any | None = None,
+        y1: Any | None = None,
+        yN: Any | None = None,
+    ) -> Function:
         """
         arrayMin([func(x[, y1, ..., yN])], source_arr[, cond1_arr, ... , condN_arr])
 
@@ -2150,7 +2246,7 @@ class FunctionWrapper:
         Returns the minimum element in the source array, or the minimum element of the lambda results if provided.
         """
         return Function("arrayMin", *to_args(locals()))
-    
+
     @staticmethod
     def arrayNormalizedGini(predicted: Any, label: Any) -> Function:
         """
@@ -2162,9 +2258,15 @@ class FunctionWrapper:
         A tuple containing the Gini coefficients of the predicted values, the Gini coefficient of the normalized values, and the normalized Gini coefficient (= the ratio of the former two Gini coefficients) [`Tuple(Float64, Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("arrayNormalizedGini", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayPartialReverseSort(f: Any | None = None, arr: Any | None = None, arr1: Any | None = None, arrN: Any | None = None, limit: Any | None = None) -> Function:
+    def arrayPartialReverseSort(
+        f: Any | None = None,
+        arr: Any | None = None,
+        arr1: Any | None = None,
+        arrN: Any | None = None,
+        limit: Any | None = None,
+    ) -> Function:
         """
         arrayPartialReverseSort([f,] arr [, arr1, ... ,arrN], limit)
 
@@ -2177,9 +2279,11 @@ class FunctionWrapper:
         in descending order. The remaining elements `(limit..N]` are in an unspecified order.
         """
         return Function("arrayPartialReverseSort", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayPartialShuffle(arr: Any, limit: Any | None = None, seed: Any | None = None) -> Function:
+    def arrayPartialShuffle(
+        arr: Any, limit: Any | None = None, seed: Any | None = None
+    ) -> Function:
         """
         arrayPartialShuffle(arr [, limit[, seed]])
 
@@ -2190,9 +2294,15 @@ class FunctionWrapper:
         Array with elements partially shuffled. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayPartialShuffle", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayPartialSort(f: Any | None = None, arr: Any | None = None, arr1: Any | None = None, arrN: Any | None = None, limit: Any | None = None) -> Function:
+    def arrayPartialSort(
+        f: Any | None = None,
+        arr: Any | None = None,
+        arr1: Any | None = None,
+        arrN: Any | None = None,
+        limit: Any | None = None,
+    ) -> Function:
         """
         arrayPartialSort([f,] arr [, arr1, ... ,arrN], limit)
 
@@ -2205,7 +2315,7 @@ class FunctionWrapper:
         in ascending order. The remaining elements `(limit..N]` are in an unspecified order.
         """
         return Function("arrayPartialSort", *to_args(locals()))
-    
+
     @staticmethod
     def arrayPopBack(arr: Any) -> Function:
         """
@@ -2216,7 +2326,7 @@ class FunctionWrapper:
         Returns an array identical to `arr` but without the last element of `arr` [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayPopBack", *to_args(locals()))
-    
+
     @staticmethod
     def arrayPopFront(arr: Any) -> Function:
         """
@@ -2227,9 +2337,14 @@ class FunctionWrapper:
         Returns an array identical to `arr` but without the first element of `arr` [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayPopFront", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayProduct(func: Any | None = None, x: Any | None = None, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayProduct(
+        func: Any | None = None,
+        x: Any | None = None,
+        y1: Any | None = None,
+        yN: Any | None = None,
+    ) -> Function:
         """
         arrayProduct([func(x[, y1, ..., yN])], source_arr[, cond1_arr, ... , condN_arr])
 
@@ -2240,14 +2355,14 @@ class FunctionWrapper:
         Returns the product of elements in the source array, or the product of elements of the lambda results if provided. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("arrayProduct", *to_args(locals()))
-    
+
     @staticmethod
     def arrayPushBack(arr: Any, x: Any) -> Function:
         """
         arrayPushBack(arr, x)
 
         - `arr` — The array for which to add value `x` to the end of. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
-        - `x` — 
+        - `x` —
         - Single value to add to the end of the array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array).
 
         note
@@ -2257,17 +2372,17 @@ class FunctionWrapper:
 
         For more information about the types of data in ClickHouse, see [Data types](https://clickhouse.com/docs/sql-reference/data-types).
 
-             
+
         Returns an array identical to `arr` but with an additional value `x` at the end of the array [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayPushBack", *to_args(locals()))
-    
+
     @staticmethod
     def arrayPushFront(arr: Any, x: Any) -> Function:
         """
         arrayPushFront(arr, x)
 
-        - `arr` — The array for which to add value `x` to the end of. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `x` — 
+        - `arr` — The array for which to add value `x` to the end of. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `x` —
         - Single value to add to the start of the array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array).
 
         note
@@ -2277,20 +2392,25 @@ class FunctionWrapper:
 
         For more information about the types of data in ClickHouse, see [Data types](https://clickhouse.com/docs/sql-reference/data-types).
 
-             
+
         Returns an array identical to `arr` but with an additional value `x` at the beginning of the array [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayPushFront", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayROCAUC(scores: Any, labels: Any, scale: Any | None = None, partial_offsets: Any | None = None) -> Function:
+    def arrayROCAUC(
+        scores: Any,
+        labels: Any,
+        scale: Any | None = None,
+        partial_offsets: Any | None = None,
+    ) -> Function:
         """
         arrayROCAUC(scores, labels[, scale[, partial_offsets]])
 
         - `scores` — Scores prediction model gives. [`Array((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Array(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         - `labels` — Labels of samples, usually 1 for positive sample and 0 for negative sample. [`Array((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Enum`](https://clickhouse.com/docs/sql-reference/data-types/enum)
         - `scale` — Optional. Decides whether to return the normalized area. If false, returns the area under the TP (true positives) x FP (false positives) curve instead. Default value: true. [`Bool`](https://clickhouse.com/docs/sql-reference/data-types/boolean)
-        - `partial_offsets` — 
+        - `partial_offsets` —
         - An array of four non-negative integers for calculating a partial area under the ROC curve (equivalent to a vertical band of the ROC space) instead of the whole AUC. This option is useful for distributed computation of the ROC AUC. The array must contain the following elements [`higher_partitions_tp`, `higher_partitions_fp`, `total_positives`, `total_negatives`]. [Array](https://clickhouse.com/docs/sql-reference/data-types/array) of non-negative [Integers](../data-types/int-uint.md). Optional.
             - `higher_partitions_tp`: The number of positive labels in the higher-scored partitions.
             - `higher_partitions_fp`: The number of negative labels in the higher-scored partitions.
@@ -2304,11 +2424,11 @@ class FunctionWrapper:
         - One partition could contain all scores in the range [0, 0.5).
         - Another partition could contain scores in the range [0.5, 1.0].
 
-         
+
         Returns area under the receiver operating characteristic (ROC) curve. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("arrayROCAUC", *to_args(locals()))
-    
+
     @staticmethod
     def arrayRandomSample(arr: Any, samples: Any) -> Function:
         """
@@ -2320,9 +2440,11 @@ class FunctionWrapper:
         An array containing a random sample of elements from the input array [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayRandomSample", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayReduce(agg_f: Any, arr1: Any, arr2: Any | None = None, arrN: Any | None = None) -> Function:
+    def arrayReduce(
+        agg_f: Any, arr1: Any, arr2: Any | None = None, arrN: Any | None = None
+    ) -> Function:
         """
         arrayReduce(agg_f, arr1 [, arr2, ... , arrN)])
 
@@ -2332,9 +2454,15 @@ class FunctionWrapper:
         Returns the result of the aggregate function
         """
         return Function("arrayReduce", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayReduceInRanges(agg_f: Any, ranges: Any, arr1: Any, arr2: Any | None = None, arrN: Any | None = None) -> Function:
+    def arrayReduceInRanges(
+        agg_f: Any,
+        ranges: Any,
+        arr1: Any,
+        arr2: Any | None = None,
+        arrN: Any | None = None,
+    ) -> Function:
         """
         arrayReduceInRanges(agg_f, ranges, arr1 [, arr2, ... ,arrN)])
 
@@ -2345,32 +2473,32 @@ class FunctionWrapper:
         Returns an array containing results of the aggregate function over the specified ranges [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayReduceInRanges", *to_args(locals()))
-    
+
     @staticmethod
     def arrayRemove(arr: Any, elem: Any) -> Function:
         """
         arrayRemove(arr, elem)
 
-        - `arr` — Array(T) - `elem` — T 
+        - `arr` — Array(T) - `elem` — T
         Returns a subset of the source array [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayRemove", *to_args(locals()))
-    
+
     @staticmethod
     def arrayResize(arr: Any, size: Any, extender: Any | None = None) -> Function:
         """
         arrayResize(arr, size[, extender])
 
         - `arr` — Array to resize. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
-        - `size` — 
+        - `size` —
         -The new length of the array.
         If `size` is less than the original size of the array, the array is truncated from the right.
         If `size` is larger than the initial size of the array, the array is extended to the right with `extender` values or default values for the data type of the array items.
-         - `extender` — Value to use for extending the array. Can be `NULL`. 
+         - `extender` — Value to use for extending the array. Can be `NULL`.
         An array of length `size`. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayResize", *to_args(locals()))
-    
+
     @staticmethod
     def arrayReverse(arr: Any) -> Function:
         """
@@ -2381,9 +2509,11 @@ class FunctionWrapper:
         Returns an array of the same size as the original array containing the elements in reverse order [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayReverse", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayReverseFill(func: Any, x: Any, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayReverseFill(
+        func: Any, x: Any, y1: Any | None = None, yN: Any | None = None
+    ) -> Function:
         """
         arrayReverseFill(func(x[, y1, ..., yN]), source_arr[, cond1_arr, ... , condN_arr])
 
@@ -2394,20 +2524,27 @@ class FunctionWrapper:
         Returns an array with elements of the source array replaced by the results of the lambda. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayReverseFill", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayReverseSort(f: Any | None = None, arr: Any | None = None, arr1: Any | None = None, arrN: Any | None = None) -> Function:
+    def arrayReverseSort(
+        f: Any | None = None,
+        arr: Any | None = None,
+        arr1: Any | None = None,
+        arrN: Any | None = None,
+    ) -> Function:
         """
         arrayReverseSort([f,] arr [, arr1, ... ,arrN)
 
-        - `f(y1[, y2 ... yN])` — The lambda function to apply to elements of array `x`. - `arr` — An array to be sorted. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array) - `arr1, ..., yN` — Optional. N additional arrays, in the case when `f` accepts multiple arguments. 
+        - `f(y1[, y2 ... yN])` — The lambda function to apply to elements of array `x`. - `arr` — An array to be sorted. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array) - `arr1, ..., yN` — Optional. N additional arrays, in the case when `f` accepts multiple arguments.
         Returns the array `x` sorted in descending order if no lambda function is provided, otherwise
         it returns an array sorted according to the logic of the provided lambda function, and then reversed. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array).
         """
         return Function("arrayReverseSort", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayReverseSplit(func: Any, x: Any, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arrayReverseSplit(
+        func: Any, x: Any, y1: Any | None = None, yN: Any | None = None
+    ) -> Function:
         """
         arrayReverseSplit(func(x[, y1, ..., yN]), source_arr[, cond1_arr, ... , condN_arr])
 
@@ -2418,37 +2555,37 @@ class FunctionWrapper:
         Returns an array of arrays. [`Array(Array(T))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayReverseSplit", *to_args(locals()))
-    
+
     @staticmethod
     def arrayRotateLeft(arr: Any, n: Any) -> Function:
         """
         arrayRotateLeft(arr, n)
 
-        - `arr` — The array for which to rotate the elements.[`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `n` — Number of elements to rotate. [`(U)Int8/16/32/64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint). 
+        - `arr` — The array for which to rotate the elements.[`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `n` — Number of elements to rotate. [`(U)Int8/16/32/64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint).
         An array rotated to the left by the specified number of elements [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayRotateLeft", *to_args(locals()))
-    
+
     @staticmethod
     def arrayRotateRight(arr: Any, n: Any) -> Function:
         """
         arrayRotateRight(arr, n)
 
-        - `arr` — The array for which to rotate the elements.[`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `n` — Number of elements to rotate. [`(U)Int8/16/32/64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint). 
+        - `arr` — The array for which to rotate the elements.[`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `n` — Number of elements to rotate. [`(U)Int8/16/32/64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint).
         An array rotated to the right by the specified number of elements [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayRotateRight", *to_args(locals()))
-    
+
     @staticmethod
     def arrayShiftLeft(arr: Any, n: Any, default: Any | None = None) -> Function:
         """
         arrayShiftLeft(arr, n[, default])
 
-        - `arr` — The array for which to shift the elements.[`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `n` — Number of elements to shift.[`(U)Int8/16/32/64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint). - `default` — Optional. Default value for new elements. 
+        - `arr` — The array for which to shift the elements.[`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `n` — Number of elements to shift.[`(U)Int8/16/32/64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint). - `default` — Optional. Default value for new elements.
         An array shifted to the left by the specified number of elements [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayShiftLeft", *to_args(locals()))
-    
+
     @staticmethod
     def arrayShiftRight(arr: Any, n: Any, default: Any | None = None) -> Function:
         """
@@ -2456,11 +2593,11 @@ class FunctionWrapper:
 
         - `arr` — The array for which to shift the elements. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         - `n` — Number of elements to shift. [`(U)Int8/16/32/64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
-        - `default` — Optional. Default value for new elements. 
+        - `default` — Optional. Default value for new elements.
         An array shifted to the right by the specified number of elements [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayShiftRight", *to_args(locals()))
-    
+
     @staticmethod
     def arrayShuffle(arr: Any, seed: Any | None = None) -> Function:
         """
@@ -2472,9 +2609,11 @@ class FunctionWrapper:
         Array with elements shuffled [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayShuffle", *to_args(locals()))
-    
+
     @staticmethod
-    def arraySimilarity(from_: Any, to: Any, from_weights: Any, to_weights: Any) -> Function:
+    def arraySimilarity(
+        from_: Any, to: Any, from_weights: Any, to_weights: Any
+    ) -> Function:
         """
         arraySimilarity(from, to, from_weights, to_weights)
 
@@ -2486,7 +2625,7 @@ class FunctionWrapper:
         Returns the similarity between `0` and `1` of the two arrays based on the weighted Levenshtein distance [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("arraySimilarity", *to_args(locals()))
-    
+
     @staticmethod
     def arraySlice(arr: Any, offset: Any, length: Any | None = None) -> Function:
         """
@@ -2499,28 +2638,35 @@ class FunctionWrapper:
         Returns a slice of the array with `length` elements from the specified `offset` [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arraySlice", *to_args(locals()))
-    
+
     @staticmethod
-    def arraySort(f: Any | None = None, arr: Any | None = None, arr1: Any | None = None, arrN: Any | None = None) -> Function:
+    def arraySort(
+        f: Any | None = None,
+        arr: Any | None = None,
+        arr1: Any | None = None,
+        arrN: Any | None = None,
+    ) -> Function:
         """
         arraySort([f,] arr [, arr1, ... ,arrN])
 
-        - `f(y1[, y2 ... yN])` — The lambda function to apply to elements of array `x`. - `arr` — An array to be sorted. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array) - `arr1, ..., yN` — Optional. N additional arrays, in the case when `f` accepts multiple arguments. 
+        - `f(y1[, y2 ... yN])` — The lambda function to apply to elements of array `x`. - `arr` — An array to be sorted. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array) - `arr1, ..., yN` — Optional. N additional arrays, in the case when `f` accepts multiple arguments.
         Returns the array `arr` sorted in ascending order if no lambda function is provided, otherwise
         it returns an array sorted according to the logic of the provided lambda function. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array).
         """
         return Function("arraySort", *to_args(locals()))
-    
+
     @staticmethod
-    def arraySplit(func: Any, x: Any, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arraySplit(
+        func: Any, x: Any, y1: Any | None = None, yN: Any | None = None
+    ) -> Function:
         """
         arraySplit(func(x[, y1, ..., yN]), source_arr[, cond1_arr, ... , condN_arr])
 
-        - `func(x[, y1, ..., yN])` — A lambda function which operates on elements of the source array (`x`) and condition arrays (`y`).[Lambda function](https://clickhouse.com/docs/sql-reference/functions/overview#arrow-operator-and-lambda). - `source_arr` — The source array to split [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `[, cond1_arr, ... , condN_arr]` — Optional. N condition arrays providing additional arguments to the lambda function. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). 
+        - `func(x[, y1, ..., yN])` — A lambda function which operates on elements of the source array (`x`) and condition arrays (`y`).[Lambda function](https://clickhouse.com/docs/sql-reference/functions/overview#arrow-operator-and-lambda). - `source_arr` — The source array to split [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `[, cond1_arr, ... , condN_arr]` — Optional. N condition arrays providing additional arguments to the lambda function. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array).
         Returns an array of arrays [`Array(Array(T))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arraySplit", *to_args(locals()))
-    
+
     @staticmethod
     def arrayStringConcat(arr: Any, separator: Any | None = None) -> Function:
         """
@@ -2532,9 +2678,14 @@ class FunctionWrapper:
         Returns the concatenated string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("arrayStringConcat", *to_args(locals()))
-    
+
     @staticmethod
-    def arraySum(func: Any | None = None, x: Any | None = None, y1: Any | None = None, yN: Any | None = None) -> Function:
+    def arraySum(
+        func: Any | None = None,
+        x: Any | None = None,
+        y1: Any | None = None,
+        yN: Any | None = None,
+    ) -> Function:
         """
         arraySum([func(x[, y1, ..., yN])], source_arr[, cond1_arr, ... , condN_arr])
 
@@ -2545,17 +2696,17 @@ class FunctionWrapper:
         Returns the sum of elements in the source array, or the sum of elements of the lambda results if provided.
         """
         return Function("arraySum", *to_args(locals()))
-    
+
     @staticmethod
     def arraySymmetricDifference(arr1: Any, arr2: Any, arrN: Any) -> Function:
         """
         arraySymmetricDifference(arr1, arr2, ... , arrN)
 
-        - `arrN` — N arrays from which to make the new array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). 
+        - `arrN` — N arrays from which to make the new array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array).
         Returns an array of distinct elements not present in all source arrays [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arraySymmetricDifference", *to_args(locals()))
-    
+
     @staticmethod
     def arrayUnion(arr1: Any, arr2: Any, arrN: Any) -> Function:
         """
@@ -2566,9 +2717,11 @@ class FunctionWrapper:
         Returns an array with distinct elements from the source arrays [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayUnion", *to_args(locals()))
-    
+
     @staticmethod
-    def arrayUniq(arr1: Any, arr2: Any | None = None, arrN: Any | None = None) -> Function:
+    def arrayUniq(
+        arr1: Any, arr2: Any | None = None, arrN: Any | None = None
+    ) -> Function:
         """
         arrayUniq(arr1[, arr2, ..., arrN])
 
@@ -2581,18 +2734,18 @@ class FunctionWrapper:
          [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("arrayUniq", *to_args(locals()))
-    
+
     @staticmethod
     def arrayWithConstant(N: Any, x: Any) -> Function:
         """
         arrayWithConstant(N, x)
 
         - `length` — Number of elements in the array. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
-        - `x` — The value of the `N` elements in the array, of any type. 
+        - `x` — The value of the `N` elements in the array, of any type.
         Returns an Array with `N` elements of value `x`. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayWithConstant", *to_args(locals()))
-    
+
     @staticmethod
     def arrayZip(arr1: Any, arr2: Any, arrN: Any) -> Function:
         """
@@ -2603,7 +2756,7 @@ class FunctionWrapper:
         Returns an array with elements from the source arrays grouped in tuples. Data types in the tuple are the same as types of the input arrays and in the same order as arrays are passed [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("arrayZip", *to_args(locals()))
-    
+
     @staticmethod
     def arrayZipUnaligned(arr1: Any, arr2: Any, arrN: Any) -> Function:
         """
@@ -2614,7 +2767,7 @@ class FunctionWrapper:
         Returns an array with elements from the source arrays grouped in tuples. Data types in the tuple are the same as types of the input arrays and in the same order as arrays are passed. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Tuple(T1, T2, ...)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("arrayZipUnaligned", *to_args(locals()))
-    
+
     @staticmethod
     def ascii(s: Any) -> Function:
         """
@@ -2625,7 +2778,7 @@ class FunctionWrapper:
         Returns the ASCII code point of the first character. If `s` is empty, the result is `0`. If the first character is not an ASCII character or not part of the Latin-1 supplement range of UTF-16, the result is undefined. [`Int32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("ascii", *to_args(locals()))
-    
+
     @staticmethod
     def asin(x: Any) -> Function:
         """
@@ -2636,7 +2789,7 @@ class FunctionWrapper:
         Returns the arcsine value of the provided argument `x` [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("asin", *to_args(locals()))
-    
+
     @staticmethod
     def asinh(x: Any) -> Function:
         """
@@ -2647,7 +2800,7 @@ class FunctionWrapper:
         Returns the angle, in radians. Values from the interval: `-∞ < asinh(x) < +∞`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("asinh", *to_args(locals()))
-    
+
     @staticmethod
     def assumeNotNull(x: Any) -> Function:
         """
@@ -2658,7 +2811,7 @@ class FunctionWrapper:
         Returns the non-nullable value, if the original value was not `NULL`, otherwise an arbitrary value, if the input value is `NULL`. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("assumeNotNull", *to_args(locals()))
-    
+
     @staticmethod
     def atan(x: Any) -> Function:
         """
@@ -2669,7 +2822,7 @@ class FunctionWrapper:
         Returns the arc tangent of `x`. [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("atan", *to_args(locals()))
-    
+
     @staticmethod
     def atan2(y: Any, x: Any) -> Function:
         """
@@ -2681,7 +2834,7 @@ class FunctionWrapper:
         Returns the angle `θ` such that `-π < θ ≤ π`, in radians [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("atan2", *to_args(locals()))
-    
+
     @staticmethod
     def atanh(x: Any) -> Function:
         """
@@ -2692,17 +2845,17 @@ class FunctionWrapper:
         Returns the angle, in radians. Values from the interval: -∞ < atanh(x) < +∞ [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("atanh", *to_args(locals()))
-    
+
     @staticmethod
     def authenticatedUser() -> Function:
         """
         authenticatedUser()
 
-        
+
         The name of the authenticated user. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("authenticatedUser", *to_args(locals()))
-    
+
     @staticmethod
     def avg(x: Any) -> Function:
         """
@@ -2713,17 +2866,17 @@ class FunctionWrapper:
         Returns the arithmetic mean, otherwise returns `NaN` if the input parameter `x` is empty. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("avg", *to_args(locals()))
-    
+
     @staticmethod
     def avg2(x1: Any, x2: Any) -> Function:
         """
         avg2(x1, x2])
 
-        - `x1, x2]` — Accepts two values for averaging. 
+        - `x1, x2]` — Accepts two values for averaging.
         Returns the average value of the provided arguments, promoted to the largest compatible type.
         """
         return Function("avg2", *to_args(locals()))
-    
+
     @staticmethod
     def avgWeighted(x: Any, weight: Any) -> Function:
         """
@@ -2735,7 +2888,7 @@ class FunctionWrapper:
         Returns `NaN` if all the weights are equal to 0 or the supplied weights parameter is empty, or the weighted mean otherwise. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("avgWeighted", *to_args(locals()))
-    
+
     @staticmethod
     def bar(x: Any, min: Any, max: Any, width: Any | None = None) -> Function:
         """
@@ -2749,7 +2902,7 @@ class FunctionWrapper:
         Returns a unicode-art bar string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("bar", *to_args(locals()))
-    
+
     @staticmethod
     def base32Decode(encoded: Any) -> Function:
         """
@@ -2760,7 +2913,7 @@ class FunctionWrapper:
         Returns a string containing the decoded value of the argument. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("base32Decode", *to_args(locals()))
-    
+
     @staticmethod
     def base32Encode(plaintext: Any) -> Function:
         """
@@ -2771,7 +2924,7 @@ class FunctionWrapper:
         Returns a string containing the encoded value of the argument. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string) or [`FixedString`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("base32Encode", *to_args(locals()))
-    
+
     @staticmethod
     def base58Decode(encoded: Any) -> Function:
         """
@@ -2782,7 +2935,7 @@ class FunctionWrapper:
         Returns a string containing the decoded value of the argument. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("base58Decode", *to_args(locals()))
-    
+
     @staticmethod
     def base58Encode(plaintext: Any) -> Function:
         """
@@ -2793,7 +2946,7 @@ class FunctionWrapper:
         Returns a string containing the encoded value of the argument. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("base58Encode", *to_args(locals()))
-    
+
     @staticmethod
     def base64Decode(encoded: Any) -> Function:
         """
@@ -2804,7 +2957,7 @@ class FunctionWrapper:
         Returns the decoded string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("base64Decode", *to_args(locals()))
-    
+
     @staticmethod
     def base64Encode(plaintext: Any) -> Function:
         """
@@ -2815,7 +2968,7 @@ class FunctionWrapper:
         Returns a string containing the encoded value of the argument. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("base64Encode", *to_args(locals()))
-    
+
     @staticmethod
     def base64URLDecode(encoded: Any) -> Function:
         """
@@ -2826,7 +2979,7 @@ class FunctionWrapper:
         Returns a string containing the decoded value of the argument. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("base64URLDecode", *to_args(locals()))
-    
+
     @staticmethod
     def base64URLEncode(plaintext: Any) -> Function:
         """
@@ -2837,7 +2990,7 @@ class FunctionWrapper:
         Returns a string containing the encoded value of the argument. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("base64URLEncode", *to_args(locals()))
-    
+
     @staticmethod
     def basename(expr: Any) -> Function:
         """
@@ -2848,7 +3001,7 @@ class FunctionWrapper:
         Returns the tail of the input string after its last slash or backslash. If the input string ends with a slash or backslash, the function returns an empty string. Returns the original string if there are no slashes or backslashes. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("basename", *to_args(locals()))
-    
+
     @staticmethod
     def bech32Decode(address: Any) -> Function:
         """
@@ -2859,7 +3012,7 @@ class FunctionWrapper:
         Returns a tuple consisting of `(hrp, data)` that was used to encode the string. The data is in binary format. [`Tuple(String, String)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("bech32Decode", *to_args(locals()))
-    
+
     @staticmethod
     def bech32Encode(hrp: Any, data: Any, witver: Any | None = None) -> Function:
         """
@@ -2872,7 +3025,7 @@ class FunctionWrapper:
         Returns a Bech32 address string, consisting of the human-readable part, a separator character which is always '1', and a data part. The length of the string will never exceed 90 characters. If the algorithm cannot generate a valid address from the input, it will return an empty string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("bech32Encode", *to_args(locals()))
-    
+
     @staticmethod
     def bin(arg: Any) -> Function:
         """
@@ -2883,7 +3036,7 @@ class FunctionWrapper:
         Returns a string with the binary representation of the argument. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("bin", *to_args(locals()))
-    
+
     @staticmethod
     def bitAnd(a: Any, b: Any) -> Function:
         """
@@ -2895,7 +3048,7 @@ class FunctionWrapper:
         Returns the result of bitwise operation `a AND b`
         """
         return Function("bitAnd", *to_args(locals()))
-    
+
     @staticmethod
     def bitCount(x: Any) -> Function:
         """
@@ -2911,7 +3064,7 @@ class FunctionWrapper:
 
         """
         return Function("bitCount", *to_args(locals()))
-    
+
     @staticmethod
     def bitHammingDistance(x: Any, y: Any) -> Function:
         """
@@ -2923,7 +3076,7 @@ class FunctionWrapper:
         Returns the hamming distance between `x` and `y` [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitHammingDistance", *to_args(locals()))
-    
+
     @staticmethod
     def bitNot(a: Any) -> Function:
         """
@@ -2934,7 +3087,7 @@ class FunctionWrapper:
         Returns the result of `~a` i.e `a` with bits flipped.
         """
         return Function("bitNot", *to_args(locals()))
-    
+
     @staticmethod
     def bitOr(a: Any, b: Any) -> Function:
         """
@@ -2946,7 +3099,7 @@ class FunctionWrapper:
         Returns the result of bitwise operation `a OR b`
         """
         return Function("bitOr", *to_args(locals()))
-    
+
     @staticmethod
     def bitPositionsToArray(arg: Any) -> Function:
         """
@@ -2957,7 +3110,7 @@ class FunctionWrapper:
         Returns an array with the ascendingly ordered positions of 1 bits in the binary representation of the input. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("bitPositionsToArray", *to_args(locals()))
-    
+
     @staticmethod
     def bitRotateLeft(a: Any, N: Any) -> Function:
         """
@@ -2969,7 +3122,7 @@ class FunctionWrapper:
         Returns the rotated value with type equal to that of `a`. [`(U)Int8/16/32/64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitRotateLeft", *to_args(locals()))
-    
+
     @staticmethod
     def bitRotateRight(a: Any, N: Any) -> Function:
         """
@@ -2981,7 +3134,7 @@ class FunctionWrapper:
         Returns the rotated value with type equal to that of `a`. [`(U)Int8/16/32/64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitRotateRight", *to_args(locals()))
-    
+
     @staticmethod
     def bitShiftLeft(a: Any, N: Any) -> Function:
         """
@@ -2993,7 +3146,7 @@ class FunctionWrapper:
         Returns the shifted value with type equal to that of `a`.
         """
         return Function("bitShiftLeft", *to_args(locals()))
-    
+
     @staticmethod
     def bitShiftRight(a: Any, N: Any) -> Function:
         """
@@ -3005,20 +3158,20 @@ class FunctionWrapper:
         Returns the shifted value with type equal to that of `a`.
         """
         return Function("bitShiftRight", *to_args(locals()))
-    
+
     @staticmethod
     def bitSlice(s: Any, offset: Any, length: Any | None = None) -> Function:
         """
         bitSlice(s, offset[, length])
 
         - `s` — The String or Fixed String to slice. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string) or [`FixedString`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
-        - `offset` — 
+        - `offset` —
         Returns the starting bit position (1-based indexing).
         - Positive values: count from the beginning of the string.
         - Negative values: count from the end of the string.
 
                  [`(U)Int8/16/32/64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
-        - `length` — 
+        - `length` —
         Optional. The number of bits to extract.
         - Positive values: extract `length` bits.
         - Negative values: extract from the offset to `(string_length - |length|)`.
@@ -3029,7 +3182,7 @@ class FunctionWrapper:
         Returns a string containing the extracted bits, represented as a binary sequence. The result is always padded to byte boundaries (multiples of 8 bits) [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("bitSlice", *to_args(locals()))
-    
+
     @staticmethod
     def bitTest(a: Any, i: Any) -> Function:
         """
@@ -3041,9 +3194,11 @@ class FunctionWrapper:
         Returns the value of the bit at position `i` in the binary representation of `a` [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitTest", *to_args(locals()))
-    
+
     @staticmethod
-    def bitTestAll(a: Any, index1: Any, index2: Any | None = None, indexN: Any | None = None) -> Function:
+    def bitTestAll(
+        a: Any, index1: Any, index2: Any | None = None, indexN: Any | None = None
+    ) -> Function:
         """
         bitTestAll(a, index1[, index2, ... , indexN])
 
@@ -3053,9 +3208,11 @@ class FunctionWrapper:
         Returns the result of the logical conjunction [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitTestAll", *to_args(locals()))
-    
+
     @staticmethod
-    def bitTestAny(a: Any, index1: Any, index2: Any | None = None, indexN: Any | None = None) -> Function:
+    def bitTestAny(
+        a: Any, index1: Any, index2: Any | None = None, indexN: Any | None = None
+    ) -> Function:
         """
         bitTestAny(a, index1[, index2, ... , indexN])
 
@@ -3065,7 +3222,7 @@ class FunctionWrapper:
         Returns the result of the logical disjunction [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitTestAny", *to_args(locals()))
-    
+
     @staticmethod
     def bitXor(a: Any, b: Any) -> Function:
         """
@@ -3077,47 +3234,47 @@ class FunctionWrapper:
         Returns the result of bitwise operation `a XOR b`
         """
         return Function("bitXor", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapAnd(bitmap1: Any, bitmap2: Any) -> Function:
         """
         bitmapAnd(bitmap1, bitmap2)
 
-        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). 
+        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction).
         Returns a bitmap containing bits present in both input bitmaps [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction)
         """
         return Function("bitmapAnd", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapAndCardinality(bitmap1: Any, bitmap2: Any) -> Function:
         """
         bitmapAndCardinality(bitmap1, bitmap2)
 
-        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). 
+        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction).
         Returns the number of set bits in the intersection of the two bitmaps [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitmapAndCardinality", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapAndnot(bitmap1: Any, bitmap2: Any) -> Function:
         """
         bitmapAndnot(bitmap1, bitmap2)
 
-        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). 
+        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction).
         Returns a bitmap containing set bits present in the first bitmap but not in the second [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction)
         """
         return Function("bitmapAndnot", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapAndnotCardinality(bitmap1: Any, bitmap2: Any) -> Function:
         """
         bitmapAndnotCardinality(bitmap1, bitmap2)
 
-        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). 
+        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction).
         Returns the number of set bits in the result of `bitmap1 AND-NOT bitmap2` [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitmapAndnotCardinality", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapBuild(array: Any) -> Function:
         """
@@ -3128,147 +3285,149 @@ class FunctionWrapper:
         Returns a bitmap from the provided array [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction)
         """
         return Function("bitmapBuild", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapCardinality(bitmap: Any) -> Function:
         """
         bitmapCardinality(bitmap)
 
-        - `bitmap` — Bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). 
+        - `bitmap` — Bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction).
         Returns the number of bits set in the bitmap [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitmapCardinality", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapContains(bitmap: Any, value: Any) -> Function:
         """
         bitmapContains(bitmap, value)
 
-        - `bitmap` — Bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `value` — Element to check for. [(U)Int8/16/32/64](https://clickhouse.com/docs/sql-reference/data-types/int-uint/) 
+        - `bitmap` — Bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `value` — Element to check for. [(U)Int8/16/32/64](https://clickhouse.com/docs/sql-reference/data-types/int-uint/)
         Returns `1` if the bitmap contains the specified value, otherwise `0` [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitmapContains", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapHasAll(bitmap1: Any, bitmap2: Any) -> Function:
         """
         bitmapHasAll(bitmap1, bitmap2)
 
-        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). 
+        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction).
         Returns `1` if all set bits of the second bitmap are present in the first bitmap, otherwise `0` [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitmapHasAll", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapHasAny(bitmap1: Any, bitmap2: Any) -> Function:
         """
         bitmapHasAny(bitmap1, bitmap2)
 
-        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). 
+        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction).
         Returns `1` if any bits of the second bitmap are present in the first bitmap, otherwise `0` [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitmapHasAny", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapMax(bitmap: Any) -> Function:
         """
         bitmapMax(bitmap)
 
-        - `bitmap` — Bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). 
+        - `bitmap` — Bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction).
         Returns the position of the greatest bit set in the bitmap, otherwise `0` [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitmapMax", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapMin(bitmap: Any) -> Function:
         """
         bitmapMin(bitmap)
 
-        - `bitmap` — Bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). 
+        - `bitmap` — Bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction).
         Returns the position of the smallest bit set in the bitmap, or `UINT32_MAX`/`UINT64_MAX` [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitmapMin", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapOr(bitmap1: Any, bitmap2: Any) -> Function:
         """
         bitmapOr(bitmap1, bitmap2)
 
-        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). 
+        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction).
         Returns a bitmap containing set bits present in either input bitmap [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction)
         """
         return Function("bitmapOr", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapOrCardinality(bitmap1: Any, bitmap2: Any) -> Function:
         """
         bitmapOrCardinality(bitmap1, bitmap2)
 
-        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). 
+        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction).
         Returns the number of set bits in the union of the two bitmaps [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitmapOrCardinality", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapSubsetInRange(bitmap: Any, start: Any, end: Any) -> Function:
         """
         bitmapSubsetInRange(bitmap, start, end)
 
-        - `bitmap` — Bitmap to extract the subset from. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `start` — Start of the range (inclusive). [`UInt*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) - `end` — End of the range (exclusive). [`UInt*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) 
+        - `bitmap` — Bitmap to extract the subset from. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `start` — Start of the range (inclusive). [`UInt*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) - `end` — End of the range (exclusive). [`UInt*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         Returns a bitmap containing only the set bits in the specified range [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction)
         """
         return Function("bitmapSubsetInRange", *to_args(locals()))
-    
+
     @staticmethod
-    def bitmapSubsetLimit(bitmap: Any, range_start: Any, cardinality_limit: Any) -> Function:
+    def bitmapSubsetLimit(
+        bitmap: Any, range_start: Any, cardinality_limit: Any
+    ) -> Function:
         """
         bitmapSubsetLimit(bitmap, range_start, cardinality_limit)
 
-        - `bitmap` — Bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `range_start` — Start of the range (inclusive). [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) - `cardinality_limit` — Maximum cardinality of the subset. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) 
+        - `bitmap` — Bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `range_start` — Start of the range (inclusive). [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) - `cardinality_limit` — Maximum cardinality of the subset. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         Returns a bitmap containing at most `cardinality_limit` set bits, starting from `range_start` [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction)
         """
         return Function("bitmapSubsetLimit", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapToArray(bitmap: Any) -> Function:
         """
         bitmapToArray(bitmap)
 
-        - `bitmap` — Bitmap to convert. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). 
+        - `bitmap` — Bitmap to convert. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction).
         Returns an array of unsigned integers contained in the bitmap [`Array(UInt*)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("bitmapToArray", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapTransform(bitmap: Any, from_array: Any, to_array: Any) -> Function:
         """
         bitmapTransform(bitmap, from_array, to_array)
 
-        - `bitmap` — Bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `from_array` — Array of original set bits to be replaced. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `to_array` — Array of new set bits to replace with. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). 
+        - `bitmap` — Bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `from_array` — Array of original set bits to be replaced. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array). - `to_array` — Array of new set bits to replace with. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array).
         Returns a bitmap with elements transformed according to the given mapping [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction)
         """
         return Function("bitmapTransform", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapXor(bitmap1: Any, bitmap2: Any) -> Function:
         """
         bitmapXor(bitmap1, bitmap2)
 
-        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). 
+        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction).
         Returns a bitmap containing set bits present in either input bitmap, but not in both [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction)
         """
         return Function("bitmapXor", *to_args(locals()))
-    
+
     @staticmethod
     def bitmapXorCardinality(bitmap1: Any, bitmap2: Any) -> Function:
         """
         bitmapXorCardinality(bitmap1, bitmap2)
 
-        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). 
+        - `bitmap1` — First bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `bitmap2` — Second bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction).
         Returns the number of set bits in the symmetric difference of the two bitmaps [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("bitmapXorCardinality", *to_args(locals()))
-    
+
     @staticmethod
     def bitmaskToArray(num: Any) -> Function:
         """
@@ -3279,7 +3438,7 @@ class FunctionWrapper:
         Returns an array with the ascendingly ordered powers of two which sum up to the input number. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("bitmaskToArray", *to_args(locals()))
-    
+
     @staticmethod
     def bitmaskToList(num: Any) -> Function:
         """
@@ -3290,17 +3449,17 @@ class FunctionWrapper:
         Returns a string containing comma-separated powers of two. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("bitmaskToList", *to_args(locals()))
-    
+
     @staticmethod
     def blockNumber() -> Function:
         """
         blockNumber()
 
-        
+
         Sequence number of the data block where the row is located. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("blockNumber", *to_args(locals()))
-    
+
     @staticmethod
     def blockSerializedSize(x1: Any, x2: Any | None = None) -> Function:
         """
@@ -3311,17 +3470,17 @@ class FunctionWrapper:
         Returns the number of bytes that will be written to disk for a block of values without compression. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("blockSerializedSize", *to_args(locals()))
-    
+
     @staticmethod
     def blockSize() -> Function:
         """
         blockSize()
 
-        
+
         Returns the number of rows in the current block. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("blockSize", *to_args(locals()))
-    
+
     @staticmethod
     def boundingRatio(x: Any, y: Any) -> Function:
         """
@@ -3333,17 +3492,17 @@ class FunctionWrapper:
         Returns the slope of the line between the leftmost and rightmost points, otherwise returns `NaN` if the data is empty. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("boundingRatio", *to_args(locals()))
-    
+
     @staticmethod
     def buildId() -> Function:
         """
         buildId()
 
-        
+
         Returns the build ID. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("buildId", *to_args(locals()))
-    
+
     @staticmethod
     def byteHammingDistance(s1: Any, s2: Any) -> Function:
         """
@@ -3355,7 +3514,7 @@ class FunctionWrapper:
         Returns the Hamming distance between the two strings. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("byteHammingDistance", *to_args(locals()))
-    
+
     @staticmethod
     def byteSize(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -3366,7 +3525,7 @@ class FunctionWrapper:
         Returns an estimation of the byte size of the arguments in memory. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("byteSize", *to_args(locals()))
-    
+
     @staticmethod
     def byteSwap(x: Any) -> Function:
         """
@@ -3377,7 +3536,7 @@ class FunctionWrapper:
         Returns `x` with bytes reversed. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("byteSwap", *to_args(locals()))
-    
+
     @staticmethod
     def caseFoldUTF8(str: Any) -> Function:
         """
@@ -3388,19 +3547,19 @@ class FunctionWrapper:
         Case-folded UTF-8 string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("caseFoldUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def caseWithExpression(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("caseWithExpression", *to_args(locals()))
-    
+
     @staticmethod
-    def catboostEvaluate(path_to_model: Any, feature_1: Any, feature_2: Any | None = None, feature_n: Any | None = None) -> Function:
+    def catboostEvaluate(
+        path_to_model: Any,
+        feature_1: Any,
+        feature_2: Any | None = None,
+        feature_n: Any | None = None,
+    ) -> Function:
         """
         catboostEvaluate(path_to_model, feature_1[, feature_2, ..., feature_n])
 
@@ -3410,9 +3569,11 @@ class FunctionWrapper:
         Returns the model evaluation result. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("catboostEvaluate", *to_args(locals()))
-    
+
     @staticmethod
-    def categoricalInformationValue(category1: Any, category2: Any | None = None, tag: Any | None = None) -> Function:
+    def categoricalInformationValue(
+        category1: Any, category2: Any | None = None, tag: Any | None = None
+    ) -> Function:
         """
         categoricalInformationValue(category1[, category2, ...,]tag)
 
@@ -3422,7 +3583,7 @@ class FunctionWrapper:
         Returns an array of Float64 values representing the information value for each unique combination of categories. Each value indicates the predictive strength of that category combination for the target variable. [`Array(Float64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("categoricalInformationValue", *to_args(locals()))
-    
+
     @staticmethod
     def cbrt(x: Any) -> Function:
         """
@@ -3433,7 +3594,7 @@ class FunctionWrapper:
         Returns the cubic root of `x`. [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("cbrt", *to_args(locals()))
-    
+
     @staticmethod
     def ceil(x: Any, N: Any | None = None) -> Function:
         """
@@ -3445,7 +3606,7 @@ class FunctionWrapper:
         Returns a rounded number of the same type as `x`. [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Decimal*`](https://clickhouse.com/docs/sql-reference/data-types/decimal) or [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("ceil", *to_args(locals()))
-    
+
     @staticmethod
     def changeDay(date_or_datetime: Any, value: Any) -> Function:
         """
@@ -3457,7 +3618,7 @@ class FunctionWrapper:
         Returns a value of the same type as `date_or_datetime` with modified day component. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("changeDay", *to_args(locals()))
-    
+
     @staticmethod
     def changeHour(date_or_datetime: Any, value: Any) -> Function:
         """
@@ -3469,7 +3630,7 @@ class FunctionWrapper:
         Returns a value of the same type as `date_or_datetime` with modified hour component. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("changeHour", *to_args(locals()))
-    
+
     @staticmethod
     def changeMinute(date_or_datetime: Any, value: Any) -> Function:
         """
@@ -3481,7 +3642,7 @@ class FunctionWrapper:
         Returns a value of the same type as `date_or_datetime` with modified minute component. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("changeMinute", *to_args(locals()))
-    
+
     @staticmethod
     def changeMonth(date_or_datetime: Any, value: Any) -> Function:
         """
@@ -3493,7 +3654,7 @@ class FunctionWrapper:
         Returns a value of the same type as `date_or_datetime` with modified month component. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("changeMonth", *to_args(locals()))
-    
+
     @staticmethod
     def changeSecond(date_or_datetime: Any, value: Any) -> Function:
         """
@@ -3505,7 +3666,7 @@ class FunctionWrapper:
         Returns a value of the same type as `date_or_datetime` with modified seconds component. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("changeSecond", *to_args(locals()))
-    
+
     @staticmethod
     def changeYear(date_or_datetime: Any, value: Any) -> Function:
         """
@@ -3517,7 +3678,7 @@ class FunctionWrapper:
         Returns a value of the same type as `date_or_datetime` with modified year component. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("changeYear", *to_args(locals()))
-    
+
     @staticmethod
     def char(num1: Any, num2: Any | None = None) -> Function:
         """
@@ -3528,7 +3689,7 @@ class FunctionWrapper:
         Returns a string of the given bytes. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("char", *to_args(locals()))
-    
+
     @staticmethod
     def cityHash64(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -3539,17 +3700,17 @@ class FunctionWrapper:
         Returns the computed hash of the input arguments. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("cityHash64", *to_args(locals()))
-    
+
     @staticmethod
     def clamp(value: Any, min: Any, max: Any) -> Function:
         """
         clamp(value, min, max)
 
-        - `value` — The value to clamp. - `min` — The minimum bound. - `max` — The maximum bound. 
+        - `value` — The value to clamp. - `min` — The minimum bound. - `max` — The maximum bound.
         Returns the value, restricted to the [min, max] range.
         """
         return Function("clamp", *to_args(locals()))
-    
+
     @staticmethod
     def coalesce(x: Any, y: Any | None = None) -> Function:
         """
@@ -3560,7 +3721,7 @@ class FunctionWrapper:
         Returns the first non-`NULL` argument, otherwise `NULL`, if all arguments are `NULL`. [`Any`](https://clickhouse.com/docs/sql-reference/data-types) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("coalesce", *to_args(locals()))
-    
+
     @staticmethod
     def colorOKLABToSRGB(tuple: Any, gamma: Any | None = None) -> Function:
         """
@@ -3572,7 +3733,7 @@ class FunctionWrapper:
         Returns a tuple (R, G, B) representing sRGB color values. [`Tuple(Float64, Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("colorOKLABToSRGB", *to_args(locals()))
-    
+
     @staticmethod
     def colorOKLCHToSRGB(tuple: Any, gamma: Any | None = None) -> Function:
         """
@@ -3584,7 +3745,7 @@ class FunctionWrapper:
         Returns a tuple (R, G, B) representing sRGB color values. [`Tuple(Float64, Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("colorOKLCHToSRGB", *to_args(locals()))
-    
+
     @staticmethod
     def colorSRGBToOKLAB(tuple: Any, gamma: Any | None = None) -> Function:
         """
@@ -3596,7 +3757,7 @@ class FunctionWrapper:
         Returns a tuple (L, a, b) representing the OKLAB color space values. [`Tuple(Float64, Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("colorSRGBToOKLAB", *to_args(locals()))
-    
+
     @staticmethod
     def colorSRGBToOKLCH(tuple: Any, gamma: Any | None = None) -> Function:
         """
@@ -3608,9 +3769,11 @@ class FunctionWrapper:
         Returns a tuple (L, C, H) representing the OKLCH color space values. [`Tuple(Float64, Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("colorSRGBToOKLCH", *to_args(locals()))
-    
+
     @staticmethod
-    def compareSubstrings(s1: Any, s2: Any, s1_offset: Any, s2_offset: Any, num_bytes: Any) -> Function:
+    def compareSubstrings(
+        s1: Any, s2: Any, s1_offset: Any, s2_offset: Any, num_bytes: Any
+    ) -> Function:
         """
         compareSubstrings(s1, s2, s1_offset, s2_offset, num_bytes)
 
@@ -3627,7 +3790,7 @@ class FunctionWrapper:
              [`Int8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("compareSubstrings", *to_args(locals()))
-    
+
     @staticmethod
     def concat(s1: Any | None = None, s2: Any | None = None) -> Function:
         """
@@ -3638,7 +3801,7 @@ class FunctionWrapper:
         Returns the String created by concatenating the arguments. If any of arguments is `NULL`, the function returns `NULL`. If there are no arguments, it returns an empty string. [`Nullable(String)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("concat", *to_args(locals()))
-    
+
     @staticmethod
     def concatAssumeInjective(s1: Any | None = None, s2: Any | None = None) -> Function:
         """
@@ -3649,9 +3812,11 @@ class FunctionWrapper:
         Returns the string created by concatenating the arguments. If any of argument values is `NULL`, the function returns `NULL`. If no arguments are passed, it returns an empty string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("concatAssumeInjective", *to_args(locals()))
-    
+
     @staticmethod
-    def concatWithSeparator(sep: Any, exp1: Any | None = None, exp2: Any | None = None) -> Function:
+    def concatWithSeparator(
+        sep: Any, exp1: Any | None = None, exp2: Any | None = None
+    ) -> Function:
         """
         concatWithSeparator(sep[, exp1, exp2, ...])
 
@@ -3661,9 +3826,11 @@ class FunctionWrapper:
         Returns the String created by concatenating the arguments. If any of the argument values is `NULL`, the function returns `NULL`. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("concatWithSeparator", *to_args(locals()))
-    
+
     @staticmethod
-    def concatWithSeparatorAssumeInjective(sep: Any, exp1: Any | None = None, exp2: Any | None = None) -> Function:
+    def concatWithSeparatorAssumeInjective(
+        sep: Any, exp1: Any | None = None, exp2: Any | None = None
+    ) -> Function:
         """
         concatWithSeparatorAssumeInjective(sep[, exp1, exp2, ... ])
 
@@ -3673,17 +3840,17 @@ class FunctionWrapper:
         Returns the String created by concatenating the arguments. If any of the argument values is `NULL`, the function returns `NULL`. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("concatWithSeparatorAssumeInjective", *to_args(locals()))
-    
+
     @staticmethod
     def connectionId() -> Function:
         """
         connectionId()
 
-        
+
         Returns the connection ID of the current client. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("connectionId", *to_args(locals()))
-    
+
     @staticmethod
     def contingency(column1: Any, column2: Any) -> Function:
         """
@@ -3695,17 +3862,17 @@ class FunctionWrapper:
         Returns a value between 0 and 1. The larger the result, the closer the association of the two columns. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("contingency", *to_args(locals()))
-    
+
     @staticmethod
     def conv(number: Any, from_base: Any, to_base: Any) -> Function:
         """
         conv(number, from_base, to_base)
 
-        - `number` — The number to convert. Can be a string or numeric type. - `from_base` — The source base (2-36). Must be an integer. - `to_base` — The target base (2-36). Must be an integer. 
+        - `number` — The number to convert. Can be a string or numeric type. - `from_base` — The source base (2-36). Must be an integer. - `to_base` — The target base (2-36). Must be an integer.
         String representation of the number in the target base.
         """
         return Function("conv", *to_args(locals()))
-    
+
     @staticmethod
     def convertCharset(s: Any, from_: Any, to: Any) -> Function:
         """
@@ -3718,7 +3885,7 @@ class FunctionWrapper:
         Returns string `s` converted from encoding `from` to encoding `to`. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("convertCharset", *to_args(locals()))
-    
+
     @staticmethod
     def corr(x: Any, y: Any) -> Function:
         """
@@ -3730,7 +3897,7 @@ class FunctionWrapper:
         Returns the Pearson correlation coefficient. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("corr", *to_args(locals()))
-    
+
     @staticmethod
     def corrMatrix(x1: Any, x2: Any | None = None) -> Function:
         """
@@ -3741,7 +3908,7 @@ class FunctionWrapper:
         Returns the correlation matrix. [`Array(Array(Float64))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("corrMatrix", *to_args(locals()))
-    
+
     @staticmethod
     def corrStable(x: Any, y: Any) -> Function:
         """
@@ -3753,7 +3920,7 @@ class FunctionWrapper:
         Returns the Pearson correlation coefficient. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("corrStable", *to_args(locals()))
-    
+
     @staticmethod
     def cos(x: Any) -> Function:
         """
@@ -3764,7 +3931,7 @@ class FunctionWrapper:
         Returns the cosine of `x`. [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("cos", *to_args(locals()))
-    
+
     @staticmethod
     def cosh(x: Any) -> Function:
         """
@@ -3775,7 +3942,7 @@ class FunctionWrapper:
         Returns values from the interval: `1 ≤ cosh(x) < +∞` [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("cosh", *to_args(locals()))
-    
+
     @staticmethod
     def cosineDistance(vector1: Any, vector2: Any) -> Function:
         """
@@ -3787,7 +3954,7 @@ class FunctionWrapper:
         Returns the cosine of the angle between two vectors subtracted from one. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("cosineDistance", *to_args(locals()))
-    
+
     @staticmethod
     def cosineDistanceTransposed(vector1: Any, vector2: Any, p: Any) -> Function:
         """
@@ -3800,7 +3967,7 @@ class FunctionWrapper:
         Returns the approximate cosine of the angle between two vectors subtracted from one. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("cosineDistanceTransposed", *to_args(locals()))
-    
+
     @staticmethod
     def count(expr: Any | None = None) -> Function:
         """
@@ -3811,7 +3978,7 @@ class FunctionWrapper:
         Returns the a row count if the function is called without parameters, otherwise returns a count of how many times the passed expression returned not null. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("count", *to_args(locals()))
-    
+
     @staticmethod
     def countDigits(x: Any) -> Function:
         """
@@ -3822,18 +3989,18 @@ class FunctionWrapper:
         Returns the number of digits needed to represent `x`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("countDigits", *to_args(locals()))
-    
+
     @staticmethod
     def countEqual(arr: Any, x: Any) -> Function:
         """
         countEqual(arr, x)
 
         - `arr` — Array to search. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
-        - `x` — Value in the array to count. Any type. 
+        - `x` — Value in the array to count. Any type.
         Returns the number of elements in the array equal to `x` [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("countEqual", *to_args(locals()))
-    
+
     @staticmethod
     def countMatches(haystack: Any, pattern: Any) -> Function:
         """
@@ -3845,7 +4012,7 @@ class FunctionWrapper:
         Returns the number of matches found. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("countMatches", *to_args(locals()))
-    
+
     @staticmethod
     def countMatchesCaseInsensitive(haystack: Any, pattern: Any) -> Function:
         """
@@ -3857,19 +4024,23 @@ class FunctionWrapper:
         Returns the number of matches found. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("countMatchesCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
-    def countSubstrings(haystack: Any, needle: Any, start_pos: Any | None = None) -> Function:
+    def countSubstrings(
+        haystack: Any, needle: Any, start_pos: Any | None = None
+    ) -> Function:
         """
         countSubstrings(haystack, needle[, start_pos])
 
-        - `haystack` — String in which the search is performed. [String](../..https://clickhouse.com/docs/sql-reference/data-types/string.md) or [Enum](../..https://clickhouse.com/docs/sql-reference/data-types/enum.md). - `needle` — Substring to be searched. [String](../..https://clickhouse.com/docs/sql-reference/data-types/string.md). - `start_pos` — Position (1-based) in `haystack` at which the search starts. [UInt](../..https://clickhouse.com/docs/sql-reference/data-types/int-uint.md). Optional. 
+        - `haystack` — String in which the search is performed. [String](../..https://clickhouse.com/docs/sql-reference/data-types/string.md) or [Enum](../..https://clickhouse.com/docs/sql-reference/data-types/enum.md). - `needle` — Substring to be searched. [String](../..https://clickhouse.com/docs/sql-reference/data-types/string.md). - `start_pos` — Position (1-based) in `haystack` at which the search starts. [UInt](../..https://clickhouse.com/docs/sql-reference/data-types/int-uint.md). Optional.
         The number of occurrences. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("countSubstrings", *to_args(locals()))
-    
+
     @staticmethod
-    def countSubstringsCaseInsensitive(haystack: Any, needle: Any, start_pos: Any | None = None) -> Function:
+    def countSubstringsCaseInsensitive(
+        haystack: Any, needle: Any, start_pos: Any | None = None
+    ) -> Function:
         """
         countSubstringsCaseInsensitive(haystack, needle[, start_pos])
 
@@ -3880,9 +4051,11 @@ class FunctionWrapper:
         Returns the number of occurrences of the neddle in the haystack. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("countSubstringsCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
-    def countSubstringsCaseInsensitiveUTF8(haystack: Any, needle: Any, start_pos: Any | None = None) -> Function:
+    def countSubstringsCaseInsensitiveUTF8(
+        haystack: Any, needle: Any, start_pos: Any | None = None
+    ) -> Function:
         """
         countSubstringsCaseInsensitiveUTF8(haystack, needle[, start_pos])
 
@@ -3893,7 +4066,7 @@ class FunctionWrapper:
         Returns the number of occurrences of the needle in the haystack. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("countSubstringsCaseInsensitiveUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def covarPop(x: Any, y: Any) -> Function:
         """
@@ -3905,7 +4078,7 @@ class FunctionWrapper:
         Returns the population covariance between `x` and `y`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("covarPop", *to_args(locals()))
-    
+
     @staticmethod
     def covarPopMatrix(x1: Any, x2: Any | None = None) -> Function:
         """
@@ -3916,7 +4089,7 @@ class FunctionWrapper:
         Returns the population covariance matrix. [`Array(Array(Float64))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("covarPopMatrix", *to_args(locals()))
-    
+
     @staticmethod
     def covarPopStable(x: Any, y: Any) -> Function:
         """
@@ -3928,7 +4101,7 @@ class FunctionWrapper:
         Returns the population covariance between `x` and `y`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("covarPopStable", *to_args(locals()))
-    
+
     @staticmethod
     def covarSamp(x: Any, y: Any) -> Function:
         """
@@ -3940,7 +4113,7 @@ class FunctionWrapper:
         Returns the sample covariance between `x` and `y`. For `n <= 1`, `nan` is returned. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("covarSamp", *to_args(locals()))
-    
+
     @staticmethod
     def covarSampMatrix(x1: Any, x2: Any | None = None) -> Function:
         """
@@ -3951,7 +4124,7 @@ class FunctionWrapper:
         Returns the sample covariance matrix. [`Array(Array(Float64))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("covarSampMatrix", *to_args(locals()))
-    
+
     @staticmethod
     def covarSampStable(x: Any, y: Any) -> Function:
         """
@@ -3963,7 +4136,7 @@ class FunctionWrapper:
         Returns the sample covariance between `x` and `y`. For `n <= 1`, `inf` is returned. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("covarSampStable", *to_args(locals()))
-    
+
     @staticmethod
     def cramersV(column1: Any, column2: Any) -> Function:
         """
@@ -3975,7 +4148,7 @@ class FunctionWrapper:
         Returns a value between 0 (corresponding to no association between the columns' values) to 1 (complete association). [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("cramersV", *to_args(locals()))
-    
+
     @staticmethod
     def cramersVBiasCorrected(column1: Any, column2: Any) -> Function:
         """
@@ -3987,57 +4160,52 @@ class FunctionWrapper:
         Returns a value between 0 (corresponding to no association between the columns' values) to 1 (complete association). [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("cramersVBiasCorrected", *to_args(locals()))
-    
+
     @staticmethod
     def cume_dist(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("cume_dist", *to_args(locals()))
-    
+
     @staticmethod
     def currentDatabase() -> Function:
         """
         currentDatabase()
 
-        
+
         Returns the current database name. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("currentDatabase", *to_args(locals()))
-    
+
     @staticmethod
     def currentProfiles() -> Function:
         """
         currentProfiles()
 
-        
+
         Returns an array of setting profiles for the current user. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("currentProfiles", *to_args(locals()))
-    
+
     @staticmethod
     def currentQueryID() -> Function:
         """
         currentQueryID()
 
-        
-        
+
+
         """
         return Function("currentQueryID", *to_args(locals()))
-    
+
     @staticmethod
     def currentRoles() -> Function:
         """
         currentRoles()
 
-        
+
         Returns an array of the roles which are assigned to the current user. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("currentRoles", *to_args(locals()))
-    
+
     @staticmethod
     def currentSchemas(bool: Any) -> Function:
         """
@@ -4048,17 +4216,17 @@ class FunctionWrapper:
         Returns a single-element array with the name of the current database. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("currentSchemas", *to_args(locals()))
-    
+
     @staticmethod
     def currentUser() -> Function:
         """
         currentUser()
 
-        
+
         Returns the name of the current user, otherwise the login of the user who initiated the query. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("currentUser", *to_args(locals()))
-    
+
     @staticmethod
     def cutFragment(url: Any) -> Function:
         """
@@ -4069,7 +4237,7 @@ class FunctionWrapper:
         Returns the URL with fragment identifier removed. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("cutFragment", *to_args(locals()))
-    
+
     @staticmethod
     def cutIPv6(x: Any, bytesToCutForIPv6: Any, bytesToCutForIPv4: Any) -> Function:
         """
@@ -4082,7 +4250,7 @@ class FunctionWrapper:
         Returns a string containing the IPv6 address in text format with specified bytes removed. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("cutIPv6", *to_args(locals()))
-    
+
     @staticmethod
     def cutQueryString(url: Any) -> Function:
         """
@@ -4093,7 +4261,7 @@ class FunctionWrapper:
         Returns the URL with query string removed. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("cutQueryString", *to_args(locals()))
-    
+
     @staticmethod
     def cutQueryStringAndFragment(url: Any) -> Function:
         """
@@ -4104,7 +4272,7 @@ class FunctionWrapper:
         Returns the URL with query string and fragment identifier removed. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("cutQueryStringAndFragment", *to_args(locals()))
-    
+
     @staticmethod
     def cutToFirstSignificantSubdomain(url: Any) -> Function:
         """
@@ -4115,7 +4283,7 @@ class FunctionWrapper:
         Returns the part of the domain that includes top-level subdomains up to the first significant subdomain if possible, otherwise returns an empty string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("cutToFirstSignificantSubdomain", *to_args(locals()))
-    
+
     @staticmethod
     def cutToFirstSignificantSubdomainCustom(url: Any, tld_list_name: Any) -> Function:
         """
@@ -4127,37 +4295,47 @@ class FunctionWrapper:
         Returns the part of the domain that includes top-level subdomains up to the first significant subdomain. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("cutToFirstSignificantSubdomainCustom", *to_args(locals()))
-    
+
     @staticmethod
-    def cutToFirstSignificantSubdomainCustomRFC(url: Any, tld_list_name: Any) -> Function:
+    def cutToFirstSignificantSubdomainCustomRFC(
+        url: Any, tld_list_name: Any
+    ) -> Function:
         """
         cutToFirstSignificantSubdomainCustomRFC(url, tld_list_name)
 
-        - `url` — URL or domain string to process according to RFC 3986. - `tld_list_name` — Name of the custom TLD list configured in ClickHouse. 
+        - `url` — URL or domain string to process according to RFC 3986. - `tld_list_name` — Name of the custom TLD list configured in ClickHouse.
         Returns the part of the domain that includes top-level subdomains up to the first significant subdomain. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("cutToFirstSignificantSubdomainCustomRFC", *to_args(locals()))
-    
+
     @staticmethod
-    def cutToFirstSignificantSubdomainCustomWithWWW(url: Any, tld_list_name: Any) -> Function:
+    def cutToFirstSignificantSubdomainCustomWithWWW(
+        url: Any, tld_list_name: Any
+    ) -> Function:
         """
         cutToFirstSignificantSubdomainCustomWithWWW(url, tld_list_name)
 
-        - `url` — URL or domain string to process. - `tld_list_name` — Name of the custom TLD list configured in ClickHouse. 
+        - `url` — URL or domain string to process. - `tld_list_name` — Name of the custom TLD list configured in ClickHouse.
         Part of the domain that includes top-level subdomains up to the first significant subdomain without stripping 'www'. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
-        return Function("cutToFirstSignificantSubdomainCustomWithWWW", *to_args(locals()))
-    
+        return Function(
+            "cutToFirstSignificantSubdomainCustomWithWWW", *to_args(locals())
+        )
+
     @staticmethod
-    def cutToFirstSignificantSubdomainCustomWithWWWRFC(url: Any, tld_list_name: Any) -> Function:
+    def cutToFirstSignificantSubdomainCustomWithWWWRFC(
+        url: Any, tld_list_name: Any
+    ) -> Function:
         """
         cutToFirstSignificantSubdomainCustomWithWWWRFC(url, tld_list_name)
 
-        - `url` — URL or domain string to process according to RFC 3986. - `tld_list_name` — Name of the custom TLD list configured in ClickHouse. 
+        - `url` — URL or domain string to process according to RFC 3986. - `tld_list_name` — Name of the custom TLD list configured in ClickHouse.
         Returns the part of the domain that includes top-level subdomains up to the first significant subdomain without stripping `www`. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
-        return Function("cutToFirstSignificantSubdomainCustomWithWWWRFC", *to_args(locals()))
-    
+        return Function(
+            "cutToFirstSignificantSubdomainCustomWithWWWRFC", *to_args(locals())
+        )
+
     @staticmethod
     def cutToFirstSignificantSubdomainRFC(url: Any) -> Function:
         """
@@ -4168,7 +4346,7 @@ class FunctionWrapper:
         Returns the part of the domain that includes top-level subdomains up to the first significant subdomain if possible, otherwise returns an empty string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("cutToFirstSignificantSubdomainRFC", *to_args(locals()))
-    
+
     @staticmethod
     def cutToFirstSignificantSubdomainWithWWW(url: Any) -> Function:
         """
@@ -4179,17 +4357,17 @@ class FunctionWrapper:
         Returns the part of the domain that includes top-level subdomains up to the first significant subdomain (with www) if possible, otherwise returns an empty string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("cutToFirstSignificantSubdomainWithWWW", *to_args(locals()))
-    
+
     @staticmethod
     def cutToFirstSignificantSubdomainWithWWWRFC(url: Any) -> Function:
         """
         cutToFirstSignificantSubdomainWithWWWRFC(url)
 
-        - `url` — URL or domain string to process according to RFC 3986. 
+        - `url` — URL or domain string to process according to RFC 3986.
         Returns the part of the domain that includes top-level subdomains up to the first significant subdomain (with 'www') if possible, otherwise returns an empty string [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("cutToFirstSignificantSubdomainWithWWWRFC", *to_args(locals()))
-    
+
     @staticmethod
     def cutURLParameter(url: Any, name: Any) -> Function:
         """
@@ -4201,7 +4379,7 @@ class FunctionWrapper:
         URL with `name` URL parameter removed. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("cutURLParameter", *to_args(locals()))
-    
+
     @staticmethod
     def cutWWW(url: Any) -> Function:
         """
@@ -4212,7 +4390,7 @@ class FunctionWrapper:
         Returns the URL with leading `www.` removed from the domain. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("cutWWW", *to_args(locals()))
-    
+
     @staticmethod
     def damerauLevenshteinDistance(s1: Any, s2: Any) -> Function:
         """
@@ -4224,9 +4402,11 @@ class FunctionWrapper:
         Returns the Damerau-Levenshtein distance between the two strings. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("damerauLevenshteinDistance", *to_args(locals()))
-    
+
     @staticmethod
-    def dateDiff(unit: Any, startdate: Any, enddate: Any, timezone: Any | None = None) -> Function:
+    def dateDiff(
+        unit: Any, startdate: Any, enddate: Any, timezone: Any | None = None
+    ) -> Function:
         """
         dateDiff(unit, startdate, enddate[, timezone])
 
@@ -4252,7 +4432,7 @@ class FunctionWrapper:
         Returns the difference between `enddate` and `startdate` expressed in `unit`. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("dateDiff", *to_args(locals()))
-    
+
     @staticmethod
     def dateName(date_part: Any, date: Any, timezone: Any | None = None) -> Function:
         """
@@ -4265,7 +4445,7 @@ class FunctionWrapper:
         Returns the specified part of date. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("dateName", *to_args(locals()))
-    
+
     @staticmethod
     def dateTime64ToSnowflake(value: Any) -> Function:
         """
@@ -4276,7 +4456,7 @@ class FunctionWrapper:
         Returns the input value converted as the first Snowflake ID at that time. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("dateTime64ToSnowflake", *to_args(locals()))
-    
+
     @staticmethod
     def dateTime64ToSnowflakeID(value: Any, epoch: Any | None = None) -> Function:
         """
@@ -4288,7 +4468,7 @@ class FunctionWrapper:
         Input value converted to [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("dateTime64ToSnowflakeID", *to_args(locals()))
-    
+
     @staticmethod
     def dateTimeToSnowflake(value: Any) -> Function:
         """
@@ -4299,7 +4479,7 @@ class FunctionWrapper:
         Returns the input value as the first Snowflake ID at that time. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("dateTimeToSnowflake", *to_args(locals()))
-    
+
     @staticmethod
     def dateTimeToSnowflakeID(value: Any, epoch: Any | None = None) -> Function:
         """
@@ -4311,7 +4491,7 @@ class FunctionWrapper:
         Input value converted to [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("dateTimeToSnowflakeID", *to_args(locals()))
-    
+
     @staticmethod
     def dateTimeToUUIDv7(value: Any) -> Function:
         """
@@ -4322,13 +4502,13 @@ class FunctionWrapper:
         Returns a UUIDv7. [`UUID`](https://clickhouse.com/docs/sql-reference/data-types/uuid)
         """
         return Function("dateTimeToUUIDv7", *to_args(locals()))
-    
+
     @staticmethod
     def dateTrunc(unit: Any, datetime: Any, timezone: Any | None = None) -> Function:
         """
         dateTrunc(unit, datetime[, timezone])
 
-        - `unit` — 
+        - `unit` —
         The type of interval to truncate the result. Possible values: `nanosecond` (only DateTime64), `microsecond` (only DateTime64), `millisecond` (only DateTime64), `second`, `minute`, `hour`, `day`, `week`, `month`, `quarter`, `year`.
          [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         - `datetime` — Date and time. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
@@ -4344,7 +4524,7 @@ class FunctionWrapper:
         | Nanosecond                  |                                       | with scale 3, 6, or 9                                                                  |
         """
         return Function("dateTrunc", *to_args(locals()))
-    
+
     @staticmethod
     def decodeHTMLComponent(s: Any) -> Function:
         """
@@ -4355,7 +4535,7 @@ class FunctionWrapper:
         Returns the string with HTML entities decoded. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("decodeHTMLComponent", *to_args(locals()))
-    
+
     @staticmethod
     def decodeURLComponent(url: Any) -> Function:
         """
@@ -4366,7 +4546,7 @@ class FunctionWrapper:
         Returns the decoded URL. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("decodeURLComponent", *to_args(locals()))
-    
+
     @staticmethod
     def decodeURLFormComponent(url: Any) -> Function:
         """
@@ -4377,7 +4557,7 @@ class FunctionWrapper:
         Returns the decoded URL. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("decodeURLFormComponent", *to_args(locals()))
-    
+
     @staticmethod
     def decodeXMLComponent(s: Any) -> Function:
         """
@@ -4388,9 +4568,15 @@ class FunctionWrapper:
         Returns the provided string with XML entities decoded. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("decodeXMLComponent", *to_args(locals()))
-    
+
     @staticmethod
-    def decrypt(mode: Any, ciphertext: Any, key: Any, iv: Any | None = None, aad: Any | None = None) -> Function:
+    def decrypt(
+        mode: Any,
+        ciphertext: Any,
+        key: Any,
+        iv: Any | None = None,
+        aad: Any | None = None,
+    ) -> Function:
         """
         decrypt(mode, ciphertext, key[, iv, aad])
 
@@ -4403,27 +4589,27 @@ class FunctionWrapper:
         Returns decrypted plaintext. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("decrypt", *to_args(locals()))
-    
+
     @staticmethod
     def defaultProfiles() -> Function:
         """
         defaultProfiles()
 
-        
+
         Returns an array of default setting profile names for the current user. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("defaultProfiles", *to_args(locals()))
-    
+
     @staticmethod
     def defaultRoles() -> Function:
         """
         defaultRoles()
 
-        
+
         Returns an array of default roles for the current user. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("defaultRoles", *to_args(locals()))
-    
+
     @staticmethod
     def defaultValueOfArgumentType(expression: Any) -> Function:
         """
@@ -4434,7 +4620,7 @@ class FunctionWrapper:
         Returns `0` for numbers, an empty string for strings or `NULL` for Nullable types. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`String`](https://clickhouse.com/docs/sql-reference/data-types/string) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("defaultValueOfArgumentType", *to_args(locals()))
-    
+
     @staticmethod
     def defaultValueOfTypeName(type: Any) -> Function:
         """
@@ -4445,7 +4631,7 @@ class FunctionWrapper:
         Returns the default value for the given type name: `0` for numbers, an empty string for strings, or `NULL` for Nullable [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`String`](https://clickhouse.com/docs/sql-reference/data-types/string) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("defaultValueOfTypeName", *to_args(locals()))
-    
+
     @staticmethod
     def degrees(x: Any) -> Function:
         """
@@ -4456,7 +4642,7 @@ class FunctionWrapper:
         Returns the value of `x` in degrees. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("degrees", *to_args(locals()))
-    
+
     @staticmethod
     def deltaSum(x1: Any, x2: Any | None = None) -> Function:
         """
@@ -4467,7 +4653,7 @@ class FunctionWrapper:
         Returns a gained arithmetic difference of the input values. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("deltaSum", *to_args(locals()))
-    
+
     @staticmethod
     def deltaSumTimestamp(value: Any, timestamp: Any) -> Function:
         """
@@ -4479,7 +4665,7 @@ class FunctionWrapper:
         Returns accumulated differences between consecutive values, ordered by the `timestamp` parameter. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("deltaSumTimestamp", *to_args(locals()))
-    
+
     @staticmethod
     def demangle(symbol: Any) -> Function:
         """
@@ -4490,17 +4676,12 @@ class FunctionWrapper:
         Returns the name of the C++ function, or an empty string if the symbol is not valid. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("demangle", *to_args(locals()))
-    
+
     @staticmethod
     def denseRank(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("denseRank", *to_args(locals()))
-    
+
     @staticmethod
     def detectCharset(s: Any) -> Function:
         """
@@ -4511,7 +4692,7 @@ class FunctionWrapper:
         Returns a string containing the code of the detected character set [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("detectCharset", *to_args(locals()))
-    
+
     @staticmethod
     def detectLanguage(s: Any) -> Function:
         """
@@ -4522,7 +4703,7 @@ class FunctionWrapper:
         Returns the 2-letter ISO code of the detected language. Other possible results: `un` = unknown, can not detect any language, `other` = the detected language does not have 2 letter code. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("detectLanguage", *to_args(locals()))
-    
+
     @staticmethod
     def detectLanguageMixed(s: Any) -> Function:
         """
@@ -4533,7 +4714,7 @@ class FunctionWrapper:
         Returns a map with keys which are 2-letter ISO codes and corresponding values which are a percentage of the text found for that language [`Map(String, Float32)`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("detectLanguageMixed", *to_args(locals()))
-    
+
     @staticmethod
     def detectLanguageUnknown(s: Any) -> Function:
         """
@@ -4544,7 +4725,7 @@ class FunctionWrapper:
         Returns the 2-letter ISO code of the detected language. Other possible results: `un` = unknown, can not detect any language, `other` = the detected language does not have 2 letter code. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("detectLanguageUnknown", *to_args(locals()))
-    
+
     @staticmethod
     def detectTonality(s: Any) -> Function:
         """
@@ -4555,7 +4736,7 @@ class FunctionWrapper:
         Returns the average sentiment value of the words in text [`Float32`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("detectTonality", *to_args(locals()))
-    
+
     @staticmethod
     def dictGet(dict_name: Any, attr_names: Any, id_expr: Any) -> Function:
         """
@@ -4569,7 +4750,7 @@ class FunctionWrapper:
         If the key is not found, returns the content of the `<null_value>` element specified for the attribute in the dictionary configuration.
         """
         return Function("dictGet", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetAll(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -4587,7 +4768,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetAll", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetChildren(dict_name: Any, key: Any) -> Function:
         """
@@ -4599,7 +4780,7 @@ class FunctionWrapper:
         Returns the first-level descendants for the key. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("dictGetChildren", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetDate(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -4617,9 +4798,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetDate", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetDateOrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetDateOrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetDateOrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -4636,7 +4819,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetDateOrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetDateTime(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -4654,9 +4837,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetDateTime", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetDateTimeOrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetDateTimeOrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetDateTimeOrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -4673,7 +4858,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetDateTimeOrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetDescendants(dict_name: Any, key: Any, level: Any) -> Function:
         """
@@ -4686,7 +4871,7 @@ class FunctionWrapper:
         Returns the descendants for the key. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("dictGetDescendants", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetFloat32(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -4704,9 +4889,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetFloat32", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetFloat32OrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetFloat32OrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetFloat32OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -4723,7 +4910,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetFloat32OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetFloat64(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -4741,9 +4928,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetFloat64", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetFloat64OrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetFloat64OrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetFloat64OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -4760,7 +4949,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetFloat64OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetHierarchy(dict_name: Any, key: Any) -> Function:
         """
@@ -4772,7 +4961,7 @@ class FunctionWrapper:
         Returns parents for the key. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("dictGetHierarchy", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetIPv4(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -4790,9 +4979,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetIPv4", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetIPv4OrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetIPv4OrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetIPv4OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -4809,7 +5000,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetIPv4OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetIPv6(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -4827,9 +5018,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetIPv6", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetIPv6OrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetIPv6OrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetIPv6OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -4846,7 +5039,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetIPv6OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetInt16(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -4864,9 +5057,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetInt16", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetInt16OrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetInt16OrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetInt16OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -4883,7 +5078,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetInt16OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetInt32(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -4901,9 +5096,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetInt32", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetInt32OrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetInt32OrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetInt32OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -4920,7 +5117,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetInt32OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetInt64(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -4938,9 +5135,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetInt64", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetInt64OrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetInt64OrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetInt64OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -4957,7 +5156,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetInt64OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetInt8(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -4975,9 +5174,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetInt8", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetInt8OrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetInt8OrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetInt8OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -4994,7 +5195,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetInt8OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetKeys(dict_name: Any, attr_name: Any, value_expr: Any) -> Function:
         """
@@ -5007,32 +5208,34 @@ class FunctionWrapper:
         For single key dictionaries: an array of keys whose attribute equals `value_expr`. For multi key dictionaries: an array of tuples of keys whose attribute equals `value_expr`. If there is no attribute corresponding to `value_expr` in the dictionary, then an empty array is returned. ClickHouse throws an exception if it cannot parse the value of the attribute or the value cannot be converted to the attribute data type.
         """
         return Function("dictGetKeys", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetOrDefault(dict_name: Any, attr_names: Any, id_expr: Any, default_value: Any) -> Function:
+    def dictGetOrDefault(
+        dict_name: Any, attr_names: Any, id_expr: Any, default_value: Any
+    ) -> Function:
         """
         dictGetOrDefault('dict_name', attr_names, id_expr, default_value)
 
         - `dict_name` — Name of the dictionary. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         - `attr_names` — Name of the column of the dictionary, or tuple of column names. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string) or [`Tuple(String)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         - `id_expr` — Key value. An expression returning UInt64/Tuple(T). [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Tuple(T)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
-        - `default_value` — Default value to return if the key is not found. Type must match the attribute's data type. 
+        - `default_value` — Default value to return if the key is not found. Type must match the attribute's data type.
         Returns the value of the dictionary attribute that corresponds to `id_expr` if the key is found.
         If the key is not found, returns the `default_value` provided.
         """
         return Function("dictGetOrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetOrNull(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
         dictGetOrNull('dict_name', 'attr_name', id_expr)
 
-        - `dict_name` — Name of the dictionary. String literal. - `attr_name` — Name of the column to retrieve. String literal. - `id_expr` — Key value. Expression returning dictionary key-type value. 
+        - `dict_name` — Name of the dictionary. String literal. - `attr_name` — Name of the column to retrieve. String literal. - `id_expr` — Key value. Expression returning dictionary key-type value.
         Returns the value of the dictionary attribute that corresponds to `id_expr` if the key is found.
         If the key is not found, returns `NULL`.
         """
         return Function("dictGetOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetString(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -5050,9 +5253,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetString", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetStringOrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetStringOrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetStringOrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -5069,7 +5274,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetStringOrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetUInt16(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -5087,9 +5292,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetUInt16", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetUInt16OrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetUInt16OrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetUInt16OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -5106,7 +5313,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetUInt16OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetUInt32(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -5124,9 +5331,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetUInt32", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetUInt32OrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetUInt32OrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetUInt32OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -5143,7 +5352,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetUInt32OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetUInt64(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -5161,9 +5370,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetUInt64", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetUInt64OrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetUInt64OrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetUInt64OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -5180,7 +5391,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetUInt64OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetUInt8(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -5198,9 +5409,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetUInt8", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetUInt8OrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetUInt8OrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetUInt8OrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -5217,7 +5430,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetUInt8OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictGetUUID(dict_name: Any, attr_name: Any, id_expr: Any) -> Function:
         """
@@ -5235,9 +5448,11 @@ class FunctionWrapper:
 
         """
         return Function("dictGetUUID", *to_args(locals()))
-    
+
     @staticmethod
-    def dictGetUUIDOrDefault(dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any) -> Function:
+    def dictGetUUIDOrDefault(
+        dict_name: Any, attr_name: Any, id_expr: Any, default_value_expr: Any
+    ) -> Function:
         """
         dictGetUUIDOrDefault(dict_name, attr_name, id_expr, default_value_expr)
 
@@ -5254,7 +5469,7 @@ class FunctionWrapper:
 
         """
         return Function("dictGetUUIDOrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def dictHas(dict_name: Any, id_expr: Any) -> Function:
         """
@@ -5266,7 +5481,7 @@ class FunctionWrapper:
         Returns `1` if the key exists, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("dictHas", *to_args(locals()))
-    
+
     @staticmethod
     def dictIsIn(dict_name: Any, child_id_expr: Any, ancestor_id_expr: Any) -> Function:
         """
@@ -5279,17 +5494,17 @@ class FunctionWrapper:
         Returns `0` if `child_id_expr` is not a child of `ancestor_id_expr`, `1` if `child_id_expr` is a child of `ancestor_id_expr` or if `child_id_expr` is an `ancestor_id_expr`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("dictIsIn", *to_args(locals()))
-    
+
     @staticmethod
     def displayName() -> Function:
         """
         displayName()
 
-        
+
         Returns the value of `display_name` from config or server FQDN if not set. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("displayName", *to_args(locals()))
-    
+
     @staticmethod
     def distinctDynamicTypes(dynamic: Any) -> Function:
         """
@@ -5300,7 +5515,7 @@ class FunctionWrapper:
         Returns the sorted list of data type names. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("distinctDynamicTypes", *to_args(locals()))
-    
+
     @staticmethod
     def distinctJSONPaths(json: Any) -> Function:
         """
@@ -5311,7 +5526,7 @@ class FunctionWrapper:
         Returns the sorted list of paths. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("distinctJSONPaths", *to_args(locals()))
-    
+
     @staticmethod
     def distinctJSONPathsAndTypes(json: Any) -> Function:
         """
@@ -5322,37 +5537,37 @@ class FunctionWrapper:
         Returns the sorted map of paths and types. [`Map(String, Array(String))`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("distinctJSONPathsAndTypes", *to_args(locals()))
-    
+
     @staticmethod
     def divide(x: Any, y: Any) -> Function:
         """
         divide(x, y)
 
-        - `x` — Dividend - `y` — Divisor 
+        - `x` — Dividend - `y` — Divisor
         The quotient of x and y
         """
         return Function("divide", *to_args(locals()))
-    
+
     @staticmethod
     def divideDecimal(x: Any, y: Any, result_scale: Any | None = None) -> Function:
         """
         divideDecimal(x, y[, result_scale])
 
-        - `x` — First value: [Decimal](https://clickhouse.com/docs/sql-reference/data-types/decimal). - `y` — Second value: [Decimal](https://clickhouse.com/docs/sql-reference/data-types/decimal). - `result_scale` — Scale of result. Type [Int/UInt](https://clickhouse.com/docs/sql-reference/data-types/int-uint). 
+        - `x` — First value: [Decimal](https://clickhouse.com/docs/sql-reference/data-types/decimal). - `y` — Second value: [Decimal](https://clickhouse.com/docs/sql-reference/data-types/decimal). - `result_scale` — Scale of result. Type [Int/UInt](https://clickhouse.com/docs/sql-reference/data-types/int-uint).
         The result of division with given scale. [`Decimal256`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("divideDecimal", *to_args(locals()))
-    
+
     @staticmethod
     def divideOrNull(x: Any, y: Any) -> Function:
         """
         divideOrNull(x, y)
 
-        - `x` — Dividend - `y` — Divisor 
+        - `x` — Dividend - `y` — Divisor
         The quotient of x and y, or NULL.
         """
         return Function("divideOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def domain(url: Any) -> Function:
         """
@@ -5363,7 +5578,7 @@ class FunctionWrapper:
         Returns the host name if the input string can be parsed as a URL, otherwise an empty string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("domain", *to_args(locals()))
-    
+
     @staticmethod
     def domainRFC(url: Any) -> Function:
         """
@@ -5374,7 +5589,7 @@ class FunctionWrapper:
         Returns the host name if the input string can be parsed as a URL, otherwise an empty string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("domainRFC", *to_args(locals()))
-    
+
     @staticmethod
     def domainWithoutWWW(url: Any) -> Function:
         """
@@ -5385,7 +5600,7 @@ class FunctionWrapper:
         Returns the domain name if the input string can be parsed as a URL (without leading `www.`), otherwise an empty string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("domainWithoutWWW", *to_args(locals()))
-    
+
     @staticmethod
     def domainWithoutWWWRFC(url: Any) -> Function:
         """
@@ -5396,7 +5611,7 @@ class FunctionWrapper:
         Returns the domain name if the input string can be parsed as a URL (without leading `www.`), otherwise an empty string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("domainWithoutWWWRFC", *to_args(locals()))
-    
+
     @staticmethod
     def dotProduct(vector1: Any, vector2: Any) -> Function:
         """
@@ -5408,7 +5623,7 @@ class FunctionWrapper:
         Returns the dot product of the two vectors. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Decimal`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("dotProduct", *to_args(locals()))
-    
+
     @staticmethod
     def dumpColumnStructure(x: Any) -> Function:
         """
@@ -5419,18 +5634,18 @@ class FunctionWrapper:
         Returns a description of the column structure used for representing the value. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("dumpColumnStructure", *to_args(locals()))
-    
+
     @staticmethod
     def dynamicElement(dynamic: Any, type_name: Any) -> Function:
         """
         dynamicElement(dynamic, type_name)
 
         - `dynamic` — Dynamic column to extract from. [`Dynamic`](https://clickhouse.com/docs/sql-reference/data-types/dynamic)
-        - `type_name` — The name of the variant type to extract (e.g., 'String', 'Int64', 'Array(Int64)'). 
+        - `type_name` — The name of the variant type to extract (e.g., 'String', 'Int64', 'Array(Int64)').
         Returns values of the specified type from the Dynamic column. Returns NULL for non-matching types (or empty array for array types). [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("dynamicElement", *to_args(locals()))
-    
+
     @staticmethod
     def dynamicType(dynamic: Any) -> Function:
         """
@@ -5441,17 +5656,17 @@ class FunctionWrapper:
         Returns the type name of the value stored in each row, or 'None' for NULL values. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("dynamicType", *to_args(locals()))
-    
+
     @staticmethod
     def e() -> Function:
         """
         e()
 
-        
+
         Returns Euler's constant [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("e", *to_args(locals()))
-    
+
     @staticmethod
     def editDistance(s1: Any, s2: Any) -> Function:
         """
@@ -5463,7 +5678,7 @@ class FunctionWrapper:
         Returns the edit distance between the two strings. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("editDistance", *to_args(locals()))
-    
+
     @staticmethod
     def editDistanceUTF8(s1: Any, s2: Any) -> Function:
         """
@@ -5475,7 +5690,7 @@ class FunctionWrapper:
         Returns the edit distance between the two UTF8 strings. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("editDistanceUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def empty(arr: Any) -> Function:
         """
@@ -5486,97 +5701,97 @@ class FunctionWrapper:
         Returns `1` for an empty array or `0` for a non-empty array [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("empty", *to_args(locals()))
-    
+
     @staticmethod
     def emptyArrayDate() -> Function:
         """
         emptyArrayDate()
 
-        
+
         An empty Date array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("emptyArrayDate", *to_args(locals()))
-    
+
     @staticmethod
     def emptyArrayDateTime() -> Function:
         """
         emptyArrayDateTime()
 
-        
+
         An empty DateTime array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("emptyArrayDateTime", *to_args(locals()))
-    
+
     @staticmethod
     def emptyArrayFloat32() -> Function:
         """
         emptyArrayFloat32()
 
-        
+
         An empty Float32 array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("emptyArrayFloat32", *to_args(locals()))
-    
+
     @staticmethod
     def emptyArrayFloat64() -> Function:
         """
         emptyArrayFloat64()
 
-        
+
         An empty Float64 array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("emptyArrayFloat64", *to_args(locals()))
-    
+
     @staticmethod
     def emptyArrayInt16() -> Function:
         """
         emptyArrayInt16()
 
-        
+
         An empty Int16 array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("emptyArrayInt16", *to_args(locals()))
-    
+
     @staticmethod
     def emptyArrayInt32() -> Function:
         """
         emptyArrayInt32()
 
-        
+
         An empty Int32 array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("emptyArrayInt32", *to_args(locals()))
-    
+
     @staticmethod
     def emptyArrayInt64() -> Function:
         """
         emptyArrayInt64()
 
-        
+
         An empty Int64 array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("emptyArrayInt64", *to_args(locals()))
-    
+
     @staticmethod
     def emptyArrayInt8() -> Function:
         """
         emptyArrayInt8()
 
-        
+
         An empty Int8 array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("emptyArrayInt8", *to_args(locals()))
-    
+
     @staticmethod
     def emptyArrayString() -> Function:
         """
         emptyArrayString()
 
-        
+
         An empty String array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("emptyArrayString", *to_args(locals()))
-    
+
     @staticmethod
     def emptyArrayToSingle(arr: Any) -> Function:
         """
@@ -5587,67 +5802,67 @@ class FunctionWrapper:
         An array with a single value of the Array's default type. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("emptyArrayToSingle", *to_args(locals()))
-    
+
     @staticmethod
     def emptyArrayUInt16() -> Function:
         """
         emptyArrayUInt16()
 
-        
+
         An empty UInt16 array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("emptyArrayUInt16", *to_args(locals()))
-    
+
     @staticmethod
     def emptyArrayUInt32() -> Function:
         """
         emptyArrayUInt32()
 
-        
+
         An empty UInt32 array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("emptyArrayUInt32", *to_args(locals()))
-    
+
     @staticmethod
     def emptyArrayUInt64() -> Function:
         """
         emptyArrayUInt64()
 
-        
+
         An empty UInt64 array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("emptyArrayUInt64", *to_args(locals()))
-    
+
     @staticmethod
     def emptyArrayUInt8() -> Function:
         """
         emptyArrayUInt8()
 
-        
+
         An empty UInt8 array. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("emptyArrayUInt8", *to_args(locals()))
-    
+
     @staticmethod
     def enabledProfiles() -> Function:
         """
         enabledProfiles()
 
-        
+
         Returns an array of setting profile names which are enabled for the current user. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("enabledProfiles", *to_args(locals()))
-    
+
     @staticmethod
     def enabledRoles() -> Function:
         """
         enabledRoles()
 
-        
+
         Returns an array of role names which are enabled for the current user. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("enabledRoles", *to_args(locals()))
-    
+
     @staticmethod
     def encodeURLComponent(url: Any) -> Function:
         """
@@ -5658,7 +5873,7 @@ class FunctionWrapper:
         Returns the encoded URL. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("encodeURLComponent", *to_args(locals()))
-    
+
     @staticmethod
     def encodeURLFormComponent(url: Any) -> Function:
         """
@@ -5669,7 +5884,7 @@ class FunctionWrapper:
         Returns the encoded URL. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("encodeURLFormComponent", *to_args(locals()))
-    
+
     @staticmethod
     def encodeXMLComponent(s: Any) -> Function:
         """
@@ -5680,9 +5895,15 @@ class FunctionWrapper:
         Returns the escaped string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("encodeXMLComponent", *to_args(locals()))
-    
+
     @staticmethod
-    def encrypt(mode: Any, plaintext: Any, key: Any, iv: Any | None = None, aad: Any | None = None) -> Function:
+    def encrypt(
+        mode: Any,
+        plaintext: Any,
+        key: Any,
+        iv: Any | None = None,
+        aad: Any | None = None,
+    ) -> Function:
         """
         encrypt(mode, plaintext, key[, iv, aad])
 
@@ -5695,7 +5916,7 @@ class FunctionWrapper:
         Returns binary string ciphertext. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("encrypt", *to_args(locals()))
-    
+
     @staticmethod
     def endsWith(s: Any, suffix: Any) -> Function:
         """
@@ -5707,7 +5928,7 @@ class FunctionWrapper:
         Returns `1` if `s` ends with `suffix`, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("endsWith", *to_args(locals()))
-    
+
     @staticmethod
     def endsWithCaseInsensitive(s: Any, suffix: Any) -> Function:
         """
@@ -5719,7 +5940,7 @@ class FunctionWrapper:
         Returns `1` if `s` ends with case-insensitive `suffix`, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("endsWithCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
     def endsWithCaseInsensitiveUTF8(s: Any, suffix: Any) -> Function:
         """
@@ -5731,7 +5952,7 @@ class FunctionWrapper:
         Returns `1` if `s` ends with case-insensitive `suffix`, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("endsWithCaseInsensitiveUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def endsWithUTF8(s: Any, suffix: Any) -> Function:
         """
@@ -5743,7 +5964,7 @@ class FunctionWrapper:
         Returns `1` if `s` ends with `suffix`, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("endsWithUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def entropy(val: Any) -> Function:
         """
@@ -5754,7 +5975,7 @@ class FunctionWrapper:
         Returns Shannon entropy. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("entropy", *to_args(locals()))
-    
+
     @staticmethod
     def equals(a: Any, b: Any) -> Function:
         """
@@ -5762,11 +5983,11 @@ class FunctionWrapper:
                 -- a = b
                 -- a == b
 
-        - `a` — First value.<sup>[*](#comparison-rules)</sup> - `b` — Second value.<sup>[*](#comparison-rules)</sup> 
+        - `a` — First value.<sup>[*](#comparison-rules)</sup> - `b` — Second value.<sup>[*](#comparison-rules)</sup>
         Returns `1` if `a` is equal to `b`, otherwise `0` [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("equals", *to_args(locals()))
-    
+
     @staticmethod
     def erf(x: Any) -> Function:
         """
@@ -5777,7 +5998,7 @@ class FunctionWrapper:
         Returns the error function value [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("erf", *to_args(locals()))
-    
+
     @staticmethod
     def erfc(x: Any) -> Function:
         """
@@ -5788,7 +6009,7 @@ class FunctionWrapper:
         Returns the complementary error function value [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("erfc", *to_args(locals()))
-    
+
     @staticmethod
     def errorCodeToName(error_code: Any) -> Function:
         """
@@ -5799,9 +6020,11 @@ class FunctionWrapper:
         Returns the textual name of `error_code`. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("errorCodeToName", *to_args(locals()))
-    
+
     @staticmethod
-    def estimateCompressionRatio(codec: Any | None = None, block_size_bytes: Any | None = None) -> Function:
+    def estimateCompressionRatio(
+        codec: Any | None = None, block_size_bytes: Any | None = None
+    ) -> Function:
         """
         estimateCompressionRatio([codec, block_size_bytes])(column)
 
@@ -5810,7 +6033,7 @@ class FunctionWrapper:
         Returns an estimate compression ratio for the given column. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("estimateCompressionRatio", *to_args(locals()))
-    
+
     @staticmethod
     def evalMLMethod(model: Any, x1: Any, x2: Any | None = None) -> Function:
         """
@@ -5822,7 +6045,7 @@ class FunctionWrapper:
         Returns the predicted value based on the trained model. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("evalMLMethod", *to_args(locals()))
-    
+
     @staticmethod
     def exp(x: Any) -> Function:
         """
@@ -5833,7 +6056,7 @@ class FunctionWrapper:
         Returns `e^x` [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("exp", *to_args(locals()))
-    
+
     @staticmethod
     def exp10(x: Any) -> Function:
         """
@@ -5844,7 +6067,7 @@ class FunctionWrapper:
         Returns 10^x [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("exp10", *to_args(locals()))
-    
+
     @staticmethod
     def exp2(x: Any) -> Function:
         """
@@ -5855,7 +6078,7 @@ class FunctionWrapper:
         Returns 2^x [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("exp2", *to_args(locals()))
-    
+
     @staticmethod
     def exponentialMovingAverage(x: Any) -> Function:
         """
@@ -5867,7 +6090,7 @@ class FunctionWrapper:
         Returns an exponentially smoothed moving average of the values for the past `x` time at the latest point of time. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("exponentialMovingAverage", *to_args(locals()))
-    
+
     @staticmethod
     def exponentialTimeDecayedAvg(x: Any) -> Function:
         """
@@ -5879,7 +6102,7 @@ class FunctionWrapper:
         Returns an exponentially smoothed weighted moving average at index `t` in time. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("exponentialTimeDecayedAvg", *to_args(locals()))
-    
+
     @staticmethod
     def exponentialTimeDecayedCount(x: Any) -> Function:
         """
@@ -5890,7 +6113,7 @@ class FunctionWrapper:
         Returns the cumulative exponential decay at the given point in time. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("exponentialTimeDecayedCount", *to_args(locals()))
-    
+
     @staticmethod
     def exponentialTimeDecayedMax(x: Any) -> Function:
         """
@@ -5902,7 +6125,7 @@ class FunctionWrapper:
         Returns the maximum of the exponentially smoothed weighted moving average at `t` and `t-1`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("exponentialTimeDecayedMax", *to_args(locals()))
-    
+
     @staticmethod
     def exponentialTimeDecayedSum(x: Any) -> Function:
         """
@@ -5914,7 +6137,7 @@ class FunctionWrapper:
         Returns the sum of exponentially smoothed moving average values at the given point in time. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("exponentialTimeDecayedSum", *to_args(locals()))
-    
+
     @staticmethod
     def extract(haystack: Any, pattern: Any) -> Function:
         """
@@ -5926,7 +6149,7 @@ class FunctionWrapper:
         Returns extracted fragment as a string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("extract", *to_args(locals()))
-    
+
     @staticmethod
     def extractAll(haystack: Any, pattern: Any) -> Function:
         """
@@ -5938,7 +6161,7 @@ class FunctionWrapper:
         Returns array of extracted fragments. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("extractAll", *to_args(locals()))
-    
+
     @staticmethod
     def extractAllGroupsHorizontal(s: Any, regexp: Any) -> Function:
         """
@@ -5950,7 +6173,7 @@ class FunctionWrapper:
         Returns an array of arrays, where each inner array contains all captures from one capturing group across all matches. The first inner array contains all captures from group 1, the second from group 2, etc. If no matches are found, returns an empty array. [`Array(Array(String))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("extractAllGroupsHorizontal", *to_args(locals()))
-    
+
     @staticmethod
     def extractAllGroupsVertical(s: Any, regexp: Any) -> Function:
         """
@@ -5962,7 +6185,7 @@ class FunctionWrapper:
         Returns an array of arrays, where each inner array contains the captured groups from one match. Each match produces an array with elements corresponding to the capturing groups in the regular expression (group 1, group 2, etc.). If no matches are found, returns an empty array. [`Array(Array(String))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("extractAllGroupsVertical", *to_args(locals()))
-    
+
     @staticmethod
     def extractGroups(s: Any, regexp: Any) -> Function:
         """
@@ -5974,27 +6197,27 @@ class FunctionWrapper:
         If the function finds at least one matching group, it returns Array(Array(String)) column, clustered by group_id (`1` to `N`, where `N` is number of capturing groups in regexp). If there is no matching group, it returns an empty array. [`Array(Array(String))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("extractGroups", *to_args(locals()))
-    
+
     @staticmethod
     def extractKeyValuePairs(input: Any) -> Function:
         """
         extractKeyValuePairs(input)
 
-        
-        
+
+
         """
         return Function("extractKeyValuePairs", *to_args(locals()))
-    
+
     @staticmethod
     def extractKeyValuePairsWithEscaping(input: Any) -> Function:
         """
         extractKeyValuePairsWithEscaping(input)
 
-        
-        
+
+
         """
         return Function("extractKeyValuePairsWithEscaping", *to_args(locals()))
-    
+
     @staticmethod
     def extractTextFromHTML(html: Any) -> Function:
         """
@@ -6005,7 +6228,7 @@ class FunctionWrapper:
         Returns the extracted text content with normalized whitespace. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("extractTextFromHTML", *to_args(locals()))
-    
+
     @staticmethod
     def extractURLParameter(url: Any, name: Any) -> Function:
         """
@@ -6017,7 +6240,7 @@ class FunctionWrapper:
         Returns the value of the URL parameter with the specified name. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("extractURLParameter", *to_args(locals()))
-    
+
     @staticmethod
     def extractURLParameterNames(url: Any) -> Function:
         """
@@ -6028,7 +6251,7 @@ class FunctionWrapper:
         Returns an array of name strings corresponding to the names of URL parameters. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("extractURLParameterNames", *to_args(locals()))
-    
+
     @staticmethod
     def extractURLParameters(url: Any) -> Function:
         """
@@ -6039,7 +6262,7 @@ class FunctionWrapper:
         Returns an array of `name=value` strings corresponding to the URL parameters. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("extractURLParameters", *to_args(locals()))
-    
+
     @staticmethod
     def factorial(n: Any) -> Function:
         """
@@ -6050,7 +6273,7 @@ class FunctionWrapper:
         Returns the factorial of the input as UInt64. Returns 1 for input 0 or any negative value. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("factorial", *to_args(locals()))
-    
+
     @staticmethod
     def farmFingerprint64(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -6061,7 +6284,7 @@ class FunctionWrapper:
         Returns the computed hash value of the input arguments. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("farmFingerprint64", *to_args(locals()))
-    
+
     @staticmethod
     def farmHash64(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -6072,7 +6295,7 @@ class FunctionWrapper:
         Returns the computed hash value of the input arguments. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("farmHash64", *to_args(locals()))
-    
+
     @staticmethod
     def file(path: Any, default: Any | None = None) -> Function:
         """
@@ -6084,7 +6307,7 @@ class FunctionWrapper:
         Returns the file content as a string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("file", *to_args(locals()))
-    
+
     @staticmethod
     def filesystemAvailable(disk_name: Any | None = None) -> Function:
         """
@@ -6095,7 +6318,7 @@ class FunctionWrapper:
         Returns the amount of remaining space available in bytes. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("filesystemAvailable", *to_args(locals()))
-    
+
     @staticmethod
     def filesystemCapacity(disk_name: Any | None = None) -> Function:
         """
@@ -6106,7 +6329,7 @@ class FunctionWrapper:
         Returns the capacity of the filesystem in bytes. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("filesystemCapacity", *to_args(locals()))
-    
+
     @staticmethod
     def filesystemUnreserved(disk_name: Any | None = None) -> Function:
         """
@@ -6117,7 +6340,7 @@ class FunctionWrapper:
         Returns the amount of free space in bytes. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("filesystemUnreserved", *to_args(locals()))
-    
+
     @staticmethod
     def finalizeAggregation(state: Any) -> Function:
         """
@@ -6128,9 +6351,11 @@ class FunctionWrapper:
         Returns the finalized result of aggregation. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("finalizeAggregation", *to_args(locals()))
-    
+
     @staticmethod
-    def financialInternalRateOfReturn(cashflows: Any, guess: Any | None = None) -> Function:
+    def financialInternalRateOfReturn(
+        cashflows: Any, guess: Any | None = None
+    ) -> Function:
         """
         financialInternalRateOfReturn(cashflows[, guess])
 
@@ -6140,16 +6365,18 @@ class FunctionWrapper:
         Returns the internal rate of return or `NaN` if the calculation cannot converge, input array is empty or has only one element, all cash flows are zero, or other calculation errors occur. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("financialInternalRateOfReturn", *to_args(locals()))
-    
+
     @staticmethod
-    def financialInternalRateOfReturnExtended(cashflow: Any, date: Any, guess: Any | None = None, daycount: Any | None = None) -> Function:
+    def financialInternalRateOfReturnExtended(
+        cashflow: Any, date: Any, guess: Any | None = None, daycount: Any | None = None
+    ) -> Function:
         """
         financialInternalRateOfReturnExtended(cashflow, date [, guess, daycount])
 
         - `cashflow` — An array of cash flows corresponding to the dates in second param. [`Array(Int8/16/32/64)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Array(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         - `date` — A sorted array of unique dates corresponding to the cash flows. [`Array(Date)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Array(Date32)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         - `[, guess]` — Optional. Initial guess (constant value) for the XIRR calculation. [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
-        - `[, daycount]` — 
+        - `[, daycount]` —
         Optional day count convention (default 'ACT_365F'). Supported values:
         - 'ACT_365F' - Actual/365 Fixed: Uses actual number of days between dates divided by 365
         - 'ACT_365_25' - Actual/365.25: Uses actual number of days between dates divided by 365.25
@@ -6158,9 +6385,11 @@ class FunctionWrapper:
         Returns the XIRR value. If the calculation cannot be performed, it returns NaN. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("financialInternalRateOfReturnExtended", *to_args(locals()))
-    
+
     @staticmethod
-    def financialNetPresentValue(rate: Any, cashflows: Any, start_from_zero: Any | None = None) -> Function:
+    def financialNetPresentValue(
+        rate: Any, cashflows: Any, start_from_zero: Any | None = None
+    ) -> Function:
         """
         financialNetPresentValue(rate, cashflows[, start_from_zero])
 
@@ -6171,9 +6400,11 @@ class FunctionWrapper:
         Returns the net present value as a Float64 value. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("financialNetPresentValue", *to_args(locals()))
-    
+
     @staticmethod
-    def financialNetPresentValueExtended(rate: Any, cashflows: Any, dates: Any, daycount: Any | None = None) -> Function:
+    def financialNetPresentValueExtended(
+        rate: Any, cashflows: Any, dates: Any, daycount: Any | None = None
+    ) -> Function:
         """
         financialNetPresentValueExtended(rate, cashflows, dates[, daycount])
 
@@ -6185,7 +6416,7 @@ class FunctionWrapper:
         Returns the net present value as a Float64 value. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("financialNetPresentValueExtended", *to_args(locals()))
-    
+
     @staticmethod
     def firstLine(s: Any) -> Function:
         """
@@ -6196,27 +6427,27 @@ class FunctionWrapper:
         Returns the first line of the input string or the whole string if there are no line separators. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("firstLine", *to_args(locals()))
-    
+
     @staticmethod
     def firstNonDefault(arg1: Any, arg2: Any | None = None) -> Function:
         """
         firstNonDefault(arg1[, arg2[ ...]])
 
-        - `arg1` — The first argument to check - `arg2` — The second argument to check - `...` — Additional arguments to check 
+        - `arg1` — The first argument to check - `arg2` — The second argument to check - `...` — Additional arguments to check
         Result type is the supertype of all arguments
         """
         return Function("firstNonDefault", *to_args(locals()))
-    
+
     @staticmethod
     def firstSignificantSubdomain(url: Any) -> Function:
         """
         firstSignificantSubdomain(url)
 
-        
-        
+
+
         """
         return Function("firstSignificantSubdomain", *to_args(locals()))
-    
+
     @staticmethod
     def firstSignificantSubdomainCustom(url: Any, tld_list_name: Any) -> Function:
         """
@@ -6228,7 +6459,7 @@ class FunctionWrapper:
         Returns the first significant subdomain. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("firstSignificantSubdomainCustom", *to_args(locals()))
-    
+
     @staticmethod
     def firstSignificantSubdomainCustomRFC(url: Any, tld_list_name: Any) -> Function:
         """
@@ -6240,19 +6471,21 @@ class FunctionWrapper:
         Returns the first significant subdomain. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("firstSignificantSubdomainCustomRFC", *to_args(locals()))
-    
+
     @staticmethod
     def firstSignificantSubdomainRFC(url: Any) -> Function:
         """
         firstSignificantSubdomainRFC(url)
 
-        
-        
+
+
         """
         return Function("firstSignificantSubdomainRFC", *to_args(locals()))
-    
+
     @staticmethod
-    def flameGraph(traces: Any, size: Any | None = None, ptr: Any | None = None) -> Function:
+    def flameGraph(
+        traces: Any, size: Any | None = None, ptr: Any | None = None
+    ) -> Function:
         """
         flameGraph(traces[, size[, ptr]])
 
@@ -6263,7 +6496,7 @@ class FunctionWrapper:
         Returns an array of strings for use with flamegraph.pl utility. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("flameGraph", *to_args(locals()))
-    
+
     @staticmethod
     def flattenTuple(input: Any) -> Function:
         """
@@ -6274,17 +6507,17 @@ class FunctionWrapper:
         Returns an output tuple whose elements are paths from the original input. [`Tuple(T)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("flattenTuple", *to_args(locals()))
-    
+
     @staticmethod
     def flipCoordinates(geometry: Any) -> Function:
         """
         flipCoordinates(geometry)
 
-        - `geometry` — The geometry to transform. Supported types: Point (Tuple(Float64, Float64)), Ring (Array(Point)), Polygon (Array(Ring)), MultiPolygon (Array(Polygon)), LineString (Array(Point)), MultiLineString (Array(LineString)), or Geometry (a variant containing any of these types). 
+        - `geometry` — The geometry to transform. Supported types: Point (Tuple(Float64, Float64)), Ring (Array(Point)), Polygon (Array(Ring)), MultiPolygon (Array(Polygon)), LineString (Array(Point)), MultiLineString (Array(LineString)), or Geometry (a variant containing any of these types).
         The geometry with flipped coordinates. The return type matches the input type. [`Point`](https://clickhouse.com/docs/sql-reference/data-types/geo#point) or [`Ring`](https://clickhouse.com/docs/sql-reference/data-types/geo#ring) or [`Polygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#polygon) or [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon) or [`LineString`](https://clickhouse.com/docs/sql-reference/data-types/geo#linestring) or [`MultiLineString`](https://clickhouse.com/docs/sql-reference/data-types/geo#multilinestring) or [`Geometry`](https://clickhouse.com/docs/sql-reference/data-types/geo)
         """
         return Function("flipCoordinates", *to_args(locals()))
-    
+
     @staticmethod
     def floor(x: Any, N: Any | None = None) -> Function:
         """
@@ -6296,7 +6529,7 @@ class FunctionWrapper:
         Returns a rounded number of the same type as `x`. [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Decimal*`](https://clickhouse.com/docs/sql-reference/data-types/decimal) or [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("floor", *to_args(locals()))
-    
+
     @staticmethod
     def format(pattern: Any, s0: Any, s1: Any | None = None) -> Function:
         """
@@ -6308,9 +6541,11 @@ class FunctionWrapper:
         Returns a formatted string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("format", *to_args(locals()))
-    
+
     @staticmethod
-    def formatDateTime(datetime: Any, format: Any, timezone: Any | None = None) -> Function:
+    def formatDateTime(
+        datetime: Any, format: Any, timezone: Any | None = None
+    ) -> Function:
         """
         formatDateTime(datetime, format[, timezone])
 
@@ -6321,9 +6556,11 @@ class FunctionWrapper:
         Returns time and date values according to the determined format. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("formatDateTime", *to_args(locals()))
-    
+
     @staticmethod
-    def formatDateTimeInJodaSyntax(datetime: Any, format: Any, timezone: Any | None = None) -> Function:
+    def formatDateTimeInJodaSyntax(
+        datetime: Any, format: Any, timezone: Any | None = None
+    ) -> Function:
         """
         formatDateTimeInJodaSyntax(datetime, format[, timezone])
 
@@ -6334,37 +6571,37 @@ class FunctionWrapper:
         Returns time and date values according to the determined format. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("formatDateTimeInJodaSyntax", *to_args(locals()))
-    
+
     @staticmethod
     def formatQuery(query: Any) -> Function:
         """
         formatQuery(query)
 
-        - `query` — The SQL query to be formatted. [String](../..https://clickhouse.com/docs/sql-reference/data-types/string.md) 
+        - `query` — The SQL query to be formatted. [String](../..https://clickhouse.com/docs/sql-reference/data-types/string.md)
         The formatted query [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("formatQuery", *to_args(locals()))
-    
+
     @staticmethod
     def formatQueryOrNull(query: Any) -> Function:
         """
         formatQueryOrNull(query)
 
-        - `query` — The SQL query to be formatted. [String](../..https://clickhouse.com/docs/sql-reference/data-types/string.md) 
+        - `query` — The SQL query to be formatted. [String](../..https://clickhouse.com/docs/sql-reference/data-types/string.md)
         The formatted query [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("formatQueryOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def formatQuerySingleLine(query: Any) -> Function:
         """
         formatQuerySingleLine(query)
 
-        - `query` — The SQL query to be formatted. [String](../..https://clickhouse.com/docs/sql-reference/data-types/string.md) 
+        - `query` — The SQL query to be formatted. [String](../..https://clickhouse.com/docs/sql-reference/data-types/string.md)
         The formatted query [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("formatQuerySingleLine", *to_args(locals()))
-    
+
     @staticmethod
     def formatQuerySingleLineOrNull(query: Any) -> Function:
         """
@@ -6375,7 +6612,7 @@ class FunctionWrapper:
         The formatted query [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("formatQuerySingleLineOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def formatReadableDecimalSize(x: Any) -> Function:
         """
@@ -6386,7 +6623,7 @@ class FunctionWrapper:
         Returns a readable, rounded size with suffix as a string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("formatReadableDecimalSize", *to_args(locals()))
-    
+
     @staticmethod
     def formatReadableQuantity(x: Any) -> Function:
         """
@@ -6397,7 +6634,7 @@ class FunctionWrapper:
         Returns a rounded number with suffix as a string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("formatReadableQuantity", *to_args(locals()))
-    
+
     @staticmethod
     def formatReadableSize(x: Any) -> Function:
         """
@@ -6408,9 +6645,11 @@ class FunctionWrapper:
         Returns a readable, rounded size with suffix as a string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("formatReadableSize", *to_args(locals()))
-    
+
     @staticmethod
-    def formatReadableTimeDelta(column: Any, maximum_unit: Any | None = None, minimum_unit: Any | None = None) -> Function:
+    def formatReadableTimeDelta(
+        column: Any, maximum_unit: Any | None = None, minimum_unit: Any | None = None
+    ) -> Function:
         """
         formatReadableTimeDelta(column[, maximum_unit, minimum_unit])
 
@@ -6421,7 +6660,7 @@ class FunctionWrapper:
         Returns a time delta as a string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("formatReadableTimeDelta", *to_args(locals()))
-    
+
     @staticmethod
     def formatRow(format: Any, x: Any, y: Any) -> Function:
         """
@@ -6433,7 +6672,7 @@ class FunctionWrapper:
         A formatted string. (for text formats it's usually terminated with the new line character). [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("formatRow", *to_args(locals()))
-    
+
     @staticmethod
     def formatRowNoNewline(format: Any, x: Any, y: Any) -> Function:
         """
@@ -6445,7 +6684,7 @@ class FunctionWrapper:
         Returns a formatted string with newlines removed. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("formatRowNoNewline", *to_args(locals()))
-    
+
     @staticmethod
     def fragment(url: Any) -> Function:
         """
@@ -6456,7 +6695,7 @@ class FunctionWrapper:
         Returns the fragment identifier without the initial hash symbol. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("fragment", *to_args(locals()))
-    
+
     @staticmethod
     def fromDaysSinceYearZero(days: Any) -> Function:
         """
@@ -6467,7 +6706,7 @@ class FunctionWrapper:
         Returns the date corresponding to the number of days passed since year zero. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("fromDaysSinceYearZero", *to_args(locals()))
-    
+
     @staticmethod
     def fromDaysSinceYearZero32(days: Any) -> Function:
         """
@@ -6478,7 +6717,7 @@ class FunctionWrapper:
         Returns the date corresponding to the number of days passed since year zero. [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32)
         """
         return Function("fromDaysSinceYearZero32", *to_args(locals()))
-    
+
     @staticmethod
     def fromModifiedJulianDay(day: Any) -> Function:
         """
@@ -6489,7 +6728,7 @@ class FunctionWrapper:
         Returns date in text form. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("fromModifiedJulianDay", *to_args(locals()))
-    
+
     @staticmethod
     def fromModifiedJulianDayOrNull(day: Any) -> Function:
         """
@@ -6500,7 +6739,7 @@ class FunctionWrapper:
         Returns date in text form for valid `day` argument, otherwise `null`. [`Nullable(String)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("fromModifiedJulianDayOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def fromUTCTimestamp(datetime: Any, time_zone: Any) -> Function:
         """
@@ -6512,7 +6751,7 @@ class FunctionWrapper:
         Returns DateTime/DateTime64 in the specified timezone. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("fromUTCTimestamp", *to_args(locals()))
-    
+
     @staticmethod
     def fromUnixTimestamp(timestamp: Any) -> Function:
         """
@@ -6526,7 +6765,7 @@ class FunctionWrapper:
         Returns `DateTime` of the timestamp when called with one argument, or a String  when called with two or three arguments. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("fromUnixTimestamp", *to_args(locals()))
-    
+
     @staticmethod
     def fromUnixTimestamp64Micro(value: Any, timezone: Any | None = None) -> Function:
         """
@@ -6538,7 +6777,7 @@ class FunctionWrapper:
         Returns a `DateTime64` value with microsecond precision. [`DateTime64(6)`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("fromUnixTimestamp64Micro", *to_args(locals()))
-    
+
     @staticmethod
     def fromUnixTimestamp64Milli(value: Any, timezone: Any | None = None) -> Function:
         """
@@ -6550,7 +6789,7 @@ class FunctionWrapper:
         A `DateTime64` value with millisecond precision. [`DateTime64(3)`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("fromUnixTimestamp64Milli", *to_args(locals()))
-    
+
     @staticmethod
     def fromUnixTimestamp64Nano(value: Any, timezone: Any | None = None) -> Function:
         """
@@ -6562,7 +6801,7 @@ class FunctionWrapper:
         Returns a `DateTime64` value with nanosecond precision. [`DateTime64(9)`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("fromUnixTimestamp64Nano", *to_args(locals()))
-    
+
     @staticmethod
     def fromUnixTimestamp64Second(value: Any, timezone: Any | None = None) -> Function:
         """
@@ -6574,7 +6813,7 @@ class FunctionWrapper:
         Returns a `DateTime64` value with second precision. [`DateTime64(0)`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("fromUnixTimestamp64Second", *to_args(locals()))
-    
+
     @staticmethod
     def fromUnixTimestampInJodaSyntax(timestamp: Any) -> Function:
         """
@@ -6588,7 +6827,7 @@ class FunctionWrapper:
         Returns a date with time when called with one argument, or a String when called with two or three arguments.} [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("fromUnixTimestampInJodaSyntax", *to_args(locals()))
-    
+
     @staticmethod
     def fuzzBits(s: Any, p: Any) -> Function:
         """
@@ -6600,17 +6839,17 @@ class FunctionWrapper:
         Returns a Fuzzed string with same type as `s`. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string) or [`FixedString`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("fuzzBits", *to_args(locals()))
-    
+
     @staticmethod
     def fuzzQuery(query: Any) -> Function:
         """
         fuzzQuery(query)
 
-        - `query` — The SQL query to be fuzzed. [String](../..https://clickhouse.com/docs/sql-reference/data-types/string.md) 
+        - `query` — The SQL query to be fuzzed. [String](../..https://clickhouse.com/docs/sql-reference/data-types/string.md)
         The fuzzed query string [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("fuzzQuery", *to_args(locals()))
-    
+
     @staticmethod
     def gccMurmurHash(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -6621,19 +6860,21 @@ class FunctionWrapper:
         Returns the calculated hash value of the input arguments. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("gccMurmurHash", *to_args(locals()))
-    
+
     @staticmethod
     def gcd(x: Any, y: Any) -> Function:
         """
         gcd(x, y)
 
-        - `x` — First integer - `y` — Second integer 
+        - `x` — First integer - `y` — Second integer
         The greatest common divisor of `x` and `y`.
         """
         return Function("gcd", *to_args(locals()))
-    
+
     @staticmethod
-    def generateRandomStructure(number_of_columns: Any | None = None, seed: Any | None = None) -> Function:
+    def generateRandomStructure(
+        number_of_columns: Any | None = None, seed: Any | None = None
+    ) -> Function:
         """
         generateRandomStructure([number_of_columns, seed])
 
@@ -6643,9 +6884,11 @@ class FunctionWrapper:
         Randomly generated table structure. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("generateRandomStructure", *to_args(locals()))
-    
+
     @staticmethod
-    def generateSerialID(series_identifier: Any, start_value: Any | None = None) -> Function:
+    def generateSerialID(
+        series_identifier: Any, start_value: Any | None = None
+    ) -> Function:
         """
         generateSerialID(series_identifier[, start_value])
 
@@ -6655,17 +6898,19 @@ class FunctionWrapper:
         Returns sequential numbers starting from the previous counter value. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("generateSerialID", *to_args(locals()))
-    
+
     @staticmethod
-    def generateSnowflakeID(expr: Any | None = None, machine_id: Any | None = None) -> Function:
+    def generateSnowflakeID(
+        expr: Any | None = None, machine_id: Any | None = None
+    ) -> Function:
         """
         generateSnowflakeID([expr, [machine_id]])
 
-        - `expr` — An arbitrary [expression](https://clickhouse.com/docs/sql-reference/syntax#expressions) used to bypass [common subexpression elimination](https://clickhouse.com/docs/sql-reference/functions/overview#common-subexpression-elimination) if the function is called multiple times in a query. The value of the expression has no effect on the returned Snowflake ID. Optional. - `machine_id` — A machine ID, the lowest 10 bits are used. [Int64](../data-types/int-uint.md). Optional. 
+        - `expr` — An arbitrary [expression](https://clickhouse.com/docs/sql-reference/syntax#expressions) used to bypass [common subexpression elimination](https://clickhouse.com/docs/sql-reference/functions/overview#common-subexpression-elimination) if the function is called multiple times in a query. The value of the expression has no effect on the returned Snowflake ID. Optional. - `machine_id` — A machine ID, the lowest 10 bits are used. [Int64](../data-types/int-uint.md). Optional.
         Returns the Snowflake ID. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("generateSnowflakeID", *to_args(locals()))
-    
+
     @staticmethod
     def generateULID(x: Any | None = None) -> Function:
         """
@@ -6676,17 +6921,17 @@ class FunctionWrapper:
         Returns a ULID. [`FixedString(26)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("generateULID", *to_args(locals()))
-    
+
     @staticmethod
     def generateUUIDv4(expr: Any | None = None) -> Function:
         """
         generateUUIDv4([expr])
 
-        - `expr` — Optional. An arbitrary expression used to bypass [common subexpression elimination](https://clickhouse.com/docs/sql-reference/functions/overview#common-subexpression-elimination) if the function is called multiple times in a query. The value of the expression has no effect on the returned UUID. 
+        - `expr` — Optional. An arbitrary expression used to bypass [common subexpression elimination](https://clickhouse.com/docs/sql-reference/functions/overview#common-subexpression-elimination) if the function is called multiple times in a query. The value of the expression has no effect on the returned UUID.
         Returns a UUIDv4. [`UUID`](https://clickhouse.com/docs/sql-reference/data-types/uuid)
         """
         return Function("generateUUIDv4", *to_args(locals()))
-    
+
     @staticmethod
     def generateUUIDv7(expr: Any | None = None) -> Function:
         """
@@ -6697,7 +6942,7 @@ class FunctionWrapper:
         Returns a UUIDv7. [`UUID`](https://clickhouse.com/docs/sql-reference/data-types/uuid)
         """
         return Function("generateUUIDv7", *to_args(locals()))
-    
+
     @staticmethod
     def geoDistance(lon1Deg: Any, lat1Deg: Any, lon2Deg: Any, lat2Deg: Any) -> Function:
         """
@@ -6711,7 +6956,7 @@ class FunctionWrapper:
         Returns the distance between two points on the Earth's surface, in meters [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("geoDistance", *to_args(locals()))
-    
+
     @staticmethod
     def geoToH3(lat: Any, lon: Any, resolution: Any) -> Function:
         """
@@ -6724,7 +6969,7 @@ class FunctionWrapper:
         Returns the H3 index number, or `0` in case of error. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("geoToH3", *to_args(locals()))
-    
+
     @staticmethod
     def geoToS2(lon: Any, lat: Any) -> Function:
         """
@@ -6736,7 +6981,7 @@ class FunctionWrapper:
         Returns the S2 cell identifier. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("geoToS2", *to_args(locals()))
-    
+
     @staticmethod
     def geohashDecode(hash_str: Any) -> Function:
         """
@@ -6747,9 +6992,11 @@ class FunctionWrapper:
         Returns a tuple of `(longitude, latitude)` with `Float64` precision. [`Tuple(Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("geohashDecode", *to_args(locals()))
-    
+
     @staticmethod
-    def geohashEncode(longitude: Any, latitude: Any, precision: Any | None = None) -> Function:
+    def geohashEncode(
+        longitude: Any, latitude: Any, precision: Any | None = None
+    ) -> Function:
         """
         geohashEncode(longitude, latitude, [precision])
 
@@ -6760,9 +7007,15 @@ class FunctionWrapper:
         Returns an alphanumeric string of the encoded coordinate (modified version of the base32-encoding alphabet is used) [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("geohashEncode", *to_args(locals()))
-    
+
     @staticmethod
-    def geohashesInBox(longitude_min: Any, latitude_min: Any, longitude_max: Any, latitude_max: Any, precision: Any) -> Function:
+    def geohashesInBox(
+        longitude_min: Any,
+        latitude_min: Any,
+        longitude_max: Any,
+        latitude_max: Any,
+        precision: Any,
+    ) -> Function:
         """
         geohashesInBox(longitude_min, latitude_min, longitude_max, latitude_max, precision)
 
@@ -6775,7 +7028,7 @@ class FunctionWrapper:
         Returns an array of precision-long strings of geohash-boxes covering the provided area, or an empty array if the minimum longitude and latitude values aren't less than the corresponding maximum values. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("geohashesInBox", *to_args(locals()))
-    
+
     @staticmethod
     def getClientHTTPHeader(name: Any) -> Function:
         """
@@ -6786,7 +7039,7 @@ class FunctionWrapper:
         Returns the value of the header. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("getClientHTTPHeader", *to_args(locals()))
-    
+
     @staticmethod
     def getMacro(name: Any) -> Function:
         """
@@ -6797,7 +7050,7 @@ class FunctionWrapper:
         Returns the value of the specified macro. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("getMacro", *to_args(locals()))
-    
+
     @staticmethod
     def getMaxTableNameLengthForDatabase(database_name: Any) -> Function:
         """
@@ -6808,7 +7061,7 @@ class FunctionWrapper:
         Returns the length of the maximum table name, an Integer
         """
         return Function("getMaxTableNameLengthForDatabase", *to_args(locals()))
-    
+
     @staticmethod
     def getMergeTreeSetting(setting_name: Any) -> Function:
         """
@@ -6819,17 +7072,17 @@ class FunctionWrapper:
         Returns the merge tree setting's current value.
         """
         return Function("getMergeTreeSetting", *to_args(locals()))
-    
+
     @staticmethod
     def getOSKernelVersion() -> Function:
         """
         getOSKernelVersion()
 
-        
+
         Returns the current OS kernel version. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("getOSKernelVersion", *to_args(locals()))
-    
+
     @staticmethod
     def getServerPort(port_name: Any) -> Function:
         """
@@ -6840,7 +7093,7 @@ class FunctionWrapper:
         Returns the server port number. [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("getServerPort", *to_args(locals()))
-    
+
     @staticmethod
     def getServerSetting(setting_name: Any) -> Function:
         """
@@ -6851,7 +7104,7 @@ class FunctionWrapper:
         Returns the server setting's current value. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("getServerSetting", *to_args(locals()))
-    
+
     @staticmethod
     def getSetting(setting_name: Any) -> Function:
         """
@@ -6862,18 +7115,18 @@ class FunctionWrapper:
         Returns the setting's current value. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("getSetting", *to_args(locals()))
-    
+
     @staticmethod
     def getSettingOrDefault(setting_name: Any, default_value: Any) -> Function:
         """
         getSettingOrDefault(setting_name, default_value)
 
         - `setting_name` — The setting name. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
-        - `default_value` — Value to return if custom_setting is not set. Value may be of any data type or Null. 
+        - `default_value` — Value to return if custom_setting is not set. Value may be of any data type or Null.
         Returns the current value of the specified setting or `default_value` if the setting is not set.
         """
         return Function("getSettingOrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def getSizeOfEnumType(x: Any) -> Function:
         """
@@ -6884,17 +7137,17 @@ class FunctionWrapper:
         Returns the number of fields with `Enum` input values. [`UInt8/16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("getSizeOfEnumType", *to_args(locals()))
-    
+
     @staticmethod
     def getSubcolumn(nested_value: Any, subcolumn_name: Any) -> Function:
         """
         getSubcolumn(nested_value, subcolumn_name)
 
-        
-        
+
+
         """
         return Function("getSubcolumn", *to_args(locals()))
-    
+
     @staticmethod
     def getTypeSerializationStreams(col: Any) -> Function:
         """
@@ -6905,87 +7158,87 @@ class FunctionWrapper:
         Returns an array with all the serialization sub-stream paths. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("getTypeSerializationStreams", *to_args(locals()))
-    
+
     @staticmethod
     def globalIn(x: Any, set: Any) -> Function:
         """
         globalIn(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("globalIn", *to_args(locals()))
-    
+
     @staticmethod
     def globalInIgnoreSet(x: Any, set: Any) -> Function:
         """
         globalIn(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("globalInIgnoreSet", *to_args(locals()))
-    
+
     @staticmethod
     def globalNotIn(x: Any, set: Any) -> Function:
         """
         globalNotIn(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is not in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("globalNotIn", *to_args(locals()))
-    
+
     @staticmethod
     def globalNotInIgnoreSet(x: Any, set: Any) -> Function:
         """
         globalNotIn(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is not in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("globalNotInIgnoreSet", *to_args(locals()))
-    
+
     @staticmethod
     def globalNotNullIn(x: Any, set: Any) -> Function:
         """
         globalNotNullIn(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is not in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("globalNotNullIn", *to_args(locals()))
-    
+
     @staticmethod
     def globalNotNullInIgnoreSet(x: Any, set: Any) -> Function:
         """
         globalNotNullIn(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is not in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("globalNotNullInIgnoreSet", *to_args(locals()))
-    
+
     @staticmethod
     def globalNullIn(x: Any, set: Any) -> Function:
         """
         globalNullIn(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("globalNullIn", *to_args(locals()))
-    
+
     @staticmethod
     def globalNullInIgnoreSet(x: Any, set: Any) -> Function:
         """
         globalNullIn(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("globalNullInIgnoreSet", *to_args(locals()))
-    
+
     @staticmethod
     def globalVariable(name: Any) -> Function:
         """
@@ -6996,9 +7249,11 @@ class FunctionWrapper:
         Returns the value of variable `name`. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("globalVariable", *to_args(locals()))
-    
+
     @staticmethod
-    def greatCircleAngle(lon1Deg: Any, lat1Deg: Any, lon2Deg: Any, lat2Deg: Any) -> Function:
+    def greatCircleAngle(
+        lon1Deg: Any, lat1Deg: Any, lon2Deg: Any, lat2Deg: Any
+    ) -> Function:
         """
         greatCircleAngle(lon1Deg, lat1Deg, lon2Deg, lat2Deg)
 
@@ -7010,9 +7265,11 @@ class FunctionWrapper:
         Returns the central angle between the two points in degrees [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("greatCircleAngle", *to_args(locals()))
-    
+
     @staticmethod
-    def greatCircleDistance(lon1Deg: Any, lat1Deg: Any, lon2Deg: Any, lat2Deg: Any) -> Function:
+    def greatCircleDistance(
+        lon1Deg: Any, lat1Deg: Any, lon2Deg: Any, lat2Deg: Any
+    ) -> Function:
         """
         greatCircleDistance(lon1Deg, lat1Deg, lon2Deg, lat2Deg)
 
@@ -7024,29 +7281,29 @@ class FunctionWrapper:
         Returns the distance between two points on the Earth's surface, in meters [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("greatCircleDistance", *to_args(locals()))
-    
+
     @staticmethod
     def greater(a: Any, b: Any) -> Function:
         """
         greater(a, b)
             -- a > b
 
-        - `a` — First value.<sup>[*](#comparison-rules)</sup> - `b` — Second value.<sup>[*](#comparison-rules)</sup> 
+        - `a` — First value.<sup>[*](#comparison-rules)</sup> - `b` — Second value.<sup>[*](#comparison-rules)</sup>
         Returns `1` if `a` is greater than `b`, otherwise `0` [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("greater", *to_args(locals()))
-    
+
     @staticmethod
     def greaterOrEquals(a: Any, b: Any) -> Function:
         """
         greaterOrEquals(a, b)
             -- a >= b
 
-        - `a` — First value.<sup>[*](#comparison-rules)</sup> - `b` — Second value.<sup>[*](#comparison-rules)</sup> 
+        - `a` — First value.<sup>[*](#comparison-rules)</sup> - `b` — Second value.<sup>[*](#comparison-rules)</sup>
         Returns `1` if `a` is greater than or equal to `b`, otherwise `0` [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("greaterOrEquals", *to_args(locals()))
-    
+
     @staticmethod
     def greatest(x1: Any, x2: Any | None = None) -> Function:
         """
@@ -7057,7 +7314,7 @@ class FunctionWrapper:
         Returns the greatest value among the arguments, promoted to the largest compatible type. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("greatest", *to_args(locals()))
-    
+
     @staticmethod
     def groupArray(x: Any) -> Function:
         """
@@ -7069,7 +7326,7 @@ class FunctionWrapper:
         Returns an array of argument values. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("groupArray", *to_args(locals()))
-    
+
     @staticmethod
     def groupArrayInsertAt(default_x: Any, size: Any) -> Function:
         """
@@ -7081,7 +7338,7 @@ class FunctionWrapper:
         Returns an array with inserted values. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("groupArrayInsertAt", *to_args(locals()))
-    
+
     @staticmethod
     def groupArrayIntersect(x: Any) -> Function:
         """
@@ -7092,7 +7349,7 @@ class FunctionWrapper:
         Returns an array that contains elements that are in all arrays. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("groupArrayIntersect", *to_args(locals()))
-    
+
     @staticmethod
     def groupArrayLast(max_size: Any) -> Function:
         """
@@ -7104,7 +7361,7 @@ class FunctionWrapper:
         Returns an array of the last argument values. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("groupArrayLast", *to_args(locals()))
-    
+
     @staticmethod
     def groupArrayMovingAvg(numbers_for_summing: Any) -> Function:
         """
@@ -7116,7 +7373,7 @@ class FunctionWrapper:
         Returns an array of the same size and type as the input data. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("groupArrayMovingAvg", *to_args(locals()))
-    
+
     @staticmethod
     def groupArrayMovingSum(numbers_for_summing: Any) -> Function:
         """
@@ -7128,7 +7385,7 @@ class FunctionWrapper:
         Returns an array of the same size and type as the input data. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("groupArrayMovingSum", *to_args(locals()))
-    
+
     @staticmethod
     def groupArraySample(max_size: Any, seed: Any | None = None) -> Function:
         """
@@ -7139,7 +7396,7 @@ class FunctionWrapper:
         Array of randomly selected x arguments. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("groupArraySample", *to_args(locals()))
-    
+
     @staticmethod
     def groupArraySorted(N: Any) -> Function:
         """
@@ -7150,7 +7407,7 @@ class FunctionWrapper:
         Returns an array with the first N items in ascending order. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("groupArraySorted", *to_args(locals()))
-    
+
     @staticmethod
     def groupBitAnd(expr: Any) -> Function:
         """
@@ -7161,7 +7418,7 @@ class FunctionWrapper:
         Returns a value of `(U)Int*` type. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("groupBitAnd", *to_args(locals()))
-    
+
     @staticmethod
     def groupBitOr(expr: Any) -> Function:
         """
@@ -7172,7 +7429,7 @@ class FunctionWrapper:
         Returns a value of `(U)Int*` type. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("groupBitOr", *to_args(locals()))
-    
+
     @staticmethod
     def groupBitXor(expr: Any) -> Function:
         """
@@ -7183,7 +7440,7 @@ class FunctionWrapper:
         Returns a value of `(U)Int*` type. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("groupBitXor", *to_args(locals()))
-    
+
     @staticmethod
     def groupBitmap(expr: Any) -> Function:
         """
@@ -7195,7 +7452,7 @@ class FunctionWrapper:
         Returns the count of type UInt64 type, or a bitmap object when using `-State`. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("groupBitmap", *to_args(locals()))
-    
+
     @staticmethod
     def groupBitmapAnd(expr: Any) -> Function:
         """
@@ -7207,7 +7464,7 @@ class FunctionWrapper:
         Returns a count of type `UInt64`, or a bitmap object when using `-State`. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("groupBitmapAnd", *to_args(locals()))
-    
+
     @staticmethod
     def groupBitmapOr(expr: Any) -> Function:
         """
@@ -7219,7 +7476,7 @@ class FunctionWrapper:
         Returns a count of type `UInt64`, or a bitmap object when using `-State`. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("groupBitmapOr", *to_args(locals()))
-    
+
     @staticmethod
     def groupBitmapXor(expr: Any) -> Function:
         """
@@ -7231,7 +7488,7 @@ class FunctionWrapper:
         Returns a count of type `UInt64`, or a bitmap object when using `-State`. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("groupBitmapXor", *to_args(locals()))
-    
+
     @staticmethod
     def groupConcat(delimiter: Any, limit: Any | None = None) -> Function:
         """
@@ -7243,17 +7500,12 @@ class FunctionWrapper:
         Returns a string consisting of the concatenated values of the column or expression. If the group has no elements or only null elements, and the function does not specify a handling for only null values, the result is a nullable string with a null value. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("groupConcat", *to_args(locals()))
-    
+
     @staticmethod
     def groupNumericIndexedVector(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("groupNumericIndexedVector", *to_args(locals()))
-    
+
     @staticmethod
     def groupUniqArray(x: Any) -> Function:
         """
@@ -7265,7 +7517,7 @@ class FunctionWrapper:
         Returns an array of unique values. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("groupUniqArray", *to_args(locals()))
-    
+
     @staticmethod
     def h3CellAreaM2(index: Any) -> Function:
         """
@@ -7276,7 +7528,7 @@ class FunctionWrapper:
         Returns the exact area of the H3 cell in square meters. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("h3CellAreaM2", *to_args(locals()))
-    
+
     @staticmethod
     def h3CellAreaRads2(index: Any) -> Function:
         """
@@ -7287,7 +7539,7 @@ class FunctionWrapper:
         Returns the exact area of the H3 cell in square radians. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("h3CellAreaRads2", *to_args(locals()))
-    
+
     @staticmethod
     def h3Distance(start: Any, end: Any) -> Function:
         """
@@ -7299,7 +7551,7 @@ class FunctionWrapper:
         Returns the number of grid cells between the start and end indices. Returns a negative number if the distance cannot be computed. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("h3Distance", *to_args(locals()))
-    
+
     @staticmethod
     def h3EdgeAngle(resolution: Any) -> Function:
         """
@@ -7310,7 +7562,7 @@ class FunctionWrapper:
         Returns the average length of an [H3](#h3-index) hexagon edge in grades. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("h3EdgeAngle", *to_args(locals()))
-    
+
     @staticmethod
     def h3EdgeLengthKm(resolution: Any) -> Function:
         """
@@ -7321,7 +7573,7 @@ class FunctionWrapper:
         Returns the average length of an [H3](#h3-index) hexagon edge in kilometers. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("h3EdgeLengthKm", *to_args(locals()))
-    
+
     @staticmethod
     def h3EdgeLengthM(resolution: Any) -> Function:
         """
@@ -7332,7 +7584,7 @@ class FunctionWrapper:
         Returns the average edge length of an [H3](#h3-index) hexagon in meters. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("h3EdgeLengthM", *to_args(locals()))
-    
+
     @staticmethod
     def h3ExactEdgeLengthKm(index: Any) -> Function:
         """
@@ -7343,7 +7595,7 @@ class FunctionWrapper:
         Returns the exact length of the H3 edge in kilometers. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("h3ExactEdgeLengthKm", *to_args(locals()))
-    
+
     @staticmethod
     def h3ExactEdgeLengthM(index: Any) -> Function:
         """
@@ -7354,7 +7606,7 @@ class FunctionWrapper:
         Returns the exact length of the H3 edge in meters. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("h3ExactEdgeLengthM", *to_args(locals()))
-    
+
     @staticmethod
     def h3ExactEdgeLengthRads(index: Any) -> Function:
         """
@@ -7365,7 +7617,7 @@ class FunctionWrapper:
         Returns the exact length of the H3 edge in radians. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("h3ExactEdgeLengthRads", *to_args(locals()))
-    
+
     @staticmethod
     def h3GetBaseCell(index: Any) -> Function:
         """
@@ -7376,7 +7628,7 @@ class FunctionWrapper:
         Returns the hexagon base cell number. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("h3GetBaseCell", *to_args(locals()))
-    
+
     @staticmethod
     def h3GetDestinationIndexFromUnidirectionalEdge(edge: Any) -> Function:
         """
@@ -7386,8 +7638,10 @@ class FunctionWrapper:
 
         Returns the destination hexagon index from the unidirectional edge. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
-        return Function("h3GetDestinationIndexFromUnidirectionalEdge", *to_args(locals()))
-    
+        return Function(
+            "h3GetDestinationIndexFromUnidirectionalEdge", *to_args(locals())
+        )
+
     @staticmethod
     def h3GetFaces(index: Any) -> Function:
         """
@@ -7398,7 +7652,7 @@ class FunctionWrapper:
         Returns an array containing the indices (0-19) of the icosahedron faces that the H3 index intersects with. [`Array(UInt8)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("h3GetFaces", *to_args(locals()))
-    
+
     @staticmethod
     def h3GetIndexesFromUnidirectionalEdge(edge: Any) -> Function:
         """
@@ -7409,7 +7663,7 @@ class FunctionWrapper:
         Returns a tuple containing the origin and destination hexagon indices from the unidirectional edge, or `(0,0)` if the input is not valid. [`Tuple(UInt64, UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("h3GetIndexesFromUnidirectionalEdge", *to_args(locals()))
-    
+
     @staticmethod
     def h3GetOriginIndexFromUnidirectionalEdge(edge: Any) -> Function:
         """
@@ -7420,7 +7674,7 @@ class FunctionWrapper:
         Returns the origin hexagon index from the unidirectional edge. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("h3GetOriginIndexFromUnidirectionalEdge", *to_args(locals()))
-    
+
     @staticmethod
     def h3GetPentagonIndexes(resolution: Any) -> Function:
         """
@@ -7431,17 +7685,17 @@ class FunctionWrapper:
         Returns an array of all pentagon H3 indices at the specified resolution. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("h3GetPentagonIndexes", *to_args(locals()))
-    
+
     @staticmethod
     def h3GetRes0Indexes() -> Function:
         """
         h3GetRes0Indexes()
 
-        
+
         Returns an array of all resolution 0 H3 indices. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("h3GetRes0Indexes", *to_args(locals()))
-    
+
     @staticmethod
     def h3GetResolution(index: Any) -> Function:
         """
@@ -7452,7 +7706,7 @@ class FunctionWrapper:
         Returns the resolution of the H3 index with range `[0, 15]`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("h3GetResolution", *to_args(locals()))
-    
+
     @staticmethod
     def h3GetUnidirectionalEdge(origin: Any, destination: Any) -> Function:
         """
@@ -7464,7 +7718,7 @@ class FunctionWrapper:
         Returns the H3 unidirectional edge index. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("h3GetUnidirectionalEdge", *to_args(locals()))
-    
+
     @staticmethod
     def h3GetUnidirectionalEdgeBoundary(index: Any) -> Function:
         """
@@ -7475,7 +7729,7 @@ class FunctionWrapper:
         Returns an array of (longitude, latitude) pairs defining a unidirectional edge. [`Array(Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("h3GetUnidirectionalEdgeBoundary", *to_args(locals()))
-    
+
     @staticmethod
     def h3GetUnidirectionalEdgesFromHexagon(index: Any) -> Function:
         """
@@ -7486,7 +7740,7 @@ class FunctionWrapper:
         Returns an array of H3 indexes representing each unidirectional edge. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("h3GetUnidirectionalEdgesFromHexagon", *to_args(locals()))
-    
+
     @staticmethod
     def h3HexAreaKm2(resolution: Any) -> Function:
         """
@@ -7497,7 +7751,7 @@ class FunctionWrapper:
         Returns the average area of an H3 hexagon in square kilometers for the given resolution. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("h3HexAreaKm2", *to_args(locals()))
-    
+
     @staticmethod
     def h3HexAreaM2(resolution: Any) -> Function:
         """
@@ -7508,7 +7762,7 @@ class FunctionWrapper:
         Returns the average area of an H3 hexagon in square meters for the given resolution. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("h3HexAreaM2", *to_args(locals()))
-    
+
     @staticmethod
     def h3HexRing(index: Any, k: Any) -> Function:
         """
@@ -7520,7 +7774,7 @@ class FunctionWrapper:
         Returns an array of H3 indices forming a hexagonal ring around the origin, or `0` if a pentagonal distortion is encountered. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("h3HexRing", *to_args(locals()))
-    
+
     @staticmethod
     def h3IndexesAreNeighbors(index1: Any, index2: Any) -> Function:
         """
@@ -7532,7 +7786,7 @@ class FunctionWrapper:
         Returns `1` if the indexes are neighbors (sharing an edge), `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("h3IndexesAreNeighbors", *to_args(locals()))
-    
+
     @staticmethod
     def h3IsPentagon(index: Any) -> Function:
         """
@@ -7543,7 +7797,7 @@ class FunctionWrapper:
         Returns `1` if the index represents a pentagonal cell, `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("h3IsPentagon", *to_args(locals()))
-    
+
     @staticmethod
     def h3IsResClassIII(index: Any) -> Function:
         """
@@ -7554,7 +7808,7 @@ class FunctionWrapper:
         Returns `1` if the index has a Class III resolution (odd-numbered), `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("h3IsResClassIII", *to_args(locals()))
-    
+
     @staticmethod
     def h3IsValid(h3index: Any) -> Function:
         """
@@ -7565,7 +7819,7 @@ class FunctionWrapper:
         Returns `1` if the number is a valid H3 index, `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("h3IsValid", *to_args(locals()))
-    
+
     @staticmethod
     def h3Line(start: Any, end: Any) -> Function:
         """
@@ -7577,7 +7831,7 @@ class FunctionWrapper:
         Returns an array of H3 indices representing the line between the start and end indices. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("h3Line", *to_args(locals()))
-    
+
     @staticmethod
     def h3NumHexagons(resolution: Any) -> Function:
         """
@@ -7588,7 +7842,7 @@ class FunctionWrapper:
         Returns the number of unique H3 indices at the specified resolution. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("h3NumHexagons", *to_args(locals()))
-    
+
     @staticmethod
     def h3PointDistKm(lat1: Any, lon1: Any, lat2: Any, lon2: Any) -> Function:
         """
@@ -7602,7 +7856,7 @@ class FunctionWrapper:
         Returns the haversine or great circle distance in kilometers. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("h3PointDistKm", *to_args(locals()))
-    
+
     @staticmethod
     def h3PointDistM(lat1: Any, lon1: Any, lat2: Any, lon2: Any) -> Function:
         """
@@ -7616,7 +7870,7 @@ class FunctionWrapper:
         Returns the haversine or great circle distance in meters. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("h3PointDistM", *to_args(locals()))
-    
+
     @staticmethod
     def h3PointDistRads(lat1: Any, lon1: Any, lat2: Any, lon2: Any) -> Function:
         """
@@ -7630,17 +7884,17 @@ class FunctionWrapper:
         Returns the haversine or great circle distance in radians. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("h3PointDistRads", *to_args(locals()))
-    
+
     @staticmethod
     def h3PolygonToCells(geometry: Any, resolution: Any) -> Function:
         """
         h3PolygonToCells(geometry, resolution)
 
-        
-        
+
+
         """
         return Function("h3PolygonToCells", *to_args(locals()))
-    
+
     @staticmethod
     def h3ToCenterChild(index: Any, resolution: Any) -> Function:
         """
@@ -7652,7 +7906,7 @@ class FunctionWrapper:
         Returns the H3 index of the center child at the specified resolution. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("h3ToCenterChild", *to_args(locals()))
-    
+
     @staticmethod
     def h3ToChildren(index: Any, resolution: Any) -> Function:
         """
@@ -7664,7 +7918,7 @@ class FunctionWrapper:
         Returns an array of child H3 indexes at the specified resolution. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("h3ToChildren", *to_args(locals()))
-    
+
     @staticmethod
     def h3ToGeo(h3Index: Any) -> Function:
         """
@@ -7675,7 +7929,7 @@ class FunctionWrapper:
         Returns a tuple consisting of two values `(lat, lon)` where `lat` is latitude and `lon` is longitude. [`Tuple(Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("h3ToGeo", *to_args(locals()))
-    
+
     @staticmethod
     def h3ToGeoBoundary(h3Index: Any) -> Function:
         """
@@ -7686,7 +7940,7 @@ class FunctionWrapper:
         Returns an array of coordinate pairs `(lat, lon)` that define the boundary of the H3 hexagon. [`Array(Tuple(Float64, Float64))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("h3ToGeoBoundary", *to_args(locals()))
-    
+
     @staticmethod
     def h3ToParent(index: Any, resolution: Any) -> Function:
         """
@@ -7698,7 +7952,7 @@ class FunctionWrapper:
         Returns the parent H3 index at the specified resolution. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("h3ToParent", *to_args(locals()))
-    
+
     @staticmethod
     def h3ToString(index: Any) -> Function:
         """
@@ -7709,7 +7963,7 @@ class FunctionWrapper:
         Returns the string representation of the H3 index. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("h3ToString", *to_args(locals()))
-    
+
     @staticmethod
     def h3UnidirectionalEdgeIsValid(index: Any) -> Function:
         """
@@ -7720,7 +7974,7 @@ class FunctionWrapper:
         Returns `1` if the H3 index is a valid unidirectional edge, `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("h3UnidirectionalEdgeIsValid", *to_args(locals()))
-    
+
     @staticmethod
     def h3kRing(h3index: Any, k: Any) -> Function:
         """
@@ -7732,9 +7986,11 @@ class FunctionWrapper:
         Returns an array of H3 indexes that are within `k` rings of the origin hexagon. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("h3kRing", *to_args(locals()))
-    
+
     @staticmethod
-    def halfMD5(arg1: Any, arg2: Any | None = None, argN: Any | None = None) -> Function:
+    def halfMD5(
+        arg1: Any, arg2: Any | None = None, argN: Any | None = None
+    ) -> Function:
         """
         halfMD5(arg1[, arg2, ..., argN])
 
@@ -7743,18 +7999,18 @@ class FunctionWrapper:
         Returns the computed half MD5 hash of the given input params returned as a `UInt64` in big-endian byte order. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("halfMD5", *to_args(locals()))
-    
+
     @staticmethod
     def has(haystack: Any, needle: Any) -> Function:
         """
         has(haystack, needle)
 
         - `haystack` — The source array, map, or JSON. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Map`](https://clickhouse.com/docs/sql-reference/data-types/map) or [`JSON`](https://clickhouse.com/docs/sql-reference/data-types/newjson)
-        - `needle` — The value to search for (element in array, key in map, or path string in JSON). 
+        - `needle` — The value to search for (element in array, key in map, or path string in JSON).
         Returns `1` if the haystack contains the specified needle, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("has", *to_args(locals()))
-    
+
     @staticmethod
     def hasAll(set: Any, subset: Any) -> Function:
         """
@@ -7769,7 +8025,7 @@ class FunctionWrapper:
         Raises a `NO_COMMON_TYPE` exception if the set and subset elements do not share a common supertype.
         """
         return Function("hasAll", *to_args(locals()))
-    
+
     @staticmethod
     def hasAllTokens(input: Any, needles: Any) -> Function:
         """
@@ -7782,7 +8038,7 @@ class FunctionWrapper:
         Returns 1, if all needles match. 0, otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("hasAllTokens", *to_args(locals()))
-    
+
     @staticmethod
     def hasAny(arr_x: Any, arr_y: Any) -> Function:
         """
@@ -7797,7 +8053,7 @@ class FunctionWrapper:
         Raises a `NO_COMMON_TYPE` exception if any of the elements of the two arrays do not share a common supertype.
         """
         return Function("hasAny", *to_args(locals()))
-    
+
     @staticmethod
     def hasAnyTokens(input: Any, needles: Any) -> Function:
         """
@@ -7810,9 +8066,16 @@ class FunctionWrapper:
         Returns `1`, if there was at least one match. `0`, otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("hasAnyTokens", *to_args(locals()))
-    
+
     @staticmethod
-    def hasColumnInTable(hostname: Any | None = None, username: Any | None = None, password: Any | None = None, database: Any | None = None, table: Any | None = None, column: Any | None = None) -> Function:
+    def hasColumnInTable(
+        hostname: Any | None = None,
+        username: Any | None = None,
+        password: Any | None = None,
+        database: Any | None = None,
+        table: Any | None = None,
+        column: Any | None = None,
+    ) -> Function:
         """
         hasColumnInTable([hostname[, username[, password]],]database, table, column)
 
@@ -7826,7 +8089,7 @@ class FunctionWrapper:
         Returns `1` if the given column exists, `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("hasColumnInTable", *to_args(locals()))
-    
+
     @staticmethod
     def hasSubsequence(haystack: Any, needle: Any) -> Function:
         """
@@ -7838,7 +8101,7 @@ class FunctionWrapper:
         Returns `1` if needle is a subsequence of haystack, `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("hasSubsequence", *to_args(locals()))
-    
+
     @staticmethod
     def hasSubsequenceCaseInsensitive(haystack: Any, needle: Any) -> Function:
         """
@@ -7850,7 +8113,7 @@ class FunctionWrapper:
         Returns 1, if needle is a subsequence of haystack, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("hasSubsequenceCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
     def hasSubsequenceCaseInsensitiveUTF8(haystack: Any, needle: Any) -> Function:
         """
@@ -7862,7 +8125,7 @@ class FunctionWrapper:
         Returns 1, if needle is a subsequence of haystack, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("hasSubsequenceCaseInsensitiveUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def hasSubsequenceUTF8(haystack: Any, needle: Any) -> Function:
         """
@@ -7874,7 +8137,7 @@ class FunctionWrapper:
         Returns `1` if `needle` is a subsequence of `haystack`, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("hasSubsequenceUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def hasSubstr(arr1: Any, arr2: Any) -> Function:
         """
@@ -7886,17 +8149,17 @@ class FunctionWrapper:
         Returns `1` if array `arr1` contains array `arr2`. Otherwise, returns `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("hasSubstr", *to_args(locals()))
-    
+
     @staticmethod
     def hasThreadFuzzer() -> Function:
         """
         hasThreadFuzzer()
 
-        
+
         Returns whether Thread Fuzzer is effective. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("hasThreadFuzzer", *to_args(locals()))
-    
+
     @staticmethod
     def hasToken(haystack: Any, token: Any) -> Function:
         """
@@ -7908,27 +8171,27 @@ class FunctionWrapper:
         Returns `1` if the token is found, `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("hasToken", *to_args(locals()))
-    
+
     @staticmethod
     def hasTokenCaseInsensitive(haystack: Any, needle: Any) -> Function:
         """
         hasTokenCaseInsensitive(haystack, needle)
 
-        
-        
+
+
         """
         return Function("hasTokenCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
     def hasTokenCaseInsensitiveOrNull(haystack: Any, needle: Any) -> Function:
         """
         hasTokenCaseInsensitiveOrNull(haystack, needle)
 
-        
-        
+
+
         """
         return Function("hasTokenCaseInsensitiveOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def hasTokenOrNull(haystack: Any, token: Any) -> Function:
         """
@@ -7940,7 +8203,7 @@ class FunctionWrapper:
         Returns `1` if the token is found, `0` otherwise, null if token is ill-formed. [`Nullable(UInt8)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("hasTokenOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def hex(arg: Any) -> Function:
         """
@@ -7951,7 +8214,7 @@ class FunctionWrapper:
         Returns a string with the hexadecimal representation of the argument. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("hex", *to_args(locals()))
-    
+
     @staticmethod
     def hilbertDecode(tuple_size: Any, code: Any) -> Function:
         """
@@ -7963,7 +8226,7 @@ class FunctionWrapper:
         Returns a tuple of the specified size. [`Tuple(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("hilbertDecode", *to_args(locals()))
-    
+
     @staticmethod
     def hilbertEncode(args: Any) -> Function:
         """
@@ -7979,17 +8242,12 @@ class FunctionWrapper:
         Returns a `UInt64` code. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("hilbertEncode", *to_args(locals()))
-    
+
     @staticmethod
     def histogram(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("histogram", *to_args(locals()))
-    
+
     @staticmethod
     def hiveHash(arg: Any) -> Function:
         """
@@ -8000,9 +8258,14 @@ class FunctionWrapper:
         Returns the computed "hive hash" of the input string. [`Int32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("hiveHash", *to_args(locals()))
-    
+
     @staticmethod
-    def hop(time_attr: Any, hop_interval: Any, window_interval: Any, timezone: Any | None = None) -> Function:
+    def hop(
+        time_attr: Any,
+        hop_interval: Any,
+        window_interval: Any,
+        timezone: Any | None = None,
+    ) -> Function:
         """
         hop(time_attr, hop_interval, window_interval[, timezone])
 
@@ -8014,9 +8277,14 @@ class FunctionWrapper:
         Returns the inclusive lower and exclusive upper bound of the corresponding hopping window. [`Tuple(DateTime, DateTime)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("hop", *to_args(locals()))
-    
+
     @staticmethod
-    def hopEnd(time_attr: Any, hop_interval: Any, window_interval: Any, timezone: Any | None = None) -> Function:
+    def hopEnd(
+        time_attr: Any,
+        hop_interval: Any,
+        window_interval: Any,
+        timezone: Any | None = None,
+    ) -> Function:
         """
         hopEnd(time_attr, hop_interval, window_interval[, timezone])
 
@@ -8028,9 +8296,14 @@ class FunctionWrapper:
         Returns the exclusive upper bound of the corresponding hopping window. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("hopEnd", *to_args(locals()))
-    
+
     @staticmethod
-    def hopStart(time_attr: Any, hop_interval: Any, window_interval: Any, timezone: Any | None = None) -> Function:
+    def hopStart(
+        time_attr: Any,
+        hop_interval: Any,
+        window_interval: Any,
+        timezone: Any | None = None,
+    ) -> Function:
         """
         hopStart(time_attr, hop_interval, window_interval[, timezone])
 
@@ -8042,17 +8315,17 @@ class FunctionWrapper:
         Returns the inclusive lower bound of the corresponding hopping window. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("hopStart", *to_args(locals()))
-    
+
     @staticmethod
     def hostName() -> Function:
         """
         hostName()
 
-        
+
         Returns the host name. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("hostName", *to_args(locals()))
-    
+
     @staticmethod
     def hypot(x: Any, y: Any) -> Function:
         """
@@ -8064,7 +8337,7 @@ class FunctionWrapper:
         Returns the length of the hypotenuse of a right-angle triangle. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("hypot", *to_args(locals()))
-    
+
     @staticmethod
     def icebergBucket(N: Any, value: Any) -> Function:
         """
@@ -8076,7 +8349,7 @@ class FunctionWrapper:
         Returns a 32-bit hash of the source value. [`Int32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("icebergBucket", *to_args(locals()))
-    
+
     @staticmethod
     def icebergHash(value: Any) -> Function:
         """
@@ -8087,7 +8360,7 @@ class FunctionWrapper:
         Returns a 32-bit Murmur3 hash, x86 variant, seeded with 0 [`Int32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("icebergHash", *to_args(locals()))
-    
+
     @staticmethod
     def icebergTruncate(N: Any, value: Any) -> Function:
         """
@@ -8098,7 +8371,7 @@ class FunctionWrapper:
         The same type as the argument
         """
         return Function("icebergTruncate", *to_args(locals()))
-    
+
     @staticmethod
     def identity(x: Any) -> Function:
         """
@@ -8109,7 +8382,7 @@ class FunctionWrapper:
         Returns the input value unchanged. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("identity", *to_args(locals()))
-    
+
     @staticmethod
     def idnaDecode(s: Any) -> Function:
         """
@@ -8120,7 +8393,7 @@ class FunctionWrapper:
         Returns a Unicode (UTF-8) representation of the input string according to the IDNA mechanism of the input value. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("idnaDecode", *to_args(locals()))
-    
+
     @staticmethod
     def idnaEncode(s: Any) -> Function:
         """
@@ -8131,18 +8404,18 @@ class FunctionWrapper:
         Returns an ASCII representation of the input string according to the IDNA mechanism of the input value. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("idnaEncode", *to_args(locals()))
-    
+
     @staticmethod
     def if_(cond: Any, then: Any, else_: Any) -> Function:
         """
         if(cond, then, else)
 
         - `cond` — The evaluated condition. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Nullable(UInt8)`](https://clickhouse.com/docs/sql-reference/data-types/nullable) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
-        - `then` — The expression returned if `cond` is true. - `else` — The expression returned if `cond` is false or `NULL`. 
+        - `then` — The expression returned if `cond` is true. - `else` — The expression returned if `cond` is false or `NULL`.
         The result of either the `then` or `else` expressions, depending on condition `cond`.
         """
         return Function("if", *to_args(locals()))
-    
+
     @staticmethod
     def ifNotFinite(x: Any, y: Any) -> Function:
         """
@@ -8155,7 +8428,7 @@ class FunctionWrapper:
         - `y` if `x` is not finite.
         """
         return Function("ifNotFinite", *to_args(locals()))
-    
+
     @staticmethod
     def ifNull(x: Any, alt: Any) -> Function:
         """
@@ -8167,7 +8440,7 @@ class FunctionWrapper:
         Returns the value of `x` if it is not `NULL`, otherwise `alt`. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("ifNull", *to_args(locals()))
-    
+
     @staticmethod
     def ignore(x: Any) -> Function:
         """
@@ -8178,7 +8451,7 @@ class FunctionWrapper:
         Always returns `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("ignore", *to_args(locals()))
-    
+
     @staticmethod
     def ilike(haystack: Any, pattern: Any) -> Function:
         """
@@ -8191,27 +8464,27 @@ class FunctionWrapper:
         Returns `1` if the string matches the LIKE pattern (case-insensitive), otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("ilike", *to_args(locals()))
-    
+
     @staticmethod
     def in_(x: Any, set: Any) -> Function:
         """
         in(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("in", *to_args(locals()))
-    
+
     @staticmethod
     def inIgnoreSet(x: Any, set: Any) -> Function:
         """
         in(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("inIgnoreSet", *to_args(locals()))
-    
+
     @staticmethod
     def indexHint(expression: Any) -> Function:
         """
@@ -8222,7 +8495,7 @@ class FunctionWrapper:
         Returns `1` in all cases. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("indexHint", *to_args(locals()))
-    
+
     @staticmethod
     def indexOf(arr: Any, x: Any) -> Function:
         """
@@ -8234,7 +8507,7 @@ class FunctionWrapper:
         Returns the index (numbered from one) of the first `x` in `arr` if it exists. Otherwise, returns `0`. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("indexOf", *to_args(locals()))
-    
+
     @staticmethod
     def indexOfAssumeSorted(arr: Any, x: Any) -> Function:
         """
@@ -8246,7 +8519,7 @@ class FunctionWrapper:
         Returns the index (numbered from one) of the first `x` in `arr` if it exists. Otherwise, returns `0`. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("indexOfAssumeSorted", *to_args(locals()))
-    
+
     @staticmethod
     def initcap(s: Any) -> Function:
         """
@@ -8257,7 +8530,7 @@ class FunctionWrapper:
         Returns `s` with the first letter of each word converted to upper case. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("initcap", *to_args(locals()))
-    
+
     @staticmethod
     def initcapUTF8(s: Any) -> Function:
         """
@@ -8268,29 +8541,31 @@ class FunctionWrapper:
         Returns `s` with the first letter of each word converted to upper case. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("initcapUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def initialQueryID() -> Function:
         """
         initialQueryID()
 
-        
+
         Returns the ID of the initial current query. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("initialQueryID", *to_args(locals()))
-    
+
     @staticmethod
     def initialQueryStartTime() -> Function:
         """
         initialQueryStartTime()
 
-        
+
         Returns the start time of the initial current query. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("initialQueryStartTime", *to_args(locals()))
-    
+
     @staticmethod
-    def initializeAggregation(aggregate_function: Any, arg1: Any, arg2: Any | None = None) -> Function:
+    def initializeAggregation(
+        aggregate_function: Any, arg1: Any, arg2: Any | None = None
+    ) -> Function:
         """
         initializeAggregation(aggregate_function, arg1[, arg2, ...])
 
@@ -8300,17 +8575,17 @@ class FunctionWrapper:
         Returns the result of aggregation for every row passed to the function. The return type is the same as the return type of the function that `initializeAggregation` takes as a first argument. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("initializeAggregation", *to_args(locals()))
-    
+
     @staticmethod
     def intDiv(x: Any, y: Any) -> Function:
         """
         intDiv(x, y)
 
-        - `x` — Left hand operand. - `y` — Right hand operand. 
+        - `x` — Left hand operand. - `y` — Right hand operand.
         Result of integer division of `x` and `y`
         """
         return Function("intDiv", *to_args(locals()))
-    
+
     @staticmethod
     def intDivOrNull(x: Any, y: Any) -> Function:
         """
@@ -8322,7 +8597,7 @@ class FunctionWrapper:
         Result of integer division of `x` and `y`, or NULL.
         """
         return Function("intDivOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def intDivOrZero(a: Any, b: Any) -> Function:
         """
@@ -8334,7 +8609,7 @@ class FunctionWrapper:
         Result of integer division of a and b, or zero.
         """
         return Function("intDivOrZero", *to_args(locals()))
-    
+
     @staticmethod
     def intExp10(x: Any) -> Function:
         """
@@ -8345,7 +8620,7 @@ class FunctionWrapper:
         Returns 10^x. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("intExp10", *to_args(locals()))
-    
+
     @staticmethod
     def intExp2(x: Any) -> Function:
         """
@@ -8356,7 +8631,7 @@ class FunctionWrapper:
         Returns 2^x. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("intExp2", *to_args(locals()))
-    
+
     @staticmethod
     def intHash32(arg: Any) -> Function:
         """
@@ -8367,7 +8642,7 @@ class FunctionWrapper:
         Returns the computed 32-bit hash code of the input integer [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("intHash32", *to_args(locals()))
-    
+
     @staticmethod
     def intHash64(int: Any) -> Function:
         """
@@ -8378,7 +8653,7 @@ class FunctionWrapper:
         64-bit hash code. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("intHash64", *to_args(locals()))
-    
+
     @staticmethod
     def intervalLengthSum(start: Any, end: Any) -> Function:
         """
@@ -8390,7 +8665,7 @@ class FunctionWrapper:
         Returns the total length of union of all ranges (segments on numeric axis). Depending on the type of the argument, the return value may be UInt64 or Float64 type. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("intervalLengthSum", *to_args(locals()))
-    
+
     @staticmethod
     def isConstant(x: Any) -> Function:
         """
@@ -8401,7 +8676,7 @@ class FunctionWrapper:
         Returns `1` if `x` is constant, `0` if `x` is non-constant. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("isConstant", *to_args(locals()))
-    
+
     @staticmethod
     def isDecimalOverflow(value: Any, precision: Any | None = None) -> Function:
         """
@@ -8413,7 +8688,7 @@ class FunctionWrapper:
         Returns `1` if the decimal value has more digits than allowed by its precision, `0` if the decimal value satisfies the specified precision. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("isDecimalOverflow", *to_args(locals()))
-    
+
     @staticmethod
     def isDistinctFrom(x: Any, y: Any) -> Function:
         """
@@ -8428,7 +8703,7 @@ class FunctionWrapper:
           - Returns `false` if x = y, or both x and y are NULL. [`Bool`](https://clickhouse.com/docs/sql-reference/data-types/boolean)
         """
         return Function("isDistinctFrom", *to_args(locals()))
-    
+
     @staticmethod
     def isDynamicElementInSharedData(dynamic: Any) -> Function:
         """
@@ -8439,7 +8714,7 @@ class FunctionWrapper:
         Returns true if the value is stored in shared variant format, false if stored as a separate subcolumn or is NULL. [`Bool`](https://clickhouse.com/docs/sql-reference/data-types/boolean)
         """
         return Function("isDynamicElementInSharedData", *to_args(locals()))
-    
+
     @staticmethod
     def isFinite(x: Any) -> Function:
         """
@@ -8450,7 +8725,7 @@ class FunctionWrapper:
         `1` if x is not infinite and not `NaN`, otherwise `0`.
         """
         return Function("isFinite", *to_args(locals()))
-    
+
     @staticmethod
     def isIPAddressInRange(address: Any, prefix: Any) -> Function:
         """
@@ -8462,7 +8737,7 @@ class FunctionWrapper:
         Returns `1` if the IP version of the address and the CIDR match, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("isIPAddressInRange", *to_args(locals()))
-    
+
     @staticmethod
     def isIPv4String(string: Any) -> Function:
         """
@@ -8473,7 +8748,7 @@ class FunctionWrapper:
         Returns `1` if `string` is IPv4 address, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("isIPv4String", *to_args(locals()))
-    
+
     @staticmethod
     def isIPv6String(string: Any) -> Function:
         """
@@ -8484,7 +8759,7 @@ class FunctionWrapper:
         Returns `1` if `string` is IPv6 address, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("isIPv6String", *to_args(locals()))
-    
+
     @staticmethod
     def isInfinite(x: Any) -> Function:
         """
@@ -8495,7 +8770,7 @@ class FunctionWrapper:
         `1` if x is infinite, otherwise `0` (including for `NaN`).
         """
         return Function("isInfinite", *to_args(locals()))
-    
+
     @staticmethod
     def isMergeTreePartCoveredBy(nested_part: Any, covering_part: Any) -> Function:
         """
@@ -8507,7 +8782,7 @@ class FunctionWrapper:
         Returns `1` if it covers, `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("isMergeTreePartCoveredBy", *to_args(locals()))
-    
+
     @staticmethod
     def isNaN(x: Any) -> Function:
         """
@@ -8518,7 +8793,7 @@ class FunctionWrapper:
         `1` if `NaN`, otherwise `0`
         """
         return Function("isNaN", *to_args(locals()))
-    
+
     @staticmethod
     def isNotDistinctFrom(x: Any, y: Any) -> Function:
         """
@@ -8533,7 +8808,7 @@ class FunctionWrapper:
           - Returns `false` if x != y, or exactly one of x or y is NULL. [`Bool`](https://clickhouse.com/docs/sql-reference/data-types/boolean)
         """
         return Function("isNotDistinctFrom", *to_args(locals()))
-    
+
     @staticmethod
     def isNotNull(x: Any) -> Function:
         """
@@ -8544,7 +8819,7 @@ class FunctionWrapper:
         Returns `1` if `x` is not `NULL`, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("isNotNull", *to_args(locals()))
-    
+
     @staticmethod
     def isNull(x: Any) -> Function:
         """
@@ -8555,7 +8830,7 @@ class FunctionWrapper:
         Returns `1` if `x` is `NULL`, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("isNull", *to_args(locals()))
-    
+
     @staticmethod
     def isNullable(x: Any) -> Function:
         """
@@ -8566,17 +8841,17 @@ class FunctionWrapper:
         Returns `1` if `x` is of a `Nullable` data type, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("isNullable", *to_args(locals()))
-    
+
     @staticmethod
     def isValidASCII(str: Any) -> Function:
         """
         isValidASCII(str)
 
-        
-        
+
+
         """
         return Function("isValidASCII", *to_args(locals()))
-    
+
     @staticmethod
     def isValidJSON(json: Any) -> Function:
         """
@@ -8587,7 +8862,7 @@ class FunctionWrapper:
         Returns `1` if the string is valid JSON, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("isValidJSON", *to_args(locals()))
-    
+
     @staticmethod
     def isValidUTF8(s: Any) -> Function:
         """
@@ -8598,7 +8873,7 @@ class FunctionWrapper:
         Returns `1`, if the set of bytes constitutes valid UTF-8-encoded text, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("isValidUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def isZeroOrNull(x: Any) -> Function:
         """
@@ -8609,7 +8884,7 @@ class FunctionWrapper:
         Returns `1` if `x` is `NULL` or equal to zero, otherwise `0`. [`UInt8/16/32/64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float32/Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("isZeroOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def jaroSimilarity(s1: Any, s2: Any) -> Function:
         """
@@ -8621,7 +8896,7 @@ class FunctionWrapper:
         Returns the Jaro similarity between the two strings. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("jaroSimilarity", *to_args(locals()))
-    
+
     @staticmethod
     def jaroWinklerSimilarity(s1: Any, s2: Any) -> Function:
         """
@@ -8633,7 +8908,7 @@ class FunctionWrapper:
         Returns the Jaro-Winkler similarity between the two strings. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("jaroWinklerSimilarity", *to_args(locals()))
-    
+
     @staticmethod
     def javaHash(arg: Any) -> Function:
         """
@@ -8644,7 +8919,7 @@ class FunctionWrapper:
         Returns the computed hash of `arg` [`Int32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("javaHash", *to_args(locals()))
-    
+
     @staticmethod
     def javaHashUTF16LE(arg: Any) -> Function:
         """
@@ -8655,9 +8930,11 @@ class FunctionWrapper:
         Returns the computed hash of the UTF-16LE encoded string. [`Int32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("javaHashUTF16LE", *to_args(locals()))
-    
+
     @staticmethod
-    def joinGet(join_storage_table_name: Any, value_column: Any, join_keys: Any) -> Function:
+    def joinGet(
+        join_storage_table_name: Any, value_column: Any, join_keys: Any
+    ) -> Function:
         """
         joinGet(join_storage_table_name, value_column, join_keys)
 
@@ -8668,9 +8945,11 @@ class FunctionWrapper:
         Returns list of values corresponded to list of keys. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("joinGet", *to_args(locals()))
-    
+
     @staticmethod
-    def joinGetOrNull(join_storage_table_name: Any, value_column: Any, join_keys: Any) -> Function:
+    def joinGetOrNull(
+        join_storage_table_name: Any, value_column: Any, join_keys: Any
+    ) -> Function:
         """
         joinGetOrNull(join_storage_table_name, value_column, join_keys)
 
@@ -8681,7 +8960,7 @@ class FunctionWrapper:
         Returns a list of values corresponding to the list of keys, or `NULL` if a key is not found. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("joinGetOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def jumpConsistentHash(key: Any, buckets: Any) -> Function:
         """
@@ -8693,7 +8972,7 @@ class FunctionWrapper:
         Returns the computed hash value. [`Int32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("jumpConsistentHash", *to_args(locals()))
-    
+
     @staticmethod
     def kafkaMurmurHash(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -8704,7 +8983,7 @@ class FunctionWrapper:
         Returns the calculated hash value of the input arguments. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("kafkaMurmurHash", *to_args(locals()))
-    
+
     @staticmethod
     def keccak256(message: Any) -> Function:
         """
@@ -8715,9 +8994,11 @@ class FunctionWrapper:
         Returns the 32-byte Keccak-256 hash of the input string as a fixed-length string. [`FixedString(32)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("keccak256", *to_args(locals()))
-    
+
     @staticmethod
-    def kolmogorovSmirnovTest(alternative: Any | None = None, computation_method: Any | None = None) -> Function:
+    def kolmogorovSmirnovTest(
+        alternative: Any | None = None, computation_method: Any | None = None
+    ) -> Function:
         """
         kolmogorovSmirnovTest([alternative, computation_method])(sample_data, sample_index)
 
@@ -8727,7 +9008,7 @@ class FunctionWrapper:
         Returns a tuple with two elements: a calculated statistic and a calculated p-value. [`Tuple(Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("kolmogorovSmirnovTest", *to_args(locals()))
-    
+
     @staticmethod
     def kostikConsistentHash(input: Any, n: Any) -> Function:
         """
@@ -8739,9 +9020,11 @@ class FunctionWrapper:
         Returns the computed hash value. [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("kostikConsistentHash", *to_args(locals()))
-    
+
     @staticmethod
-    def kql_array_sort_asc(array1: Any, array2: Any | None = None, nulls_last: Any | None = None) -> Function:
+    def kql_array_sort_asc(
+        array1: Any, array2: Any | None = None, nulls_last: Any | None = None
+    ) -> Function:
         """
         kql_array_sort_asc(array1[, array2, ..., nulls_last])
 
@@ -8752,9 +9035,11 @@ class FunctionWrapper:
         Returns a tuple of arrays sorted in ascending order. [`Tuple(Array, ...)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("kql_array_sort_asc", *to_args(locals()))
-    
+
     @staticmethod
-    def kql_array_sort_desc(array1: Any, array2: Any | None = None, nulls_last: Any | None = None) -> Function:
+    def kql_array_sort_desc(
+        array1: Any, array2: Any | None = None, nulls_last: Any | None = None
+    ) -> Function:
         """
         kql_array_sort_desc(array1[, array2, ..., nulls_last])
 
@@ -8765,7 +9050,7 @@ class FunctionWrapper:
         Returns a tuple of arrays sorted in descending order. [`Tuple(Array, ...)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("kql_array_sort_desc", *to_args(locals()))
-    
+
     @staticmethod
     def kurtPop(expr: Any) -> Function:
         """
@@ -8776,7 +9061,7 @@ class FunctionWrapper:
         Returns the kurtosis of the given distribution. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("kurtPop", *to_args(locals()))
-    
+
     @staticmethod
     def kurtSamp(expr: Any) -> Function:
         """
@@ -8787,27 +9072,17 @@ class FunctionWrapper:
         Returns the kurtosis of the given distribution. If `n <= 1` (`n` is a size of the sample), then the function returns `nan`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("kurtSamp", *to_args(locals()))
-    
+
     @staticmethod
     def lag(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("lag", *to_args(locals()))
-    
+
     @staticmethod
     def lagInFrame(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("lagInFrame", *to_args(locals()))
-    
+
     @staticmethod
     def largestTriangleThreeBuckets(n: Any) -> Function:
         """
@@ -8819,7 +9094,7 @@ class FunctionWrapper:
         Returns an array of tuples with two elements.. [`Array(Tuple(Float64, Float64))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("largestTriangleThreeBuckets", *to_args(locals()))
-    
+
     @staticmethod
     def lcm(x: Any, y: Any) -> Function:
         """
@@ -8831,27 +9106,17 @@ class FunctionWrapper:
         Returns the least common multiple of `x` and `y`. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("lcm", *to_args(locals()))
-    
+
     @staticmethod
     def lead(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("lead", *to_args(locals()))
-    
+
     @staticmethod
     def leadInFrame(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("leadInFrame", *to_args(locals()))
-    
+
     @staticmethod
     def least(x1: Any, x2: Any | None = None) -> Function:
         """
@@ -8862,7 +9127,7 @@ class FunctionWrapper:
         Returns the least value among the arguments, promoted to the largest compatible type. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("least", *to_args(locals()))
-    
+
     @staticmethod
     def left(s: Any, offset: Any) -> Function:
         """
@@ -8878,7 +9143,7 @@ class FunctionWrapper:
              [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("left", *to_args(locals()))
-    
+
     @staticmethod
     def leftPad(string: Any, length: Any, pad_string: Any | None = None) -> Function:
         """
@@ -8891,9 +9156,11 @@ class FunctionWrapper:
         Returns a left-padded string of the given length. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("leftPad", *to_args(locals()))
-    
+
     @staticmethod
-    def leftPadUTF8(string: Any, length: Any, pad_string: Any | None = None) -> Function:
+    def leftPadUTF8(
+        string: Any, length: Any, pad_string: Any | None = None
+    ) -> Function:
         """
         leftPadUTF8(string, length[, pad_string])
 
@@ -8904,7 +9171,7 @@ class FunctionWrapper:
         Returns a left-padded string of the given length. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("leftPadUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def leftUTF8(s: Any, offset: Any) -> Function:
         """
@@ -8920,7 +9187,7 @@ class FunctionWrapper:
              [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("leftUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def lemmatize(lang: Any, word: Any) -> Function:
         """
@@ -8932,7 +9199,7 @@ class FunctionWrapper:
         Returns the lemmatized form of the word [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("lemmatize", *to_args(locals()))
-    
+
     @staticmethod
     def length(x: Any) -> Function:
         """
@@ -8943,7 +9210,7 @@ class FunctionWrapper:
         Returns the number of number of bytes in the String/FixedString `x` / the number of elements in array `x` [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("length", *to_args(locals()))
-    
+
     @staticmethod
     def lengthUTF8(s: Any) -> Function:
         """
@@ -8954,29 +9221,29 @@ class FunctionWrapper:
         Length of the string `s` in Unicode code points. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("lengthUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def less(a: Any, b: Any) -> Function:
         """
         less(a, b)
             -- a < b
 
-        - `a` — First value.<sup>[*](#comparison-rules)</sup> - `b` — Second value.<sup>[*](#comparison-rules)</sup> 
+        - `a` — First value.<sup>[*](#comparison-rules)</sup> - `b` — Second value.<sup>[*](#comparison-rules)</sup>
         Returns `1` if `a` is less than `b`, otherwise `0` [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("less", *to_args(locals()))
-    
+
     @staticmethod
     def lessOrEquals(a: Any, b: Any) -> Function:
         """
         lessOrEquals(a, b)
         -- a <= b
 
-        - `a` — First value.<sup>[*](#comparison-rules)</sup> - `b` — Second value.<sup>[*](#comparison-rules)</sup> 
+        - `a` — First value.<sup>[*](#comparison-rules)</sup> - `b` — Second value.<sup>[*](#comparison-rules)</sup>
         Returns `1` if `a` is less than or equal to `b`, otherwise `0` [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("lessOrEquals", *to_args(locals()))
-    
+
     @staticmethod
     def lgamma(x: Any) -> Function:
         """
@@ -8987,7 +9254,7 @@ class FunctionWrapper:
         Returns the logarithm of the gamma function of `x`. [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("lgamma", *to_args(locals()))
-    
+
     @staticmethod
     def like(haystack: Any, pattern: Any) -> Function:
         """
@@ -9000,7 +9267,7 @@ class FunctionWrapper:
         Returns `1` if the string matches the `LIKE` pattern, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("like", *to_args(locals()))
-    
+
     @staticmethod
     def locate(needle: Any, haystack: Any, start_pos: Any | None = None) -> Function:
         """
@@ -9013,7 +9280,7 @@ class FunctionWrapper:
         Returns starting position in bytes and counting from 1, if the substring was found, `0`, if the substring was not found. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("locate", *to_args(locals()))
-    
+
     @staticmethod
     def log(x: Any) -> Function:
         """
@@ -9024,7 +9291,7 @@ class FunctionWrapper:
         Returns the natural logarithm of `x`. [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("log", *to_args(locals()))
-    
+
     @staticmethod
     def log10(x: Any) -> Function:
         """
@@ -9035,7 +9302,7 @@ class FunctionWrapper:
         Returns the decimal logarithm of `x`. [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("log10", *to_args(locals()))
-    
+
     @staticmethod
     def log1p(x: Any) -> Function:
         """
@@ -9046,7 +9313,7 @@ class FunctionWrapper:
         Returns values from the interval: -∞ < log1p(x) < +∞ [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("log1p", *to_args(locals()))
-    
+
     @staticmethod
     def log2(x: Any) -> Function:
         """
@@ -9057,7 +9324,7 @@ class FunctionWrapper:
         Returns the binary logarithm of `x`. [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("log2", *to_args(locals()))
-    
+
     @staticmethod
     def logTrace(message: Any) -> Function:
         """
@@ -9068,7 +9335,7 @@ class FunctionWrapper:
         Returns `0` always. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("logTrace", *to_args(locals()))
-    
+
     @staticmethod
     def lowCardinalityIndices(col: Any) -> Function:
         """
@@ -9079,7 +9346,7 @@ class FunctionWrapper:
         The position of the value in the dictionary of the current part. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("lowCardinalityIndices", *to_args(locals()))
-    
+
     @staticmethod
     def lowCardinalityKeys(col: Any) -> Function:
         """
@@ -9090,7 +9357,7 @@ class FunctionWrapper:
         Returns the dictionary keys. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("lowCardinalityKeys", *to_args(locals()))
-    
+
     @staticmethod
     def lower(s: Any) -> Function:
         """
@@ -9101,7 +9368,7 @@ class FunctionWrapper:
         Returns a lowercase string from `s`. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("lower", *to_args(locals()))
-    
+
     @staticmethod
     def lowerUTF8(input: Any) -> Function:
         """
@@ -9112,7 +9379,7 @@ class FunctionWrapper:
         Returns a lowercase string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("lowerUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def makeDate(year: Any, month: Any, day: Any) -> Function:
         """
@@ -9127,7 +9394,7 @@ class FunctionWrapper:
         Returns a `Date` value constructed from the provided arguments [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("makeDate", *to_args(locals()))
-    
+
     @staticmethod
     def makeDate32(year: Any, month: Any, day: Any) -> Function:
         """
@@ -9142,9 +9409,17 @@ class FunctionWrapper:
         Returns a `Date32` value constructed from the provided arguments [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32)
         """
         return Function("makeDate32", *to_args(locals()))
-    
+
     @staticmethod
-    def makeDateTime(year: Any, month: Any, day: Any, hour: Any, minute: Any, second: Any, timezone: Any | None = None) -> Function:
+    def makeDateTime(
+        year: Any,
+        month: Any,
+        day: Any,
+        hour: Any,
+        minute: Any,
+        second: Any,
+        timezone: Any | None = None,
+    ) -> Function:
         """
         makeDateTime(year, month, day, hour, minute, second[, timezone])
 
@@ -9159,9 +9434,19 @@ class FunctionWrapper:
         Returns a `DateTime` value constructed from the provided arguments [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("makeDateTime", *to_args(locals()))
-    
+
     @staticmethod
-    def makeDateTime64(year: Any, month: Any, day: Any, hour: Any, minute: Any, second: Any, fraction: Any | None = None, precision: Any | None = None, timezone: Any | None = None) -> Function:
+    def makeDateTime64(
+        year: Any,
+        month: Any,
+        day: Any,
+        hour: Any,
+        minute: Any,
+        second: Any,
+        fraction: Any | None = None,
+        precision: Any | None = None,
+        timezone: Any | None = None,
+    ) -> Function:
         """
         makeDateTime64(year, month, day, hour, minute, second[, fraction[, precision[, timezone]]])
 
@@ -9178,9 +9463,11 @@ class FunctionWrapper:
         Returns a `DateTime64` value constructed from the provided arguments [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("makeDateTime64", *to_args(locals()))
-    
+
     @staticmethod
-    def mannWhitneyUTest(alternative: Any, continuity_correction: Any | None = None) -> Function:
+    def mannWhitneyUTest(
+        alternative: Any, continuity_correction: Any | None = None
+    ) -> Function:
         """
         mannWhitneyUTest[(alternative[, continuity_correction])](sample_data, sample_index)
 
@@ -9190,9 +9477,11 @@ class FunctionWrapper:
         Returns a tuple with two elements: calculated U-statistic and calculated p-value. [`Tuple(Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("mannWhitneyUTest", *to_args(locals()))
-    
+
     @staticmethod
-    def map(key1: Any, value1: Any, key2: Any | None = None, value2: Any | None = None) -> Function:
+    def map(
+        key1: Any, value1: Any, key2: Any | None = None, value2: Any | None = None
+    ) -> Function:
         """
         map(key1, value1[, key2, value2, ...])
 
@@ -9202,7 +9491,7 @@ class FunctionWrapper:
         Returns a map containing key:value pairs. [`Map(Any, Any)`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("map", *to_args(locals()))
-    
+
     @staticmethod
     def mapAdd(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -9213,7 +9502,7 @@ class FunctionWrapper:
         Returns a map or returns a tuple, where the first array contains the sorted keys and the second array contains values. [`Map(K, V)`](https://clickhouse.com/docs/sql-reference/data-types/map) or [`Tuple(Array(T), Array(T))`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("mapAdd", *to_args(locals()))
-    
+
     @staticmethod
     def mapAll(func: Any | None = None, map: Any | None = None) -> Function:
         """
@@ -9225,7 +9514,7 @@ class FunctionWrapper:
         Returns `1` if all key-value pairs satisfy the condition, `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("mapAll", *to_args(locals()))
-    
+
     @staticmethod
     def mapApply(func: Any, map: Any) -> Function:
         """
@@ -9237,7 +9526,7 @@ class FunctionWrapper:
         Returns a new map obtained from the original map by application of `func` for each element. [`Map(K, V)`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("mapApply", *to_args(locals()))
-    
+
     @staticmethod
     def mapConcat(maps: Any) -> Function:
         """
@@ -9248,7 +9537,7 @@ class FunctionWrapper:
         Returns a map with concatenated maps passed as arguments. [`Map`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("mapConcat", *to_args(locals()))
-    
+
     @staticmethod
     def mapContainsKey(map: Any, key: Any) -> Function:
         """
@@ -9260,7 +9549,7 @@ class FunctionWrapper:
         Returns 1 if map contains key, 0 if not. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("mapContainsKey", *to_args(locals()))
-    
+
     @staticmethod
     def mapContainsKeyLike(map: Any, pattern: Any) -> Function:
         """
@@ -9272,7 +9561,7 @@ class FunctionWrapper:
         Returns `1` if `map` contains a key matching `pattern`, `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("mapContainsKeyLike", *to_args(locals()))
-    
+
     @staticmethod
     def mapContainsValue(map: Any, value: Any) -> Function:
         """
@@ -9284,7 +9573,7 @@ class FunctionWrapper:
         Returns `1` if the map contains the value, `0` if not. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("mapContainsValue", *to_args(locals()))
-    
+
     @staticmethod
     def mapContainsValueLike(map: Any, pattern: Any) -> Function:
         """
@@ -9296,7 +9585,7 @@ class FunctionWrapper:
         Returns `1` if `map` contains a value matching `pattern`, `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("mapContainsValueLike", *to_args(locals()))
-    
+
     @staticmethod
     def mapExists(func: Any | None = None, map: Any | None = None) -> Function:
         """
@@ -9308,7 +9597,7 @@ class FunctionWrapper:
         Returns `1` if at least one key-value pair satisfies the condition, `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("mapExists", *to_args(locals()))
-    
+
     @staticmethod
     def mapExtractKeyLike(map: Any, pattern: Any) -> Function:
         """
@@ -9320,7 +9609,7 @@ class FunctionWrapper:
         Returns a map containing elements the key matching the specified pattern. If no elements match the pattern, an empty map is returned. [`Map(K, V)`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("mapExtractKeyLike", *to_args(locals()))
-    
+
     @staticmethod
     def mapExtractValueLike(map: Any, pattern: Any) -> Function:
         """
@@ -9332,7 +9621,7 @@ class FunctionWrapper:
         Returns a map containing elements the value matching the specified pattern. If no elements match the pattern, an empty map is returned. [`Map(K, V)`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("mapExtractValueLike", *to_args(locals()))
-    
+
     @staticmethod
     def mapFilter(func: Any, map: Any) -> Function:
         """
@@ -9344,7 +9633,7 @@ class FunctionWrapper:
         Returns a map containing only the elements in the map for which `func` returns something other than `0`. [`Map(K, V)`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("mapFilter", *to_args(locals()))
-    
+
     @staticmethod
     def mapFromArrays(keys: Any, values: Any) -> Function:
         """
@@ -9356,7 +9645,7 @@ class FunctionWrapper:
         Returns a map with keys and values constructed from the key array and value array/map. [`Map`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("mapFromArrays", *to_args(locals()))
-    
+
     @staticmethod
     def mapKeys(map: Any) -> Function:
         """
@@ -9367,9 +9656,11 @@ class FunctionWrapper:
         Returns array containing all keys from the map. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("mapKeys", *to_args(locals()))
-    
+
     @staticmethod
-    def mapPartialReverseSort(func: Any | None = None, limit: Any | None = None, map: Any | None = None) -> Function:
+    def mapPartialReverseSort(
+        func: Any | None = None, limit: Any | None = None, map: Any | None = None
+    ) -> Function:
         """
         mapPartialReverseSort([func,] limit, map)
 
@@ -9380,9 +9671,11 @@ class FunctionWrapper:
         Returns a partially sorted map in descending order. [`Map(K, V)`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("mapPartialReverseSort", *to_args(locals()))
-    
+
     @staticmethod
-    def mapPartialSort(func: Any | None = None, limit: Any | None = None, map: Any | None = None) -> Function:
+    def mapPartialSort(
+        func: Any | None = None, limit: Any | None = None, map: Any | None = None
+    ) -> Function:
         """
         mapPartialSort([func,] limit, map)
 
@@ -9393,7 +9686,7 @@ class FunctionWrapper:
         Returns a partially sorted map. [`Map(K, V)`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("mapPartialSort", *to_args(locals()))
-    
+
     @staticmethod
     def mapPopulateSeries(map: Any, max: Any | None = None) -> Function:
         """
@@ -9407,7 +9700,7 @@ class FunctionWrapper:
         Returns a map or a tuple of two arrays where the first has keys in sorted order, and the second values for the corresponding keys. [`Map(K, V)`](https://clickhouse.com/docs/sql-reference/data-types/map) or [`Tuple(Array(UInt*), Array(Any))`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("mapPopulateSeries", *to_args(locals()))
-    
+
     @staticmethod
     def mapReverseSort(func: Any | None = None, map: Any | None = None) -> Function:
         """
@@ -9419,7 +9712,7 @@ class FunctionWrapper:
         Returns a map sorted in descending order. [`Map(K, V)`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("mapReverseSort", *to_args(locals()))
-    
+
     @staticmethod
     def mapSort(func: Any | None = None, map: Any | None = None) -> Function:
         """
@@ -9431,7 +9724,7 @@ class FunctionWrapper:
         Returns a map sorted in ascending order. [`Map(K, V)`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("mapSort", *to_args(locals()))
-    
+
     @staticmethod
     def mapSubtract(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -9442,7 +9735,7 @@ class FunctionWrapper:
         Returns one map or tuple, where the first array contains the sorted keys and the second array contains values. [`Map(K, V)`](https://clickhouse.com/docs/sql-reference/data-types/map) or [`Tuple(Array(T), Array(T))`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("mapSubtract", *to_args(locals()))
-    
+
     @staticmethod
     def mapUpdate(map1: Any, map2: Any) -> Function:
         """
@@ -9454,7 +9747,7 @@ class FunctionWrapper:
         Returns `map1` with values updated from values for the corresponding keys in `map2`. [`Map(K, V)`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("mapUpdate", *to_args(locals()))
-    
+
     @staticmethod
     def mapValues(map: Any) -> Function:
         """
@@ -9465,7 +9758,7 @@ class FunctionWrapper:
         Returns an array containing all the values from the map. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("mapValues", *to_args(locals()))
-    
+
     @staticmethod
     def match(haystack: Any, pattern: Any) -> Function:
         """
@@ -9477,7 +9770,7 @@ class FunctionWrapper:
         Returns `1` if the pattern matches, `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("match", *to_args(locals()))
-    
+
     @staticmethod
     def materialize(x: Any) -> Function:
         """
@@ -9488,7 +9781,7 @@ class FunctionWrapper:
         Returns a full column containing the constant value. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("materialize", *to_args(locals()))
-    
+
     @staticmethod
     def max(column: Any) -> Function:
         """
@@ -9499,7 +9792,7 @@ class FunctionWrapper:
         The maximum value across the group with type equal to that of the input. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("max", *to_args(locals()))
-    
+
     @staticmethod
     def max2(x: Any, y: Any) -> Function:
         """
@@ -9511,7 +9804,7 @@ class FunctionWrapper:
         Returns the bigger value of `x` and `y`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("max2", *to_args(locals()))
-    
+
     @staticmethod
     def maxIntersections(start_column: Any, end_column: Any) -> Function:
         """
@@ -9523,7 +9816,7 @@ class FunctionWrapper:
         Returns the maximum number of intersected intervals. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("maxIntersections", *to_args(locals()))
-    
+
     @staticmethod
     def maxIntersectionsPosition(start_column: Any, end_column: Any) -> Function:
         """
@@ -9535,7 +9828,7 @@ class FunctionWrapper:
         Returns the start positions of the maximum number of intersected intervals. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("maxIntersectionsPosition", *to_args(locals()))
-    
+
     @staticmethod
     def maxMappedArrays(key: Any, value: Any) -> Function:
         """
@@ -9548,9 +9841,11 @@ class FunctionWrapper:
         Returns a tuple of two arrays: keys in sorted order, and values calculated for the corresponding keys. [`Tuple(Array(T), Array(T))`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("maxMappedArrays", *to_args(locals()))
-    
+
     @staticmethod
-    def meanZTest(population_variance_x: Any, population_variance_y: Any, confidence_level: Any) -> Function:
+    def meanZTest(
+        population_variance_x: Any, population_variance_y: Any, confidence_level: Any
+    ) -> Function:
         """
         meanZTest(population_variance_x, population_variance_y, confidence_level)(sample_data, sample_index)
 
@@ -9560,7 +9855,7 @@ class FunctionWrapper:
         Returns a tuple with four elements: calculated z-statistic, calculated p-value, calculated confidence-interval-low, calculated confidence-interval-high. [`Tuple(Float64, Float64, Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("meanZTest", *to_args(locals()))
-    
+
     @staticmethod
     def mergeTreePartInfo(part_name: Any) -> Function:
         """
@@ -9571,7 +9866,7 @@ class FunctionWrapper:
         Returns a Tuple with subcolumns: `partition_id`, `min_block`, `max_block`, `level`, `mutation`. [`Tuple`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("mergeTreePartInfo", *to_args(locals()))
-    
+
     @staticmethod
     def metroHash64(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -9582,17 +9877,17 @@ class FunctionWrapper:
         Returns the computed hash of the input arguments. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("metroHash64", *to_args(locals()))
-    
+
     @staticmethod
     def midpoint(x1: Any, x2: Any | None = None) -> Function:
         """
         midpoint(x1[, x2, ...])
 
-        - `x1[, x2, ...]` — Accepts a single value or multiple values for averaging. 
+        - `x1[, x2, ...]` — Accepts a single value or multiple values for averaging.
         Returns the average value of the provided arguments, promoted to the largest compatible type.
         """
         return Function("midpoint", *to_args(locals()))
-    
+
     @staticmethod
     def min(column: Any) -> Function:
         """
@@ -9603,7 +9898,7 @@ class FunctionWrapper:
         Returns the minimum value across the group with type equal to that of the input. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("min", *to_args(locals()))
-    
+
     @staticmethod
     def min2(x: Any, y: Any) -> Function:
         """
@@ -9615,7 +9910,7 @@ class FunctionWrapper:
         Returns the smaller value of `x` and `y`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("min2", *to_args(locals()))
-    
+
     @staticmethod
     def minMappedArrays(key: Any, value: Any) -> Function:
         """
@@ -9628,9 +9923,11 @@ class FunctionWrapper:
         Returns a tuple of two arrays: keys in sorted order, and values calculated for the corresponding keys. [`Tuple(Array(T), Array(T))`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("minMappedArrays", *to_args(locals()))
-    
+
     @staticmethod
-    def minSampleSizeContinuous(baseline: Any, sigma: Any, mde: Any, power: Any, alpha: Any) -> Function:
+    def minSampleSizeContinuous(
+        baseline: Any, sigma: Any, mde: Any, power: Any, alpha: Any
+    ) -> Function:
         """
         minSampleSizeContinuous(baseline, sigma, mde, power, alpha)
 
@@ -9643,9 +9940,11 @@ class FunctionWrapper:
         Returns a named Tuple with 3 elements: `minimum_sample_size`, `detect_range_lower` and  `detect_range_upper`. These are respectively: the required sample size, the lower bound of the range of values not detectable with the returned required sample size, calculated as `baseline * (1 - mde)`, and the upper bound of the range of values not detectable with the returned required sample size, calculated as `baseline * (1 + mde)` (Float64). [`Tuple(Float64, Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("minSampleSizeContinuous", *to_args(locals()))
-    
+
     @staticmethod
-    def minSampleSizeConversion(baseline: Any, mde: Any, power: Any, alpha: Any) -> Function:
+    def minSampleSizeConversion(
+        baseline: Any, mde: Any, power: Any, alpha: Any
+    ) -> Function:
         """
         minSampleSizeConversion(baseline, mde, power, alpha)
 
@@ -9657,27 +9956,27 @@ class FunctionWrapper:
         Returns a named Tuple with 3 elements: `minimum_sample_size`, `detect_range_lower`, `detect_range_upper`. These are, respectively: the required sample size, the lower bound of the range of values not detectable with the returned required sample size, calculated as `baseline - mde`, the upper bound of the range of values not detectable with the returned required sample size, calculated as `baseline + mde`. [`Tuple(Float64, Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("minSampleSizeConversion", *to_args(locals()))
-    
+
     @staticmethod
     def minus(x: Any, y: Any) -> Function:
         """
         minus(x, y)
 
-        - `x` — Minuend. - `y` — Subtrahend. 
+        - `x` — Minuend. - `y` — Subtrahend.
         x minus y
         """
         return Function("minus", *to_args(locals()))
-    
+
     @staticmethod
     def modulo(a: Any, b: Any) -> Function:
         """
         modulo(a, b)
 
-        - `a` — The dividend - `b` — The divisor (modulus) 
+        - `a` — The dividend - `b` — The divisor (modulus)
         The remainder of a % b
         """
         return Function("modulo", *to_args(locals()))
-    
+
     @staticmethod
     def moduloLegacy(a: Any, b: Any) -> Function:
         """
@@ -9689,7 +9988,7 @@ class FunctionWrapper:
         Returns the remainder of the division. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("moduloLegacy", *to_args(locals()))
-    
+
     @staticmethod
     def moduloOrNull(x: Any, y: Any) -> Function:
         """
@@ -9701,7 +10000,7 @@ class FunctionWrapper:
         Returns the remainder of the division of `x` by `y`, or null when the divisor is zero.
         """
         return Function("moduloOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def moduloOrZero(a: Any, b: Any) -> Function:
         """
@@ -9713,7 +10012,7 @@ class FunctionWrapper:
         Returns the remainder of a % b, or `0` when the divisor is `0`.
         """
         return Function("moduloOrZero", *to_args(locals()))
-    
+
     @staticmethod
     def monthName(datetime: Any) -> Function:
         """
@@ -9724,7 +10023,7 @@ class FunctionWrapper:
         Returns the name of the month. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("monthName", *to_args(locals()))
-    
+
     @staticmethod
     def mortonDecode(tuple_size: Any, code: Any) -> Function:
         """
@@ -9741,7 +10040,7 @@ class FunctionWrapper:
         Returns a tuple of the specified size. [`Tuple(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("mortonDecode", *to_args(locals()))
-    
+
     @staticmethod
     def mortonEncode(args: Any) -> Function:
         """
@@ -9757,9 +10056,15 @@ class FunctionWrapper:
         Returns a `UInt64` code. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("mortonEncode", *to_args(locals()))
-    
+
     @staticmethod
-    def multiFuzzyMatchAllIndices(haystack: Any, distance: Any, pattern1: Any | None = None, pattern2: Any | None = None, patternN: Any | None = None) -> Function:
+    def multiFuzzyMatchAllIndices(
+        haystack: Any,
+        distance: Any,
+        pattern1: Any | None = None,
+        pattern2: Any | None = None,
+        patternN: Any | None = None,
+    ) -> Function:
         """
         multiFuzzyMatchAllIndices(haystack, distance, [pattern1, pattern2, ..., patternN])
 
@@ -9770,9 +10075,15 @@ class FunctionWrapper:
         Returns an array of all indices (starting from 1) that match the haystack within the specified edit distance in any order. Returns an empty array if no matches are found. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("multiFuzzyMatchAllIndices", *to_args(locals()))
-    
+
     @staticmethod
-    def multiFuzzyMatchAny(haystack: Any, distance: Any, pattern1: Any | None = None, pattern2: Any | None = None, patternN: Any | None = None) -> Function:
+    def multiFuzzyMatchAny(
+        haystack: Any,
+        distance: Any,
+        pattern1: Any | None = None,
+        pattern2: Any | None = None,
+        patternN: Any | None = None,
+    ) -> Function:
         """
         multiFuzzyMatchAny(haystack, distance, [pattern1, pattern2, ..., patternN])
 
@@ -9783,9 +10094,15 @@ class FunctionWrapper:
         Returns `1` if any pattern matches the haystack within the specified edit distance, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("multiFuzzyMatchAny", *to_args(locals()))
-    
+
     @staticmethod
-    def multiFuzzyMatchAnyIndex(haystack: Any, distance: Any, pattern1: Any | None = None, pattern2: Any | None = None, patternn: Any | None = None) -> Function:
+    def multiFuzzyMatchAnyIndex(
+        haystack: Any,
+        distance: Any,
+        pattern1: Any | None = None,
+        pattern2: Any | None = None,
+        patternn: Any | None = None,
+    ) -> Function:
         """
         multiFuzzyMatchAnyIndex(haystack, distance, [pattern1, pattern2, ..., patternn])
 
@@ -9796,20 +10113,27 @@ class FunctionWrapper:
         Returns the index (starting from 1) of any pattern that matches the haystack within the specified edit distance, otherwise `0`. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("multiFuzzyMatchAnyIndex", *to_args(locals()))
-    
+
     @staticmethod
-    def multiIf(cond_1: Any, then_1: Any, cond_2: Any, then_2: Any, else_: Any) -> Function:
+    def multiIf(
+        cond_1: Any, then_1: Any, cond_2: Any, then_2: Any, else_: Any
+    ) -> Function:
         """
         multiIf(cond_1, then_1, cond_2, then_2, ..., else)
 
         - `cond_N` — The N-th evaluated condition which controls if `then_N` is returned. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Nullable(UInt8)`](https://clickhouse.com/docs/sql-reference/data-types/nullable) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
-        - `then_N` — The result of the function when `cond_N` is true. - `else` — The result of the function if none of the conditions is true. 
+        - `then_N` — The result of the function when `cond_N` is true. - `else` — The result of the function if none of the conditions is true.
         Returns the result of `then_N` for matching `cond_N`, otherwise returns the `else` condition.
         """
         return Function("multiIf", *to_args(locals()))
-    
+
     @staticmethod
-    def multiMatchAllIndices(haystack: Any, pattern1: Any | None = None, pattern2: Any | None = None, patternn: Any | None = None) -> Function:
+    def multiMatchAllIndices(
+        haystack: Any,
+        pattern1: Any | None = None,
+        pattern2: Any | None = None,
+        patternn: Any | None = None,
+    ) -> Function:
         """
         multiMatchAllIndices(haystack, [pattern1, pattern2, ..., patternn])
 
@@ -9819,9 +10143,11 @@ class FunctionWrapper:
         Array of all indices (starting from 1) that match the haystack in any order. Returns an empty array if no matches are found. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("multiMatchAllIndices", *to_args(locals()))
-    
+
     @staticmethod
-    def multiMatchAny(haystack: Any, pattern1: Any, pattern2: Any | None = None) -> Function:
+    def multiMatchAny(
+        haystack: Any, pattern1: Any, pattern2: Any | None = None
+    ) -> Function:
         """
         multiMatchAny(haystack, pattern1[, pattern2, ...])
 
@@ -9831,9 +10157,14 @@ class FunctionWrapper:
         Returns `1` if any pattern matches, `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("multiMatchAny", *to_args(locals()))
-    
+
     @staticmethod
-    def multiMatchAnyIndex(haystack: Any, pattern1: Any | None = None, pattern2: Any | None = None, patternn: Any | None = None) -> Function:
+    def multiMatchAnyIndex(
+        haystack: Any,
+        pattern1: Any | None = None,
+        pattern2: Any | None = None,
+        patternn: Any | None = None,
+    ) -> Function:
         """
         multiMatchAnyIndex(haystack, [pattern1, pattern2, ..., patternn])
 
@@ -9843,9 +10174,11 @@ class FunctionWrapper:
         Returns the index (starting from 1) of the first pattern that matches, or 0 if no match is found. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("multiMatchAnyIndex", *to_args(locals()))
-    
+
     @staticmethod
-    def multiSearchAllPositions(haystack: Any, needle1: Any, needle2: Any | None = None) -> Function:
+    def multiSearchAllPositions(
+        haystack: Any, needle1: Any, needle2: Any | None = None
+    ) -> Function:
         """
         multiSearchAllPositions(haystack, needle1[, needle2, ...])
 
@@ -9855,9 +10188,11 @@ class FunctionWrapper:
         Returns array of the starting position in bytes and counting from 1, if the substring was found, `0`, if the substring was not found. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("multiSearchAllPositions", *to_args(locals()))
-    
+
     @staticmethod
-    def multiSearchAllPositionsCaseInsensitive(haystack: Any, needle1: Any, needle2: Any | None = None) -> Function:
+    def multiSearchAllPositionsCaseInsensitive(
+        haystack: Any, needle1: Any, needle2: Any | None = None
+    ) -> Function:
         """
         multiSearchAllPositionsCaseInsensitive(haystack, needle1[, needle2, ...])
 
@@ -9867,9 +10202,14 @@ class FunctionWrapper:
         Returns array of the starting position in bytes and counting from 1 (if the substring was found), `0` if the substring was not found. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("multiSearchAllPositionsCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
-    def multiSearchAllPositionsCaseInsensitiveUTF8(haystack: Any, needle1: Any | None = None, needle2: Any | None = None, needleN: Any | None = None) -> Function:
+    def multiSearchAllPositionsCaseInsensitiveUTF8(
+        haystack: Any,
+        needle1: Any | None = None,
+        needle2: Any | None = None,
+        needleN: Any | None = None,
+    ) -> Function:
         """
         multiSearchAllPositionsCaseInsensitiveUTF8(haystack, [needle1, needle2, ..., needleN])
 
@@ -9878,10 +10218,14 @@ class FunctionWrapper:
 
         Array of the starting position in bytes and counting from 1 (if the substring was found). Returns 0 if the substring was not found. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
-        return Function("multiSearchAllPositionsCaseInsensitiveUTF8", *to_args(locals()))
-    
+        return Function(
+            "multiSearchAllPositionsCaseInsensitiveUTF8", *to_args(locals())
+        )
+
     @staticmethod
-    def multiSearchAllPositionsUTF8(haystack: Any, needle1: Any, needle2: Any | None = None) -> Function:
+    def multiSearchAllPositionsUTF8(
+        haystack: Any, needle1: Any, needle2: Any | None = None
+    ) -> Function:
         """
         multiSearchAllPositionsUTF8(haystack, needle1[, needle2, ...])
 
@@ -9891,9 +10235,11 @@ class FunctionWrapper:
         Returns array of the starting position in bytes and counting from 1 (if the substring was found), `0` if the substring was not found. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("multiSearchAllPositionsUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def multiSearchAny(haystack: Any, needle1: Any, needle2: Any | None = None) -> Function:
+    def multiSearchAny(
+        haystack: Any, needle1: Any, needle2: Any | None = None
+    ) -> Function:
         """
         multiSearchAny(haystack, needle1[, needle2, ...])
 
@@ -9903,9 +10249,14 @@ class FunctionWrapper:
         Returns `1`, if there was at least one match, otherwise `0`, if there was not at least one match. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("multiSearchAny", *to_args(locals()))
-    
+
     @staticmethod
-    def multiSearchAnyCaseInsensitive(haystack: Any, needle1: Any | None = None, needle2: Any | None = None, needleN: Any | None = None) -> Function:
+    def multiSearchAnyCaseInsensitive(
+        haystack: Any,
+        needle1: Any | None = None,
+        needle2: Any | None = None,
+        needleN: Any | None = None,
+    ) -> Function:
         """
         multiSearchAnyCaseInsensitive(haystack, [needle1, needle2, ..., needleN])
 
@@ -9915,9 +10266,14 @@ class FunctionWrapper:
         Returns `1`, if there was at least one case-insensitive match, otherwise `0`, if there was not at least one case-insensitive match. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("multiSearchAnyCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
-    def multiSearchAnyCaseInsensitiveUTF8(haystack: Any, needle1: Any | None = None, needle2: Any | None = None, needleN: Any | None = None) -> Function:
+    def multiSearchAnyCaseInsensitiveUTF8(
+        haystack: Any,
+        needle1: Any | None = None,
+        needle2: Any | None = None,
+        needleN: Any | None = None,
+    ) -> Function:
         """
         multiSearchAnyCaseInsensitiveUTF8(haystack, [needle1, needle2, ..., needleN])
 
@@ -9927,9 +10283,14 @@ class FunctionWrapper:
         Returns `1`, if there was at least one case-insensitive match, otherwise `0`, if there was not at least one case-insensitive match. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("multiSearchAnyCaseInsensitiveUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def multiSearchAnyUTF8(haystack: Any, needle1: Any | None = None, needle2: Any | None = None, needleN: Any | None = None) -> Function:
+    def multiSearchAnyUTF8(
+        haystack: Any,
+        needle1: Any | None = None,
+        needle2: Any | None = None,
+        needleN: Any | None = None,
+    ) -> Function:
         """
         multiSearchAnyUTF8(haystack, [needle1, needle2, ..., needleN])
 
@@ -9939,9 +10300,14 @@ class FunctionWrapper:
         Returns `1`, if there was at least one match, otherwise `0`, if there was not at least one match. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("multiSearchAnyUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def multiSearchFirstIndex(haystack: Any, needle1: Any | None = None, needle2: Any | None = None, needleN: Any | None = None) -> Function:
+    def multiSearchFirstIndex(
+        haystack: Any,
+        needle1: Any | None = None,
+        needle2: Any | None = None,
+        needleN: Any | None = None,
+    ) -> Function:
         """
         multiSearchFirstIndex(haystack, [needle1, needle2, ..., needleN])
 
@@ -9951,7 +10317,7 @@ class FunctionWrapper:
         Returns the 1-based index (position in the needles array) of the first needle found in the haystack. Returns 0 if no needles are found. The search is case-sensitive. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("multiSearchFirstIndex", *to_args(locals()))
-    
+
     @staticmethod
     def multiSearchFirstIndexCaseInsensitive() -> Function:
         """
@@ -9963,9 +10329,14 @@ class FunctionWrapper:
         Returns the index (starting from 1) of the leftmost found needle. Otherwise `0`, if there was no match. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("multiSearchFirstIndexCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
-    def multiSearchFirstIndexCaseInsensitiveUTF8(haystack: Any, needle1: Any | None = None, needle2: Any | None = None, needleN: Any | None = None) -> Function:
+    def multiSearchFirstIndexCaseInsensitiveUTF8(
+        haystack: Any,
+        needle1: Any | None = None,
+        needle2: Any | None = None,
+        needleN: Any | None = None,
+    ) -> Function:
         """
         multiSearchFirstIndexCaseInsensitiveUTF8(haystack, [needle1, needle2, ..., needleN])
 
@@ -9975,9 +10346,14 @@ class FunctionWrapper:
         Returns the 1-based index (position in the needles array) of the first needle found in the haystack. Returns 0 if no needles are found. The search is case-insensitive and respects UTF-8 character encoding. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("multiSearchFirstIndexCaseInsensitiveUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def multiSearchFirstIndexUTF8(haystack: Any, needle1: Any | None = None, needle2: Any | None = None, needleN: Any | None = None) -> Function:
+    def multiSearchFirstIndexUTF8(
+        haystack: Any,
+        needle1: Any | None = None,
+        needle2: Any | None = None,
+        needleN: Any | None = None,
+    ) -> Function:
         """
         multiSearchFirstIndexUTF8(haystack, [needle1, needle2, ..., needleN])
 
@@ -9987,9 +10363,11 @@ class FunctionWrapper:
         Returns the index (starting from 1) of the leftmost found needle. Otherwise 0, if there was no match. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("multiSearchFirstIndexUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def multiSearchFirstPosition(haystack: Any, needle1: Any, needle2: Any | None = None) -> Function:
+    def multiSearchFirstPosition(
+        haystack: Any, needle1: Any, needle2: Any | None = None
+    ) -> Function:
         """
         multiSearchFirstPosition(haystack, needle1[, needle2, ...])
 
@@ -9999,9 +10377,14 @@ class FunctionWrapper:
         Returns the leftmost offset in a `haystack` string which matches any of multiple `needle` strings, otherwise `0`, if there was no match. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("multiSearchFirstPosition", *to_args(locals()))
-    
+
     @staticmethod
-    def multiSearchFirstPositionCaseInsensitive(haystack: Any, needle1: Any | None = None, needle2: Any | None = None, needleN: Any | None = None) -> Function:
+    def multiSearchFirstPositionCaseInsensitive(
+        haystack: Any,
+        needle1: Any | None = None,
+        needle2: Any | None = None,
+        needleN: Any | None = None,
+    ) -> Function:
         """
         multiSearchFirstPositionCaseInsensitive(haystack, [needle1, needle2, ..., needleN])
 
@@ -10011,9 +10394,14 @@ class FunctionWrapper:
         Returns the leftmost offset in a `haystack` string which matches any of multiple `needle` strings. Returns `0`, if there was no match. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("multiSearchFirstPositionCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
-    def multiSearchFirstPositionCaseInsensitiveUTF8(haystack: Any, needle1: Any | None = None, needle2: Any | None = None, needleN: Any | None = None) -> Function:
+    def multiSearchFirstPositionCaseInsensitiveUTF8(
+        haystack: Any,
+        needle1: Any | None = None,
+        needle2: Any | None = None,
+        needleN: Any | None = None,
+    ) -> Function:
         """
         multiSearchFirstPositionCaseInsensitiveUTF8(haystack, [needle1, needle2, ..., needleN])
 
@@ -10022,10 +10410,17 @@ class FunctionWrapper:
 
         Returns the leftmost offset in a `haystack` string which matches any of multiple `needle` strings, ignoring case. Returns `0`, if there was no match. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
-        return Function("multiSearchFirstPositionCaseInsensitiveUTF8", *to_args(locals()))
-    
+        return Function(
+            "multiSearchFirstPositionCaseInsensitiveUTF8", *to_args(locals())
+        )
+
     @staticmethod
-    def multiSearchFirstPositionUTF8(haystack: Any, needle1: Any | None = None, needle2: Any | None = None, needleN: Any | None = None) -> Function:
+    def multiSearchFirstPositionUTF8(
+        haystack: Any,
+        needle1: Any | None = None,
+        needle2: Any | None = None,
+        needleN: Any | None = None,
+    ) -> Function:
         """
         multiSearchFirstPositionUTF8(haystack, [needle1, needle2, ..., needleN])
 
@@ -10035,7 +10430,7 @@ class FunctionWrapper:
         Leftmost offset in a `haystack` string which matches any of multiple `needle` strings. Returns `0`, if there was no match. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("multiSearchFirstPositionUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def multiply(x: Any, y: Any) -> Function:
         """
@@ -10047,7 +10442,7 @@ class FunctionWrapper:
         Returns the product of x and y
         """
         return Function("multiply", *to_args(locals()))
-    
+
     @staticmethod
     def multiplyDecimal(a: Any, b: Any, result_scale: Any | None = None) -> Function:
         """
@@ -10060,7 +10455,7 @@ class FunctionWrapper:
         The result of multiplication with the given scale. Type: [`Decimal256`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("multiplyDecimal", *to_args(locals()))
-    
+
     @staticmethod
     def murmurHash2_32(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -10071,7 +10466,7 @@ class FunctionWrapper:
         Returns the computed hash value of the input arguments. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("murmurHash2_32", *to_args(locals()))
-    
+
     @staticmethod
     def murmurHash2_64(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -10082,7 +10477,7 @@ class FunctionWrapper:
         Returns the computed hash of the input arguments. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("murmurHash2_64", *to_args(locals()))
-    
+
     @staticmethod
     def murmurHash3_128(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -10093,7 +10488,7 @@ class FunctionWrapper:
         Returns the computed 128-bit `MurmurHash3` hash value of the input arguments. [`FixedString(16)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("murmurHash3_128", *to_args(locals()))
-    
+
     @staticmethod
     def murmurHash3_32(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -10104,7 +10499,7 @@ class FunctionWrapper:
         Returns the computed hash value of the input arguments. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("murmurHash3_32", *to_args(locals()))
-    
+
     @staticmethod
     def murmurHash3_64(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -10115,7 +10510,7 @@ class FunctionWrapper:
         Returns the computed hash value of the input arguments. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("murmurHash3_64", *to_args(locals()))
-    
+
     @staticmethod
     def naiveBayesClassifier(model_name: Any, input_text: Any) -> Function:
         """
@@ -10127,7 +10522,7 @@ class FunctionWrapper:
         Predicted class ID as an unsigned integer. Class IDs correspond to categories defined during model construction. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("naiveBayesClassifier", *to_args(locals()))
-    
+
     @staticmethod
     def naturalSortKey(s: Any) -> Function:
         """
@@ -10138,19 +10533,21 @@ class FunctionWrapper:
         Returns a natural sort key string from `s`. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("naturalSortKey", *to_args(locals()))
-    
+
     @staticmethod
     def negate(x: Any) -> Function:
         """
         negate(x)
 
-        - `x` — The value to negate. 
+        - `x` — The value to negate.
         Returns -x from x
         """
         return Function("negate", *to_args(locals()))
-    
+
     @staticmethod
-    def neighbor(column: Any, offset: Any, default_value: Any | None = None) -> Function:
+    def neighbor(
+        column: Any, offset: Any, default_value: Any | None = None
+    ) -> Function:
         """
         neighbor(column, offset[, default_value])
 
@@ -10161,17 +10558,12 @@ class FunctionWrapper:
         Returns a value from the specified offset, or default if out of bounds. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("neighbor", *to_args(locals()))
-    
+
     @staticmethod
     def nested(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("nested", *to_args(locals()))
-    
+
     @staticmethod
     def netloc(url: Any) -> Function:
         """
@@ -10182,7 +10574,7 @@ class FunctionWrapper:
         Returns `username:password@host:port` from a given URL. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("netloc", *to_args(locals()))
-    
+
     @staticmethod
     def ngramDistance(haystack: Any, needle: Any) -> Function:
         """
@@ -10194,7 +10586,7 @@ class FunctionWrapper:
         Returns a Float32 number between `0` and `1`. The smaller the returned value, the more similar the strings are. [`Float32`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("ngramDistance", *to_args(locals()))
-    
+
     @staticmethod
     def ngramDistanceCaseInsensitive(haystack: Any, needle: Any) -> Function:
         """
@@ -10206,7 +10598,7 @@ class FunctionWrapper:
         Returns a Float32 number between `0` and `1`. [`Float32`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("ngramDistanceCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
     def ngramDistanceCaseInsensitiveUTF8(haystack: Any, needle: Any) -> Function:
         """
@@ -10218,7 +10610,7 @@ class FunctionWrapper:
         Returns a Float32 number between `0` and `1`. [`Float32`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("ngramDistanceCaseInsensitiveUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def ngramDistanceUTF8(haystack: Any, needle: Any) -> Function:
         """
@@ -10230,9 +10622,11 @@ class FunctionWrapper:
         Returns a Float32 number between `0` and `1`. [`Float32`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("ngramDistanceUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def ngramMinHash(string: Any, ngramsize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def ngramMinHash(
+        string: Any, ngramsize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         ngramMinHash(string[, ngramsize, hashnum])
 
@@ -10243,9 +10637,11 @@ class FunctionWrapper:
         Returns a tuple with two hashes — the minimum and the maximum. [`Tuple`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("ngramMinHash", *to_args(locals()))
-    
+
     @staticmethod
-    def ngramMinHashArg(string: Any, ngramsize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def ngramMinHashArg(
+        string: Any, ngramsize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         ngramMinHashArg(string[, ngramsize, hashnum])
 
@@ -10256,9 +10652,11 @@ class FunctionWrapper:
         Returns a tuple with two tuples with `hashnum` n-grams each. [`Tuple(String)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("ngramMinHashArg", *to_args(locals()))
-    
+
     @staticmethod
-    def ngramMinHashArgCaseInsensitive(string: Any, ngramsize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def ngramMinHashArgCaseInsensitive(
+        string: Any, ngramsize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         ngramMinHashArgCaseInsensitive(string[, ngramsize, hashnum])
 
@@ -10269,9 +10667,11 @@ class FunctionWrapper:
         Returns a tuple with two tuples with `hashnum` n-grams each. [`Tuple(Tuple(String))`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("ngramMinHashArgCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
-    def ngramMinHashArgCaseInsensitiveUTF8(string: Any, ngramsize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def ngramMinHashArgCaseInsensitiveUTF8(
+        string: Any, ngramsize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         ngramMinHashArgCaseInsensitiveUTF8(string[, ngramsize, hashnum])
 
@@ -10282,9 +10682,11 @@ class FunctionWrapper:
         Returns a tuple with two tuples with `hashnum` n-grams each. [`Tuple(Tuple(String))`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("ngramMinHashArgCaseInsensitiveUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def ngramMinHashArgUTF8(string: Any, ngramsize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def ngramMinHashArgUTF8(
+        string: Any, ngramsize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         ngramMinHashArgUTF8(string[, ngramsize, hashnum])
 
@@ -10295,19 +10697,23 @@ class FunctionWrapper:
         Returns a tuple with two tuples with `hashnum` n-grams each. [`Tuple(Tuple(String))`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("ngramMinHashArgUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def ngramMinHashCaseInsensitive(string: Any, ngramsize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def ngramMinHashCaseInsensitive(
+        string: Any, ngramsize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         ngramMinHashCaseInsensitive(string[, ngramsize, hashnum])
 
-        - `string` — String. [String](../data-types/string.md). - `ngramsize` — The size of an n-gram. Optional. Possible values: any number from `1` to `25`. Default value: `3`. [UInt8](../data-types/int-uint.md). - `hashnum` — The number of minimum and maximum hashes used to calculate the result. Optional. Possible values: any number from `1` to `25`. Default value: `6`. [UInt8](../data-types/int-uint.md). 
+        - `string` — String. [String](../data-types/string.md). - `ngramsize` — The size of an n-gram. Optional. Possible values: any number from `1` to `25`. Default value: `3`. [UInt8](../data-types/int-uint.md). - `hashnum` — The number of minimum and maximum hashes used to calculate the result. Optional. Possible values: any number from `1` to `25`. Default value: `6`. [UInt8](../data-types/int-uint.md).
         Tuple with two hashes — the minimum and the maximum. [Tuple](../data-types/tuple.md)([UInt64](../data-types/int-uint.md), [UInt64](../data-types/int-uint.md)). [`Tuple`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("ngramMinHashCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
-    def ngramMinHashCaseInsensitiveUTF8(string: Any, ngramsize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def ngramMinHashCaseInsensitiveUTF8(
+        string: Any, ngramsize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         ngramMinHashCaseInsensitiveUTF8(string [, ngramsize, hashnum])
 
@@ -10318,9 +10724,11 @@ class FunctionWrapper:
         Returns a tuple with two hashes — the minimum and the maximum. [`Tuple`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("ngramMinHashCaseInsensitiveUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def ngramMinHashUTF8(string: Any, ngramsize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def ngramMinHashUTF8(
+        string: Any, ngramsize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         ngramMinHashUTF8(string[, ngramsize, hashnum])
 
@@ -10331,7 +10739,7 @@ class FunctionWrapper:
         Returns a tuple with two hashes — the minimum and the maximum. [`Tuple`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("ngramMinHashUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def ngramSearch(haystack: Any, needle: Any) -> Function:
         """
@@ -10343,7 +10751,7 @@ class FunctionWrapper:
         Returns `1` if the 4-gram distance between the strings is less than or equal to a threshold (`1.0` by default), `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("ngramSearch", *to_args(locals()))
-    
+
     @staticmethod
     def ngramSearchCaseInsensitive(haystack: Any, needle: Any) -> Function:
         """
@@ -10355,7 +10763,7 @@ class FunctionWrapper:
         Returns `1` if the 4-gram distance between the strings is less than or equal to a threshold (`1.0` by default), `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("ngramSearchCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
     def ngramSearchCaseInsensitiveUTF8(haystack: Any, needle: Any) -> Function:
         """
@@ -10367,7 +10775,7 @@ class FunctionWrapper:
         Returns `1` if the 3-gram distance between the strings is less than or equal to a threshold (`1.0` by default), `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("ngramSearchCaseInsensitiveUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def ngramSearchUTF8(haystack: Any, needle: Any) -> Function:
         """
@@ -10379,7 +10787,7 @@ class FunctionWrapper:
         Returns `1` if the 3-gram distance between the strings is less than or equal to a threshold (`1.0` by default), `0` otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("ngramSearchUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def ngramSimHash(string: Any, ngramsize: Any | None = None) -> Function:
         """
@@ -10391,9 +10799,11 @@ class FunctionWrapper:
         Returns the computed hash of the input string. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("ngramSimHash", *to_args(locals()))
-    
+
     @staticmethod
-    def ngramSimHashCaseInsensitive(string: Any, ngramsize: Any | None = None) -> Function:
+    def ngramSimHashCaseInsensitive(
+        string: Any, ngramsize: Any | None = None
+    ) -> Function:
         """
         ngramSimHashCaseInsensitive(string[, ngramsize])
 
@@ -10403,9 +10813,11 @@ class FunctionWrapper:
         Hash value. [UInt64](../data-types/int-uint.md). [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("ngramSimHashCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
-    def ngramSimHashCaseInsensitiveUTF8(string: Any, ngramsize: Any | None = None) -> Function:
+    def ngramSimHashCaseInsensitiveUTF8(
+        string: Any, ngramsize: Any | None = None
+    ) -> Function:
         """
         ngramSimHashCaseInsensitiveUTF8(string[, ngramsize])
 
@@ -10415,7 +10827,7 @@ class FunctionWrapper:
         Returns the computed hash value. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("ngramSimHashCaseInsensitiveUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def ngramSimHashUTF8(string: Any, ngramsize: Any | None = None) -> Function:
         """
@@ -10427,7 +10839,7 @@ class FunctionWrapper:
         Returns the computed hash value. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("ngramSimHashUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def ngrams(s: Any, N: Any) -> Function:
         """
@@ -10439,17 +10851,12 @@ class FunctionWrapper:
         Returns an array with n-grams. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("ngrams", *to_args(locals()))
-    
+
     @staticmethod
     def nonNegativeDerivative(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("nonNegativeDerivative", *to_args(locals()))
-    
+
     @staticmethod
     def normalizeQuery(x: Any) -> Function:
         """
@@ -10460,7 +10867,7 @@ class FunctionWrapper:
         Returns the given sequence of characters with placeholders. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("normalizeQuery", *to_args(locals()))
-    
+
     @staticmethod
     def normalizeQueryKeepNames(x: Any) -> Function:
         """
@@ -10471,7 +10878,7 @@ class FunctionWrapper:
         Returns the given sequence of characters with placeholders. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("normalizeQueryKeepNames", *to_args(locals()))
-    
+
     @staticmethod
     def normalizeUTF8NFC(str: Any) -> Function:
         """
@@ -10482,7 +10889,7 @@ class FunctionWrapper:
         Returns the NFC normalized form of the UTF-8 string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("normalizeUTF8NFC", *to_args(locals()))
-    
+
     @staticmethod
     def normalizeUTF8NFD(str: Any) -> Function:
         """
@@ -10493,7 +10900,7 @@ class FunctionWrapper:
         Returns the NFD normalized form of the UTF-8 string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("normalizeUTF8NFD", *to_args(locals()))
-    
+
     @staticmethod
     def normalizeUTF8NFKC(str: Any) -> Function:
         """
@@ -10504,7 +10911,7 @@ class FunctionWrapper:
         Returns the NFKC normalized form of the UTF-8 string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("normalizeUTF8NFKC", *to_args(locals()))
-    
+
     @staticmethod
     def normalizeUTF8NFKCCasefold(str: Any) -> Function:
         """
@@ -10515,7 +10922,7 @@ class FunctionWrapper:
         Returns the NFKC_Casefold normalized form of the UTF-8 string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("normalizeUTF8NFKCCasefold", *to_args(locals()))
-    
+
     @staticmethod
     def normalizeUTF8NFKD(str: Any) -> Function:
         """
@@ -10526,7 +10933,7 @@ class FunctionWrapper:
         Returns the NFKD normalized form of the UTF-8 string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("normalizeUTF8NFKD", *to_args(locals()))
-    
+
     @staticmethod
     def normalizedQueryHash(x: Any) -> Function:
         """
@@ -10537,7 +10944,7 @@ class FunctionWrapper:
         Returns a 64 bit hash value. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("normalizedQueryHash", *to_args(locals()))
-    
+
     @staticmethod
     def normalizedQueryHashKeepNames(x: Any) -> Function:
         """
@@ -10548,7 +10955,7 @@ class FunctionWrapper:
         Returns a 64 bit hash value. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("normalizedQueryHashKeepNames", *to_args(locals()))
-    
+
     @staticmethod
     def not_(val: Any) -> Function:
         """
@@ -10563,7 +10970,7 @@ class FunctionWrapper:
                  [`Nullable(UInt8)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("not", *to_args(locals()))
-    
+
     @staticmethod
     def notEmpty(arr: Any) -> Function:
         """
@@ -10574,7 +10981,7 @@ class FunctionWrapper:
         Returns `1` for a non-empty array or `0` for an empty array [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("notEmpty", *to_args(locals()))
-    
+
     @staticmethod
     def notEquals(a: Any, b: Any) -> Function:
         """
@@ -10582,11 +10989,11 @@ class FunctionWrapper:
             -- a != b
             -- a <> b
 
-        - `a` — First value.<sup>[*](#comparison-rules)</sup> - `b` — Second value.<sup>[*](#comparison-rules)</sup> 
+        - `a` — First value.<sup>[*](#comparison-rules)</sup> - `b` — Second value.<sup>[*](#comparison-rules)</sup>
         Returns `1` if `a` is not equal to `b`, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("notEquals", *to_args(locals()))
-    
+
     @staticmethod
     def notILike(haystack: Any, pattern: Any) -> Function:
         """
@@ -10598,27 +11005,27 @@ class FunctionWrapper:
         Returns `1` if the string does not match the pattern (case-insensitive), otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("notILike", *to_args(locals()))
-    
+
     @staticmethod
     def notIn(x: Any, set: Any) -> Function:
         """
         notIn(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is not in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("notIn", *to_args(locals()))
-    
+
     @staticmethod
     def notInIgnoreSet(x: Any, set: Any) -> Function:
         """
         notIn(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is not in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("notInIgnoreSet", *to_args(locals()))
-    
+
     @staticmethod
     def notLike(haystack: Any, pattern: Any) -> Function:
         """
@@ -10631,57 +11038,42 @@ class FunctionWrapper:
         Returns `1` if the string does not match the `LIKE` pattern, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("notLike", *to_args(locals()))
-    
+
     @staticmethod
     def notNullIn(x: Any, set: Any) -> Function:
         """
         notNullIn(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is not in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("notNullIn", *to_args(locals()))
-    
+
     @staticmethod
     def notNullInIgnoreSet(x: Any, set: Any) -> Function:
         """
         notNullIn(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is not in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("notNullInIgnoreSet", *to_args(locals()))
-    
+
     @staticmethod
     def nothing(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("nothing", *to_args(locals()))
-    
+
     @staticmethod
     def nothingNull(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("nothingNull", *to_args(locals()))
-    
+
     @staticmethod
     def nothingUInt64(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("nothingUInt64", *to_args(locals()))
-    
+
     @staticmethod
     def now(timezone: Any | None = None) -> Function:
         """
@@ -10692,7 +11084,7 @@ class FunctionWrapper:
         Returns the current date and time. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("now", *to_args(locals()))
-    
+
     @staticmethod
     def now64(scale: Any | None = None, timezone: Any | None = None) -> Function:
         """
@@ -10704,7 +11096,7 @@ class FunctionWrapper:
         Returns current date and time with sub-second precision. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("now64", *to_args(locals()))
-    
+
     @staticmethod
     def nowInBlock(timezone: Any | None = None) -> Function:
         """
@@ -10715,7 +11107,7 @@ class FunctionWrapper:
         Returns the current date and time at the moment of processing of each block of data. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("nowInBlock", *to_args(locals()))
-    
+
     @staticmethod
     def nowInBlock64(scale: Any | None = None, timezone: Any | None = None) -> Function:
         """
@@ -10727,27 +11119,17 @@ class FunctionWrapper:
         Returns the current date and time at the moment of processing of each block of data with sub-second precision. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("nowInBlock64", *to_args(locals()))
-    
+
     @staticmethod
     def nth_value(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("nth_value", *to_args(locals()))
-    
+
     @staticmethod
     def ntile(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("ntile", *to_args(locals()))
-    
+
     @staticmethod
     def nullIf(x: Any, y: Any) -> Function:
         """
@@ -10759,27 +11141,27 @@ class FunctionWrapper:
         Returns `NULL` if both arguments are equal, otherwise returns the first argument. [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null) or [`Nullable(x)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("nullIf", *to_args(locals()))
-    
+
     @staticmethod
     def nullIn(x: Any, set: Any) -> Function:
         """
         nullIn(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("nullIn", *to_args(locals()))
-    
+
     @staticmethod
     def nullInIgnoreSet(x: Any, set: Any) -> Function:
         """
         nullIn(x, set)
 
-        - `x` — The value to check. - `set` — The set of values. 
+        - `x` — The value to check. - `set` — The set of values.
         Returns 1 if x is in the set, 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("nullInIgnoreSet", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorAllValueSum(v: Any) -> Function:
         """
@@ -10790,7 +11172,7 @@ class FunctionWrapper:
         Returns the sum. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("numericIndexedVectorAllValueSum", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorBuild(map: Any) -> Function:
         """
@@ -10801,7 +11183,7 @@ class FunctionWrapper:
         Returns a NumericIndexedVector object. [`AggregateFunction`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction)
         """
         return Function("numericIndexedVectorBuild", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorCardinality(v: Any) -> Function:
         """
@@ -10812,7 +11194,7 @@ class FunctionWrapper:
         Returns the number of unique indexes. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("numericIndexedVectorCardinality", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorGetValue(v: Any, i: Any) -> Function:
         """
@@ -10824,7 +11206,7 @@ class FunctionWrapper:
         A numeric value with the same type as the value type of NumericIndexedVector. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("numericIndexedVectorGetValue", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorPointwiseAdd(v1: Any, v2: Any) -> Function:
         """
@@ -10836,7 +11218,7 @@ class FunctionWrapper:
         Returns a new numericIndexedVector object. [`numericIndexedVector`](https://clickhouse.com/docs/sql-reference/functions/numeric-indexed-vector-functions#create-numeric-indexed-vector-object)
         """
         return Function("numericIndexedVectorPointwiseAdd", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorPointwiseDivide(v1: Any, v2: Any) -> Function:
         """
@@ -10848,7 +11230,7 @@ class FunctionWrapper:
         Returns a new numericIndexedVector object. [`numericIndexedVector`](https://clickhouse.com/docs/sql-reference/functions/numeric-indexed-vector-functions#create-numeric-indexed-vector-object)
         """
         return Function("numericIndexedVectorPointwiseDivide", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorPointwiseEqual(v1: Any, v2: Any) -> Function:
         """
@@ -10860,7 +11242,7 @@ class FunctionWrapper:
         Returns a new numericIndexedVector object. [`numericIndexedVector`](https://clickhouse.com/docs/sql-reference/functions/numeric-indexed-vector-functions#create-numeric-indexed-vector-object)
         """
         return Function("numericIndexedVectorPointwiseEqual", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorPointwiseGreater(v1: Any, v2: Any) -> Function:
         """
@@ -10872,7 +11254,7 @@ class FunctionWrapper:
         Returns a new numericIndexedVector object. [`numericIndexedVector`](https://clickhouse.com/docs/sql-reference/functions/numeric-indexed-vector-functions#create-numeric-indexed-vector-object)
         """
         return Function("numericIndexedVectorPointwiseGreater", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorPointwiseGreaterEqual(v1: Any, v2: Any) -> Function:
         """
@@ -10884,7 +11266,7 @@ class FunctionWrapper:
         Returns a new numericIndexedVector object. [`numericIndexedVector`](https://clickhouse.com/docs/sql-reference/functions/numeric-indexed-vector-functions#create-numeric-indexed-vector-object)
         """
         return Function("numericIndexedVectorPointwiseGreaterEqual", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorPointwiseLess(v1: Any, v2: Any) -> Function:
         """
@@ -10896,7 +11278,7 @@ class FunctionWrapper:
         Returns a new numericIndexedVector object. [`numericIndexedVector`](https://clickhouse.com/docs/sql-reference/functions/numeric-indexed-vector-functions#create-numeric-indexed-vector-object)
         """
         return Function("numericIndexedVectorPointwiseLess", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorPointwiseLessEqual(v1: Any, v2: Any) -> Function:
         """
@@ -10908,7 +11290,7 @@ class FunctionWrapper:
         Returns a new numericIndexedVector object. [`numericIndexedVector`](https://clickhouse.com/docs/sql-reference/functions/numeric-indexed-vector-functions#create-numeric-indexed-vector-object)
         """
         return Function("numericIndexedVectorPointwiseLessEqual", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorPointwiseMultiply(v1: Any, v2: Any) -> Function:
         """
@@ -10920,7 +11302,7 @@ class FunctionWrapper:
         Returns a new numericIndexedVector object. [`numericIndexedVector`](https://clickhouse.com/docs/sql-reference/functions/numeric-indexed-vector-functions#create-numeric-indexed-vector-object)
         """
         return Function("numericIndexedVectorPointwiseMultiply", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorPointwiseNotEqual(v1: Any, v2: Any) -> Function:
         """
@@ -10932,7 +11314,7 @@ class FunctionWrapper:
         Returns a new numericIndexedVector object. [`numericIndexedVector`](https://clickhouse.com/docs/sql-reference/functions/numeric-indexed-vector-functions#create-numeric-indexed-vector-object)
         """
         return Function("numericIndexedVectorPointwiseNotEqual", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorPointwiseSubtract(v1: Any, v2: Any) -> Function:
         """
@@ -10944,7 +11326,7 @@ class FunctionWrapper:
         Returns a new numericIndexedVector object. [`numericIndexedVector`](https://clickhouse.com/docs/sql-reference/functions/numeric-indexed-vector-functions#create-numeric-indexed-vector-object)
         """
         return Function("numericIndexedVectorPointwiseSubtract", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorShortDebugString(v: Any) -> Function:
         """
@@ -10955,7 +11337,7 @@ class FunctionWrapper:
         Returns a JSON string containing debug information. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("numericIndexedVectorShortDebugString", *to_args(locals()))
-    
+
     @staticmethod
     def numericIndexedVectorToMap(v: Any) -> Function:
         """
@@ -10966,7 +11348,7 @@ class FunctionWrapper:
         Returns a map with index-value pairs. [`Map`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("numericIndexedVectorToMap", *to_args(locals()))
-    
+
     @staticmethod
     def or_(val1: Any, val2: Any) -> Function:
         """
@@ -10981,9 +11363,11 @@ class FunctionWrapper:
                  [`Nullable(UInt8)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("or", *to_args(locals()))
-    
+
     @staticmethod
-    def overlay(s: Any, replace: Any, offset: Any, length: Any | None = None) -> Function:
+    def overlay(
+        s: Any, replace: Any, offset: Any, length: Any | None = None
+    ) -> Function:
         """
         overlay(s, replace, offset[, length])
 
@@ -10995,9 +11379,11 @@ class FunctionWrapper:
         Returns a string with replacement. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("overlay", *to_args(locals()))
-    
+
     @staticmethod
-    def overlayUTF8(s: Any, replace: Any, offset: Any, length: Any | None = None) -> Function:
+    def overlayUTF8(
+        s: Any, replace: Any, offset: Any, length: Any | None = None
+    ) -> Function:
         """
         overlayUTF8(s, replace, offset[, length])
 
@@ -11009,9 +11395,11 @@ class FunctionWrapper:
         Returns a string with replacement. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("overlayUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime(time_string: Any, format: Any, timezone: Any | None = None) -> Function:
+    def parseDateTime(
+        time_string: Any, format: Any, timezone: Any | None = None
+    ) -> Function:
         """
         parseDateTime(time_string, format[, timezone])
 
@@ -11022,9 +11410,11 @@ class FunctionWrapper:
         Returns a DateTime parsed from the input string according to the MySQL style format string. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("parseDateTime", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime32BestEffort(time_string: Any, time_zone: Any | None = None) -> Function:
+    def parseDateTime32BestEffort(
+        time_string: Any, time_zone: Any | None = None
+    ) -> Function:
         """
         parseDateTime32BestEffort(time_string[, time_zone])
 
@@ -11034,9 +11424,11 @@ class FunctionWrapper:
         Returns `time_string` as a `DateTime`. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("parseDateTime32BestEffort", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime32BestEffortOrNull(time_string: Any, time_zone: Any | None = None) -> Function:
+    def parseDateTime32BestEffortOrNull(
+        time_string: Any, time_zone: Any | None = None
+    ) -> Function:
         """
         parseDateTime32BestEffortOrNull(time_string[, time_zone])
 
@@ -11046,9 +11438,11 @@ class FunctionWrapper:
         Returns a `DateTime` object parsed from the string, or `NULL` if the parsing fails. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("parseDateTime32BestEffortOrNull", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime32BestEffortOrZero(time_string: Any, time_zone: Any | None = None) -> Function:
+    def parseDateTime32BestEffortOrZero(
+        time_string: Any, time_zone: Any | None = None
+    ) -> Function:
         """
         parseDateTime32BestEffortOrZero(time_string[, time_zone])
 
@@ -11058,9 +11452,11 @@ class FunctionWrapper:
         Returns a `DateTime` object parsed from the string, or zero date (`1970-01-01 00:00:00`) if the parsing fails. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("parseDateTime32BestEffortOrZero", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime64(time_string: Any, format: Any, timezone: Any | None = None) -> Function:
+    def parseDateTime64(
+        time_string: Any, format: Any, timezone: Any | None = None
+    ) -> Function:
         """
         parseDateTime64(time_string, format[, timezone])
 
@@ -11071,9 +11467,11 @@ class FunctionWrapper:
         Returns a DateTime64 parsed from the input string according to the MySQL style format string. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("parseDateTime64", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime64BestEffort(time_string: Any, precision: Any | None = None, time_zone: Any | None = None) -> Function:
+    def parseDateTime64BestEffort(
+        time_string: Any, precision: Any | None = None, time_zone: Any | None = None
+    ) -> Function:
         """
         parseDateTime64BestEffort(time_string[, precision[, time_zone]])
 
@@ -11084,9 +11482,11 @@ class FunctionWrapper:
         Returns `time_string` converted to the [`DateTime64`](../..https://clickhouse.com/docs/sql-reference/data-types/datetime64.md) data type. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("parseDateTime64BestEffort", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime64BestEffortOrNull(time_string: Any, precision: Any | None = None, time_zone: Any | None = None) -> Function:
+    def parseDateTime64BestEffortOrNull(
+        time_string: Any, precision: Any | None = None, time_zone: Any | None = None
+    ) -> Function:
         """
         parseDateTime64BestEffortOrNull(time_string[, precision[, time_zone]])
 
@@ -11097,9 +11497,11 @@ class FunctionWrapper:
         Returns `time_string` converted to [`DateTime64`](../..https://clickhouse.com/docs/sql-reference/data-types/datetime64.md), or `NULL` if the input cannot be parsed. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("parseDateTime64BestEffortOrNull", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime64BestEffortOrZero(time_string: Any, precision: Any | None = None, time_zone: Any | None = None) -> Function:
+    def parseDateTime64BestEffortOrZero(
+        time_string: Any, precision: Any | None = None, time_zone: Any | None = None
+    ) -> Function:
         """
         parseDateTime64BestEffortOrZero(time_string[, precision[, time_zone]])
 
@@ -11110,9 +11512,11 @@ class FunctionWrapper:
         Returns `time_string` converted to [`DateTime64`](../..https://clickhouse.com/docs/sql-reference/data-types/datetime64.md), or zero date/datetime (`1970-01-01 00:00:00.000`) if the input cannot be parsed. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("parseDateTime64BestEffortOrZero", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime64BestEffortUS(time_string: Any, precision: Any | None = None, time_zone: Any | None = None) -> Function:
+    def parseDateTime64BestEffortUS(
+        time_string: Any, precision: Any | None = None, time_zone: Any | None = None
+    ) -> Function:
         """
         parseDateTime64BestEffortUS(time_string [, precision [, time_zone]])
 
@@ -11123,9 +11527,11 @@ class FunctionWrapper:
         Returns `time_string` converted to [`DateTime64`](../..https://clickhouse.com/docs/sql-reference/data-types/datetime64.md) using US date format preference for ambiguous cases. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("parseDateTime64BestEffortUS", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime64BestEffortUSOrNull(time_string: Any, precision: Any | None = None, time_zone: Any | None = None) -> Function:
+    def parseDateTime64BestEffortUSOrNull(
+        time_string: Any, precision: Any | None = None, time_zone: Any | None = None
+    ) -> Function:
         """
         parseDateTime64BestEffortUSOrNull(time_string[, precision[, time_zone]])
 
@@ -11136,9 +11542,11 @@ class FunctionWrapper:
         Returns `time_string` converted to [`DateTime64`](../..https://clickhouse.com/docs/sql-reference/data-types/datetime64.md) using US format preference, or `NULL` if the input cannot be parsed. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("parseDateTime64BestEffortUSOrNull", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime64BestEffortUSOrZero(time_string: Any, precision: Any | None = None, time_zone: Any | None = None) -> Function:
+    def parseDateTime64BestEffortUSOrZero(
+        time_string: Any, precision: Any | None = None, time_zone: Any | None = None
+    ) -> Function:
         """
         parseDateTime64BestEffortUSOrZero(time_string [, precision [, time_zone]])
 
@@ -11149,9 +11557,11 @@ class FunctionWrapper:
         Returns `time_string` converted to [`DateTime64`](../..https://clickhouse.com/docs/sql-reference/data-types/datetime64.md) using US format preference, or zero date/datetime (`1970-01-01 00:00:00.000`) if the input cannot be parsed. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("parseDateTime64BestEffortUSOrZero", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime64InJodaSyntax(time_string: Any, format: Any, timezone: Any | None = None) -> Function:
+    def parseDateTime64InJodaSyntax(
+        time_string: Any, format: Any, timezone: Any | None = None
+    ) -> Function:
         """
         parseDateTime64InJodaSyntax(time_string, format[, timezone])
 
@@ -11162,9 +11572,11 @@ class FunctionWrapper:
         Returns a DateTime64 parsed from the input string according to the Joda style format string. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("parseDateTime64InJodaSyntax", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime64InJodaSyntaxOrNull(time_string: Any, format: Any, timezone: Any | None = None) -> Function:
+    def parseDateTime64InJodaSyntaxOrNull(
+        time_string: Any, format: Any, timezone: Any | None = None
+    ) -> Function:
         """
         parseDateTime64InJodaSyntaxOrNull(time_string, format[, timezone])
 
@@ -11175,9 +11587,11 @@ class FunctionWrapper:
         Returns DateTime64 parsed from input string, or NULL if parsing fails. [`Nullable(DateTime64)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("parseDateTime64InJodaSyntaxOrNull", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime64InJodaSyntaxOrZero(time_string: Any, format: Any, timezone: Any | None = None) -> Function:
+    def parseDateTime64InJodaSyntaxOrZero(
+        time_string: Any, format: Any, timezone: Any | None = None
+    ) -> Function:
         """
         parseDateTime64InJodaSyntaxOrZero(time_string, format[, timezone])
 
@@ -11188,9 +11602,11 @@ class FunctionWrapper:
         Returns DateTime64 parsed from input string, or zero DateTime64 if parsing fails. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("parseDateTime64InJodaSyntaxOrZero", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime64OrNull(time_string: Any, format: Any, timezone: Any | None = None) -> Function:
+    def parseDateTime64OrNull(
+        time_string: Any, format: Any, timezone: Any | None = None
+    ) -> Function:
         """
         parseDateTime64OrNull(time_string, format[, timezone])
 
@@ -11201,9 +11617,11 @@ class FunctionWrapper:
         Returns DateTime64 parsed from input string, or NULL if parsing fails. [`Nullable(DateTime64)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("parseDateTime64OrNull", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTime64OrZero(time_string: Any, format: Any, timezone: Any | None = None) -> Function:
+    def parseDateTime64OrZero(
+        time_string: Any, format: Any, timezone: Any | None = None
+    ) -> Function:
         """
         parseDateTime64OrZero(time_string, format[, timezone])
 
@@ -11214,9 +11632,11 @@ class FunctionWrapper:
         Returns DateTime64 parsed from input string, or zero DateTime64 if parsing fails. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("parseDateTime64OrZero", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTimeBestEffort(time_string: Any, time_zone: Any | None = None) -> Function:
+    def parseDateTimeBestEffort(
+        time_string: Any, time_zone: Any | None = None
+    ) -> Function:
         """
         parseDateTimeBestEffort(time_string[, time_zone])
 
@@ -11226,9 +11646,11 @@ class FunctionWrapper:
         Returns `time_string` as a `DateTime`. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("parseDateTimeBestEffort", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTimeBestEffortOrNull(time_string: Any, time_zone: Any | None = None) -> Function:
+    def parseDateTimeBestEffortOrNull(
+        time_string: Any, time_zone: Any | None = None
+    ) -> Function:
         """
         parseDateTimeBestEffortOrNull(time_string[, time_zone])
 
@@ -11238,9 +11660,11 @@ class FunctionWrapper:
         Returns `time_string` as a DateTime, or `NULL` if the input cannot be parsed. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("parseDateTimeBestEffortOrNull", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTimeBestEffortOrZero(time_string: Any, time_zone: Any | None = None) -> Function:
+    def parseDateTimeBestEffortOrZero(
+        time_string: Any, time_zone: Any | None = None
+    ) -> Function:
         """
         parseDateTimeBestEffortOrZero(time_string[, time_zone])
 
@@ -11250,9 +11674,11 @@ class FunctionWrapper:
         Returns `time_string` as a `DateTime`, or zero date/datetime (`1970-01-01` or `1970-01-01 00:00:00`) if the input cannot be parsed. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("parseDateTimeBestEffortOrZero", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTimeBestEffortUS(time_string: Any, time_zone: Any | None = None) -> Function:
+    def parseDateTimeBestEffortUS(
+        time_string: Any, time_zone: Any | None = None
+    ) -> Function:
         """
         parseDateTimeBestEffortUS(time_string[, time_zone])
 
@@ -11262,9 +11688,11 @@ class FunctionWrapper:
         Returns `time_string` as a `DateTime` using US date format preference for ambiguous cases. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("parseDateTimeBestEffortUS", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTimeBestEffortUSOrNull(time_string: Any, time_zone: Any | None = None) -> Function:
+    def parseDateTimeBestEffortUSOrNull(
+        time_string: Any, time_zone: Any | None = None
+    ) -> Function:
         """
         parseDateTimeBestEffortUSOrNull(time_string[, time_zone])
 
@@ -11274,9 +11702,11 @@ class FunctionWrapper:
         Returns `time_string` as a DateTime using US format preference, or `NULL` if the input cannot be parsed. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("parseDateTimeBestEffortUSOrNull", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTimeBestEffortUSOrZero(time_string: Any, time_zone: Any | None = None) -> Function:
+    def parseDateTimeBestEffortUSOrZero(
+        time_string: Any, time_zone: Any | None = None
+    ) -> Function:
         """
         parseDateTimeBestEffortUSOrZero(time_string[, time_zone])
 
@@ -11286,9 +11716,11 @@ class FunctionWrapper:
         Returns `time_string` as a `DateTime` using US format preference, or zero date/datetime (`1970-01-01` or `1970-01-01 00:00:00`) if the input cannot be parsed. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("parseDateTimeBestEffortUSOrZero", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTimeInJodaSyntax(time_string: Any, format: Any, timezone: Any | None = None) -> Function:
+    def parseDateTimeInJodaSyntax(
+        time_string: Any, format: Any, timezone: Any | None = None
+    ) -> Function:
         """
         parseDateTimeInJodaSyntax(time_string, format[, timezone])
 
@@ -11299,9 +11731,11 @@ class FunctionWrapper:
         Returns a DateTime parsed from the input string according to the Joda style format string. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("parseDateTimeInJodaSyntax", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTimeInJodaSyntaxOrNull(time_string: Any, format: Any, timezone: Any | None = None) -> Function:
+    def parseDateTimeInJodaSyntaxOrNull(
+        time_string: Any, format: Any, timezone: Any | None = None
+    ) -> Function:
         """
         parseDateTimeInJodaSyntaxOrNull(time_string, format[, timezone])
 
@@ -11312,9 +11746,11 @@ class FunctionWrapper:
         Returns DateTime parsed from input string, or NULL if parsing fails. [`Nullable(DateTime)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("parseDateTimeInJodaSyntaxOrNull", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTimeInJodaSyntaxOrZero(time_string: Any, format: Any, timezone: Any | None = None) -> Function:
+    def parseDateTimeInJodaSyntaxOrZero(
+        time_string: Any, format: Any, timezone: Any | None = None
+    ) -> Function:
         """
         parseDateTimeInJodaSyntaxOrZero(time_string, format[, timezone])
 
@@ -11325,9 +11761,11 @@ class FunctionWrapper:
         Returns DateTime parsed from input string, or zero DateTime if parsing fails. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("parseDateTimeInJodaSyntaxOrZero", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTimeOrNull(time_string: Any, format: Any, timezone: Any | None = None) -> Function:
+    def parseDateTimeOrNull(
+        time_string: Any, format: Any, timezone: Any | None = None
+    ) -> Function:
         """
         parseDateTimeOrNull(time_string, format[, timezone])
 
@@ -11338,9 +11776,11 @@ class FunctionWrapper:
         Returns DateTime parsed from input string, or NULL if parsing fails. [`Nullable(DateTime)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("parseDateTimeOrNull", *to_args(locals()))
-    
+
     @staticmethod
-    def parseDateTimeOrZero(time_string: Any, format: Any, timezone: Any | None = None) -> Function:
+    def parseDateTimeOrZero(
+        time_string: Any, format: Any, timezone: Any | None = None
+    ) -> Function:
         """
         parseDateTimeOrZero(time_string, format[, timezone])
 
@@ -11351,7 +11791,7 @@ class FunctionWrapper:
         Returns DateTime parsed from input string, or zero DateTime if parsing fails. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("parseDateTimeOrZero", *to_args(locals()))
-    
+
     @staticmethod
     def parseReadableSize(x: Any) -> Function:
         """
@@ -11362,7 +11802,7 @@ class FunctionWrapper:
         Returns the number of bytes, rounded up to the nearest integer. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("parseReadableSize", *to_args(locals()))
-    
+
     @staticmethod
     def parseReadableSizeOrNull(x: Any) -> Function:
         """
@@ -11373,7 +11813,7 @@ class FunctionWrapper:
         Returns the number of bytes, rounded up to the nearest integer, or `NULL` if unable to parse the input [`Nullable(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("parseReadableSizeOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def parseReadableSizeOrZero(x: Any) -> Function:
         """
@@ -11384,7 +11824,7 @@ class FunctionWrapper:
         Returns the number of bytes, rounded up to the nearest integer, or `0` if unable to parse the input. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("parseReadableSizeOrZero", *to_args(locals()))
-    
+
     @staticmethod
     def parseTimeDelta(timestr: Any) -> Function:
         """
@@ -11395,17 +11835,17 @@ class FunctionWrapper:
         The number of seconds. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("parseTimeDelta", *to_args(locals()))
-    
+
     @staticmethod
     def partitionId(column1: Any, column2: Any | None = None) -> Function:
         """
         partitionId(column1[, column2, ...])
 
-        - `column1, column2, ...` — Column for which to return the partition ID. 
+        - `column1, column2, ...` — Column for which to return the partition ID.
         Returns the partition ID that the row belongs to. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("partitionId", *to_args(locals()))
-    
+
     @staticmethod
     def path(url: Any) -> Function:
         """
@@ -11416,7 +11856,7 @@ class FunctionWrapper:
         Returns the path of the URL without query string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("path", *to_args(locals()))
-    
+
     @staticmethod
     def pathFull(url: Any) -> Function:
         """
@@ -11427,17 +11867,12 @@ class FunctionWrapper:
         Returns the path of the URL including query string and fragment. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("pathFull", *to_args(locals()))
-    
+
     @staticmethod
     def percentRank(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("percentRank", *to_args(locals()))
-    
+
     @staticmethod
     def perimeterCartesian(object: Any) -> Function:
         """
@@ -11448,7 +11883,7 @@ class FunctionWrapper:
         Returns the perimeter of the object. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("perimeterCartesian", *to_args(locals()))
-    
+
     @staticmethod
     def perimeterSpherical(object: Any) -> Function:
         """
@@ -11459,27 +11894,27 @@ class FunctionWrapper:
         Returns the perimeter of the object. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("perimeterSpherical", *to_args(locals()))
-    
+
     @staticmethod
     def pi() -> Function:
         """
         pi()
 
-        
+
         Returns pi [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("pi", *to_args(locals()))
-    
+
     @staticmethod
     def plus(x: Any, y: Any) -> Function:
         """
         plus(x, y)
 
-        - `x` — Left hand operand. - `y` — Right hand operand. 
+        - `x` — Left hand operand. - `y` — Right hand operand.
         Returns the sum of x and y
         """
         return Function("plus", *to_args(locals()))
-    
+
     @staticmethod
     def pointInPolygon(x: Any, y: Any) -> Function:
         """
@@ -11492,7 +11927,7 @@ class FunctionWrapper:
         Returns `1` if the point is inside the polygon, `0` if it is not. If the point is on the polygon boundary, the function may return either `0` or `1`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("pointInPolygon", *to_args(locals()))
-    
+
     @staticmethod
     def polygonAreaCartesian(polygon: Any) -> Function:
         """
@@ -11503,7 +11938,7 @@ class FunctionWrapper:
         Returns the area of the polygon [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("polygonAreaCartesian", *to_args(locals()))
-    
+
     @staticmethod
     def polygonAreaSpherical(polygon: Any) -> Function:
         """
@@ -11514,7 +11949,7 @@ class FunctionWrapper:
         Returns the surface area of the polygon [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("polygonAreaSpherical", *to_args(locals()))
-    
+
     @staticmethod
     def polygonConvexHullCartesian(multipolygon: Any) -> Function:
         """
@@ -11525,7 +11960,7 @@ class FunctionWrapper:
         Returns the convex hull as a Polygon. [`Polygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#polygon)
         """
         return Function("polygonConvexHullCartesian", *to_args(locals()))
-    
+
     @staticmethod
     def polygonPerimeterCartesian(polygon: Any) -> Function:
         """
@@ -11536,17 +11971,17 @@ class FunctionWrapper:
         Returns the perimeter of the polygon. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("polygonPerimeterCartesian", *to_args(locals()))
-    
+
     @staticmethod
     def polygonPerimeterSpherical(polygon: Any) -> Function:
         """
         polygonPerimeterSpherical(polygon)
 
-        - `polygon` — A value of type [`Polygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#polygon) 
+        - `polygon` — A value of type [`Polygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#polygon)
         The perimeter of the polygon on a sphere [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("polygonPerimeterSpherical", *to_args(locals()))
-    
+
     @staticmethod
     def polygonsDistanceCartesian(polygon1: Any, polygon2: Any) -> Function:
         """
@@ -11558,7 +11993,7 @@ class FunctionWrapper:
         Returns the minimal distance between the two polygons [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("polygonsDistanceCartesian", *to_args(locals()))
-    
+
     @staticmethod
     def polygonsDistanceSpherical(polygon1: Any, polygon2: Any) -> Function:
         """
@@ -11570,7 +12005,7 @@ class FunctionWrapper:
         Returns the minimal distance between the two polygons on a sphere [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("polygonsDistanceSpherical", *to_args(locals()))
-    
+
     @staticmethod
     def polygonsEqualsCartesian(polygon1: Any, polygon2: Any) -> Function:
         """
@@ -11582,27 +12017,27 @@ class FunctionWrapper:
         Returns `1` if equal, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("polygonsEqualsCartesian", *to_args(locals()))
-    
+
     @staticmethod
     def polygonsIntersectCartesian(polygon1: Any, polygon2: Any) -> Function:
         """
         polygonsIntersectCartesian(polygon1, polygon2)
 
-        - `polygon1` — A value of type [`Polygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#polygon) or [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon). - `polygon2` — A value of type [`Polygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#polygon) or [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon). 
+        - `polygon1` — A value of type [`Polygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#polygon) or [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon). - `polygon2` — A value of type [`Polygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#polygon) or [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon).
         Returns true (1) if the two polygons intersect. [`Bool`](https://clickhouse.com/docs/sql-reference/data-types/boolean).
         """
         return Function("polygonsIntersectCartesian", *to_args(locals()))
-    
+
     @staticmethod
     def polygonsIntersectSpherical(polygon1: Any, polygon2: Any) -> Function:
         """
         polygonsIntersectSpherical(polygon1, polygon2)
 
-        - `polygon1` — A value of type [`Polygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#polygon) or [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon). - `polygon2` — A value of type [`Polygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#polygon) or [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon). 
+        - `polygon1` — A value of type [`Polygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#polygon) or [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon). - `polygon2` — A value of type [`Polygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#polygon) or [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon).
         Returns true (1) if the two polygons intersect (share any common area or boundary). [`Bool`](https://clickhouse.com/docs/sql-reference/data-types/boolean).
         """
         return Function("polygonsIntersectSpherical", *to_args(locals()))
-    
+
     @staticmethod
     def polygonsIntersectionCartesian(polygon1: Any, polygon2: Any) -> Function:
         """
@@ -11614,7 +12049,7 @@ class FunctionWrapper:
         Returns the intersection of the polygons as a MultiPolygon. [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon)
         """
         return Function("polygonsIntersectionCartesian", *to_args(locals()))
-    
+
     @staticmethod
     def polygonsIntersectionSpherical(polygon1: Any, polygon2: Any) -> Function:
         """
@@ -11626,7 +12061,7 @@ class FunctionWrapper:
         Returns the intersection of the polygons as a MultiPolygon. [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon)
         """
         return Function("polygonsIntersectionSpherical", *to_args(locals()))
-    
+
     @staticmethod
     def polygonsSymDifferenceCartesian(polygon1: Any, polygon2: Any) -> Function:
         """
@@ -11638,7 +12073,7 @@ class FunctionWrapper:
         Returns the symmetric difference of the polygons as a MultiPolygon. [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon)
         """
         return Function("polygonsSymDifferenceCartesian", *to_args(locals()))
-    
+
     @staticmethod
     def polygonsSymDifferenceSpherical(polygon1: Any, polygon2: Any) -> Function:
         """
@@ -11650,7 +12085,7 @@ class FunctionWrapper:
         Returns the symmetric difference of the polygons as a MultiPolygon. [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon)
         """
         return Function("polygonsSymDifferenceSpherical", *to_args(locals()))
-    
+
     @staticmethod
     def polygonsUnionCartesian(polygon1: Any, polygon2: Any) -> Function:
         """
@@ -11662,7 +12097,7 @@ class FunctionWrapper:
         Returns the union of the polygons as a MultiPolygon. [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon)
         """
         return Function("polygonsUnionCartesian", *to_args(locals()))
-    
+
     @staticmethod
     def polygonsUnionSpherical(polygon1: Any, polygon2: Any) -> Function:
         """
@@ -11674,7 +12109,7 @@ class FunctionWrapper:
         Returns the union of the polygons as a MultiPolygon. [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon)
         """
         return Function("polygonsUnionSpherical", *to_args(locals()))
-    
+
     @staticmethod
     def polygonsWithinCartesian(polygon1: Any, polygon2: Any) -> Function:
         """
@@ -11686,7 +12121,7 @@ class FunctionWrapper:
         Returns `1` if `polygon1` is contained in `polygon2`, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("polygonsWithinCartesian", *to_args(locals()))
-    
+
     @staticmethod
     def polygonsWithinSpherical(polygon1: Any, polygon2: Any) -> Function:
         """
@@ -11698,7 +12133,7 @@ class FunctionWrapper:
         Returns `1` if `polygon1` lies completely within `polygon2`, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("polygonsWithinSpherical", *to_args(locals()))
-    
+
     @staticmethod
     def port(url: Any, default_port: Any | None = None) -> Function:
         """
@@ -11710,7 +12145,7 @@ class FunctionWrapper:
         Returns the port of the URL, or the default port if there is no port in the URL or in case of a validation error. [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("port", *to_args(locals()))
-    
+
     @staticmethod
     def portRFC(url: Any, default_port: Any | None = None) -> Function:
         """
@@ -11722,7 +12157,7 @@ class FunctionWrapper:
         Returns the port or the default port if there is no port in the URL or in case of a validation error. [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("portRFC", *to_args(locals()))
-    
+
     @staticmethod
     def position(haystack: Any, needle: Any, start_pos: Any | None = None) -> Function:
         """
@@ -11735,9 +12170,11 @@ class FunctionWrapper:
         Returns starting position in bytes and counting from 1, if the substring was found, otherwise `0`, if the substring was not found. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("position", *to_args(locals()))
-    
+
     @staticmethod
-    def positionCaseInsensitive(haystack: Any, needle: Any, start_pos: Any | None = None) -> Function:
+    def positionCaseInsensitive(
+        haystack: Any, needle: Any, start_pos: Any | None = None
+    ) -> Function:
         """
         positionCaseInsensitive(haystack, needle[, start_pos])
 
@@ -11748,9 +12185,11 @@ class FunctionWrapper:
         Returns starting position in bytes and counting from 1, if the substring was found, otherwise `0`, if the substring was not found. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("positionCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
-    def positionCaseInsensitiveUTF8(haystack: Any, needle: Any, start_pos: Any | None = None) -> Function:
+    def positionCaseInsensitiveUTF8(
+        haystack: Any, needle: Any, start_pos: Any | None = None
+    ) -> Function:
         """
         positionCaseInsensitiveUTF8(haystack, needle[, start_pos])
 
@@ -11761,9 +12200,11 @@ class FunctionWrapper:
         Returns starting position in bytes and counting from 1, if the substring was found, otherwise `0`, if the substring was not found. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("positionCaseInsensitiveUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def positionUTF8(haystack: Any, needle: Any, start_pos: Any | None = None) -> Function:
+    def positionUTF8(
+        haystack: Any, needle: Any, start_pos: Any | None = None
+    ) -> Function:
         """
         positionUTF8(haystack, needle[, start_pos])
 
@@ -11774,7 +12215,7 @@ class FunctionWrapper:
         Returns starting position in bytes and counting from 1, if the substring was found, otherwise `0`, if the substring was not found. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("positionUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def positiveModulo(x: Any, y: Any) -> Function:
         """
@@ -11787,18 +12228,18 @@ class FunctionWrapper:
         `x` divisible by `y`.
         """
         return Function("positiveModulo", *to_args(locals()))
-    
+
     @staticmethod
     def positiveModuloOrNull(x: Any, y: Any) -> Function:
         """
         positiveModuloOrNull(x, y)
 
-        - `x` — The dividend. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)/[`Float32/64`](https://clickhouse.com/docs/sql-reference/data-types/float). - `x` — The divisor (modulus). [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)/[`Float32/64`](https://clickhouse.com/docs/sql-reference/data-types/float). 
+        - `x` — The dividend. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)/[`Float32/64`](https://clickhouse.com/docs/sql-reference/data-types/float). - `x` — The divisor (modulus). [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)/[`Float32/64`](https://clickhouse.com/docs/sql-reference/data-types/float).
         Returns the difference between `x` and the nearest integer not greater than
         `x` divisible by `y`, `null` when the divisor is zero.
         """
         return Function("positiveModuloOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def pow(x: Any, y: Any) -> Function:
         """
@@ -11810,9 +12251,11 @@ class FunctionWrapper:
         Returns x^y [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("pow", *to_args(locals()))
-    
+
     @staticmethod
-    def printf(format: Any, sub1: Any | None = None, sub2: Any | None = None) -> Function:
+    def printf(
+        format: Any, sub1: Any | None = None, sub2: Any | None = None
+    ) -> Function:
         """
         printf(format[, sub1, sub2, ...])
 
@@ -11822,9 +12265,16 @@ class FunctionWrapper:
         Returns a formatted string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("printf", *to_args(locals()))
-    
+
     @staticmethod
-    def proportionsZTest(successes_x: Any, successes_y: Any, trials_x: Any, trials_y: Any, conf_level: Any, pool_type: Any) -> Function:
+    def proportionsZTest(
+        successes_x: Any,
+        successes_y: Any,
+        trials_x: Any,
+        trials_y: Any,
+        conf_level: Any,
+        pool_type: Any,
+    ) -> Function:
         """
         proportionsZTest(successes_x, successes_y, trials_x, trials_y, conf_level, pool_type)
 
@@ -11838,7 +12288,7 @@ class FunctionWrapper:
         Returns a tuple containing: `z_stat` (Z statistic), `p_val` (P value), `ci_low` (lower confidence interval), `ci_high` (upper confidence interval). [`Tuple(Float64, Float64, Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("proportionsZTest", *to_args(locals()))
-    
+
     @staticmethod
     def protocol(url: Any) -> Function:
         """
@@ -11849,7 +12299,7 @@ class FunctionWrapper:
         Returns the protocol of the URL, or an empty string if it cannot be determined. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("protocol", *to_args(locals()))
-    
+
     @staticmethod
     def punycodeDecode(s: Any) -> Function:
         """
@@ -11860,7 +12310,7 @@ class FunctionWrapper:
         Returns the plaintext of the input value. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("punycodeDecode", *to_args(locals()))
-    
+
     @staticmethod
     def punycodeEncode(s: Any) -> Function:
         """
@@ -11871,7 +12321,7 @@ class FunctionWrapper:
         Returns a Punycode representation of the input value. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("punycodeEncode", *to_args(locals()))
-    
+
     @staticmethod
     def quantile(level: Any) -> Function:
         """
@@ -11882,7 +12332,7 @@ class FunctionWrapper:
         Approximate quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("quantile", *to_args(locals()))
-    
+
     @staticmethod
     def quantileBFloat16(level: Any) -> Function:
         """
@@ -11893,7 +12343,7 @@ class FunctionWrapper:
         Approximate quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("quantileBFloat16", *to_args(locals()))
-    
+
     @staticmethod
     def quantileBFloat16Weighted(level: Any) -> Function:
         """
@@ -11905,7 +12355,7 @@ class FunctionWrapper:
         Approximate quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("quantileBFloat16Weighted", *to_args(locals()))
-    
+
     @staticmethod
     def quantileDD(relative_accuracy: Any, level: Any | None = None) -> Function:
         """
@@ -11916,7 +12366,7 @@ class FunctionWrapper:
         Approximate quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("quantileDD", *to_args(locals()))
-    
+
     @staticmethod
     def quantileDeterministic(level: Any) -> Function:
         """
@@ -11928,7 +12378,7 @@ class FunctionWrapper:
         Returns an approximate quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("quantileDeterministic", *to_args(locals()))
-    
+
     @staticmethod
     def quantileExact(level: Any) -> Function:
         """
@@ -11939,7 +12389,7 @@ class FunctionWrapper:
         Quantile of the specified level. For numeric data types the output format will be the same as the input format. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Decimal*`](https://clickhouse.com/docs/sql-reference/data-types/decimal) or [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("quantileExact", *to_args(locals()))
-    
+
     @staticmethod
     def quantileExactExclusive(level: Any) -> Function:
         """
@@ -11950,7 +12400,7 @@ class FunctionWrapper:
         Returns the quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("quantileExactExclusive", *to_args(locals()))
-    
+
     @staticmethod
     def quantileExactHigh(level: Any) -> Function:
         """
@@ -11961,7 +12411,7 @@ class FunctionWrapper:
         Returns the quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("quantileExactHigh", *to_args(locals()))
-    
+
     @staticmethod
     def quantileExactInclusive(level: Any) -> Function:
         """
@@ -11972,7 +12422,7 @@ class FunctionWrapper:
         Returns the quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("quantileExactInclusive", *to_args(locals()))
-    
+
     @staticmethod
     def quantileExactLow(level: Any) -> Function:
         """
@@ -11983,7 +12433,7 @@ class FunctionWrapper:
         Returns the quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("quantileExactLow", *to_args(locals()))
-    
+
     @staticmethod
     def quantileExactWeighted(level: Any) -> Function:
         """
@@ -11995,7 +12445,7 @@ class FunctionWrapper:
         Quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("quantileExactWeighted", *to_args(locals()))
-    
+
     @staticmethod
     def quantileExactWeightedInterpolated(level: Any) -> Function:
         """
@@ -12007,7 +12457,7 @@ class FunctionWrapper:
         Quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("quantileExactWeightedInterpolated", *to_args(locals()))
-    
+
     @staticmethod
     def quantileGK(accuracy: Any, level: Any) -> Function:
         """
@@ -12018,7 +12468,7 @@ class FunctionWrapper:
         Returns the quantile of the specified level and accuracy. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("quantileGK", *to_args(locals()))
-    
+
     @staticmethod
     def quantileInterpolatedWeighted(level: Any) -> Function:
         """
@@ -12030,7 +12480,7 @@ class FunctionWrapper:
         Quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("quantileInterpolatedWeighted", *to_args(locals()))
-    
+
     @staticmethod
     def quantilePrometheusHistogram(level: Any) -> Function:
         """
@@ -12042,7 +12492,7 @@ class FunctionWrapper:
         Returns the quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("quantilePrometheusHistogram", *to_args(locals()))
-    
+
     @staticmethod
     def quantileTDigest(level: Any) -> Function:
         """
@@ -12053,7 +12503,7 @@ class FunctionWrapper:
         Approximate quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("quantileTDigest", *to_args(locals()))
-    
+
     @staticmethod
     def quantileTDigestWeighted(level: Any) -> Function:
         """
@@ -12065,7 +12515,7 @@ class FunctionWrapper:
         Approximate quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("quantileTDigestWeighted", *to_args(locals()))
-    
+
     @staticmethod
     def quantileTiming(level: Any) -> Function:
         """
@@ -12076,7 +12526,7 @@ class FunctionWrapper:
         Quantile of the specified level. If no values are passed to the function (when using `quantileTimingIf`), NaN is returned. The purpose of this is to differentiate these cases from cases that result in zero. [`Float32`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("quantileTiming", *to_args(locals()))
-    
+
     @staticmethod
     def quantileTimingWeighted(level: Any) -> Function:
         """
@@ -12088,7 +12538,7 @@ class FunctionWrapper:
         Quantile of the specified level. [`Float32`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("quantileTimingWeighted", *to_args(locals()))
-    
+
     @staticmethod
     def quantiles(level1: Any, level2: Any) -> Function:
         """
@@ -12099,57 +12549,32 @@ class FunctionWrapper:
         Array of approximate quantiles of the specified levels in the same order as the levels were specified. [`Array(Float64)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Array(Date)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Array(DateTime)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("quantiles", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesBFloat16(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("quantilesBFloat16", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesBFloat16Weighted(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("quantilesBFloat16Weighted", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesDD(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("quantilesDD", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesDeterministic(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("quantilesDeterministic", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesExact(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("quantilesExact", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesExactExclusive(level1: Any, level2: Any) -> Function:
         """
@@ -12160,17 +12585,12 @@ class FunctionWrapper:
         Array of quantiles of the specified levels in the same order as the levels were specified. [`Array(Float64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("quantilesExactExclusive", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesExactHigh(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("quantilesExactHigh", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesExactInclusive(level1: Any, level2: Any) -> Function:
         """
@@ -12181,37 +12601,22 @@ class FunctionWrapper:
         Array of quantiles of the specified levels in the same order as the levels were specified. [`Array(Float64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("quantilesExactInclusive", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesExactLow(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("quantilesExactLow", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesExactWeighted(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("quantilesExactWeighted", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesExactWeightedInterpolated(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("quantilesExactWeightedInterpolated", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesGK(accuracy: Any, level1: Any, level2: Any) -> Function:
         """
@@ -12222,17 +12627,12 @@ class FunctionWrapper:
         Array of quantiles of the specified levels in the same order as the levels were specified. [`Array(Float64)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Array(Date)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Array(DateTime)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("quantilesGK", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesInterpolatedWeighted(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("quantilesInterpolatedWeighted", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesPrometheusHistogram(level: Any) -> Function:
         """
@@ -12244,7 +12644,7 @@ class FunctionWrapper:
         Returns the quantile of the specified level. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("quantilesPrometheusHistogram", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesTDigest(level1: Any, level2: Any) -> Function:
         """
@@ -12255,7 +12655,7 @@ class FunctionWrapper:
         Array of approximate quantiles of the specified levels in the same order as the levels were specified. [`Array(Float64)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Array(Date)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Array(DateTime)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("quantilesTDigest", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesTDigestWeighted(level1: Any, level2: Any) -> Function:
         """
@@ -12267,7 +12667,7 @@ class FunctionWrapper:
         Array of approximate quantiles of the specified levels in the same order as the levels were specified. [`Array(Float64)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Array(Date)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Array(DateTime)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("quantilesTDigestWeighted", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesTiming(level1: Any, level2: Any) -> Function:
         """
@@ -12278,7 +12678,7 @@ class FunctionWrapper:
         Array of quantiles of the specified levels in the same order as the levels were specified. [`Array(Float32)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("quantilesTiming", *to_args(locals()))
-    
+
     @staticmethod
     def quantilesTimingWeighted(level1: Any, level2: Any) -> Function:
         """
@@ -12290,17 +12690,17 @@ class FunctionWrapper:
         Array of quantiles of the specified levels in the same order as the levels were specified. [`Array(Float32)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("quantilesTimingWeighted", *to_args(locals()))
-    
+
     @staticmethod
     def queryID() -> Function:
         """
         queryID()
 
-        
+
         Returns the ID of the current query. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("queryID", *to_args(locals()))
-    
+
     @staticmethod
     def queryString(url: Any) -> Function:
         """
@@ -12311,7 +12711,7 @@ class FunctionWrapper:
         Returns the query string of the URL without the initial question mark and fragment. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("queryString", *to_args(locals()))
-    
+
     @staticmethod
     def queryStringAndFragment(url: Any) -> Function:
         """
@@ -12322,7 +12722,7 @@ class FunctionWrapper:
         Returns the query string and fragment identifier of the URL. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("queryStringAndFragment", *to_args(locals()))
-    
+
     @staticmethod
     def radians(x: Any) -> Function:
         """
@@ -12333,7 +12733,7 @@ class FunctionWrapper:
         Returns value in radians [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("radians", *to_args(locals()))
-    
+
     @staticmethod
     def rand(x: Any | None = None) -> Function:
         """
@@ -12344,7 +12744,7 @@ class FunctionWrapper:
         Returns a random number of type `UInt32`. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("rand", *to_args(locals()))
-    
+
     @staticmethod
     def rand64(x: Any | None = None) -> Function:
         """
@@ -12355,7 +12755,7 @@ class FunctionWrapper:
         Returns a random UInt64 number with uniform distribution. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("rand64", *to_args(locals()))
-    
+
     @staticmethod
     def randBernoulli(probability: Any, x: Any | None = None) -> Function:
         """
@@ -12367,9 +12767,11 @@ class FunctionWrapper:
         Returns a random Float64 number drawn from the specified Bernoulli distribution. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("randBernoulli", *to_args(locals()))
-    
+
     @staticmethod
-    def randBinomial(experiments: Any, probability: Any, x: Any | None = None) -> Function:
+    def randBinomial(
+        experiments: Any, probability: Any, x: Any | None = None
+    ) -> Function:
         """
         randBinomial(experiments, probability[, x])
 
@@ -12380,7 +12782,7 @@ class FunctionWrapper:
         Returns a random Float64 number drawn from the specified binomial distribution. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("randBinomial", *to_args(locals()))
-    
+
     @staticmethod
     def randCanonical(x: Any | None = None) -> Function:
         """
@@ -12391,7 +12793,7 @@ class FunctionWrapper:
         Returns a random Float64 number. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("randCanonical", *to_args(locals()))
-    
+
     @staticmethod
     def randChiSquared(degree_of_freedom: Any, x: Any | None = None) -> Function:
         """
@@ -12403,7 +12805,7 @@ class FunctionWrapper:
         Returns a random Float64 number drawn from the specified chi-square distribution. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("randChiSquared", *to_args(locals()))
-    
+
     @staticmethod
     def randConstant(x: Any | None = None) -> Function:
         """
@@ -12414,7 +12816,7 @@ class FunctionWrapper:
         Returns a column of type `UInt32` containing the same random value in each row. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("randConstant", *to_args(locals()))
-    
+
     @staticmethod
     def randExponential(lambda_: Any, x: Any | None = None) -> Function:
         """
@@ -12426,7 +12828,7 @@ class FunctionWrapper:
         Returns a random Float64 number drawn from the specified exponential distribution. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("randExponential", *to_args(locals()))
-    
+
     @staticmethod
     def randFisherF(d1: Any, d2: Any, x: Any | None = None) -> Function:
         """
@@ -12439,7 +12841,7 @@ class FunctionWrapper:
         Returns a random Float64 number drawn from the specified F-distribution [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("randFisherF", *to_args(locals()))
-    
+
     @staticmethod
     def randLogNormal(mean: Any, stddev: Any, x: Any | None = None) -> Function:
         """
@@ -12452,9 +12854,11 @@ class FunctionWrapper:
         Returns a random Float64 number drawn from the specified log-normal distribution. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("randLogNormal", *to_args(locals()))
-    
+
     @staticmethod
-    def randNegativeBinomial(experiments: Any, probability: Any, x: Any | None = None) -> Function:
+    def randNegativeBinomial(
+        experiments: Any, probability: Any, x: Any | None = None
+    ) -> Function:
         """
         randNegativeBinomial(experiments, probability[, x])
 
@@ -12465,7 +12869,7 @@ class FunctionWrapper:
         Returns a random Float64 number drawn from the specified negative binomial distribution [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("randNegativeBinomial", *to_args(locals()))
-    
+
     @staticmethod
     def randNormal(mean: Any, stddev: Any, x: Any | None = None) -> Function:
         """
@@ -12478,7 +12882,7 @@ class FunctionWrapper:
         Returns a random Float64 number drawn from the specified normal distribution. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("randNormal", *to_args(locals()))
-    
+
     @staticmethod
     def randPoisson(n: Any, x: Any | None = None) -> Function:
         """
@@ -12490,7 +12894,7 @@ class FunctionWrapper:
         Returns a random Float64 number drawn from the specified Poisson distribution. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("randPoisson", *to_args(locals()))
-    
+
     @staticmethod
     def randStudentT(degree_of_freedom: Any, x: Any | None = None) -> Function:
         """
@@ -12502,7 +12906,7 @@ class FunctionWrapper:
         Returns a random Float64 number drawn from the specified Student's t-distribution. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("randStudentT", *to_args(locals()))
-    
+
     @staticmethod
     def randUniform(min: Any, max: Any, x: Any | None = None) -> Function:
         """
@@ -12515,7 +12919,7 @@ class FunctionWrapper:
         Returns a random number drawn uniformly from the interval formed by `min` and `max`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("randUniform", *to_args(locals()))
-    
+
     @staticmethod
     def randomFixedString(length: Any) -> Function:
         """
@@ -12526,7 +12930,7 @@ class FunctionWrapper:
         Returns a string filled with random bytes. [`FixedString`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("randomFixedString", *to_args(locals()))
-    
+
     @staticmethod
     def randomPrintableASCII(length: Any, x: Any | None = None) -> Function:
         """
@@ -12538,7 +12942,7 @@ class FunctionWrapper:
         Returns a string with a random set of ASCII printable characters. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("randomPrintableASCII", *to_args(locals()))
-    
+
     @staticmethod
     def randomString(length: Any, x: Any | None = None) -> Function:
         """
@@ -12550,7 +12954,7 @@ class FunctionWrapper:
         Returns a string filled with random bytes. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("randomString", *to_args(locals()))
-    
+
     @staticmethod
     def randomStringUTF8(length: Any) -> Function:
         """
@@ -12561,27 +12965,24 @@ class FunctionWrapper:
         Returns a string filled with random UTF-8 codepoints. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("randomStringUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def range(start: Any | None = None, end: Any | None = None, step: Any | None = None) -> Function:
+    def range(
+        start: Any | None = None, end: Any | None = None, step: Any | None = None
+    ) -> Function:
         """
         range([start, ] end [, step])
 
-        - `start` — Optional. The first element of the array. Required if `step` is used. Default value: `0`. - `end` — Required. The number before which the array is constructed. - `step` — Optional. Determines the incremental step between each element in the array. Default value: `1`. 
+        - `start` — Optional. The first element of the array. Required if `step` is used. Default value: `0`. - `end` — Required. The number before which the array is constructed. - `step` — Optional. Determines the incremental step between each element in the array. Default value: `1`.
         Array of numbers from `start` to `end - 1` by `step`. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("range", *to_args(locals()))
-    
+
     @staticmethod
     def rank(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("rank", *to_args(locals()))
-    
+
     @staticmethod
     def rankCorr(x: Any, y: Any) -> Function:
         """
@@ -12593,7 +12994,7 @@ class FunctionWrapper:
         Returns a rank correlation coefficient of the ranks of x and y. The value ranges from -1 to +1. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("rankCorr", *to_args(locals()))
-    
+
     @staticmethod
     def readWKB(wkb_string: Any) -> Function:
         """
@@ -12604,7 +13005,7 @@ class FunctionWrapper:
         Returns a ClickHouse internal representation of the Geometry. [`Geo`](https://clickhouse.com/docs/sql-reference/data-types/geo)
         """
         return Function("readWKB", *to_args(locals()))
-    
+
     @staticmethod
     def readWKBLineString(wkb_string: Any) -> Function:
         """
@@ -12615,7 +13016,7 @@ class FunctionWrapper:
         Returns returns a ClickHouse internal representation of the linestring geometry. [`Geo`](https://clickhouse.com/docs/sql-reference/data-types/geo)
         """
         return Function("readWKBLineString", *to_args(locals()))
-    
+
     @staticmethod
     def readWKBMultiLineString(wkb_string: Any) -> Function:
         """
@@ -12626,7 +13027,7 @@ class FunctionWrapper:
         Returns a ClickHouse internal representation of the multilinestring geometry. [`Geo`](https://clickhouse.com/docs/sql-reference/data-types/geo)
         """
         return Function("readWKBMultiLineString", *to_args(locals()))
-    
+
     @staticmethod
     def readWKBMultiPolygon(wkb_string: Any) -> Function:
         """
@@ -12637,7 +13038,7 @@ class FunctionWrapper:
         Returns a ClickHouse internal representation of the MultiPolygon geometry. [`Geo`](https://clickhouse.com/docs/sql-reference/data-types/geo)
         """
         return Function("readWKBMultiPolygon", *to_args(locals()))
-    
+
     @staticmethod
     def readWKBPoint(wkb_string: Any) -> Function:
         """
@@ -12648,7 +13049,7 @@ class FunctionWrapper:
         The function returns a ClickHouse internal representation of the point geometry. [`Geo`](https://clickhouse.com/docs/sql-reference/data-types/geo)
         """
         return Function("readWKBPoint", *to_args(locals()))
-    
+
     @staticmethod
     def readWKBPolygon(wkb_string: Any) -> Function:
         """
@@ -12659,7 +13060,7 @@ class FunctionWrapper:
         Returns a ClickHouse internal representation of the Polygon geometry. [`Geo`](https://clickhouse.com/docs/sql-reference/data-types/geo)
         """
         return Function("readWKBPolygon", *to_args(locals()))
-    
+
     @staticmethod
     def readWKT(wkt_string: Any) -> Function:
         """
@@ -12670,7 +13071,7 @@ class FunctionWrapper:
         Returns a ClickHouse internal representation of the Geometry.
         """
         return Function("readWKT", *to_args(locals()))
-    
+
     @staticmethod
     def readWKTLineString(wkt_string: Any) -> Function:
         """
@@ -12681,7 +13082,7 @@ class FunctionWrapper:
         Returns a ClickHouse internal representation of the linestring geometry. [`Geo`](https://clickhouse.com/docs/sql-reference/data-types/geo)
         """
         return Function("readWKTLineString", *to_args(locals()))
-    
+
     @staticmethod
     def readWKTMultiLineString(wkt_string: Any) -> Function:
         """
@@ -12692,7 +13093,7 @@ class FunctionWrapper:
         Returns the function returns a ClickHouse internal representation of the multilinestring geometry. [`Geo`](https://clickhouse.com/docs/sql-reference/data-types/geo)
         """
         return Function("readWKTMultiLineString", *to_args(locals()))
-    
+
     @staticmethod
     def readWKTMultiPolygon(wkt_string: Any) -> Function:
         """
@@ -12703,7 +13104,7 @@ class FunctionWrapper:
         Returns a MultiPolygon [`MultiPolygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#multipolygon)
         """
         return Function("readWKTMultiPolygon", *to_args(locals()))
-    
+
     @staticmethod
     def readWKTPoint(wkt_string: Any) -> Function:
         """
@@ -12714,7 +13115,7 @@ class FunctionWrapper:
         Returns a ClickHouse internal representation of the Point geometry. [`Geo`](https://clickhouse.com/docs/sql-reference/data-types/geo)
         """
         return Function("readWKTPoint", *to_args(locals()))
-    
+
     @staticmethod
     def readWKTPolygon(wkt_string: Any) -> Function:
         """
@@ -12725,7 +13126,7 @@ class FunctionWrapper:
         Returns a Polygon [`Polygon`](https://clickhouse.com/docs/sql-reference/data-types/geo#polygon)
         """
         return Function("readWKTPolygon", *to_args(locals()))
-    
+
     @staticmethod
     def readWKTRing(wkt_string: Any) -> Function:
         """
@@ -12736,9 +13137,11 @@ class FunctionWrapper:
         Returns a ClickHouse internal representation of the ring (closed linestring) geometry. [`Geo`](https://clickhouse.com/docs/sql-reference/data-types/geo)
         """
         return Function("readWKTRing", *to_args(locals()))
-    
+
     @staticmethod
-    def regexpExtract(haystack: Any, pattern: Any, index: Any | None = None) -> Function:
+    def regexpExtract(
+        haystack: Any, pattern: Any, index: Any | None = None
+    ) -> Function:
         """
         regexpExtract(haystack, pattern[, index])
 
@@ -12749,7 +13152,7 @@ class FunctionWrapper:
         Returns a string match [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("regexpExtract", *to_args(locals()))
-    
+
     @staticmethod
     def regexpQuoteMeta(s: Any) -> Function:
         """
@@ -12760,7 +13163,7 @@ class FunctionWrapper:
         Returns a string with regex special characters escaped. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("regexpQuoteMeta", *to_args(locals()))
-    
+
     @staticmethod
     def regionHierarchy(id: Any, geobase: Any | None = None) -> Function:
         """
@@ -12772,7 +13175,7 @@ class FunctionWrapper:
         Array of region IDs consisting of the passed region and all parents along the chain [`Array(UInt32)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("regionHierarchy", *to_args(locals()))
-    
+
     @staticmethod
     def regionIn(lhs: Any, rhs: Any, geobase: Any | None = None) -> Function:
         """
@@ -12785,7 +13188,7 @@ class FunctionWrapper:
         Returns `1` if the region belongs, `0` otherwise [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("regionIn", *to_args(locals()))
-    
+
     @staticmethod
     def regionToArea(id: Any, geobase: Any | None = None) -> Function:
         """
@@ -12797,7 +13200,7 @@ class FunctionWrapper:
         Returns the region ID for the appropriate area, if it exists, otherwise returns `0` [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("regionToArea", *to_args(locals()))
-    
+
     @staticmethod
     def regionToCity(id: Any, geobase: Any | None = None) -> Function:
         """
@@ -12809,7 +13212,7 @@ class FunctionWrapper:
         Returns the region ID for the appropriate city, if it exists, otherwise returns `0` [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("regionToCity", *to_args(locals()))
-    
+
     @staticmethod
     def regionToContinent(id: Any, geobase: Any | None = None) -> Function:
         """
@@ -12821,7 +13224,7 @@ class FunctionWrapper:
         Returns the region ID for the appropriate continent, if it exists, otherwise returns `0` [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("regionToContinent", *to_args(locals()))
-    
+
     @staticmethod
     def regionToCountry(id: Any, geobase: Any | None = None) -> Function:
         """
@@ -12833,7 +13236,7 @@ class FunctionWrapper:
         Returns the region ID for the appropriate country, if it exists, otherwise returns `0` [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("regionToCountry", *to_args(locals()))
-    
+
     @staticmethod
     def regionToDistrict(id: Any, geobase: Any | None = None) -> Function:
         """
@@ -12845,7 +13248,7 @@ class FunctionWrapper:
         Returns the region ID for the appropriate district, if it exists, otherwise returns `0` [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("regionToDistrict", *to_args(locals()))
-    
+
     @staticmethod
     def regionToName(id: Any, lang: Any | None = None) -> Function:
         """
@@ -12857,7 +13260,7 @@ class FunctionWrapper:
         Name of the region in the specified language, or an empty string if the region doesn't exist [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("regionToName", *to_args(locals()))
-    
+
     @staticmethod
     def regionToPopulation(id: Any, geobase: Any | None = None) -> Function:
         """
@@ -12869,7 +13272,7 @@ class FunctionWrapper:
         Returns the population for the region, or `0` if there is none [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("regionToPopulation", *to_args(locals()))
-    
+
     @staticmethod
     def regionToTopContinent(id: Any, geobase: Any | None = None) -> Function:
         """
@@ -12881,7 +13284,7 @@ class FunctionWrapper:
         Returns the identifier of the top level continent (the latter when you climb the hierarchy of regions), or `0` if there is none [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("regionToTopContinent", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpret(x: Any, type: Any) -> Function:
         """
@@ -12893,7 +13296,7 @@ class FunctionWrapper:
         Destination type value. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("reinterpret", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsDate(x: Any) -> Function:
         """
@@ -12904,7 +13307,7 @@ class FunctionWrapper:
         Date. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("reinterpretAsDate", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsDateTime(x: Any) -> Function:
         """
@@ -12915,7 +13318,7 @@ class FunctionWrapper:
         Date and Time. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("reinterpretAsDateTime", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsFixedString(x: Any) -> Function:
         """
@@ -12926,7 +13329,7 @@ class FunctionWrapper:
         Fixed string containing bytes representing `x`. [`FixedString`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("reinterpretAsFixedString", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsFloat32(x: Any) -> Function:
         """
@@ -12937,7 +13340,7 @@ class FunctionWrapper:
         Returns the reinterpreted value `x`. [`Float32`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("reinterpretAsFloat32", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsFloat64(x: Any) -> Function:
         """
@@ -12948,7 +13351,7 @@ class FunctionWrapper:
         Returns the reinterpreted value `x`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("reinterpretAsFloat64", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsInt128(x: Any) -> Function:
         """
@@ -12959,7 +13362,7 @@ class FunctionWrapper:
         Returns the reinterpreted value `x`. [`Int128`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("reinterpretAsInt128", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsInt16(x: Any) -> Function:
         """
@@ -12970,7 +13373,7 @@ class FunctionWrapper:
         Returns the reinterpreted value `x`. [`Int16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("reinterpretAsInt16", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsInt256(x: Any) -> Function:
         """
@@ -12981,7 +13384,7 @@ class FunctionWrapper:
         Returns the reinterpreted value `x`. [`Int256`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("reinterpretAsInt256", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsInt32(x: Any) -> Function:
         """
@@ -12992,7 +13395,7 @@ class FunctionWrapper:
         Returns the reinterpreted value `x`. [`Int32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("reinterpretAsInt32", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsInt64(x: Any) -> Function:
         """
@@ -13003,7 +13406,7 @@ class FunctionWrapper:
         Returns the reinterpreted value `x`. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("reinterpretAsInt64", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsInt8(x: Any) -> Function:
         """
@@ -13014,7 +13417,7 @@ class FunctionWrapper:
         Returns the reinterpreted value `x`. [`Int8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("reinterpretAsInt8", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsString(x: Any) -> Function:
         """
@@ -13025,7 +13428,7 @@ class FunctionWrapper:
         String containing bytes representing `x`. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("reinterpretAsString", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsUInt128(x: Any) -> Function:
         """
@@ -13036,7 +13439,7 @@ class FunctionWrapper:
         Returns the reinterpreted value `x`. [`UInt128`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("reinterpretAsUInt128", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsUInt16(x: Any) -> Function:
         """
@@ -13047,7 +13450,7 @@ class FunctionWrapper:
         Returns the reinterpreted value `x`. [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("reinterpretAsUInt16", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsUInt256(x: Any) -> Function:
         """
@@ -13058,7 +13461,7 @@ class FunctionWrapper:
         Returns the reinterpreted value `x`. [`UInt256`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("reinterpretAsUInt256", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsUInt32(x: Any) -> Function:
         """
@@ -13069,7 +13472,7 @@ class FunctionWrapper:
         Returns the reinterpreted value `x`. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("reinterpretAsUInt32", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsUInt64(x: Any) -> Function:
         """
@@ -13080,7 +13483,7 @@ class FunctionWrapper:
         Returns the reinterpreted value of `x`. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("reinterpretAsUInt64", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsUInt8(x: Any) -> Function:
         """
@@ -13091,7 +13494,7 @@ class FunctionWrapper:
         Returns the reinterpreted value `x`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("reinterpretAsUInt8", *to_args(locals()))
-    
+
     @staticmethod
     def reinterpretAsUUID(fixed_string: Any) -> Function:
         """
@@ -13102,7 +13505,7 @@ class FunctionWrapper:
         The UUID type value. [`UUID`](https://clickhouse.com/docs/sql-reference/data-types/uuid)
         """
         return Function("reinterpretAsUUID", *to_args(locals()))
-    
+
     @staticmethod
     def removeDiacriticsUTF8(str: Any) -> Function:
         """
@@ -13113,7 +13516,7 @@ class FunctionWrapper:
         UTF-8 string with diacritics removed. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("removeDiacriticsUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def repeat(s: Any, n: Any) -> Function:
         """
@@ -13125,7 +13528,7 @@ class FunctionWrapper:
         A string containing string `s` repeated `n` times. If `n` is negative, the function returns the empty string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("repeat", *to_args(locals()))
-    
+
     @staticmethod
     def replaceAll(haystack: Any, pattern: Any, replacement: Any) -> Function:
         """
@@ -13138,7 +13541,7 @@ class FunctionWrapper:
         Returns a string with all occurrences of pattern replaced. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("replaceAll", *to_args(locals()))
-    
+
     @staticmethod
     def replaceOne(haystack: Any, pattern: Any, replacement: Any) -> Function:
         """
@@ -13151,7 +13554,7 @@ class FunctionWrapper:
         Returns a string with the first occurrence of pattern replaced. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("replaceOne", *to_args(locals()))
-    
+
     @staticmethod
     def replaceRegexpAll(haystack: Any, pattern: Any, replacement: Any) -> Function:
         """
@@ -13164,7 +13567,7 @@ class FunctionWrapper:
         Returns a string with all regex matches replaced. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("replaceRegexpAll", *to_args(locals()))
-    
+
     @staticmethod
     def replaceRegexpOne(haystack: Any, pattern: Any, replacement: Any) -> Function:
         """
@@ -13177,7 +13580,7 @@ class FunctionWrapper:
         Returns a string with the first regex match replaced. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("replaceRegexpOne", *to_args(locals()))
-    
+
     @staticmethod
     def replicate(x: Any, arr: Any) -> Function:
         """
@@ -13189,17 +13592,12 @@ class FunctionWrapper:
         Returns an array of the same length as `arr` filled with value `x`. [`Array(T)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("replicate", *to_args(locals()))
-    
+
     @staticmethod
     def retention(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("retention", *to_args(locals()))
-    
+
     @staticmethod
     def reverse(arr: Any, str: Any) -> Function:
         """
@@ -13210,7 +13608,7 @@ class FunctionWrapper:
         Returns an array or string with the order of elements or characters reversed.
         """
         return Function("reverse", *to_args(locals()))
-    
+
     @staticmethod
     def reverseBySeparator(string: Any, separator: Any | None = None) -> Function:
         """
@@ -13222,7 +13620,7 @@ class FunctionWrapper:
         Returns a string with substrings ordered from right to left of the original string, joined by the same separator. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("reverseBySeparator", *to_args(locals()))
-    
+
     @staticmethod
     def reverseUTF8(s: Any) -> Function:
         """
@@ -13233,17 +13631,17 @@ class FunctionWrapper:
         Returns a string with the sequence of Unicode code points reversed. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("reverseUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def revision() -> Function:
         """
         revision()
 
-        
+
         Returns the current ClickHouse server revision. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("revision", *to_args(locals()))
-    
+
     @staticmethod
     def right(s: Any, offset: Any) -> Function:
         """
@@ -13259,7 +13657,7 @@ class FunctionWrapper:
              [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("right", *to_args(locals()))
-    
+
     @staticmethod
     def rightPad(string: Any, length: Any, pad_string: Any | None = None) -> Function:
         """
@@ -13272,9 +13670,11 @@ class FunctionWrapper:
         Returns a right-padded string of the given length. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("rightPad", *to_args(locals()))
-    
+
     @staticmethod
-    def rightPadUTF8(string: Any, length: Any, pad_string: Any | None = None) -> Function:
+    def rightPadUTF8(
+        string: Any, length: Any, pad_string: Any | None = None
+    ) -> Function:
         """
         rightPadUTF8(string, length[, pad_string])
 
@@ -13285,7 +13685,7 @@ class FunctionWrapper:
         Returns a right-padded string of the given length. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("rightPadUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def rightUTF8(s: Any, offset: Any) -> Function:
         """
@@ -13301,7 +13701,7 @@ class FunctionWrapper:
              [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("rightUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def round(x: Any, N: Any | None = None) -> Function:
         """
@@ -13313,7 +13713,7 @@ class FunctionWrapper:
         Returns a rounded number of the same type as `x`. [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Decimal*`](https://clickhouse.com/docs/sql-reference/data-types/decimal) or [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("round", *to_args(locals()))
-    
+
     @staticmethod
     def roundAge(num: Any) -> Function:
         """
@@ -13324,7 +13724,7 @@ class FunctionWrapper:
         Returns either the highest or lowest age of the range `age` falls within. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("roundAge", *to_args(locals()))
-    
+
     @staticmethod
     def roundBankers(x: Any, N: Any | None = None) -> Function:
         """
@@ -13336,7 +13736,7 @@ class FunctionWrapper:
         Returns a value rounded by the banker's rounding method. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Decimal*`](https://clickhouse.com/docs/sql-reference/data-types/decimal) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("roundBankers", *to_args(locals()))
-    
+
     @staticmethod
     def roundDown(num: Any, arr: Any) -> Function:
         """
@@ -13348,7 +13748,7 @@ class FunctionWrapper:
         Returns a number rounded down to an element in `arr`. If the value is less than the lowest bound, the lowest bound is returned. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("roundDown", *to_args(locals()))
-    
+
     @staticmethod
     def roundDuration(num: Any) -> Function:
         """
@@ -13359,7 +13759,7 @@ class FunctionWrapper:
         Returns `0`, for `num` < 1. Otherwise, one of: `1, 10, 30, 60, 120, 180, 240, 300, 600, 1200, 1800, 3600, 7200, 18000, 36000`. [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("roundDuration", *to_args(locals()))
-    
+
     @staticmethod
     def roundToExp2(num: Any) -> Function:
         """
@@ -13370,37 +13770,32 @@ class FunctionWrapper:
         Returns `num` rounded down to the nearest (whole non-negative) power of two, otherwise `0` for `num < 1`. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("roundToExp2", *to_args(locals()))
-    
+
     @staticmethod
     def rowNumberInAllBlocks() -> Function:
         """
         rowNumberInAllBlocks()
 
-        
+
         Returns the ordinal number of the row in the data block starting from `0`. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("rowNumberInAllBlocks", *to_args(locals()))
-    
+
     @staticmethod
     def rowNumberInBlock() -> Function:
         """
         rowNumberInBlock()
 
-        
+
         Returns the ordinal number of the row in the data block starting from `0`. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("rowNumberInBlock", *to_args(locals()))
-    
+
     @staticmethod
     def row_number(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("row_number", *to_args(locals()))
-    
+
     @staticmethod
     def runningAccumulate(agg_state: Any, grouping: Any | None = None) -> Function:
         """
@@ -13412,7 +13807,7 @@ class FunctionWrapper:
         Returns the accumulated result for each row. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("runningAccumulate", *to_args(locals()))
-    
+
     @staticmethod
     def runningConcurrency(start: Any, end: Any) -> Function:
         """
@@ -13424,7 +13819,7 @@ class FunctionWrapper:
         Returns the number of concurrent events at each event start time. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("runningConcurrency", *to_args(locals()))
-    
+
     @staticmethod
     def runningDifference(x: Any) -> Function:
         """
@@ -13435,7 +13830,7 @@ class FunctionWrapper:
         Returns the difference between consecutive values, with 0 for the first row.
         """
         return Function("runningDifference", *to_args(locals()))
-    
+
     @staticmethod
     def runningDifferenceStartingWithFirstValue(x: Any) -> Function:
         """
@@ -13446,7 +13841,7 @@ class FunctionWrapper:
         Returns the difference between consecutive values, with the first row's value for the first row. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("runningDifferenceStartingWithFirstValue", *to_args(locals()))
-    
+
     @staticmethod
     def s2CapContains(center: Any, degrees: Any, point: Any) -> Function:
         """
@@ -13459,7 +13854,7 @@ class FunctionWrapper:
         Returns 1 if the cap contains the point and 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("s2CapContains", *to_args(locals()))
-    
+
     @staticmethod
     def s2CapUnion(center1: Any, radius1: Any, center2: Any, radius2: Any) -> Function:
         """
@@ -13473,7 +13868,7 @@ class FunctionWrapper:
         Returns a tuple (center, radius) representing the smallest cap containing both input caps. [`Tuple(UInt64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("s2CapUnion", *to_args(locals()))
-    
+
     @staticmethod
     def s2CellsIntersect(s2index1: Any, s2index2: Any) -> Function:
         """
@@ -13485,7 +13880,7 @@ class FunctionWrapper:
         Returns 1 if the cells intersect and 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("s2CellsIntersect", *to_args(locals()))
-    
+
     @staticmethod
     def s2GetNeighbors(s2index: Any) -> Function:
         """
@@ -13496,7 +13891,7 @@ class FunctionWrapper:
         Returns an array of 4 neighbor S2 cell identifiers. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("s2GetNeighbors", *to_args(locals()))
-    
+
     @staticmethod
     def s2RectAdd(s2RectLow: Any, s2RectHigh: Any, s2Point: Any) -> Function:
         """
@@ -13509,7 +13904,7 @@ class FunctionWrapper:
         Returns a tuple (s2RectLow, s2RectHigh) representing the expanded rectangle. [`Tuple(UInt64, UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("s2RectAdd", *to_args(locals()))
-    
+
     @staticmethod
     def s2RectContains(s2RectLow: Any, s2RectHigh: Any, s2Point: Any) -> Function:
         """
@@ -13522,9 +13917,11 @@ class FunctionWrapper:
         Returns 1 if the rectangle contains the point and 0 otherwise. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("s2RectContains", *to_args(locals()))
-    
+
     @staticmethod
-    def s2RectIntersection(s2Rect1Low: Any, s2Rect1High: Any, s2Rect2Low: Any, s2Rect2High: Any) -> Function:
+    def s2RectIntersection(
+        s2Rect1Low: Any, s2Rect1High: Any, s2Rect2Low: Any, s2Rect2High: Any
+    ) -> Function:
         """
         s2RectIntersection(s2Rect1Low, s2Rect1High, s2Rect2Low, s2Rect2High)
 
@@ -13536,9 +13933,11 @@ class FunctionWrapper:
         Returns a tuple (s2RectLow, s2RectHigh) representing the intersection rectangle. [`Tuple(UInt64, UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("s2RectIntersection", *to_args(locals()))
-    
+
     @staticmethod
-    def s2RectUnion(s2Rect1Low: Any, s2Rect1High: Any, s2Rect2Low: Any, s2Rect2High: Any) -> Function:
+    def s2RectUnion(
+        s2Rect1Low: Any, s2Rect1High: Any, s2Rect2Low: Any, s2Rect2High: Any
+    ) -> Function:
         """
         s2RectUnion(s2Rect1Low, s2Rect1High, s2Rect2Low, s2Rect2High)
 
@@ -13550,7 +13949,7 @@ class FunctionWrapper:
         Returns a tuple (s2RectLow, s2RectHigh) representing the union rectangle. [`Tuple(UInt64, UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("s2RectUnion", *to_args(locals()))
-    
+
     @staticmethod
     def s2ToGeo(s2index: Any) -> Function:
         """
@@ -13561,47 +13960,27 @@ class FunctionWrapper:
         Returns a tuple (lon, lat) of Float64 values representing the longitude and latitude. [`Tuple(Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("s2ToGeo", *to_args(locals()))
-    
+
     @staticmethod
     def sequenceCount(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("sequenceCount", *to_args(locals()))
-    
+
     @staticmethod
     def sequenceMatch(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("sequenceMatch", *to_args(locals()))
-    
+
     @staticmethod
     def sequenceMatchEvents(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("sequenceMatchEvents", *to_args(locals()))
-    
+
     @staticmethod
     def sequenceNextNode(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("sequenceNextNode", *to_args(locals()))
-    
+
     @staticmethod
     def seriesDecomposeSTL(series: Any, period: Any) -> Function:
         """
@@ -13613,9 +13992,14 @@ class FunctionWrapper:
         Returns an array of four arrays where the first array includes seasonal components, the second array - trend, the third array - residue component, and the fourth array - baseline(seasonal + trend) component. [`Array(Array(Float32), Array(Float32), Array(Float32), Array(Float32))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("seriesDecomposeSTL", *to_args(locals()))
-    
+
     @staticmethod
-    def seriesOutliersDetectTukey(series: Any, min_percentile: Any | None = None, max_percentile: Any | None = None, K: Any | None = None) -> Function:
+    def seriesOutliersDetectTukey(
+        series: Any,
+        min_percentile: Any | None = None,
+        max_percentile: Any | None = None,
+        K: Any | None = None,
+    ) -> Function:
         """
         seriesOutliersDetectTukey(series[, min_percentile, max_percentile, K])
 
@@ -13627,7 +14011,7 @@ class FunctionWrapper:
         Returns an array of the same length as the input array where each value represents score of possible anomaly of corresponding element in the series. A non-zero score indicates a possible anomaly. [`Array(Float32)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("seriesOutliersDetectTukey", *to_args(locals()))
-    
+
     @staticmethod
     def seriesPeriodDetectFFT(series: Any) -> Function:
         """
@@ -13638,57 +14022,57 @@ class FunctionWrapper:
         Returns a real value equal to the period of series data. NaN when number of data points are less than four. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("seriesPeriodDetectFFT", *to_args(locals()))
-    
+
     @staticmethod
     def serverTimezone() -> Function:
         """
         serverTimezone()
 
-        
+
         Returns the server timezone as a [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("serverTimezone", *to_args(locals()))
-    
+
     @staticmethod
     def serverUUID() -> Function:
         """
         serverUUID()
 
-        
+
         Returns the random UUID of the server. [`UUID`](https://clickhouse.com/docs/sql-reference/data-types/uuid)
         """
         return Function("serverUUID", *to_args(locals()))
-    
+
     @staticmethod
     def shardCount() -> Function:
         """
         shardCount()
 
-        
+
         Returns the total number of shards or `0`. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("shardCount", *to_args(locals()))
-    
+
     @staticmethod
     def shardNum() -> Function:
         """
         shardNum()
 
-        
+
         Returns the shard index or a constant `0`. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("shardNum", *to_args(locals()))
-    
+
     @staticmethod
     def showCertificate() -> Function:
         """
         showCertificate()
 
-        
+
         Returns map of key-value pairs relating to the configured SSL certificate. [`Map(String, String)`](https://clickhouse.com/docs/sql-reference/data-types/map)
         """
         return Function("showCertificate", *to_args(locals()))
-    
+
     @staticmethod
     def sigmoid(x: Any) -> Function:
         """
@@ -13699,7 +14083,7 @@ class FunctionWrapper:
         Returns the sigmoid of the input value, in the range (0, 1). [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("sigmoid", *to_args(locals()))
-    
+
     @staticmethod
     def sign(x: Any) -> Function:
         """
@@ -13710,7 +14094,7 @@ class FunctionWrapper:
         Returns `-1` for `x < 0`, `0` for `x = 0`, `1` for `x > 0`. [`Int8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("sign", *to_args(locals()))
-    
+
     @staticmethod
     def simpleJSONExtractBool(json: Any, field_name: Any) -> Function:
         """
@@ -13725,7 +14109,7 @@ class FunctionWrapper:
         - If the field contains `1` as a numerical value. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("simpleJSONExtractBool", *to_args(locals()))
-    
+
     @staticmethod
     def simpleJSONExtractFloat(json: Any, field_name: Any) -> Function:
         """
@@ -13737,7 +14121,7 @@ class FunctionWrapper:
         Returns the number parsed from the field if the field exists and contains a number, otherwise `0`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("simpleJSONExtractFloat", *to_args(locals()))
-    
+
     @staticmethod
     def simpleJSONExtractInt(json: Any, field_name: Any) -> Function:
         """
@@ -13749,7 +14133,7 @@ class FunctionWrapper:
         Returns the number parsed from the field if the field exists and contains a number, `0` otherwise [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("simpleJSONExtractInt", *to_args(locals()))
-    
+
     @staticmethod
     def simpleJSONExtractRaw(json: Any, field_name: Any) -> Function:
         """
@@ -13761,7 +14145,7 @@ class FunctionWrapper:
         Returns the value of the field as a string, including separators if the field exists, or an empty string otherwise [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("simpleJSONExtractRaw", *to_args(locals()))
-    
+
     @staticmethod
     def simpleJSONExtractString(json: Any, field_name: Any) -> Function:
         """
@@ -13773,7 +14157,7 @@ class FunctionWrapper:
         Returns the unescaped value of a field as a string, including separators. An empty string is returned if the field doesn't contain a double quoted string, if unescaping fails or if the field doesn't exist [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("simpleJSONExtractString", *to_args(locals()))
-    
+
     @staticmethod
     def simpleJSONExtractUInt(json: Any, field_name: Any) -> Function:
         """
@@ -13785,7 +14169,7 @@ class FunctionWrapper:
         Returns the number parsed from the field if the field exists and contains a number, `0` otherwise [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("simpleJSONExtractUInt", *to_args(locals()))
-    
+
     @staticmethod
     def simpleJSONHas(json: Any, field_name: Any) -> Function:
         """
@@ -13797,7 +14181,7 @@ class FunctionWrapper:
         Returns `1` if the field exists, `0` otherwise [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("simpleJSONHas", *to_args(locals()))
-    
+
     @staticmethod
     def simpleLinearRegression(x: Any, y: Any) -> Function:
         """
@@ -13809,7 +14193,7 @@ class FunctionWrapper:
         Returns constants `(k, b)` of the resulting line `y = k*x + b`. [`Tuple(Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("simpleLinearRegression", *to_args(locals()))
-    
+
     @staticmethod
     def sin(x: Any) -> Function:
         """
@@ -13820,7 +14204,7 @@ class FunctionWrapper:
         Returns the sine of x.
         """
         return Function("sin", *to_args(locals()))
-    
+
     @staticmethod
     def singleValueOrNull(x: Any) -> Function:
         """
@@ -13831,7 +14215,7 @@ class FunctionWrapper:
         Returns the unique value if there is only one unique non-NULL value in `x`. Returns `NULL` if there are zero or at least two distinct values. [`Any`](https://clickhouse.com/docs/sql-reference/data-types) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("singleValueOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def sinh(x: Any) -> Function:
         """
@@ -13842,7 +14226,7 @@ class FunctionWrapper:
         Returns values from the interval: -∞ < sinh(x) < +∞ [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("sinh", *to_args(locals()))
-    
+
     @staticmethod
     def sipHash128(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -13853,7 +14237,7 @@ class FunctionWrapper:
         Returns a 128-bit `SipHash` hash value. [`FixedString(16)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("sipHash128", *to_args(locals()))
-    
+
     @staticmethod
     def sipHash128Keyed(k0: Any, k1: Any) -> Function:
         """
@@ -13865,7 +14249,7 @@ class FunctionWrapper:
         A 128-bit `SipHash` hash value of type [FixedString(16)](../data-types/fixedstring.md). [`FixedString(16)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("sipHash128Keyed", *to_args(locals()))
-    
+
     @staticmethod
     def sipHash128Reference(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -13876,7 +14260,7 @@ class FunctionWrapper:
         Returns the computed 128-bit `SipHash` hash value of the input arguments. [`FixedString(16)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("sipHash128Reference", *to_args(locals()))
-    
+
     @staticmethod
     def sipHash128ReferenceKeyed(k0: Any, k1: Any) -> Function:
         """
@@ -13888,7 +14272,7 @@ class FunctionWrapper:
         Returns the computed 128-bit `SipHash` hash value of the input arguments. [`FixedString(16)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("sipHash128ReferenceKeyed", *to_args(locals()))
-    
+
     @staticmethod
     def sipHash64(arg1: Any, arg2: Any | None = None) -> Function:
         """
@@ -13899,7 +14283,7 @@ class FunctionWrapper:
         Returns a computed hash value of the input arguments. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("sipHash64", *to_args(locals()))
-    
+
     @staticmethod
     def sipHash64Keyed(k0: Any, k1: Any) -> Function:
         """
@@ -13911,7 +14295,7 @@ class FunctionWrapper:
         Returns the computed hash of the input values. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("sipHash64Keyed", *to_args(locals()))
-    
+
     @staticmethod
     def skewPop(expr: Any) -> Function:
         """
@@ -13922,7 +14306,7 @@ class FunctionWrapper:
         Returns the skewness of the given distribution. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("skewPop", *to_args(locals()))
-    
+
     @staticmethod
     def skewSamp(expr: Any) -> Function:
         """
@@ -13933,7 +14317,7 @@ class FunctionWrapper:
         Returns the skewness of the given distribution. If `n <= 1` (`n` is the size of the sample), then the function returns `nan`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("skewSamp", *to_args(locals()))
-    
+
     @staticmethod
     def sleep(seconds: Any) -> Function:
         """
@@ -13944,7 +14328,7 @@ class FunctionWrapper:
         Returns `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("sleep", *to_args(locals()))
-    
+
     @staticmethod
     def sleepEachRow(seconds: Any) -> Function:
         """
@@ -13955,9 +14339,11 @@ class FunctionWrapper:
         Returns `0` for each row. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("sleepEachRow", *to_args(locals()))
-    
+
     @staticmethod
-    def snowflakeIDToDateTime(value: Any, epoch: Any | None = None, time_zone: Any | None = None) -> Function:
+    def snowflakeIDToDateTime(
+        value: Any, epoch: Any | None = None, time_zone: Any | None = None
+    ) -> Function:
         """
         snowflakeIDToDateTime(value[, epoch[, time_zone]])
 
@@ -13968,9 +14354,11 @@ class FunctionWrapper:
         Returns the timestamp component of `value`. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("snowflakeIDToDateTime", *to_args(locals()))
-    
+
     @staticmethod
-    def snowflakeIDToDateTime64(value: Any, epoch: Any | None = None, time_zone: Any | None = None) -> Function:
+    def snowflakeIDToDateTime64(
+        value: Any, epoch: Any | None = None, time_zone: Any | None = None
+    ) -> Function:
         """
         snowflakeIDToDateTime64(value[, epoch[, time_zone]])
 
@@ -13981,7 +14369,7 @@ class FunctionWrapper:
         Returns the timestamp component of `value` as a `DateTime64` with scale = 3, i.e. millisecond precision. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("snowflakeIDToDateTime64", *to_args(locals()))
-    
+
     @staticmethod
     def snowflakeToDateTime(value: Any, time_zone: Any | None = None) -> Function:
         """
@@ -13993,7 +14381,7 @@ class FunctionWrapper:
         Returns the timestamp component of `value`. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("snowflakeToDateTime", *to_args(locals()))
-    
+
     @staticmethod
     def snowflakeToDateTime64(value: Any, time_zone: Any | None = None) -> Function:
         """
@@ -14005,7 +14393,7 @@ class FunctionWrapper:
         Returns the timestamp component of `value`. [`DateTime64(3)`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("snowflakeToDateTime64", *to_args(locals()))
-    
+
     @staticmethod
     def soundex(s: Any) -> Function:
         """
@@ -14016,7 +14404,7 @@ class FunctionWrapper:
         Returns the Soundex code of the input string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("soundex", *to_args(locals()))
-    
+
     @staticmethod
     def space(n: Any) -> Function:
         """
@@ -14027,9 +14415,11 @@ class FunctionWrapper:
         Returns astring containing a space repeated `n` times. If `n <= 0`, the function returns the empty string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("space", *to_args(locals()))
-    
+
     @staticmethod
-    def sparkbar(buckets: Any, min_x: Any | None = None, max_x: Any | None = None) -> Function:
+    def sparkbar(
+        buckets: Any, min_x: Any | None = None, max_x: Any | None = None
+    ) -> Function:
         """
         sparkbar(buckets[, min_x, max_x])(x, y)
 
@@ -14039,9 +14429,11 @@ class FunctionWrapper:
         Returns the frequency histogram. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("sparkbar", *to_args(locals()))
-    
+
     @staticmethod
-    def sparseGrams(s: Any, min_ngram_length: Any | None = None, max_ngram_length: Any | None = None) -> Function:
+    def sparseGrams(
+        s: Any, min_ngram_length: Any | None = None, max_ngram_length: Any | None = None
+    ) -> Function:
         """
         sparseGrams(s[, min_ngram_length, max_ngram_length])
 
@@ -14053,9 +14445,11 @@ class FunctionWrapper:
         Returns an array of selected substrings. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("sparseGrams", *to_args(locals()))
-    
+
     @staticmethod
-    def sparseGramsHashes(s: Any, min_ngram_length: Any | None = None, max_ngram_length: Any | None = None) -> Function:
+    def sparseGramsHashes(
+        s: Any, min_ngram_length: Any | None = None, max_ngram_length: Any | None = None
+    ) -> Function:
         """
         sparseGramsHashes(s[, min_ngram_length, max_ngram_length])
 
@@ -14067,9 +14461,11 @@ class FunctionWrapper:
         Returns an array of selected substrings CRC32 hashes. [`Array(UInt32)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("sparseGramsHashes", *to_args(locals()))
-    
+
     @staticmethod
-    def sparseGramsHashesUTF8(s: Any, min_ngram_length: Any | None = None, max_ngram_length: Any | None = None) -> Function:
+    def sparseGramsHashesUTF8(
+        s: Any, min_ngram_length: Any | None = None, max_ngram_length: Any | None = None
+    ) -> Function:
         """
         sparseGramsHashesUTF8(s[, min_ngram_length, max_ngram_length])
 
@@ -14081,9 +14477,11 @@ class FunctionWrapper:
         Returns an array of selected UTF-8 substrings CRC32 hashes. [`Array(UInt32)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("sparseGramsHashesUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def sparseGramsUTF8(s: Any, min_ngram_length: Any | None = None, max_ngram_length: Any | None = None) -> Function:
+    def sparseGramsUTF8(
+        s: Any, min_ngram_length: Any | None = None, max_ngram_length: Any | None = None
+    ) -> Function:
         """
         sparseGramsUTF8(s[, min_ngram_length, max_ngram_length])
 
@@ -14095,9 +14493,11 @@ class FunctionWrapper:
         Returns an array of selected UTF-8 substrings. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("sparseGramsUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def splitByChar(separator: Any, s: Any, max_substrings: Any | None = None) -> Function:
+    def splitByChar(
+        separator: Any, s: Any, max_substrings: Any | None = None
+    ) -> Function:
         """
         splitByChar(separator, s[, max_substrings])
 
@@ -14108,7 +14508,7 @@ class FunctionWrapper:
         Returns an array of selected substrings. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("splitByChar", *to_args(locals()))
-    
+
     @staticmethod
     def splitByNonAlpha(s: Any, max_substrings: Any | None = None) -> Function:
         """
@@ -14120,9 +14520,11 @@ class FunctionWrapper:
         Returns an array of selected substrings of `s`. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("splitByNonAlpha", *to_args(locals()))
-    
+
     @staticmethod
-    def splitByRegexp(regexp: Any, s: Any, max_substrings: Any | None = None) -> Function:
+    def splitByRegexp(
+        regexp: Any, s: Any, max_substrings: Any | None = None
+    ) -> Function:
         """
         splitByRegexp(regexp, s[, max_substrings])
 
@@ -14133,9 +14535,11 @@ class FunctionWrapper:
         Returns an array of the selected substrings of `s`. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("splitByRegexp", *to_args(locals()))
-    
+
     @staticmethod
-    def splitByString(separator: Any, s: Any, max_substrings: Any | None = None) -> Function:
+    def splitByString(
+        separator: Any, s: Any, max_substrings: Any | None = None
+    ) -> Function:
         """
         splitByString(separator, s[, max_substrings])
 
@@ -14146,7 +14550,7 @@ class FunctionWrapper:
         Returns an array of selected substrings of `s` [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("splitByString", *to_args(locals()))
-    
+
     @staticmethod
     def splitByWhitespace(s: Any, max_substrings: Any | None = None) -> Function:
         """
@@ -14158,7 +14562,7 @@ class FunctionWrapper:
         Returns an array of the selected substrings of `s`. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("splitByWhitespace", *to_args(locals()))
-    
+
     @staticmethod
     def sqidDecode(sqid: Any) -> Function:
         """
@@ -14169,7 +14573,7 @@ class FunctionWrapper:
         Returns an array of numbers from `sqid`. [`Array(UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("sqidDecode", *to_args(locals()))
-    
+
     @staticmethod
     def sqidEncode(n1: Any, n2: Any | None = None) -> Function:
         """
@@ -14180,7 +14584,7 @@ class FunctionWrapper:
         Returns a hash ID [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("sqidEncode", *to_args(locals()))
-    
+
     @staticmethod
     def sqrt(x: Any) -> Function:
         """
@@ -14191,7 +14595,7 @@ class FunctionWrapper:
         Returns the square root of x [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("sqrt", *to_args(locals()))
-    
+
     @staticmethod
     def startsWith(s: Any, prefix: Any) -> Function:
         """
@@ -14203,7 +14607,7 @@ class FunctionWrapper:
         Returns `1` if `s` starts with `prefix`, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("startsWith", *to_args(locals()))
-    
+
     @staticmethod
     def startsWithCaseInsensitive(s: Any, prefix: Any) -> Function:
         """
@@ -14215,7 +14619,7 @@ class FunctionWrapper:
         Returns `1` if `s` starts with case-insensitive `prefix`, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("startsWithCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
     def startsWithCaseInsensitiveUTF8(s: Any, prefix: Any) -> Function:
         """
@@ -14227,7 +14631,7 @@ class FunctionWrapper:
         Returns `1` if `s` starts with case-insensitive `prefix`, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("startsWithCaseInsensitiveUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def startsWithUTF8(s: Any, prefix: Any) -> Function:
         """
@@ -14239,7 +14643,7 @@ class FunctionWrapper:
         Returns `1` if `s` starts with `prefix`, otherwise `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("startsWithUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def stddevPop(x: Any) -> Function:
         """
@@ -14250,7 +14654,7 @@ class FunctionWrapper:
         Returns the square root of population variance of `x`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("stddevPop", *to_args(locals()))
-    
+
     @staticmethod
     def stddevPopStable(x: Any) -> Function:
         """
@@ -14261,7 +14665,7 @@ class FunctionWrapper:
         Returns the square root of the variance of `x`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("stddevPopStable", *to_args(locals()))
-    
+
     @staticmethod
     def stddevSamp(x: Any) -> Function:
         """
@@ -14272,7 +14676,7 @@ class FunctionWrapper:
         Returns the square root of sample variance of `x`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("stddevSamp", *to_args(locals()))
-    
+
     @staticmethod
     def stddevSampStable(x: Any) -> Function:
         """
@@ -14283,7 +14687,7 @@ class FunctionWrapper:
         Returns the square root of sample variance of `x`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("stddevSampStable", *to_args(locals()))
-    
+
     @staticmethod
     def stem(lang: Any, word: Any) -> Function:
         """
@@ -14295,9 +14699,14 @@ class FunctionWrapper:
         Returns the stemmed form of the word [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("stem", *to_args(locals()))
-    
+
     @staticmethod
-    def stochasticLinearRegression(learning_rate: Any | None = None, l2_regularization_coef: Any | None = None, mini_batch_size: Any | None = None, method: Any | None = None) -> Function:
+    def stochasticLinearRegression(
+        learning_rate: Any | None = None,
+        l2_regularization_coef: Any | None = None,
+        mini_batch_size: Any | None = None,
+        method: Any | None = None,
+    ) -> Function:
         """
         stochasticLinearRegression([learning_rate, l2_regularization_coef, mini_batch_size, method])(target, x1, x2, ...)
 
@@ -14311,9 +14720,14 @@ class FunctionWrapper:
         Returns the trained linear regression model weights. First values correspond to the parameters of the model, the last one is bias. Use `evalMLMethod` for predictions. [`Array(Float64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("stochasticLinearRegression", *to_args(locals()))
-    
+
     @staticmethod
-    def stochasticLogisticRegression(learning_rate: Any | None = None, l2_regularization_coef: Any | None = None, mini_batch_size: Any | None = None, method: Any | None = None) -> Function:
+    def stochasticLogisticRegression(
+        learning_rate: Any | None = None,
+        l2_regularization_coef: Any | None = None,
+        mini_batch_size: Any | None = None,
+        method: Any | None = None,
+    ) -> Function:
         """
         stochasticLogisticRegression([learning_rate, l2_regularization_coef, mini_batch_size, method])(target, x1, x2, ...)
 
@@ -14327,7 +14741,7 @@ class FunctionWrapper:
         Returns the trained logistic regression model weights. Use `evalMLMethod` for predictions which returns probabilities of object having label `1`. [`Array(Float64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("stochasticLogisticRegression", *to_args(locals()))
-    
+
     @staticmethod
     def stringBytesEntropy(s: Any) -> Function:
         """
@@ -14338,7 +14752,7 @@ class FunctionWrapper:
         Returns Shannon's entropy of byte distribution in the string. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("stringBytesEntropy", *to_args(locals()))
-    
+
     @staticmethod
     def stringBytesUniq(s: Any) -> Function:
         """
@@ -14349,7 +14763,7 @@ class FunctionWrapper:
         Returns the number of distinct bytes in the string. [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("stringBytesUniq", *to_args(locals()))
-    
+
     @staticmethod
     def stringJaccardIndex(s1: Any, s2: Any) -> Function:
         """
@@ -14361,7 +14775,7 @@ class FunctionWrapper:
         Returns the Jaccard similarity index between the two strings. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("stringJaccardIndex", *to_args(locals()))
-    
+
     @staticmethod
     def stringJaccardIndexUTF8(s1: Any, s2: Any) -> Function:
         """
@@ -14373,7 +14787,7 @@ class FunctionWrapper:
         Returns the Jaccard similarity index between the two UTF8 strings. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("stringJaccardIndexUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def stringToH3(index_str: Any) -> Function:
         """
@@ -14384,17 +14798,17 @@ class FunctionWrapper:
         Returns the H3 index number, or `0` if the input is not a valid H3 index. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("stringToH3", *to_args(locals()))
-    
+
     @staticmethod
     def structureToCapnProtoSchema(table_structure: Any, message: Any) -> Function:
         """
         structureToCapnProtoSchema(table_structure, message)
 
-        
-        
+
+
         """
         return Function("structureToCapnProtoSchema", *to_args(locals()))
-    
+
     @staticmethod
     def structureToProtobufSchema(structure: Any, message_name: Any) -> Function:
         """
@@ -14406,7 +14820,7 @@ class FunctionWrapper:
         Returns a Protobuf schema definition in proto3 syntax that corresponds to the input ClickHouse structure. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("structureToProtobufSchema", *to_args(locals()))
-    
+
     @staticmethod
     def studentTTest(confidence_level: Any | None = None) -> Function:
         """
@@ -14418,7 +14832,7 @@ class FunctionWrapper:
         Returns a tuple with two or four elements (if the optional `confidence_level` is specified): calculated t-statistic, calculated p-value, [calculated confidence-interval-low], [calculated confidence-interval-high]. [`Tuple(Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float64, Float64, Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("studentTTest", *to_args(locals()))
-    
+
     @staticmethod
     def studentTTestOneSample(confidence_level: Any | None = None) -> Function:
         """
@@ -14430,17 +14844,17 @@ class FunctionWrapper:
         Returns a tuple with two or four elements (if `confidence_level` is specified): calculated t-statistic, calculated p-value (two-tailed), [calculated confidence-interval-low], [calculated confidence-interval-high]. Confidence intervals are for the sample mean at the given confidence level. [`Tuple(Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float64, Float64, Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("studentTTestOneSample", *to_args(locals()))
-    
+
     @staticmethod
     def subBitmap(bitmap: Any, offset: Any, cardinality_limit: Any) -> Function:
         """
         subBitmap(bitmap, offset, cardinality_limit)
 
-        - `bitmap` — Bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `offset` — Number of set bits to skip from the beginning (zero-based). [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) - `cardinality_limit` — Maximum number of set bits to include in the subset. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) 
+        - `bitmap` — Bitmap object. [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction). - `offset` — Number of set bits to skip from the beginning (zero-based). [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) - `cardinality_limit` — Maximum number of set bits to include in the subset. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         Returns a bitmap containing at most `limit` set bits, starting after skipping `offset` set bits in ascending order [`AggregateFunction(groupBitmap, T)`](https://clickhouse.com/docs/sql-reference/data-types/aggregatefunction)
         """
         return Function("subBitmap", *to_args(locals()))
-    
+
     @staticmethod
     def subDate(datetime: Any, interval: Any) -> Function:
         """
@@ -14452,7 +14866,7 @@ class FunctionWrapper:
         Returns date or date with time obtained by subtracting `interval` from `datetime`. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("subDate", *to_args(locals()))
-    
+
     @staticmethod
     def substring(s: Any, offset: Any, length: Any | None = None) -> Function:
         """
@@ -14465,7 +14879,7 @@ class FunctionWrapper:
         Returns a substring of `s` with `length` many bytes, starting at index `offset`. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("substring", *to_args(locals()))
-    
+
     @staticmethod
     def substringIndex(s: Any, delim: Any, count: Any) -> Function:
         """
@@ -14478,7 +14892,7 @@ class FunctionWrapper:
         Returns a substring of `s` before `count` occurrences of `delim`. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("substringIndex", *to_args(locals()))
-    
+
     @staticmethod
     def substringIndexUTF8(s: Any, delim: Any, count: Any) -> Function:
         """
@@ -14491,7 +14905,7 @@ class FunctionWrapper:
         Returns a substring of `s` before `count` occurrences of `delim`. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("substringIndexUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def substringUTF8(s: Any, offset: Any, length: Any | None = None) -> Function:
         """
@@ -14504,7 +14918,7 @@ class FunctionWrapper:
         Returns a substring of `s` with `length` many code points, starting at code point index `offset`. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("substringUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def subtractDays(datetime: Any, num: Any) -> Function:
         """
@@ -14516,7 +14930,7 @@ class FunctionWrapper:
         Returns `datetime` minus `num` days [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("subtractDays", *to_args(locals()))
-    
+
     @staticmethod
     def subtractHours(datetime: Any, num: Any) -> Function:
         """
@@ -14528,7 +14942,7 @@ class FunctionWrapper:
         Returns `datetime` minus `num` hours [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64(3)`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("subtractHours", *to_args(locals()))
-    
+
     @staticmethod
     def subtractInterval(interval_1: Any, interval_2: Any) -> Function:
         """
@@ -14540,7 +14954,7 @@ class FunctionWrapper:
         Returns a tuple of intervals [`Tuple(T)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("subtractInterval", *to_args(locals()))
-    
+
     @staticmethod
     def subtractMicroseconds(datetime: Any, num: Any) -> Function:
         """
@@ -14552,7 +14966,7 @@ class FunctionWrapper:
         Returns `datetime` minus `num` microseconds [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("subtractMicroseconds", *to_args(locals()))
-    
+
     @staticmethod
     def subtractMilliseconds(datetime: Any, num: Any) -> Function:
         """
@@ -14564,7 +14978,7 @@ class FunctionWrapper:
         Returns `datetime` minus `num` milliseconds [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("subtractMilliseconds", *to_args(locals()))
-    
+
     @staticmethod
     def subtractMinutes(datetime: Any, num: Any) -> Function:
         """
@@ -14576,7 +14990,7 @@ class FunctionWrapper:
         Returns `datetime` minus `num` minutes [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64(3)`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("subtractMinutes", *to_args(locals()))
-    
+
     @staticmethod
     def subtractMonths(datetime: Any, num: Any) -> Function:
         """
@@ -14588,7 +15002,7 @@ class FunctionWrapper:
         Returns `datetime` minus `num` months [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("subtractMonths", *to_args(locals()))
-    
+
     @staticmethod
     def subtractNanoseconds(datetime: Any, num: Any) -> Function:
         """
@@ -14600,7 +15014,7 @@ class FunctionWrapper:
         Returns `datetime` minus `num` nanoseconds [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("subtractNanoseconds", *to_args(locals()))
-    
+
     @staticmethod
     def subtractQuarters(datetime: Any, num: Any) -> Function:
         """
@@ -14612,7 +15026,7 @@ class FunctionWrapper:
         Returns `datetime` minus `num` quarters [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("subtractQuarters", *to_args(locals()))
-    
+
     @staticmethod
     def subtractSeconds(datetime: Any, num: Any) -> Function:
         """
@@ -14624,7 +15038,7 @@ class FunctionWrapper:
         Returns `datetime` minus `num` seconds [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64(3)`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("subtractSeconds", *to_args(locals()))
-    
+
     @staticmethod
     def subtractTupleOfIntervals(datetime: Any, intervals: Any) -> Function:
         """
@@ -14636,7 +15050,7 @@ class FunctionWrapper:
         Returns `date` with subtracted `intervals` [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("subtractTupleOfIntervals", *to_args(locals()))
-    
+
     @staticmethod
     def subtractWeeks(datetime: Any, num: Any) -> Function:
         """
@@ -14648,7 +15062,7 @@ class FunctionWrapper:
         Returns `datetime` minus `num` weeks [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("subtractWeeks", *to_args(locals()))
-    
+
     @staticmethod
     def subtractYears(datetime: Any, num: Any) -> Function:
         """
@@ -14660,7 +15074,7 @@ class FunctionWrapper:
         Returns `datetime` minus `num` years [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("subtractYears", *to_args(locals()))
-    
+
     @staticmethod
     def sum(num: Any) -> Function:
         """
@@ -14671,7 +15085,7 @@ class FunctionWrapper:
         Returns the sum of the values. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Decimal*`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("sum", *to_args(locals()))
-    
+
     @staticmethod
     def sumCount(x: Any) -> Function:
         """
@@ -14682,7 +15096,7 @@ class FunctionWrapper:
         Returns a tuple `(sum, count)`, where `sum` is the sum of numbers and `count` is the number of rows with not-NULL values. [`Tuple`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("sumCount", *to_args(locals()))
-    
+
     @staticmethod
     def sumKahan(x: Any) -> Function:
         """
@@ -14693,27 +15107,17 @@ class FunctionWrapper:
         Returns the sum of numbers. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Decimal`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("sumKahan", *to_args(locals()))
-    
+
     @staticmethod
     def sumMapFiltered(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("sumMapFiltered", *to_args(locals()))
-    
+
     @staticmethod
     def sumMapFilteredWithOverflow(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("sumMapFilteredWithOverflow", *to_args(locals()))
-    
+
     @staticmethod
     def sumMapWithOverflow(key: Any, value: Any) -> Function:
         """
@@ -14726,7 +15130,7 @@ class FunctionWrapper:
         Returns a tuple of two arrays: keys in sorted order, and values summed for the corresponding keys. [`Tuple(Array, Array)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("sumMapWithOverflow", *to_args(locals()))
-    
+
     @staticmethod
     def sumMappedArrays(key: Any, value1: Any, value2: Any | None = None) -> Function:
         """
@@ -14739,7 +15143,7 @@ class FunctionWrapper:
         Returns a tuple of arrays: the first array contains keys in sorted order, followed by arrays containing values summed for the corresponding keys. [`Tuple`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("sumMappedArrays", *to_args(locals()))
-    
+
     @staticmethod
     def sumWithOverflow(num: Any) -> Function:
         """
@@ -14750,7 +15154,7 @@ class FunctionWrapper:
         The sum of the values. [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Decimal*`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("sumWithOverflow", *to_args(locals()))
-    
+
     @staticmethod
     def svg(geometry: Any, style: Any | None = None) -> Function:
         """
@@ -14762,7 +15166,7 @@ class FunctionWrapper:
         Returns the SVG representation of the geometry. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("svg", *to_args(locals()))
-    
+
     @staticmethod
     def synonyms(ext_name: Any, word: Any) -> Function:
         """
@@ -14774,7 +15178,7 @@ class FunctionWrapper:
         Returns array of synonyms for the given word. [`Array(String)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("synonyms", *to_args(locals()))
-    
+
     @staticmethod
     def tan(x: Any) -> Function:
         """
@@ -14785,7 +15189,7 @@ class FunctionWrapper:
         Returns the tangent of `x`. [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("tan", *to_args(locals()))
-    
+
     @staticmethod
     def tanh(x: Any) -> Function:
         """
@@ -14796,17 +15200,17 @@ class FunctionWrapper:
         Returns values from the interval: -1 < tanh(x) < 1 [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("tanh", *to_args(locals()))
-    
+
     @staticmethod
     def tcpPort() -> Function:
         """
         tcpPort()
 
-        
+
         Returns the TCP port number. [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("tcpPort", *to_args(locals()))
-    
+
     @staticmethod
     def tgamma(x: Any) -> Function:
         """
@@ -14817,7 +15221,7 @@ class FunctionWrapper:
         Returns the gamma function value [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("tgamma", *to_args(locals()))
-    
+
     @staticmethod
     def theilsU(column1: Any, column2: Any) -> Function:
         """
@@ -14829,9 +15233,11 @@ class FunctionWrapper:
         Returns a value between -1 and 1. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("theilsU", *to_args(locals()))
-    
+
     @staticmethod
-    def throwIf(x: Any, message: Any | None = None, error_code: Any | None = None) -> Function:
+    def throwIf(
+        x: Any, message: Any | None = None, error_code: Any | None = None
+    ) -> Function:
         """
         throwIf(x[, message[, error_code]])
 
@@ -14842,17 +15248,17 @@ class FunctionWrapper:
         Returns `0` if the condition is false, throws an exception if the condition is true. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("throwIf", *to_args(locals()))
-    
+
     @staticmethod
     def tid() -> Function:
         """
         tid()
 
-        
+
         Returns the current thread id. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("tid", *to_args(locals()))
-    
+
     @staticmethod
     def timeDiff(startdate: Any, enddate: Any) -> Function:
         """
@@ -14864,19 +15270,23 @@ class FunctionWrapper:
         Returns the difference between `enddate` and `startdate` expressed in seconds. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("timeDiff", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesChangesToGrid(start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness: Any) -> Function:
+    def timeSeriesChangesToGrid(
+        start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness: Any
+    ) -> Function:
         """
         timeSeriesChangesToGrid(start_timestamp, end_timestamp, grid_step, staleness)(timestamp, value)
 
-        - `timestamp` — Timestamp of the sample. Can be individual values or arrays. - `value` — Value of the time series corresponding to the timestamp. Can be individual values or arrays. 
+        - `timestamp` — Timestamp of the sample. Can be individual values or arrays. - `value` — Value of the time series corresponding to the timestamp. Can be individual values or arrays.
         `changes` values on the specified grid as an `Array(Nullable(Float64))`. The returned array contains one value for each time grid point. The value is NULL if there are no samples within the window to calculate the changes value for a particular grid point.
         """
         return Function("timeSeriesChangesToGrid", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesCopyTag(dest_group: Any, src_group: Any, tag_to_copy: Any) -> Function:
+    def timeSeriesCopyTag(
+        dest_group: Any, src_group: Any, tag_to_copy: Any
+    ) -> Function:
         """
         timeSeriesCopyTag(dest_group, src_group, tag_to_copy)
 
@@ -14887,9 +15297,11 @@ class FunctionWrapper:
         Returns a group of tags containing the tags from `dest_group` along with the copied tags from `src_group`. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("timeSeriesCopyTag", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesCopyTags(dest_group: Any, src_group: Any, tags_to_copy: Any) -> Function:
+    def timeSeriesCopyTags(
+        dest_group: Any, src_group: Any, tags_to_copy: Any
+    ) -> Function:
         """
         timeSeriesCopyTags(dest_group, src_group, tags_to_copy)
 
@@ -14900,9 +15312,11 @@ class FunctionWrapper:
         Returns a group of tags containing the tags from `dest_group` along with the copied tags from `src_group`. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("timeSeriesCopyTags", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesDeltaToGrid(start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness: Any) -> Function:
+    def timeSeriesDeltaToGrid(
+        start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness: Any
+    ) -> Function:
         """
         timeSeriesDeltaToGrid(start_timestamp, end_timestamp, grid_step, staleness)(timestamp, value)
 
@@ -14912,17 +15326,19 @@ class FunctionWrapper:
         Returns delta values on the specified grid. The returned array contains one value for each time grid point. The value is NULL if there are not enough samples within the window to calculate the delta value for a particular grid point. [`Array(Nullable(Float64))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("timeSeriesDeltaToGrid", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesDerivToGrid(start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness: Any) -> Function:
+    def timeSeriesDerivToGrid(
+        start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness: Any
+    ) -> Function:
         """
         timeSeriesDerivToGrid(start_timestamp, end_timestamp, grid_step, staleness)(timestamp, value)
 
-        - `timestamp` — Timestamp of the sample. Can be individual values or arrays. - `value` — Value of the time series corresponding to the timestamp. Can be individual values or arrays. 
+        - `timestamp` — Timestamp of the sample. Can be individual values or arrays. - `value` — Value of the time series corresponding to the timestamp. Can be individual values or arrays.
         `deriv` values on the specified grid as an `Array(Nullable(Float64))`. The returned array contains one value for each time grid point. The value is NULL if there are not enough samples within the window to calculate the derivative value for a particular grid point.
         """
         return Function("timeSeriesDerivToGrid", *to_args(locals()))
-    
+
     @staticmethod
     def timeSeriesExtractTag(group: Any) -> Function:
         """
@@ -14934,9 +15350,11 @@ class FunctionWrapper:
         Returns the value of a specified tag. [`Nullable(String)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("timeSeriesExtractTag", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesFromGrid(start_timestamp: Any, end_timestamp: Any, step: Any, values: Any) -> Function:
+    def timeSeriesFromGrid(
+        start_timestamp: Any, end_timestamp: Any, step: Any, values: Any
+    ) -> Function:
         """
         timeSeriesFromGrid(start_timestamp, end_timestamp, step, values)
 
@@ -14948,7 +15366,7 @@ class FunctionWrapper:
         Returns values from the source array of values combined with timestamps on a regular time grid described by `start_timestamp` and `step`. [`Array(Tuple(DateTime64, Float64))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("timeSeriesFromGrid", *to_args(locals()))
-    
+
     @staticmethod
     def timeSeriesGroupArray(timestamp: Any, value: Any) -> Function:
         """
@@ -14960,7 +15378,7 @@ class FunctionWrapper:
         Returns an array of tuples `(timestamp, value)` sorted by timestamp in ascending order. If there are multiple values for the same timestamp then the function chooses the greatest of these values. [`Array(Tuple(T1, T2))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("timeSeriesGroupArray", *to_args(locals()))
-    
+
     @staticmethod
     def timeSeriesGroupToTags(group: Any) -> Function:
         """
@@ -14973,7 +15391,7 @@ class FunctionWrapper:
                  [`Array(Tuple(String, String))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("timeSeriesGroupToTags", *to_args(locals()))
-    
+
     @staticmethod
     def timeSeriesIdToGroup(id: Any) -> Function:
         """
@@ -14984,7 +15402,7 @@ class FunctionWrapper:
         Returns a group of tags associated with the identifier `id` of a time series. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("timeSeriesIdToGroup", *to_args(locals()))
-    
+
     @staticmethod
     def timeSeriesIdToTags(id: Any) -> Function:
         """
@@ -14997,9 +15415,11 @@ class FunctionWrapper:
                  [`Array(Tuple(String, String))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("timeSeriesIdToTags", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesInstantDeltaToGrid(start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness: Any) -> Function:
+    def timeSeriesInstantDeltaToGrid(
+        start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness: Any
+    ) -> Function:
         """
         timeSeriesInstantDeltaToGrid(start_timestamp, end_timestamp, grid_step, staleness)(timestamp, value)
 
@@ -15009,9 +15429,11 @@ class FunctionWrapper:
         Returns idelta values on the specified grid. The returned array contains one value for each time grid point. The value is NULL if there are not enough samples within the window to calculate the instant delta value for a particular grid point. [`Array(Nullable(Float64))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("timeSeriesInstantDeltaToGrid", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesInstantRateToGrid(start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness: Any) -> Function:
+    def timeSeriesInstantRateToGrid(
+        start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness: Any
+    ) -> Function:
         """
         timeSeriesInstantRateToGrid(start_timestamp, end_timestamp, grid_step, staleness)(timestamp, value)
 
@@ -15021,9 +15443,11 @@ class FunctionWrapper:
         Returns irate values on the specified grid. The returned array contains one value for each time grid point. The value is NULL if there are not enough samples within the window to calculate the instant rate value for a particular grid point. [`Array(Nullable(Float64))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("timeSeriesInstantRateToGrid", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesJoinTags(group: Any, dest_tag: Any, separator: Any, src_tags: Any) -> Function:
+    def timeSeriesJoinTags(
+        group: Any, dest_tag: Any, separator: Any, src_tags: Any
+    ) -> Function:
         """
         timeSeriesJoinTags(group, dest_tag, separator, src_tags)
 
@@ -15035,7 +15459,7 @@ class FunctionWrapper:
         Returns a new group of tags with the `dest_tag` tag set to the joined result. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("timeSeriesJoinTags", *to_args(locals()))
-    
+
     @staticmethod
     def timeSeriesLastTwoSamples(timestamp: Any, value: Any) -> Function:
         """
@@ -15047,19 +15471,27 @@ class FunctionWrapper:
         Returns a pair of arrays of equal length from 0 to 2. The first array contains the timestamps of sampled time series, the second array contains the corresponding values of the time series. [`Tuple(Array(DateTime), Array(Float64))`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("timeSeriesLastTwoSamples", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesPredictLinearToGrid(start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness: Any, predict_offset: Any) -> Function:
+    def timeSeriesPredictLinearToGrid(
+        start_timestamp: Any,
+        end_timestamp: Any,
+        grid_step: Any,
+        staleness: Any,
+        predict_offset: Any,
+    ) -> Function:
         """
         timeSeriesPredictLinearToGrid(start_timestamp, end_timestamp, grid_step, staleness, predict_offset)(timestamp, value)
 
-        - `timestamp` — Timestamp of the sample. Can be individual values or arrays. - `value` — Value of the time series corresponding to the timestamp. Can be individual values or arrays. 
+        - `timestamp` — Timestamp of the sample. Can be individual values or arrays. - `value` — Value of the time series corresponding to the timestamp. Can be individual values or arrays.
         `predict_linear` values on the specified grid as an `Array(Nullable(Float64))`. The returned array contains one value for each time grid point. The value is NULL if there are not enough samples within the window to calculate the rate value for a particular grid point.
         """
         return Function("timeSeriesPredictLinearToGrid", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesRange(start_timestamp: Any, end_timestamp: Any, step: Any) -> Function:
+    def timeSeriesRange(
+        start_timestamp: Any, end_timestamp: Any, step: Any
+    ) -> Function:
         """
         timeSeriesRange(start_timestamp, end_timestamp, step)
 
@@ -15070,9 +15502,11 @@ class FunctionWrapper:
         Returns a range of timestamps. [`Array(DateTime64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("timeSeriesRange", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesRateToGrid(start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness: Any) -> Function:
+    def timeSeriesRateToGrid(
+        start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness: Any
+    ) -> Function:
         """
         timeSeriesRateToGrid(start_timestamp, end_timestamp, grid_step, staleness)(timestamp, value)
 
@@ -15082,7 +15516,7 @@ class FunctionWrapper:
         Returns rate values on the specified grid. The returned array contains one value for each time grid point. The value is NULL if there are not enough samples within the window to calculate the rate value for a particular grid point. [`Array(Nullable(Float64))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("timeSeriesRateToGrid", *to_args(locals()))
-    
+
     @staticmethod
     def timeSeriesRemoveAllTagsExcept(group: Any, tags_to_keep: Any) -> Function:
         """
@@ -15094,7 +15528,7 @@ class FunctionWrapper:
         A new group of tags with only the specified tags kept. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("timeSeriesRemoveAllTagsExcept", *to_args(locals()))
-    
+
     @staticmethod
     def timeSeriesRemoveTag(group: Any, tag_to_remove: Any) -> Function:
         """
@@ -15106,7 +15540,7 @@ class FunctionWrapper:
         A new group of tags without the specified tag. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("timeSeriesRemoveTag", *to_args(locals()))
-    
+
     @staticmethod
     def timeSeriesRemoveTags(group: Any, tags_to_remove: Any) -> Function:
         """
@@ -15118,9 +15552,11 @@ class FunctionWrapper:
         A new group of tags without the specified tags. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("timeSeriesRemoveTags", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesReplaceTag(group: Any, dest_tag: Any, replacement: Any, src_tag: Any, regex: Any) -> Function:
+    def timeSeriesReplaceTag(
+        group: Any, dest_tag: Any, replacement: Any, src_tag: Any, regex: Any
+    ) -> Function:
         """
         timeSeriesReplaceTag(group, dest_tag, replacement, src_tag, regex)
 
@@ -15133,9 +15569,11 @@ class FunctionWrapper:
         A new group of tags with maybe `dest_tag` added. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("timeSeriesReplaceTag", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesResampleToGridWithStaleness(start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness_window: Any) -> Function:
+    def timeSeriesResampleToGridWithStaleness(
+        start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness_window: Any
+    ) -> Function:
         """
         timeSeriesResampleToGridWithStaleness(start_timestamp, end_timestamp, grid_step, staleness_window)(timestamp, value)
 
@@ -15145,19 +15583,23 @@ class FunctionWrapper:
         Returns time series values re-sampled to the specified grid. The returned array contains one value for each time grid point. The value is NULL if there is no sample for a particular grid point. [`Array(Nullable(Float64))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("timeSeriesResampleToGridWithStaleness", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesResetsToGrid(start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness: Any) -> Function:
+    def timeSeriesResetsToGrid(
+        start_timestamp: Any, end_timestamp: Any, grid_step: Any, staleness: Any
+    ) -> Function:
         """
         timeSeriesResetsToGrid(start_timestamp, end_timestamp, grid_step, staleness)(timestamp, value)
 
-        - `timestamp` — Timestamp of the sample. Can be individual values or arrays. - `value` — Value of the time series corresponding to the timestamp. Can be individual values or arrays. 
+        - `timestamp` — Timestamp of the sample. Can be individual values or arrays. - `value` — Value of the time series corresponding to the timestamp. Can be individual values or arrays.
         `resets` values on the specified grid as an `Array(Nullable(Float64))`. The returned array contains one value for each time grid point. The value is NULL if there are no samples within the window to calculate the resets value for a particular grid point.
         """
         return Function("timeSeriesResetsToGrid", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesStoreTags(id: Any, tags_array: Any, separate_tag_name_1: Any, separate_tag_value_1: Any) -> Function:
+    def timeSeriesStoreTags(
+        id: Any, tags_array: Any, separate_tag_name_1: Any, separate_tag_value_1: Any
+    ) -> Function:
         """
         timeSeriesStoreTags(id, tags_array, separate_tag_name_1, separate_tag_value_1, ...)
 
@@ -15169,9 +15611,15 @@ class FunctionWrapper:
         Returns the identifier of a time series (i.e. just the first argument).
         """
         return Function("timeSeriesStoreTags", *to_args(locals()))
-    
+
     @staticmethod
-    def timeSeriesTagsToGroup(tags_array: Any, tag_name_1: Any, tag_value_1: Any, tag_name2: Any, tag_value2: Any) -> Function:
+    def timeSeriesTagsToGroup(
+        tags_array: Any,
+        tag_name_1: Any,
+        tag_value_1: Any,
+        tag_name2: Any,
+        tag_value2: Any,
+    ) -> Function:
         """
         timeSeriesTagsToGroup(tags_array, tag_name_1, tag_value_1, tag_name2, tag_value2, ...)
 
@@ -15182,7 +15630,7 @@ class FunctionWrapper:
         Returns a group of tags associated with the specified tags. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("timeSeriesTagsToGroup", *to_args(locals()))
-    
+
     @staticmethod
     def timeSeriesThrowDuplicateSeriesIf(condition: Any, group: Any) -> Function:
         """
@@ -15194,7 +15642,7 @@ class FunctionWrapper:
         Returns `0`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("timeSeriesThrowDuplicateSeriesIf", *to_args(locals()))
-    
+
     @staticmethod
     def timeSlot(time: Any, time_zone: Any | None = None) -> Function:
         """
@@ -15206,7 +15654,7 @@ class FunctionWrapper:
         Returns the time rounded to the start of a half-an-hour length interval. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("timeSlot", *to_args(locals()))
-    
+
     @staticmethod
     def timeSlots(StartTime: Any, Duration: Any, Size: Any | None = None) -> Function:
         """
@@ -15219,7 +15667,7 @@ class FunctionWrapper:
         Returns an array of DateTime/DateTime64 (return type matches the type of `StartTime`). For DateTime64, the return value's scale can differ from the scale of `StartTime` - the highest scale among all given arguments is taken. [`Array(DateTime)`](https://clickhouse.com/docs/sql-reference/data-types/array) or [`Array(DateTime64)`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("timeSlots", *to_args(locals()))
-    
+
     @staticmethod
     def timestamp(expr: Any, expr_time: Any | None = None) -> Function:
         """
@@ -15231,17 +15679,17 @@ class FunctionWrapper:
         Returns the converted value of `expr`, or `expr` with added time [`DateTime64(6)`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("timestamp", *to_args(locals()))
-    
+
     @staticmethod
     def timezone() -> Function:
         """
         timezone()
 
-        
+
         Returns the canonical time zone name as a [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("timezone", *to_args(locals()))
-    
+
     @staticmethod
     def timezoneOf(datetime: Any) -> Function:
         """
@@ -15253,7 +15701,7 @@ class FunctionWrapper:
         Returns the timezone name for `datetime` [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("timezoneOf", *to_args(locals()))
-    
+
     @staticmethod
     def timezoneOffset(datetime: Any) -> Function:
         """
@@ -15264,7 +15712,7 @@ class FunctionWrapper:
         Returns the offset from UTC in seconds [`Int32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("timezoneOffset", *to_args(locals()))
-    
+
     @staticmethod
     def toBFloat16(expr: Any) -> Function:
         """
@@ -15275,7 +15723,7 @@ class FunctionWrapper:
         Returns a 16-bit brain-float value. [`BFloat16`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("toBFloat16", *to_args(locals()))
-    
+
     @staticmethod
     def toBFloat16OrNull(x: Any) -> Function:
         """
@@ -15286,7 +15734,7 @@ class FunctionWrapper:
         Reurns a 16-bit brain-float value, otherwise `NULL`. [`BFloat16`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toBFloat16OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toBFloat16OrZero(x: Any) -> Function:
         """
@@ -15297,7 +15745,7 @@ class FunctionWrapper:
         Returns a 16-bit brain-float value, otherwise `0`. [`BFloat16`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("toBFloat16OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toBool(expr: Any) -> Function:
         """
@@ -15308,7 +15756,7 @@ class FunctionWrapper:
         Returns `true` or `false` based on evaluation of the argument. [`Bool`](https://clickhouse.com/docs/sql-reference/data-types/boolean)
         """
         return Function("toBool", *to_args(locals()))
-    
+
     @staticmethod
     def toColumnTypeName(value: Any) -> Function:
         """
@@ -15319,7 +15767,7 @@ class FunctionWrapper:
         Returns the internal data type used to represent the value. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("toColumnTypeName", *to_args(locals()))
-    
+
     @staticmethod
     def toDate(x: Any) -> Function:
         """
@@ -15330,7 +15778,7 @@ class FunctionWrapper:
         Returns the converted input value. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("toDate", *to_args(locals()))
-    
+
     @staticmethod
     def toDate32(expr: Any) -> Function:
         """
@@ -15341,7 +15789,7 @@ class FunctionWrapper:
         Returns a calendar date. [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32)
         """
         return Function("toDate32", *to_args(locals()))
-    
+
     @staticmethod
     def toDate32OrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -15353,7 +15801,7 @@ class FunctionWrapper:
         Value of type Date32 if successful, otherwise returns the default value if passed or 1900-01-01 if not. [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32)
         """
         return Function("toDate32OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toDate32OrNull(x: Any) -> Function:
         """
@@ -15364,7 +15812,7 @@ class FunctionWrapper:
         Returns a Date32 value if successful, otherwise `NULL`. [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toDate32OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toDate32OrZero(x: Any) -> Function:
         """
@@ -15375,7 +15823,7 @@ class FunctionWrapper:
         Returns a Date32 value if successful, otherwise the lower boundary of Date32 (`1900-01-01`). [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32)
         """
         return Function("toDate32OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toDateOrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -15387,7 +15835,7 @@ class FunctionWrapper:
         Value of type Date if successful, otherwise returns the default value if passed or 1970-01-01 if not. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("toDateOrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toDateOrNull(x: Any) -> Function:
         """
@@ -15398,7 +15846,7 @@ class FunctionWrapper:
         Returns a Date value if successful, otherwise `NULL`. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toDateOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toDateOrZero(x: Any) -> Function:
         """
@@ -15409,7 +15857,7 @@ class FunctionWrapper:
         Returns a Date value if successful, otherwise the lower boundary of Date (`1970-01-01`). [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("toDateOrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toDateTime(expr: Any, time_zone: Any | None = None) -> Function:
         """
@@ -15421,7 +15869,7 @@ class FunctionWrapper:
         Returns a date time. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("toDateTime", *to_args(locals()))
-    
+
     @staticmethod
     def toDateTime32(x: Any, timezone: Any | None = None) -> Function:
         """
@@ -15433,7 +15881,7 @@ class FunctionWrapper:
         Returns the converted input value. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("toDateTime32", *to_args(locals()))
-    
+
     @staticmethod
     def toDateTime64(expr: Any, scale: Any, timezone: Any | None = None) -> Function:
         """
@@ -15446,9 +15894,11 @@ class FunctionWrapper:
         Returns a calendar date and time of day, with sub-second precision. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toDateTime64", *to_args(locals()))
-    
+
     @staticmethod
-    def toDateTime64OrDefault(expr: Any, scale: Any, timezone: Any | None = None, default: Any | None = None) -> Function:
+    def toDateTime64OrDefault(
+        expr: Any, scale: Any, timezone: Any | None = None, default: Any | None = None
+    ) -> Function:
         """
         toDateTime64OrDefault(expr, scale[, timezone, default])
 
@@ -15460,7 +15910,7 @@ class FunctionWrapper:
         Value of type DateTime64 if successful, otherwise returns the default value if passed or 1970-01-01 00:00:00.000 if not. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toDateTime64OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toDateTime64OrNull(x: Any) -> Function:
         """
@@ -15471,7 +15921,7 @@ class FunctionWrapper:
         Returns a DateTime64 value if successful, otherwise `NULL`. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toDateTime64OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toDateTime64OrZero(x: Any) -> Function:
         """
@@ -15482,9 +15932,11 @@ class FunctionWrapper:
         Returns a DateTime64 value if successful, otherwise the lower boundary of DateTime64 (`1970-01-01 00:00:00.000`). [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toDateTime64OrZero", *to_args(locals()))
-    
+
     @staticmethod
-    def toDateTimeOrDefault(expr: Any, timezone: Any | None = None, default: Any | None = None) -> Function:
+    def toDateTimeOrDefault(
+        expr: Any, timezone: Any | None = None, default: Any | None = None
+    ) -> Function:
         """
         toDateTimeOrDefault(expr[, timezone, default])
 
@@ -15495,7 +15947,7 @@ class FunctionWrapper:
         Value of type DateTime if successful, otherwise returns the default value if passed or 1970-01-01 00:00:00 if not. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("toDateTimeOrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toDateTimeOrNull(x: Any) -> Function:
         """
@@ -15506,7 +15958,7 @@ class FunctionWrapper:
         Returns a `DateTime` value if successful, otherwise `NULL`. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toDateTimeOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toDateTimeOrZero(x: Any) -> Function:
         """
@@ -15517,7 +15969,7 @@ class FunctionWrapper:
         Returns a DateTime value if successful, otherwise the lower boundary of DateTime (`1970-01-01 00:00:00`). [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("toDateTimeOrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toDayOfMonth(datetime: Any) -> Function:
         """
@@ -15528,9 +15980,11 @@ class FunctionWrapper:
         Returns the day of the month of the given date/time [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toDayOfMonth", *to_args(locals()))
-    
+
     @staticmethod
-    def toDayOfWeek(datetime: Any, mode: Any | None = None, timezone: Any | None = None) -> Function:
+    def toDayOfWeek(
+        datetime: Any, mode: Any | None = None, timezone: Any | None = None
+    ) -> Function:
         """
         toDayOfWeek(datetime[, mode[, timezone]])
 
@@ -15541,7 +15995,7 @@ class FunctionWrapper:
         Returns the day of the week for the given `Date` or `DateTime` [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toDayOfWeek", *to_args(locals()))
-    
+
     @staticmethod
     def toDayOfYear(datetime: Any) -> Function:
         """
@@ -15552,7 +16006,7 @@ class FunctionWrapper:
         Returns the day of the year of the given Date or DateTime [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toDayOfYear", *to_args(locals()))
-    
+
     @staticmethod
     def toDaysInMonth(datetime: Any) -> Function:
         """
@@ -15563,7 +16017,7 @@ class FunctionWrapper:
         Returns the number of days in the month of the given date/time. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toDaysInMonth", *to_args(locals()))
-    
+
     @staticmethod
     def toDaysSinceYearZero(date: Any, time_zone: Any | None = None) -> Function:
         """
@@ -15575,7 +16029,7 @@ class FunctionWrapper:
         Returns the number of days passed since date `0000-01-01`. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toDaysSinceYearZero", *to_args(locals()))
-    
+
     @staticmethod
     def toDecimal128(expr: Any, S: Any) -> Function:
         """
@@ -15587,9 +16041,11 @@ class FunctionWrapper:
         Returns a value of type `Decimal(38, S)` [`Decimal128(S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("toDecimal128", *to_args(locals()))
-    
+
     @staticmethod
-    def toDecimal128OrDefault(expr: Any, S: Any, default: Any | None = None) -> Function:
+    def toDecimal128OrDefault(
+        expr: Any, S: Any, default: Any | None = None
+    ) -> Function:
         """
         toDecimal128OrDefault(expr, S[, default])
 
@@ -15600,7 +16056,7 @@ class FunctionWrapper:
         Value of type Decimal(38, S) if successful, otherwise returns the default value if passed or 0 if not. [`Decimal128(S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("toDecimal128OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toDecimal128OrNull(expr: Any, S: Any) -> Function:
         """
@@ -15612,7 +16068,7 @@ class FunctionWrapper:
         Returns a Decimal(38, S) value if successful, otherwise `NULL`. [`Decimal128(S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toDecimal128OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toDecimal128OrZero(expr: Any, S: Any) -> Function:
         """
@@ -15624,7 +16080,7 @@ class FunctionWrapper:
         Returns a Decimal(38, S) value if successful, otherwise `0`. [`Decimal128(S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("toDecimal128OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toDecimal256(expr: Any, S: Any) -> Function:
         """
@@ -15636,9 +16092,11 @@ class FunctionWrapper:
         Returns a value of type `Decimal(76, S)`. [`Decimal256(S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("toDecimal256", *to_args(locals()))
-    
+
     @staticmethod
-    def toDecimal256OrDefault(expr: Any, S: Any, default: Any | None = None) -> Function:
+    def toDecimal256OrDefault(
+        expr: Any, S: Any, default: Any | None = None
+    ) -> Function:
         """
         toDecimal256OrDefault(expr, S[, default])
 
@@ -15649,7 +16107,7 @@ class FunctionWrapper:
         Value of type Decimal(76, S) if successful, otherwise returns the default value if passed or 0 if not. [`Decimal256(S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("toDecimal256OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toDecimal256OrNull(expr: Any, S: Any) -> Function:
         """
@@ -15661,7 +16119,7 @@ class FunctionWrapper:
         Returns a Decimal(76, S) value if successful, otherwise `NULL`. [`Decimal256(S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toDecimal256OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toDecimal256OrZero(expr: Any, S: Any) -> Function:
         """
@@ -15673,7 +16131,7 @@ class FunctionWrapper:
         Returns a Decimal(76, S) value if successful, otherwise `0`. [`Decimal256(S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("toDecimal256OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toDecimal32(expr: Any, S: Any) -> Function:
         """
@@ -15685,7 +16143,7 @@ class FunctionWrapper:
         Returns a value of type `Decimal(9, S)` [`Decimal32(S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("toDecimal32", *to_args(locals()))
-    
+
     @staticmethod
     def toDecimal32OrDefault(expr: Any, S: Any, default: Any | None = None) -> Function:
         """
@@ -15698,7 +16156,7 @@ class FunctionWrapper:
         Value of type Decimal(9, S) if successful, otherwise returns the default value if passed or 0 if not. [`Decimal32(S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("toDecimal32OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toDecimal32OrNull(expr: Any, S: Any) -> Function:
         """
@@ -15710,7 +16168,7 @@ class FunctionWrapper:
         Returns a Decimal(9, S) value if successful, otherwise `NULL`. [`Decimal32(S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toDecimal32OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toDecimal32OrZero(expr: Any, S: Any) -> Function:
         """
@@ -15722,7 +16180,7 @@ class FunctionWrapper:
         Returns a Decimal(9, S) value if successful, otherwise `0`. [`Decimal32(S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("toDecimal32OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toDecimal64(expr: Any, S: Any) -> Function:
         """
@@ -15734,7 +16192,7 @@ class FunctionWrapper:
         Returns a decimal value. [`Decimal(18, S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("toDecimal64", *to_args(locals()))
-    
+
     @staticmethod
     def toDecimal64OrDefault(expr: Any, S: Any, default: Any | None = None) -> Function:
         """
@@ -15747,7 +16205,7 @@ class FunctionWrapper:
         Value of type Decimal(18, S) if successful, otherwise returns the default value if passed or 0 if not. [`Decimal64(S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("toDecimal64OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toDecimal64OrNull(expr: Any, S: Any) -> Function:
         """
@@ -15759,7 +16217,7 @@ class FunctionWrapper:
         Returns a Decimal(18, S) value if successful, otherwise `NULL`. [`Decimal64(S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toDecimal64OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toDecimal64OrZero(expr: Any, S: Any) -> Function:
         """
@@ -15771,7 +16229,7 @@ class FunctionWrapper:
         Returns a Decimal(18, S) value if successful, otherwise `0`. [`Decimal64(S)`](https://clickhouse.com/docs/sql-reference/data-types/decimal)
         """
         return Function("toDecimal64OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toDecimalString(number: Any, scale: Any) -> Function:
         """
@@ -15783,7 +16241,7 @@ class FunctionWrapper:
         Returns a String representation of the number with exactly the specified number of fractional digits. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("toDecimalString", *to_args(locals()))
-    
+
     @staticmethod
     def toFixedString(s: Any, N: Any) -> Function:
         """
@@ -15795,7 +16253,7 @@ class FunctionWrapper:
         Returns a FixedString of length N. [`FixedString(N)`](https://clickhouse.com/docs/sql-reference/data-types/fixedstring)
         """
         return Function("toFixedString", *to_args(locals()))
-    
+
     @staticmethod
     def toFloat32(expr: Any) -> Function:
         """
@@ -15806,7 +16264,7 @@ class FunctionWrapper:
         Returns a 32-bit floating point value. [`Float32`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("toFloat32", *to_args(locals()))
-    
+
     @staticmethod
     def toFloat32OrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -15818,7 +16276,7 @@ class FunctionWrapper:
         Returns a value of type Float32 if successful, otherwise returns the default value if passed or 0 if not. [`Float32`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("toFloat32OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toFloat32OrNull(x: Any) -> Function:
         """
@@ -15829,7 +16287,7 @@ class FunctionWrapper:
         Returns a 32-bit Float value if successful, otherwise `NULL`. [`Float32`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toFloat32OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toFloat32OrZero(x: Any) -> Function:
         """
@@ -15840,7 +16298,7 @@ class FunctionWrapper:
         Returns a 32-bit Float value if successful, otherwise `0`. [`Float32`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("toFloat32OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toFloat64(expr: Any) -> Function:
         """
@@ -15851,7 +16309,7 @@ class FunctionWrapper:
         Returns a 64-bit floating point value. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("toFloat64", *to_args(locals()))
-    
+
     @staticmethod
     def toFloat64OrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -15863,7 +16321,7 @@ class FunctionWrapper:
         Returns a value of type Float64 if successful, otherwise returns the default value if passed or 0 if not. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("toFloat64OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toFloat64OrNull(x: Any) -> Function:
         """
@@ -15874,7 +16332,7 @@ class FunctionWrapper:
         Returns a 64-bit Float value if successful, otherwise `NULL`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toFloat64OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toFloat64OrZero(x: Any) -> Function:
         """
@@ -15885,7 +16343,7 @@ class FunctionWrapper:
         Returns a 64-bit Float value if successful, otherwise `0`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("toFloat64OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toHour(datetime: Any) -> Function:
         """
@@ -15896,7 +16354,7 @@ class FunctionWrapper:
         Returns the hour (0-23) of `datetime`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toHour", *to_args(locals()))
-    
+
     @staticmethod
     def toIPv4(x: Any) -> Function:
         """
@@ -15907,7 +16365,7 @@ class FunctionWrapper:
         Returns an IPv4 address. [`IPv4`](https://clickhouse.com/docs/sql-reference/data-types/ipv4)
         """
         return Function("toIPv4", *to_args(locals()))
-    
+
     @staticmethod
     def toIPv4OrDefault(string: Any, default: Any | None = None) -> Function:
         """
@@ -15919,7 +16377,7 @@ class FunctionWrapper:
         Returns a string converted to the current IPv4 address, or the default value if conversion fails. [`IPv4`](https://clickhouse.com/docs/sql-reference/data-types/ipv4)
         """
         return Function("toIPv4OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toIPv4OrNull(x: Any) -> Function:
         """
@@ -15930,7 +16388,7 @@ class FunctionWrapper:
         Returns an IPv4 address if successful, otherwise `NULL`. [`IPv4`](https://clickhouse.com/docs/sql-reference/data-types/ipv4) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toIPv4OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toIPv4OrZero(x: Any) -> Function:
         """
@@ -15941,7 +16399,7 @@ class FunctionWrapper:
         Returns an IPv4 address if successful, otherwise zero IPv4 address (`0.0.0.0`). [`IPv4`](https://clickhouse.com/docs/sql-reference/data-types/ipv4)
         """
         return Function("toIPv4OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toIPv6(x: Any) -> Function:
         """
@@ -15952,17 +16410,17 @@ class FunctionWrapper:
         Returns an IPv6 address. [`IPv6`](https://clickhouse.com/docs/sql-reference/data-types/ipv6)
         """
         return Function("toIPv6", *to_args(locals()))
-    
+
     @staticmethod
     def toIPv6OrDefault(string: Any, default: Any | None = None) -> Function:
         """
         toIPv6OrDefault(string[, default])
 
-        - `string` — IP address string to convert. - `default` — Optional. The value to return if string has an invalid format. 
+        - `string` — IP address string to convert. - `default` — Optional. The value to return if string has an invalid format.
         Returns the IPv6 address, otherwise `::` or the provided optional default if argument `string` has an invalid format. [`IPv6`](https://clickhouse.com/docs/sql-reference/data-types/ipv6)
         """
         return Function("toIPv6OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toIPv6OrNull(x: Any) -> Function:
         """
@@ -15973,7 +16431,7 @@ class FunctionWrapper:
         Returns an IPv6 address if successful, otherwise `NULL`. [`IPv6`](https://clickhouse.com/docs/sql-reference/data-types/ipv6) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toIPv6OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toIPv6OrZero(x: Any) -> Function:
         """
@@ -15984,7 +16442,7 @@ class FunctionWrapper:
         Returns an IPv6 address if successful, otherwise zero IPv6 address (`::`).  [`IPv6`](https://clickhouse.com/docs/sql-reference/data-types/ipv6)
         """
         return Function("toIPv6OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toISOWeek(datetime: Any, timezone: Any | None = None) -> Function:
         """
@@ -15996,7 +16454,7 @@ class FunctionWrapper:
         Returns the ISO week number according to ISO 8601 standard. Returns a number between 1 and 53. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toISOWeek", *to_args(locals()))
-    
+
     @staticmethod
     def toISOYear(datetime: Any) -> Function:
         """
@@ -16007,7 +16465,7 @@ class FunctionWrapper:
         Returns the input value converted to an ISO year number. [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toISOYear", *to_args(locals()))
-    
+
     @staticmethod
     def toInt128(expr: Any) -> Function:
         """
@@ -16018,7 +16476,7 @@ class FunctionWrapper:
         Returns a 128-bit integer value. [`Int128`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt128", *to_args(locals()))
-    
+
     @staticmethod
     def toInt128OrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -16030,7 +16488,7 @@ class FunctionWrapper:
         Returns a value of type Int128 if successful, otherwise returns the default value if passed, or 0 if not. [`Int128`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt128OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toInt128OrNull(x: Any) -> Function:
         """
@@ -16041,7 +16499,7 @@ class FunctionWrapper:
         Returns a value of type Int128, otherwise `NULL` if the conversion is unsuccessful. [`Int128`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toInt128OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toInt128OrZero(x: Any) -> Function:
         """
@@ -16052,7 +16510,7 @@ class FunctionWrapper:
         Returns the converted input value, otherwise `0` if conversion fails. [`Int128`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt128OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toInt16(expr: Any) -> Function:
         """
@@ -16063,7 +16521,7 @@ class FunctionWrapper:
         Returns a 16-bit integer value. [`Int16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt16", *to_args(locals()))
-    
+
     @staticmethod
     def toInt16OrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -16075,7 +16533,7 @@ class FunctionWrapper:
         Returns a value of type Int16 if successful, otherwise returns the default value if passed, or 0 if not. [`Int16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt16OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toInt16OrNull(x: Any) -> Function:
         """
@@ -16086,7 +16544,7 @@ class FunctionWrapper:
         Returns a value of type `Int16`, otherwise `NULL` if the conversion is unsuccessful. [`Int16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toInt16OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toInt16OrZero(x: Any) -> Function:
         """
@@ -16097,7 +16555,7 @@ class FunctionWrapper:
         Returns a value of type Int16, otherwise `0` if the conversion is unsuccessful. [`Int16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt16OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toInt256(expr: Any) -> Function:
         """
@@ -16108,7 +16566,7 @@ class FunctionWrapper:
         Returns a 256-bit integer value. [`Int256`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt256", *to_args(locals()))
-    
+
     @staticmethod
     def toInt256OrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -16120,7 +16578,7 @@ class FunctionWrapper:
         Returns a value of type Int256 if successful, otherwise returns the default value if passed, or 0 if not. [`Int256`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt256OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toInt256OrNull(x: Any) -> Function:
         """
@@ -16131,7 +16589,7 @@ class FunctionWrapper:
         Returns a value of type Int256, otherwise `NULL` if the conversion is unsuccessful. [`Int256`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toInt256OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toInt256OrZero(x: Any) -> Function:
         """
@@ -16142,7 +16600,7 @@ class FunctionWrapper:
         Returns the converted input value, otherwise `0` if conversion fails. [`Int256`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt256OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toInt32(expr: Any) -> Function:
         """
@@ -16153,7 +16611,7 @@ class FunctionWrapper:
         Returns a 32-bit integer value. [`Int32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt32", *to_args(locals()))
-    
+
     @staticmethod
     def toInt32OrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -16165,7 +16623,7 @@ class FunctionWrapper:
         Returns a value of type Int32 if successful, otherwise returns the default value if passed or 0 if not. [`Int32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt32OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toInt32OrNull(x: Any) -> Function:
         """
@@ -16176,7 +16634,7 @@ class FunctionWrapper:
         Returns a value of type Int32, otherwise `NULL` if the conversion is unsuccessful. [`Int32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toInt32OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toInt32OrZero(x: Any) -> Function:
         """
@@ -16187,7 +16645,7 @@ class FunctionWrapper:
         Returns a value of type Int32, otherwise `0` if the conversion is unsuccessful. [`Int32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt32OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toInt64(expr: Any) -> Function:
         """
@@ -16198,7 +16656,7 @@ class FunctionWrapper:
         Returns a 64-bit integer value. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt64", *to_args(locals()))
-    
+
     @staticmethod
     def toInt64OrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -16210,7 +16668,7 @@ class FunctionWrapper:
         Returns a value of type Int64 if successful, otherwise returns the default value if passed, or 0 if not. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt64OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toInt64OrNull(x: Any) -> Function:
         """
@@ -16221,7 +16679,7 @@ class FunctionWrapper:
         Returns a value of type Int64, otherwise `NULL` if the conversion is unsuccessful. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toInt64OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toInt64OrZero(x: Any) -> Function:
         """
@@ -16232,7 +16690,7 @@ class FunctionWrapper:
         Returns the converted input value, otherwise `0` if conversion fails. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt64OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toInt8(expr: Any) -> Function:
         """
@@ -16243,7 +16701,7 @@ class FunctionWrapper:
         Returns an 8-bit integer value. [`Int8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt8", *to_args(locals()))
-    
+
     @staticmethod
     def toInt8OrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -16255,7 +16713,7 @@ class FunctionWrapper:
         Returns a value of type Int8 if successful, otherwise returns the default value if passed, or 0 if not. [`Int8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt8OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toInt8OrNull(x: Any) -> Function:
         """
@@ -16266,7 +16724,7 @@ class FunctionWrapper:
         Returns a value of type Int8, otherwise `NULL` if the conversion is unsuccessful. [`Int8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toInt8OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toInt8OrZero(x: Any) -> Function:
         """
@@ -16277,7 +16735,7 @@ class FunctionWrapper:
         Returns a value of type Int8, otherwise `0` if the conversion is unsuccessful. [`Int8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInt8OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toInterval(value: Any, unit: Any) -> Function:
         """
@@ -16289,7 +16747,7 @@ class FunctionWrapper:
         Returns an Interval value of the specified type. The result type depends on the unit: IntervalNanosecond, IntervalMicrosecond, IntervalMillisecond, IntervalSecond, IntervalMinute, IntervalHour, IntervalDay, IntervalWeek, IntervalMonth, IntervalQuarter, or IntervalYear. [`Interval`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toInterval", *to_args(locals()))
-    
+
     @staticmethod
     def toIntervalDay(n: Any) -> Function:
         """
@@ -16300,7 +16758,7 @@ class FunctionWrapper:
         Returns an interval of `n` days. [`Interval`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toIntervalDay", *to_args(locals()))
-    
+
     @staticmethod
     def toIntervalHour(n: Any) -> Function:
         """
@@ -16311,7 +16769,7 @@ class FunctionWrapper:
         Returns an interval of `n` hours. [`Interval`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toIntervalHour", *to_args(locals()))
-    
+
     @staticmethod
     def toIntervalMicrosecond(n: Any) -> Function:
         """
@@ -16322,7 +16780,7 @@ class FunctionWrapper:
         Returns an interval of `n` microseconds. [`Interval`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toIntervalMicrosecond", *to_args(locals()))
-    
+
     @staticmethod
     def toIntervalMillisecond(n: Any) -> Function:
         """
@@ -16333,7 +16791,7 @@ class FunctionWrapper:
         Returns an interval of `n` milliseconds. [`Interval`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toIntervalMillisecond", *to_args(locals()))
-    
+
     @staticmethod
     def toIntervalMinute(n: Any) -> Function:
         """
@@ -16344,7 +16802,7 @@ class FunctionWrapper:
         Returns an interval of `n` minutes. [`Interval`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toIntervalMinute", *to_args(locals()))
-    
+
     @staticmethod
     def toIntervalMonth(n: Any) -> Function:
         """
@@ -16355,7 +16813,7 @@ class FunctionWrapper:
         Returns an interval of `n` months. [`Interval`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toIntervalMonth", *to_args(locals()))
-    
+
     @staticmethod
     def toIntervalNanosecond(n: Any) -> Function:
         """
@@ -16366,7 +16824,7 @@ class FunctionWrapper:
         Returns an interval of `n` nanoseconds. [`Interval`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toIntervalNanosecond", *to_args(locals()))
-    
+
     @staticmethod
     def toIntervalQuarter(n: Any) -> Function:
         """
@@ -16377,7 +16835,7 @@ class FunctionWrapper:
         Returns an interval of `n` quarters. [`Interval`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toIntervalQuarter", *to_args(locals()))
-    
+
     @staticmethod
     def toIntervalSecond(n: Any) -> Function:
         """
@@ -16388,7 +16846,7 @@ class FunctionWrapper:
         Returns an interval of `n` seconds. [`Interval`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toIntervalSecond", *to_args(locals()))
-    
+
     @staticmethod
     def toIntervalWeek(n: Any) -> Function:
         """
@@ -16399,7 +16857,7 @@ class FunctionWrapper:
         Returns an interval of `n` weeks. [`Interval`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toIntervalWeek", *to_args(locals()))
-    
+
     @staticmethod
     def toIntervalYear(n: Any) -> Function:
         """
@@ -16410,7 +16868,7 @@ class FunctionWrapper:
         Returns an interval of `n` years. [`Interval`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toIntervalYear", *to_args(locals()))
-    
+
     @staticmethod
     def toJSONString(value: Any) -> Function:
         """
@@ -16421,7 +16879,7 @@ class FunctionWrapper:
         Returns the JSON representation of the value. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("toJSONString", *to_args(locals()))
-    
+
     @staticmethod
     def toLastDayOfMonth(value: Any) -> Function:
         """
@@ -16432,9 +16890,11 @@ class FunctionWrapper:
         Returns the date of the last day of the month for the given date or date with time. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("toLastDayOfMonth", *to_args(locals()))
-    
+
     @staticmethod
-    def toLastDayOfWeek(datetime: Any, mode: Any | None = None, timezone: Any | None = None) -> Function:
+    def toLastDayOfWeek(
+        datetime: Any, mode: Any | None = None, timezone: Any | None = None
+    ) -> Function:
         """
         toLastDayOfWeek(datetime[, mode[, timezone]])
 
@@ -16445,7 +16905,7 @@ class FunctionWrapper:
         Returns the date of the nearest Saturday or Sunday, on or after the given date, depending on the mode [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toLastDayOfWeek", *to_args(locals()))
-    
+
     @staticmethod
     def toLowCardinality(expr: Any) -> Function:
         """
@@ -16456,7 +16916,7 @@ class FunctionWrapper:
         Returns the input value converted to the `LowCardinality` data type. [`LowCardinality`](https://clickhouse.com/docs/sql-reference/data-types/lowcardinality)
         """
         return Function("toLowCardinality", *to_args(locals()))
-    
+
     @staticmethod
     def toMillisecond(datetime: Any) -> Function:
         """
@@ -16467,7 +16927,7 @@ class FunctionWrapper:
         Returns the millisecond in the minute (0 - 59) of `datetime`. [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toMillisecond", *to_args(locals()))
-    
+
     @staticmethod
     def toMinute(datetime: Any) -> Function:
         """
@@ -16478,7 +16938,7 @@ class FunctionWrapper:
         Returns the minute of the hour (0 - 59) of `datetime`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toMinute", *to_args(locals()))
-    
+
     @staticmethod
     def toModifiedJulianDay(date: Any) -> Function:
         """
@@ -16489,7 +16949,7 @@ class FunctionWrapper:
         Returns Modified Julian Day number. [`Int32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toModifiedJulianDay", *to_args(locals()))
-    
+
     @staticmethod
     def toModifiedJulianDayOrNull(date: Any) -> Function:
         """
@@ -16500,7 +16960,7 @@ class FunctionWrapper:
         Returns the modified Julian day number for valid `date`, otherwise `null`. [`Nullable(Int32)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("toModifiedJulianDayOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toMonday(value: Any) -> Function:
         """
@@ -16511,7 +16971,7 @@ class FunctionWrapper:
         Returns the date of the Monday of the same week for the given date or date with time. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("toMonday", *to_args(locals()))
-    
+
     @staticmethod
     def toMonth(datetime: Any) -> Function:
         """
@@ -16522,7 +16982,7 @@ class FunctionWrapper:
         Returns the month of the given date/time [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toMonth", *to_args(locals()))
-    
+
     @staticmethod
     def toMonthNumSinceEpoch(date: Any) -> Function:
         """
@@ -16533,7 +16993,7 @@ class FunctionWrapper:
         Positive integer
         """
         return Function("toMonthNumSinceEpoch", *to_args(locals()))
-    
+
     @staticmethod
     def toNullable(x: Any) -> Function:
         """
@@ -16544,7 +17004,7 @@ class FunctionWrapper:
         Returns the input value but of `Nullable` type. [`Nullable(Any)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("toNullable", *to_args(locals()))
-    
+
     @staticmethod
     def toQuarter(datetime: Any) -> Function:
         """
@@ -16555,7 +17015,7 @@ class FunctionWrapper:
         Returns the quarter of the year for the given date/time [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toQuarter", *to_args(locals()))
-    
+
     @staticmethod
     def toRelativeDayNum(date: Any) -> Function:
         """
@@ -16566,7 +17026,7 @@ class FunctionWrapper:
         Returns the number of days from a fixed reference point in the past. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toRelativeDayNum", *to_args(locals()))
-    
+
     @staticmethod
     def toRelativeHourNum(date: Any) -> Function:
         """
@@ -16577,7 +17037,7 @@ class FunctionWrapper:
         Returns the number of hours from a fixed reference point in the past. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toRelativeHourNum", *to_args(locals()))
-    
+
     @staticmethod
     def toRelativeMinuteNum(date: Any) -> Function:
         """
@@ -16588,7 +17048,7 @@ class FunctionWrapper:
         Returns the number of minutes from a fixed reference point in the past. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toRelativeMinuteNum", *to_args(locals()))
-    
+
     @staticmethod
     def toRelativeMonthNum(date: Any) -> Function:
         """
@@ -16599,7 +17059,7 @@ class FunctionWrapper:
         Returns the number of months from a fixed reference point in the past. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toRelativeMonthNum", *to_args(locals()))
-    
+
     @staticmethod
     def toRelativeQuarterNum(date: Any) -> Function:
         """
@@ -16610,7 +17070,7 @@ class FunctionWrapper:
         Returns the number of quarters from a fixed reference point in the past. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toRelativeQuarterNum", *to_args(locals()))
-    
+
     @staticmethod
     def toRelativeSecondNum(date: Any) -> Function:
         """
@@ -16621,7 +17081,7 @@ class FunctionWrapper:
         Returns the number of seconds from a fixed reference point in the past. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toRelativeSecondNum", *to_args(locals()))
-    
+
     @staticmethod
     def toRelativeWeekNum(date: Any) -> Function:
         """
@@ -16632,7 +17092,7 @@ class FunctionWrapper:
         Returns the number of weeks from a fixed reference point in the past. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toRelativeWeekNum", *to_args(locals()))
-    
+
     @staticmethod
     def toRelativeYearNum(date: Any) -> Function:
         """
@@ -16643,7 +17103,7 @@ class FunctionWrapper:
         Returns the number of years from a fixed reference point in the past. [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toRelativeYearNum", *to_args(locals()))
-    
+
     @staticmethod
     def toSecond(datetime: Any) -> Function:
         """
@@ -16654,7 +17114,7 @@ class FunctionWrapper:
         Returns the second in the minute (0 - 59) of `datetime`. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toSecond", *to_args(locals()))
-    
+
     @staticmethod
     def toStartOfDay(datetime: Any) -> Function:
         """
@@ -16665,7 +17125,7 @@ class FunctionWrapper:
         Returns the date with time rounded down to the start of the day. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toStartOfDay", *to_args(locals()))
-    
+
     @staticmethod
     def toStartOfFifteenMinutes(datetime: Any) -> Function:
         """
@@ -16676,7 +17136,7 @@ class FunctionWrapper:
         Returns the date with time rounded to the start of the nearest fifteen-minute interval [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toStartOfFifteenMinutes", *to_args(locals()))
-    
+
     @staticmethod
     def toStartOfFiveMinutes(datetime: Any) -> Function:
         """
@@ -16687,7 +17147,7 @@ class FunctionWrapper:
         Returns the date with time rounded to the start of the nearest five-minute interval [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toStartOfFiveMinutes", *to_args(locals()))
-    
+
     @staticmethod
     def toStartOfHour(datetime: Any) -> Function:
         """
@@ -16698,7 +17158,7 @@ class FunctionWrapper:
         Returns the date with time rounded down to the start of the hour. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toStartOfHour", *to_args(locals()))
-    
+
     @staticmethod
     def toStartOfISOYear(value: Any) -> Function:
         """
@@ -16709,19 +17169,21 @@ class FunctionWrapper:
         Returns the first day of the ISO year for the given date or date with time. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("toStartOfISOYear", *to_args(locals()))
-    
+
     @staticmethod
-    def toStartOfInterval(value: Any, INTERVAL: Any, x: Any, unit: Any, time_zone: Any | None = None) -> Function:
+    def toStartOfInterval(
+        value: Any, INTERVAL: Any, x: Any, unit: Any, time_zone: Any | None = None
+    ) -> Function:
         """
         toStartOfInterval(value, INTERVAL x unit[, time_zone])
         toStartOfInterval(value, INTERVAL x unit[, origin[, time_zone]])
 
         - `value` — Date or date with time value to round down. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
-        - `x` — Interval length number. - `unit` — Interval unit: YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND, MICROSECOND, NANOSECOND. - `time_zone` — Optional. Time zone name as a string. - `origin` — Optional. Origin point for calculation (second overload only). 
+        - `x` — Interval length number. - `unit` — Interval unit: YEAR, QUARTER, MONTH, WEEK, DAY, HOUR, MINUTE, SECOND, MILLISECOND, MICROSECOND, NANOSECOND. - `time_zone` — Optional. Time zone name as a string. - `origin` — Optional. Origin point for calculation (second overload only).
         Returns the start of the interval containing the input value. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("toStartOfInterval", *to_args(locals()))
-    
+
     @staticmethod
     def toStartOfMicrosecond(datetime: Any, timezone: Any | None = None) -> Function:
         """
@@ -16733,7 +17195,7 @@ class FunctionWrapper:
         Input value with sub-microseconds [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toStartOfMicrosecond", *to_args(locals()))
-    
+
     @staticmethod
     def toStartOfMillisecond(datetime: Any, timezone: Any | None = None) -> Function:
         """
@@ -16745,7 +17207,7 @@ class FunctionWrapper:
         Input value with sub-milliseconds. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toStartOfMillisecond", *to_args(locals()))
-    
+
     @staticmethod
     def toStartOfMinute(datetime: Any) -> Function:
         """
@@ -16756,7 +17218,7 @@ class FunctionWrapper:
         Returns the date with time rounded down to the start of the minute. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toStartOfMinute", *to_args(locals()))
-    
+
     @staticmethod
     def toStartOfMonth(value: Any) -> Function:
         """
@@ -16767,7 +17229,7 @@ class FunctionWrapper:
         Returns the first day of the month for the given date or date with time. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("toStartOfMonth", *to_args(locals()))
-    
+
     @staticmethod
     def toStartOfNanosecond(datetime: Any, timezone: Any | None = None) -> Function:
         """
@@ -16779,7 +17241,7 @@ class FunctionWrapper:
         Input value with nanoseconds. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toStartOfNanosecond", *to_args(locals()))
-    
+
     @staticmethod
     def toStartOfQuarter(value: Any) -> Function:
         """
@@ -16790,7 +17252,7 @@ class FunctionWrapper:
         Returns the first day of the quarter for the given date or date with time. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("toStartOfQuarter", *to_args(locals()))
-    
+
     @staticmethod
     def toStartOfSecond(datetime: Any, timezone: Any | None = None) -> Function:
         """
@@ -16802,7 +17264,7 @@ class FunctionWrapper:
         Returns the input value without sub-seconds. [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toStartOfSecond", *to_args(locals()))
-    
+
     @staticmethod
     def toStartOfTenMinutes(datetime: Any) -> Function:
         """
@@ -16813,9 +17275,11 @@ class FunctionWrapper:
         Returns the date with time rounded to the start of the nearest ten-minute interval [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toStartOfTenMinutes", *to_args(locals()))
-    
+
     @staticmethod
-    def toStartOfWeek(datetime: Any, mode: Any | None = None, timezone: Any | None = None) -> Function:
+    def toStartOfWeek(
+        datetime: Any, mode: Any | None = None, timezone: Any | None = None
+    ) -> Function:
         """
         toStartOfWeek(datetime[, mode[, timezone]])
 
@@ -16826,7 +17290,7 @@ class FunctionWrapper:
         Returns the date of the nearest Sunday or Monday on, or prior to, the given date, depending on the mode [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date) or [`Date32`](https://clickhouse.com/docs/sql-reference/data-types/date32) or [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toStartOfWeek", *to_args(locals()))
-    
+
     @staticmethod
     def toStartOfYear(value: Any) -> Function:
         """
@@ -16837,7 +17301,7 @@ class FunctionWrapper:
         Returns the first day of the year for the given date/time [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("toStartOfYear", *to_args(locals()))
-    
+
     @staticmethod
     def toString(value: Any, timezone: Any | None = None) -> Function:
         """
@@ -16849,7 +17313,7 @@ class FunctionWrapper:
         Returns a string representation of the input value. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("toString", *to_args(locals()))
-    
+
     @staticmethod
     def toStringCutToZero(s: Any) -> Function:
         """
@@ -16860,7 +17324,7 @@ class FunctionWrapper:
         Returns a String containing the characters before the first null byte. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("toStringCutToZero", *to_args(locals()))
-    
+
     @staticmethod
     def toTime(x: Any) -> Function:
         """
@@ -16871,7 +17335,7 @@ class FunctionWrapper:
         Returns the converted value. [`Time`](https://clickhouse.com/docs/sql-reference/data-types/time)
         """
         return Function("toTime", *to_args(locals()))
-    
+
     @staticmethod
     def toTime64(x: Any) -> Function:
         """
@@ -16882,7 +17346,7 @@ class FunctionWrapper:
         Returns the converted input value with microsecond precision. [`Time64(6)`](https://clickhouse.com/docs/sql-reference/data-types/time64)
         """
         return Function("toTime64", *to_args(locals()))
-    
+
     @staticmethod
     def toTime64OrNull(x: Any) -> Function:
         """
@@ -16893,7 +17357,7 @@ class FunctionWrapper:
         Returns a Time64 value if successful, otherwise `NULL`. [`Time64`](https://clickhouse.com/docs/sql-reference/data-types/time64) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toTime64OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toTime64OrZero(x: Any) -> Function:
         """
@@ -16904,7 +17368,7 @@ class FunctionWrapper:
         Returns a Time64 value if successful, otherwise `00:00:00.000`. [`Time64`](https://clickhouse.com/docs/sql-reference/data-types/time64)
         """
         return Function("toTime64OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toTimeOrNull(x: Any) -> Function:
         """
@@ -16915,7 +17379,7 @@ class FunctionWrapper:
         Returns a Time value if successful, otherwise `NULL`. [`Time`](https://clickhouse.com/docs/sql-reference/data-types/time) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toTimeOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toTimeOrZero(x: Any) -> Function:
         """
@@ -16926,7 +17390,7 @@ class FunctionWrapper:
         Returns a Time value if successful, otherwise `00:00:00`. [`Time`](https://clickhouse.com/docs/sql-reference/data-types/time)
         """
         return Function("toTimeOrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toTimeWithFixedDate(date: Any, timezone: Any | None = None) -> Function:
         """
@@ -16938,7 +17402,7 @@ class FunctionWrapper:
         Returns the time component of a date or date with time in the form of an offset to a fixed point in time (selected as 1970-01-02, currently). [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("toTimeWithFixedDate", *to_args(locals()))
-    
+
     @staticmethod
     def toTimezone(datetime: Any, timezone: Any) -> Function:
         """
@@ -16950,7 +17414,7 @@ class FunctionWrapper:
         Returns the same timestamp as the input, but with the specified time zone [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toTimezone", *to_args(locals()))
-    
+
     @staticmethod
     def toTypeName(x: Any) -> Function:
         """
@@ -16961,7 +17425,7 @@ class FunctionWrapper:
         Returns the data type name of the input value. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("toTypeName", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt128(expr: Any) -> Function:
         """
@@ -16972,7 +17436,7 @@ class FunctionWrapper:
         Returns a 128-bit unsigned integer value. [`UInt128`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt128", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt128OrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -16984,7 +17448,7 @@ class FunctionWrapper:
         Returns a value of type UInt128 if successful, otherwise returns the default value if passed, or 0 if not. [`UInt128`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt128OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt128OrNull(x: Any) -> Function:
         """
@@ -16995,7 +17459,7 @@ class FunctionWrapper:
         Returns a value of type UInt128, otherwise `NULL` if the conversion is unsuccessful. [`UInt128`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toUInt128OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt128OrZero(x: Any) -> Function:
         """
@@ -17006,7 +17470,7 @@ class FunctionWrapper:
         Returns a value of type UInt128, otherwise `0` if the conversion is unsuccessful. [`UInt128`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt128OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt16(expr: Any) -> Function:
         """
@@ -17017,7 +17481,7 @@ class FunctionWrapper:
         Returns a 16-bit unsigned integer value. [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt16", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt16OrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -17029,7 +17493,7 @@ class FunctionWrapper:
         Returns a value of type UInt16 if successful, otherwise returns the default value if passed, or 0 if not. [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt16OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt16OrNull(x: Any) -> Function:
         """
@@ -17040,7 +17504,7 @@ class FunctionWrapper:
         Returns a value of type `UInt16`, otherwise `NULL` if the conversion is unsuccessful. [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toUInt16OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt16OrZero(x: Any) -> Function:
         """
@@ -17051,7 +17515,7 @@ class FunctionWrapper:
         Returns a value of type UInt16, otherwise `0` if the conversion is unsuccessful. [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt16OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt256(expr: Any) -> Function:
         """
@@ -17062,7 +17526,7 @@ class FunctionWrapper:
         Returns a 256-bit unsigned integer value. [`UInt256`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt256", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt256OrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -17074,7 +17538,7 @@ class FunctionWrapper:
         Returns a value of type UInt256 if successful, otherwise returns the default value if passed, or 0 if not. [`UInt256`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt256OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt256OrNull(x: Any) -> Function:
         """
@@ -17085,7 +17549,7 @@ class FunctionWrapper:
         Returns a value of type UInt256, otherwise `NULL` if the conversion is unsuccessful. [`UInt256`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toUInt256OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt256OrZero(x: Any) -> Function:
         """
@@ -17096,7 +17560,7 @@ class FunctionWrapper:
         Returns a value of type UInt256, otherwise `0` if the conversion is unsuccessful. [`UInt256`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt256OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt32(expr: Any) -> Function:
         """
@@ -17107,7 +17571,7 @@ class FunctionWrapper:
         Returns a 32-bit unsigned integer value. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt32", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt32OrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -17119,7 +17583,7 @@ class FunctionWrapper:
         Returns a value of type UInt32 if successful, otherwise returns the default value if passed, or 0 if not. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt32OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt32OrNull(x: Any) -> Function:
         """
@@ -17130,7 +17594,7 @@ class FunctionWrapper:
         Returns a value of type `UInt32`, otherwise `NULL` if the conversion is unsuccessful. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toUInt32OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt32OrZero(x: Any) -> Function:
         """
@@ -17141,7 +17605,7 @@ class FunctionWrapper:
         Returns a value of type UInt32, otherwise `0` if the conversion is unsuccessful. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt32OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt64(expr: Any) -> Function:
         """
@@ -17152,7 +17616,7 @@ class FunctionWrapper:
         Returns a 64-bit unsigned integer value. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt64", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt64OrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -17164,7 +17628,7 @@ class FunctionWrapper:
         Returns a value of type UInt64 if successful, otherwise returns the default value if passed, or 0 if not. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt64OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt64OrNull(x: Any) -> Function:
         """
@@ -17175,7 +17639,7 @@ class FunctionWrapper:
         Returns a value of type UInt64, otherwise `NULL` if the conversion is unsuccessful. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toUInt64OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt64OrZero(x: Any) -> Function:
         """
@@ -17186,7 +17650,7 @@ class FunctionWrapper:
         Returns a value of type UInt64, otherwise `0` if the conversion is unsuccessful. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt64OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt8(expr: Any) -> Function:
         """
@@ -17197,7 +17661,7 @@ class FunctionWrapper:
         Returns an 8-bit unsigned integer value. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt8", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt8OrDefault(expr: Any, default: Any | None = None) -> Function:
         """
@@ -17209,7 +17673,7 @@ class FunctionWrapper:
         Returns a value of type UInt8 if successful, otherwise returns the default value if passed, or 0 if not. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt8OrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt8OrNull(x: Any) -> Function:
         """
@@ -17220,7 +17684,7 @@ class FunctionWrapper:
         Returns a value of type UInt8, otherwise `NULL` if the conversion is unsuccessful. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toUInt8OrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toUInt8OrZero(x: Any) -> Function:
         """
@@ -17231,7 +17695,7 @@ class FunctionWrapper:
         Returns a value of type UInt8, otherwise `0` if the conversion is unsuccessful. [`UInt8`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUInt8OrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toUTCTimestamp(datetime: Any, time_zone: Any) -> Function:
         """
@@ -17243,7 +17707,7 @@ class FunctionWrapper:
         Returns a date or date with time in UTC timezone. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime) or [`DateTime64`](https://clickhouse.com/docs/sql-reference/data-types/datetime64)
         """
         return Function("toUTCTimestamp", *to_args(locals()))
-    
+
     @staticmethod
     def toUUID(string: Any) -> Function:
         """
@@ -17254,17 +17718,17 @@ class FunctionWrapper:
         Returns a UUID from the string representation of the UUID. [`UUID`](https://clickhouse.com/docs/sql-reference/data-types/uuid)
         """
         return Function("toUUID", *to_args(locals()))
-    
+
     @staticmethod
     def toUUIDOrDefault(string: Any, default: Any) -> Function:
         """
         toUUIDOrDefault(string, default)
 
-        - `string` — String of 36 characters or FixedString(36) to be converted to UUID. - `default` — UUID value to be returned if the first argument cannot be converted to UUID type. 
+        - `string` — String of 36 characters or FixedString(36) to be converted to UUID. - `default` — UUID value to be returned if the first argument cannot be converted to UUID type.
         Returns the converted UUID if successful, or the default UUID if conversion fails. [`UUID`](https://clickhouse.com/docs/sql-reference/data-types/uuid)
         """
         return Function("toUUIDOrDefault", *to_args(locals()))
-    
+
     @staticmethod
     def toUUIDOrNull(x: Any) -> Function:
         """
@@ -17275,7 +17739,7 @@ class FunctionWrapper:
         Returns a UUID value if successful, otherwise `NULL`. [`UUID`](https://clickhouse.com/docs/sql-reference/data-types/uuid) or [`NULL`](https://clickhouse.com/docs/sql-reference/syntax#null)
         """
         return Function("toUUIDOrNull", *to_args(locals()))
-    
+
     @staticmethod
     def toUUIDOrZero(x: Any) -> Function:
         """
@@ -17286,7 +17750,7 @@ class FunctionWrapper:
         Returns a UUID value if successful, otherwise zero UUID (`00000000-0000-0000-0000-000000000000`). [`UUID`](https://clickhouse.com/docs/sql-reference/data-types/uuid)
         """
         return Function("toUUIDOrZero", *to_args(locals()))
-    
+
     @staticmethod
     def toUnixTimestamp(date: Any, timezone: Any | None = None) -> Function:
         """
@@ -17298,7 +17762,7 @@ class FunctionWrapper:
         Returns the Unix timestamp. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUnixTimestamp", *to_args(locals()))
-    
+
     @staticmethod
     def toUnixTimestamp64Micro(value: Any) -> Function:
         """
@@ -17309,7 +17773,7 @@ class FunctionWrapper:
         Returns a Unix timestamp in microseconds. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUnixTimestamp64Micro", *to_args(locals()))
-    
+
     @staticmethod
     def toUnixTimestamp64Milli(value: Any) -> Function:
         """
@@ -17320,7 +17784,7 @@ class FunctionWrapper:
         Returns a Unix timestamp in milliseconds. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUnixTimestamp64Milli", *to_args(locals()))
-    
+
     @staticmethod
     def toUnixTimestamp64Nano(value: Any) -> Function:
         """
@@ -17331,7 +17795,7 @@ class FunctionWrapper:
         Returns a Unix timestamp in nanoseconds. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUnixTimestamp64Nano", *to_args(locals()))
-    
+
     @staticmethod
     def toUnixTimestamp64Second(value: Any) -> Function:
         """
@@ -17342,7 +17806,7 @@ class FunctionWrapper:
         Returns a Unix timestamp in seconds. [`Int64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toUnixTimestamp64Second", *to_args(locals()))
-    
+
     @staticmethod
     def toValidUTF8(s: Any) -> Function:
         """
@@ -17353,9 +17817,11 @@ class FunctionWrapper:
         Returns a valid UTF-8 string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("toValidUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def toWeek(datetime: Any, mode: Any | None = None, time_zone: Any | None = None) -> Function:
+    def toWeek(
+        datetime: Any, mode: Any | None = None, time_zone: Any | None = None
+    ) -> Function:
         """
         toWeek(datetime[, mode[, time_zone]])
 
@@ -17365,7 +17831,7 @@ class FunctionWrapper:
         Returns the week number according to the specified mode. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toWeek", *to_args(locals()))
-    
+
     @staticmethod
     def toYYYYMM(datetime: Any, timezone: Any | None = None) -> Function:
         """
@@ -17377,7 +17843,7 @@ class FunctionWrapper:
         Returns a UInt32 number containing the year and month number (YYYY * 100 + MM). [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toYYYYMM", *to_args(locals()))
-    
+
     @staticmethod
     def toYYYYMMDD(datetime: Any, timezone: Any | None = None) -> Function:
         """
@@ -17389,7 +17855,7 @@ class FunctionWrapper:
         Returns a `UInt32` number containing the year, month and day (YYYY * 10000 + MM * 100 + DD). [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toYYYYMMDD", *to_args(locals()))
-    
+
     @staticmethod
     def toYYYYMMDDhhmmss(datetime: Any, timezone: Any | None = None) -> Function:
         """
@@ -17401,7 +17867,7 @@ class FunctionWrapper:
         Returns a `UInt64` number containing the year, month, day, hour, minute and second (YYYY * 10000000000 + MM * 100000000 + DD * 1000000 + hh * 10000 + mm * 100 + ss). [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toYYYYMMDDhhmmss", *to_args(locals()))
-    
+
     @staticmethod
     def toYear(datetime: Any) -> Function:
         """
@@ -17412,7 +17878,7 @@ class FunctionWrapper:
         Returns the year of the given Date or DateTime [`UInt16`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toYear", *to_args(locals()))
-    
+
     @staticmethod
     def toYearNumSinceEpoch(date: Any) -> Function:
         """
@@ -17423,9 +17889,11 @@ class FunctionWrapper:
         Positive integer
         """
         return Function("toYearNumSinceEpoch", *to_args(locals()))
-    
+
     @staticmethod
-    def toYearWeek(datetime: Any, mode: Any | None = None, timezone: Any | None = None) -> Function:
+    def toYearWeek(
+        datetime: Any, mode: Any | None = None, timezone: Any | None = None
+    ) -> Function:
         """
         toYearWeek(datetime[, mode[, timezone]])
 
@@ -17435,17 +17903,17 @@ class FunctionWrapper:
         Returns year and week number as a combined integer value. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("toYearWeek", *to_args(locals()))
-    
+
     @staticmethod
     def today() -> Function:
         """
         today()
 
-        
+
         Returns the current date [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("today", *to_args(locals()))
-    
+
     @staticmethod
     def tokens(value: Any) -> Function:
         """
@@ -17469,9 +17937,13 @@ class FunctionWrapper:
         Returns the resulting array of tokens from input string. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("tokens", *to_args(locals()))
-    
+
     @staticmethod
-    def tokensForLikePattern(value: Any, tokenizer: Any | None = None, tokenizer_specific_arguments: Any | None = None) -> Function:
+    def tokensForLikePattern(
+        value: Any,
+        tokenizer: Any | None = None,
+        tokenizer_specific_arguments: Any | None = None,
+    ) -> Function:
         """
         tokensForLikePattern(value[, tokenizer[, tokenizer_specific_arguments...]])
 
@@ -17487,7 +17959,7 @@ class FunctionWrapper:
         Returns the resulting array of tokens from input string. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("tokensForLikePattern", *to_args(locals()))
-    
+
     @staticmethod
     def topK(N: Any) -> Function:
         """
@@ -17500,7 +17972,7 @@ class FunctionWrapper:
         Returns an array of the approximately most frequent values, sorted in descending order of approximate frequency. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("topK", *to_args(locals()))
-    
+
     @staticmethod
     def topKWeighted(N: Any) -> Function:
         """
@@ -17513,7 +17985,7 @@ class FunctionWrapper:
         Returns an array of the values with maximum approximate sum of weights. [`Array`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("topKWeighted", *to_args(locals()))
-    
+
     @staticmethod
     def topLevelDomain(url: Any) -> Function:
         """
@@ -17524,7 +17996,7 @@ class FunctionWrapper:
         Returns the domain name if the input string can be parsed as a URL. Otherwise, an empty string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("topLevelDomain", *to_args(locals()))
-    
+
     @staticmethod
     def topLevelDomainRFC(url: Any) -> Function:
         """
@@ -17535,13 +18007,13 @@ class FunctionWrapper:
         Domain name if the input string can be parsed as a URL. Otherwise, an empty string. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("topLevelDomainRFC", *to_args(locals()))
-    
+
     @staticmethod
     def transactionID() -> Function:
         """
         transactionID()
 
-        
+
         Returns a tuple consisting of `start_csn`, `local_tid` and `host_id`.
         - `start_csn`: Global sequential number, the newest commit timestamp that was seen when this transaction began.
         - `local_tid`: Local sequential number that is unique for each transaction started by this host within a specific start_csn.
@@ -17549,29 +18021,31 @@ class FunctionWrapper:
              [`Tuple(UInt64, UInt64, UUID)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("transactionID", *to_args(locals()))
-    
+
     @staticmethod
     def transactionLatestSnapshot() -> Function:
         """
         transactionLatestSnapshot()
 
-        
+
         Returns the latest snapshot (CSN) of a transaction. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("transactionLatestSnapshot", *to_args(locals()))
-    
+
     @staticmethod
     def transactionOldestSnapshot() -> Function:
         """
         transactionOldestSnapshot()
 
-        
+
         Returns the oldest snapshot (CSN) of a transaction. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("transactionOldestSnapshot", *to_args(locals()))
-    
+
     @staticmethod
-    def transform(x: Any, array_from: Any, array_to: Any, default: Any | None = None) -> Function:
+    def transform(
+        x: Any, array_from: Any, array_to: Any, default: Any | None = None
+    ) -> Function:
         """
         transform(x, array_from, array_to[, default])
 
@@ -17583,7 +18057,7 @@ class FunctionWrapper:
         Returns the corresponding value from `array_to` if x matches an element in `array_from`, otherwise returns default (if provided) or x (if default not provided). [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("transform", *to_args(locals()))
-    
+
     @staticmethod
     def translate(s: Any, from_: Any, to: Any) -> Function:
         """
@@ -17596,7 +18070,7 @@ class FunctionWrapper:
         Returns a string with character translations applied. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("translate", *to_args(locals()))
-    
+
     @staticmethod
     def translateUTF8(s: Any, from_: Any, to: Any) -> Function:
         """
@@ -17609,7 +18083,7 @@ class FunctionWrapper:
         Returns a `String` data type value. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("translateUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def trimBoth(s: Any, trim_characters: Any | None = None) -> Function:
         """
@@ -17621,7 +18095,7 @@ class FunctionWrapper:
         Returns the string with specified characters trimmed from both ends. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("trimBoth", *to_args(locals()))
-    
+
     @staticmethod
     def trimLeft(input: Any, trim_characters: Any | None = None) -> Function:
         """
@@ -17633,7 +18107,7 @@ class FunctionWrapper:
         Returns the string with specified characters trimmed from the left. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("trimLeft", *to_args(locals()))
-    
+
     @staticmethod
     def trimRight(s: Any, trim_characters: Any | None = None) -> Function:
         """
@@ -17645,7 +18119,7 @@ class FunctionWrapper:
         Returns the string with specified characters trimmed from the right. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("trimRight", *to_args(locals()))
-    
+
     @staticmethod
     def trunc(x: Any, N: Any | None = None) -> Function:
         """
@@ -17657,7 +18131,7 @@ class FunctionWrapper:
         Returns a rounded number of the same type as `x`. [`Float*`](https://clickhouse.com/docs/sql-reference/data-types/float) or [`Decimal*`](https://clickhouse.com/docs/sql-reference/data-types/decimal) or [`(U)Int*`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("trunc", *to_args(locals()))
-    
+
     @staticmethod
     def tryBase32Decode(encoded: Any) -> Function:
         """
@@ -17668,7 +18142,7 @@ class FunctionWrapper:
         Returns a string containing the decoded value of the argument. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("tryBase32Decode", *to_args(locals()))
-    
+
     @staticmethod
     def tryBase58Decode(encoded: Any) -> Function:
         """
@@ -17679,7 +18153,7 @@ class FunctionWrapper:
         Returns a string containing the decoded value of the argument. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("tryBase58Decode", *to_args(locals()))
-    
+
     @staticmethod
     def tryBase64Decode(encoded: Any) -> Function:
         """
@@ -17690,7 +18164,7 @@ class FunctionWrapper:
         Returns a string containing the decoded value of the argument. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("tryBase64Decode", *to_args(locals()))
-    
+
     @staticmethod
     def tryBase64URLDecode(encoded: Any) -> Function:
         """
@@ -17701,9 +18175,15 @@ class FunctionWrapper:
         Returns a string containing the decoded value of the argument. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("tryBase64URLDecode", *to_args(locals()))
-    
+
     @staticmethod
-    def tryDecrypt(mode: Any, ciphertext: Any, key: Any, iv: Any | None = None, aad: Any | None = None) -> Function:
+    def tryDecrypt(
+        mode: Any,
+        ciphertext: Any,
+        key: Any,
+        iv: Any | None = None,
+        aad: Any | None = None,
+    ) -> Function:
         """
         tryDecrypt(mode, ciphertext, key[, iv, aad])
 
@@ -17716,7 +18196,7 @@ class FunctionWrapper:
         Returns the decrypted String, or `NULL` if decryption fails. [`Nullable(String)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("tryDecrypt", *to_args(locals()))
-    
+
     @staticmethod
     def tryIdnaEncode(s: Any) -> Function:
         """
@@ -17727,7 +18207,7 @@ class FunctionWrapper:
         Returns an ASCII representation of the input string according to the IDNA mechanism of the input value, or empty string if input is invalid. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("tryIdnaEncode", *to_args(locals()))
-    
+
     @staticmethod
     def tryPunycodeDecode(s: Any) -> Function:
         """
@@ -17738,7 +18218,7 @@ class FunctionWrapper:
         Returns the plaintext of the input value, or empty string if input is invalid. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("tryPunycodeDecode", *to_args(locals()))
-    
+
     @staticmethod
     def tumble(time_attr: Any, interval: Any, timezone: Any | None = None) -> Function:
         """
@@ -17751,9 +18231,11 @@ class FunctionWrapper:
         Returns the inclusive lower and exclusive upper bound of the corresponding tumbling window. [`Tuple(DateTime, DateTime)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("tumble", *to_args(locals()))
-    
+
     @staticmethod
-    def tumbleEnd(time_attr: Any, interval: Any, timezone: Any | None = None) -> Function:
+    def tumbleEnd(
+        time_attr: Any, interval: Any, timezone: Any | None = None
+    ) -> Function:
         """
         tumbleEnd(time_attr, interval[, timezone])
 
@@ -17764,9 +18246,11 @@ class FunctionWrapper:
         Returns the exclusive upper bound of the corresponding tumbling window. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("tumbleEnd", *to_args(locals()))
-    
+
     @staticmethod
-    def tumbleStart(time_attr: Any, interval: Any, timezone: Any | None = None) -> Function:
+    def tumbleStart(
+        time_attr: Any, interval: Any, timezone: Any | None = None
+    ) -> Function:
         """
         tumbleStart(time_attr, interval[, timezone])
 
@@ -17777,17 +18261,17 @@ class FunctionWrapper:
         Returns the inclusive lower bound of the corresponding tumbling window. [`DateTime`](https://clickhouse.com/docs/sql-reference/data-types/datetime)
         """
         return Function("tumbleStart", *to_args(locals()))
-    
+
     @staticmethod
     def tuple(t1: Any | None = None, t2: Any | None = None) -> Function:
         """
         tuple([t1[, t2[ ...]])
 
-        
-        
+
+
         """
         return Function("tuple", *to_args(locals()))
-    
+
     @staticmethod
     def tupleConcat(tuple1: Any, tuple2: Any | None = None) -> Function:
         """
@@ -17798,7 +18282,7 @@ class FunctionWrapper:
         Returns a tuple containing all elements from the input tuples. [`Tuple(T)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("tupleConcat", *to_args(locals()))
-    
+
     @staticmethod
     def tupleDivide(t1: Any, t2: Any) -> Function:
         """
@@ -17810,7 +18294,7 @@ class FunctionWrapper:
         Returns tuple with the result of division. [`Tuple((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Decimal)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("tupleDivide", *to_args(locals()))
-    
+
     @staticmethod
     def tupleDivideByNumber(tuple: Any, number: Any) -> Function:
         """
@@ -17822,9 +18306,11 @@ class FunctionWrapper:
         Returns a tuple with divided elements. [`Tuple((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Decimal)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("tupleDivideByNumber", *to_args(locals()))
-    
+
     @staticmethod
-    def tupleElement(tuple: Any, index: Any, name: Any, default_value: Any | None = None) -> Function:
+    def tupleElement(
+        tuple: Any, index: Any, name: Any, default_value: Any | None = None
+    ) -> Function:
         """
         tupleElement(tuple, index|name[, default_value])
 
@@ -17836,7 +18322,7 @@ class FunctionWrapper:
         Returns the element at the specified index or name. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("tupleElement", *to_args(locals()))
-    
+
     @staticmethod
     def tupleHammingDistance(t1: Any, t2: Any) -> Function:
         """
@@ -17848,7 +18334,7 @@ class FunctionWrapper:
         Returns the Hamming distance. [`UInt8/16/32/64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("tupleHammingDistance", *to_args(locals()))
-    
+
     @staticmethod
     def tupleIntDiv(tuple_num: Any, tuple_div: Any) -> Function:
         """
@@ -17860,7 +18346,7 @@ class FunctionWrapper:
         Returns a tuple of the quotients. [`Tuple((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Decimal)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("tupleIntDiv", *to_args(locals()))
-    
+
     @staticmethod
     def tupleIntDivByNumber(tuple_num: Any, div: Any) -> Function:
         """
@@ -17872,7 +18358,7 @@ class FunctionWrapper:
         Returns a tuple of the quotients. [`Tuple((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Decimal)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("tupleIntDivByNumber", *to_args(locals()))
-    
+
     @staticmethod
     def tupleIntDivOrZero(tuple_num: Any, tuple_div: Any) -> Function:
         """
@@ -17884,7 +18370,7 @@ class FunctionWrapper:
         Returns tuple of the quotients. Returns 0 for quotients where the divisor is 0. [`Tuple((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Decimal)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("tupleIntDivOrZero", *to_args(locals()))
-    
+
     @staticmethod
     def tupleIntDivOrZeroByNumber(tuple_num: Any, div: Any) -> Function:
         """
@@ -17896,7 +18382,7 @@ class FunctionWrapper:
         Returns a tuple of the quotients with `0` for quotients where the divisor is `0`. [`Tuple((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Decimal)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("tupleIntDivOrZeroByNumber", *to_args(locals()))
-    
+
     @staticmethod
     def tupleMinus(t1: Any, t2: Any) -> Function:
         """
@@ -17908,7 +18394,7 @@ class FunctionWrapper:
         Returns a tuple containing the results  of the subtractions. [`Tuple((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Decimal)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("tupleMinus", *to_args(locals()))
-    
+
     @staticmethod
     def tupleModulo(tuple_num: Any, tuple_mod: Any) -> Function:
         """
@@ -17920,7 +18406,7 @@ class FunctionWrapper:
         Returns tuple of the remainders of division. An error is thrown for division by zero. [`Tuple((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Decimal)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("tupleModulo", *to_args(locals()))
-    
+
     @staticmethod
     def tupleModuloByNumber(tuple_num: Any, div: Any) -> Function:
         """
@@ -17932,7 +18418,7 @@ class FunctionWrapper:
         Returns tuple of the remainders of division. An error is thrown for division by zero. [`Tuple((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Decimal)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("tupleModuloByNumber", *to_args(locals()))
-    
+
     @staticmethod
     def tupleMultiply(t1: Any, t2: Any) -> Function:
         """
@@ -17944,7 +18430,7 @@ class FunctionWrapper:
         Returns a tuple with the results of the multiplications. [`Tuple((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Decimal)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("tupleMultiply", *to_args(locals()))
-    
+
     @staticmethod
     def tupleMultiplyByNumber(tuple: Any, number: Any) -> Function:
         """
@@ -17956,17 +18442,17 @@ class FunctionWrapper:
         Returns a tuple with multiplied elements. [`Tuple((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Decimal)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("tupleMultiplyByNumber", *to_args(locals()))
-    
+
     @staticmethod
     def tupleNames(tuple: Any) -> Function:
         """
         tupleNames(tuple)
 
-        
-        
+
+
         """
         return Function("tupleNames", *to_args(locals()))
-    
+
     @staticmethod
     def tupleNegate(t: Any) -> Function:
         """
@@ -17977,7 +18463,7 @@ class FunctionWrapper:
         Returns a tuple with the result of negation. [`Tuple((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Decimal)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("tupleNegate", *to_args(locals()))
-    
+
     @staticmethod
     def tuplePlus(t1: Any, t2: Any) -> Function:
         """
@@ -17989,7 +18475,7 @@ class FunctionWrapper:
         Returns a tuple containing the sums of corresponding input tuple arguments. [`Tuple((U)Int*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float*)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Decimal)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("tuplePlus", *to_args(locals()))
-    
+
     @staticmethod
     def tupleToNameValuePairs(tuple: Any) -> Function:
         """
@@ -18000,7 +18486,7 @@ class FunctionWrapper:
         Returns an array with `(name, value)` pairs. [`Array(Tuple(String, T))`](https://clickhouse.com/docs/sql-reference/data-types/array)
         """
         return Function("tupleToNameValuePairs", *to_args(locals()))
-    
+
     @staticmethod
     def unbin(arg: Any) -> Function:
         """
@@ -18011,7 +18497,7 @@ class FunctionWrapper:
         Returns a binary string (BLOB). [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("unbin", *to_args(locals()))
-    
+
     @staticmethod
     def unhex(arg: Any) -> Function:
         """
@@ -18022,7 +18508,7 @@ class FunctionWrapper:
         Returns a binary string (BLOB). [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("unhex", *to_args(locals()))
-    
+
     @staticmethod
     def uniq(x: Any) -> Function:
         """
@@ -18033,7 +18519,7 @@ class FunctionWrapper:
         Returns a UInt64-type number representing the approximate number of different values. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("uniq", *to_args(locals()))
-    
+
     @staticmethod
     def uniqCombined(HLL_precision: Any) -> Function:
         """
@@ -18045,7 +18531,7 @@ class FunctionWrapper:
         Returns a UInt64-type number representing the approximate number of different argument values. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("uniqCombined", *to_args(locals()))
-    
+
     @staticmethod
     def uniqCombined64(HLL_precision: Any) -> Function:
         """
@@ -18057,7 +18543,7 @@ class FunctionWrapper:
         Returns a UInt64-type number representing the approximate number of different argument values. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("uniqCombined64", *to_args(locals()))
-    
+
     @staticmethod
     def uniqExact(x: Any) -> Function:
         """
@@ -18068,7 +18554,7 @@ class FunctionWrapper:
         Returns the exact number of different argument values as a UInt64. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("uniqExact", *to_args(locals()))
-    
+
     @staticmethod
     def uniqHLL12(x: Any) -> Function:
         """
@@ -18079,7 +18565,7 @@ class FunctionWrapper:
         Returns a UInt64-type number representing the approximate number of different argument values. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("uniqHLL12", *to_args(locals()))
-    
+
     @staticmethod
     def uniqTheta(x: Any) -> Function:
         """
@@ -18090,17 +18576,12 @@ class FunctionWrapper:
         Returns a UInt64-type number representing the approximate number of different argument values. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("uniqTheta", *to_args(locals()))
-    
+
     @staticmethod
     def uniqUpTo(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("uniqUpTo", *to_args(locals()))
-    
+
     @staticmethod
     def upper(s: Any) -> Function:
         """
@@ -18111,7 +18592,7 @@ class FunctionWrapper:
         Returns an uppercase string from `s`. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("upper", *to_args(locals()))
-    
+
     @staticmethod
     def upperUTF8(s: Any) -> Function:
         """
@@ -18122,27 +18603,22 @@ class FunctionWrapper:
         A String data type value. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("upperUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def uptime() -> Function:
         """
         uptime()
 
-        
+
         Returns the server uptime in seconds. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("uptime", *to_args(locals()))
-    
+
     @staticmethod
     def validateNestedArraySizes(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("validateNestedArraySizes", *to_args(locals()))
-    
+
     @staticmethod
     def varPop(x: Any) -> Function:
         """
@@ -18153,7 +18629,7 @@ class FunctionWrapper:
         Returns the population variance of `x`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("varPop", *to_args(locals()))
-    
+
     @staticmethod
     def varPopStable(x: Any) -> Function:
         """
@@ -18164,7 +18640,7 @@ class FunctionWrapper:
         Returns the population variance of `x`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("varPopStable", *to_args(locals()))
-    
+
     @staticmethod
     def varSamp(x: Any) -> Function:
         """
@@ -18175,7 +18651,7 @@ class FunctionWrapper:
         Returns the sample variance of the input data set `x`. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("varSamp", *to_args(locals()))
-    
+
     @staticmethod
     def varSampStable(x: Any) -> Function:
         """
@@ -18186,9 +18662,11 @@ class FunctionWrapper:
         Returns the sample variance of the input data set. [`Float64`](https://clickhouse.com/docs/sql-reference/data-types/float)
         """
         return Function("varSampStable", *to_args(locals()))
-    
+
     @staticmethod
-    def variantElement(variant: Any, type_name: Any, default_value: Any | None = None) -> Function:
+    def variantElement(
+        variant: Any, type_name: Any, default_value: Any | None = None
+    ) -> Function:
         """
         variantElement(variant, type_name[, default_value])
 
@@ -18199,7 +18677,7 @@ class FunctionWrapper:
         Returns a column with the specified variant type extracted from the Variant column. [`Any`](https://clickhouse.com/docs/sql-reference/data-types)
         """
         return Function("variantElement", *to_args(locals()))
-    
+
     @staticmethod
     def variantType(variant: Any) -> Function:
         """
@@ -18210,17 +18688,17 @@ class FunctionWrapper:
         Returns an Enum column with variant type name for each row. [`Enum`](https://clickhouse.com/docs/sql-reference/data-types/enum)
         """
         return Function("variantType", *to_args(locals()))
-    
+
     @staticmethod
     def version() -> Function:
         """
         version()
 
-        
+
         Returns the current version of ClickHouse. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("version", *to_args(locals()))
-    
+
     @staticmethod
     def visibleWidth(x: Any) -> Function:
         """
@@ -18231,7 +18709,7 @@ class FunctionWrapper:
         Returns the approximate width of the value when displayed in text format. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("visibleWidth", *to_args(locals()))
-    
+
     @staticmethod
     def welchTTest(confidence_level: Any | None = None) -> Function:
         """
@@ -18243,7 +18721,7 @@ class FunctionWrapper:
         Returns a Tuple with two or four elements (if the optional `confidence_level` is specified): calculated t-statistic, calculated p-value, and optionally calculated confidence-interval-low and confidence-interval-high. [`Tuple(Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple) or [`Tuple(Float64, Float64, Float64, Float64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("welchTTest", *to_args(locals()))
-    
+
     @staticmethod
     def widthBucket(operand: Any, low: Any, high: Any, count: Any) -> Function:
         """
@@ -18257,19 +18735,16 @@ class FunctionWrapper:
         Returns the bucket number as an integer. Returns 0 if operand < low, returns count+1 if operand >= high. [`UInt8/16/32/64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("widthBucket", *to_args(locals()))
-    
+
     @staticmethod
     def windowFunnel(*args: Any) -> Function:
-        """
-        
-
-        
-        
-        """
+        """ """
         return Function("windowFunnel", *to_args(locals()))
-    
+
     @staticmethod
-    def windowID(time_attr: Any, interval: Any, timezone: Any | None = None) -> Function:
+    def windowID(
+        time_attr: Any, interval: Any, timezone: Any | None = None
+    ) -> Function:
         """
         windowID(time_attr, interval[, timezone])
 
@@ -18280,17 +18755,17 @@ class FunctionWrapper:
         Returns the window identifier of the corresponding window. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("windowID", *to_args(locals()))
-    
+
     @staticmethod
     def wkb(geometry: Any) -> Function:
         """
         wkb(geometry)
 
-        - `geometry` — The input geometry type to convert into WKB. 
-        
+        - `geometry` — The input geometry type to convert into WKB.
+
         """
         return Function("wkb", *to_args(locals()))
-    
+
     @staticmethod
     def wkt(geometry: Any) -> Function:
         """
@@ -18301,9 +18776,11 @@ class FunctionWrapper:
         Returns the WKT string representation of the geometry. [`String`](https://clickhouse.com/docs/sql-reference/data-types/string)
         """
         return Function("wkt", *to_args(locals()))
-    
+
     @staticmethod
-    def wordShingleMinHash(string: Any, shinglesize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def wordShingleMinHash(
+        string: Any, shinglesize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         wordShingleMinHash(string[, shinglesize, hashnum])
 
@@ -18314,9 +18791,11 @@ class FunctionWrapper:
         Returns a tuple with two hashes — the minimum and the maximum. [`Tuple(UInt64, UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("wordShingleMinHash", *to_args(locals()))
-    
+
     @staticmethod
-    def wordShingleMinHashArg(string: Any, shinglesize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def wordShingleMinHashArg(
+        string: Any, shinglesize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         wordShingleMinHashArg(string[, shinglesize, hashnum])
 
@@ -18327,9 +18806,11 @@ class FunctionWrapper:
         Returns a tuple with two tuples with `hashnum` word shingles each. [`Tuple(Tuple(String))`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("wordShingleMinHashArg", *to_args(locals()))
-    
+
     @staticmethod
-    def wordShingleMinHashArgCaseInsensitive(string: Any, shinglesize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def wordShingleMinHashArgCaseInsensitive(
+        string: Any, shinglesize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         wordShingleMinHashArgCaseInsensitive(string[, shinglesize, hashnum])
 
@@ -18340,9 +18821,11 @@ class FunctionWrapper:
         Returns a tuple with two tuples with `hashnum` word shingles each. [`Tuple(Tuple(String))`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("wordShingleMinHashArgCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
-    def wordShingleMinHashArgCaseInsensitiveUTF8(string: Any, shinglesize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def wordShingleMinHashArgCaseInsensitiveUTF8(
+        string: Any, shinglesize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         wordShingleMinHashArgCaseInsensitiveUTF8(string[, shinglesize, hashnum])
 
@@ -18353,9 +18836,11 @@ class FunctionWrapper:
         Returns a tuple with two tuples with `hashnum` word shingles each. [`Tuple(Tuple(String))`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("wordShingleMinHashArgCaseInsensitiveUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def wordShingleMinHashArgUTF8(string: Any, shinglesize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def wordShingleMinHashArgUTF8(
+        string: Any, shinglesize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         wordShingleMinHashArgUTF8(string[, shinglesize, hashnum])
 
@@ -18366,9 +18851,11 @@ class FunctionWrapper:
         Returns a tuple with two tuples with `hashnum` word shingles each. [`Tuple(Tuple(String))`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("wordShingleMinHashArgUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def wordShingleMinHashCaseInsensitive(string: Any, shinglesize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def wordShingleMinHashCaseInsensitive(
+        string: Any, shinglesize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         wordShingleMinHashCaseInsensitive(string[, shinglesize, hashnum])
 
@@ -18379,9 +18866,11 @@ class FunctionWrapper:
         Returns a tuple with two hashes — the minimum and the maximum. [`Tuple(UInt64, UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("wordShingleMinHashCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
-    def wordShingleMinHashCaseInsensitiveUTF8(string: Any, shinglesize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def wordShingleMinHashCaseInsensitiveUTF8(
+        string: Any, shinglesize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         wordShingleMinHashCaseInsensitiveUTF8(string[, shinglesize, hashnum])
 
@@ -18392,9 +18881,11 @@ class FunctionWrapper:
         Returns a tuple with two hashes — the minimum and the maximum. [`Tuple(UInt64, UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("wordShingleMinHashCaseInsensitiveUTF8", *to_args(locals()))
-    
+
     @staticmethod
-    def wordShingleMinHashUTF8(string: Any, shinglesize: Any | None = None, hashnum: Any | None = None) -> Function:
+    def wordShingleMinHashUTF8(
+        string: Any, shinglesize: Any | None = None, hashnum: Any | None = None
+    ) -> Function:
         """
         wordShingleMinHashUTF8(string[, shinglesize, hashnum])
 
@@ -18405,7 +18896,7 @@ class FunctionWrapper:
         Returns a tuple with two hashes — the minimum and the maximum. [`Tuple(UInt64, UInt64)`](https://clickhouse.com/docs/sql-reference/data-types/tuple)
         """
         return Function("wordShingleMinHashUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def wordShingleSimHash(string: Any, shinglesize: Any | None = None) -> Function:
         """
@@ -18417,9 +18908,11 @@ class FunctionWrapper:
         Returns the computed hash value. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("wordShingleSimHash", *to_args(locals()))
-    
+
     @staticmethod
-    def wordShingleSimHashCaseInsensitive(string: Any, shinglesize: Any | None = None) -> Function:
+    def wordShingleSimHashCaseInsensitive(
+        string: Any, shinglesize: Any | None = None
+    ) -> Function:
         """
         wordShingleSimHashCaseInsensitive(string[, shinglesize])
 
@@ -18429,9 +18922,11 @@ class FunctionWrapper:
         Returns the computed hash value. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("wordShingleSimHashCaseInsensitive", *to_args(locals()))
-    
+
     @staticmethod
-    def wordShingleSimHashCaseInsensitiveUTF8(string: Any, shinglesize: Any | None = None) -> Function:
+    def wordShingleSimHashCaseInsensitiveUTF8(
+        string: Any, shinglesize: Any | None = None
+    ) -> Function:
         """
         wordShingleSimHashCaseInsensitiveUTF8(string[, shinglesize])
 
@@ -18441,7 +18936,7 @@ class FunctionWrapper:
         Returns the computed hash value. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("wordShingleSimHashCaseInsensitiveUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def wordShingleSimHashUTF8(string: Any, shinglesize: Any | None = None) -> Function:
         """
@@ -18453,7 +18948,7 @@ class FunctionWrapper:
         Returns the computed hash value. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("wordShingleSimHashUTF8", *to_args(locals()))
-    
+
     @staticmethod
     def wyHash64(arg: Any) -> Function:
         """
@@ -18464,7 +18959,7 @@ class FunctionWrapper:
         Returns the computed 64-bit hash value [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("wyHash64", *to_args(locals()))
-    
+
     @staticmethod
     def xor(val1: Any, val2: Any) -> Function:
         """
@@ -18479,7 +18974,7 @@ class FunctionWrapper:
                  [`Nullable(UInt8)`](https://clickhouse.com/docs/sql-reference/data-types/nullable)
         """
         return Function("xor", *to_args(locals()))
-    
+
     @staticmethod
     def xxHash32(arg: Any) -> Function:
         """
@@ -18490,7 +18985,7 @@ class FunctionWrapper:
         Returns the computed 32-bit hash of the input string. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("xxHash32", *to_args(locals()))
-    
+
     @staticmethod
     def xxHash64(arg: Any) -> Function:
         """
@@ -18501,7 +18996,7 @@ class FunctionWrapper:
         Returns the computed 64-bit hash of the input string. [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("xxHash64", *to_args(locals()))
-    
+
     @staticmethod
     def xxh3(expr: Any) -> Function:
         """
@@ -18512,7 +19007,7 @@ class FunctionWrapper:
         Returns the computed 64-bit `xxh3` hash value [`UInt64`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("xxh3", *to_args(locals()))
-    
+
     @staticmethod
     def xxh3_128(expr: Any) -> Function:
         """
@@ -18523,26 +19018,26 @@ class FunctionWrapper:
         Returns the computed 128-bit `xxh3` hash value [`UInt128`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("xxh3_128", *to_args(locals()))
-    
+
     @staticmethod
     def yesterday() -> Function:
         """
         yesterday()
 
-        
+
         Returns yesterday's date. [`Date`](https://clickhouse.com/docs/sql-reference/data-types/date)
         """
         return Function("yesterday", *to_args(locals()))
-    
+
     @staticmethod
     def zookeeperSessionUptime() -> Function:
         """
         zookeeperSessionUptime()
 
-        
+
         Returns the uptime of the current ZooKeeper session in seconds. [`UInt32`](https://clickhouse.com/docs/sql-reference/data-types/int-uint)
         """
         return Function("zookeeperSessionUptime", *to_args(locals()))
-    
+
 
 F = FunctionWrapper()
