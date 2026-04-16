@@ -1,29 +1,26 @@
 # pyclickhouse
 
-A modern async Python ORM for ClickHouse
+A modern async Python ORM for ClickHouse using Pydantic.
 
 ## Features
-* Async first design: non-blocking API built around async/await using `clickhouse_connect`
-* Data models: using `pydantic` models for table design, serialization and deserialization with auto data types
-* Query builder: build expressive and composable queries using `prql`
-* Database admin: create and manage tables/views and migrations
-* Batch writer: Validate and insert data in batches to tables
-* Stream reader: Parameterize queries and deserialize results with support for streaming
+* **Async** http client using `clickhouse_connect`
+* **Model** data using `pydantic` for table with auto data types
+* **Query** builder using `prql` to create composable queries
+* **Admin** to create and manage tables/views and migrations
+* **Writer** to validate and insert data in batches to tables
+* **Reader** to query and stream results with validation
 
 ## Documentation
+Documentation is available at [docs/](/)
 
-Documentation is available at [docs/index.md](docs/index.md)
+---
 
 ## Installation
-
 using `uv`
-
 ```sh
 uv add pyclickhouse
 ```
-
 using `pip`
-
 ```sh
 pip install pyclickhouse
 ```
@@ -31,51 +28,48 @@ pip install pyclickhouse
 ## Quickstart
 
 ```py
-from typing import Annotated
-
 from pydantic import BaseModel
 
-import pyclickhouse as ch
+from pyclickhouse import Admin, Client, F, Query, Reader, Table, Writer
 
 
 async def main() -> None:
-    client = ch.create_async_client(dsn="clickhouse://localhost:9000/default")
+    # create new client
+    client = Client()
 
-    # model for table management and serialization
+    # define your model
     class Event(BaseModel):
-        name: Annotated[str, ch.Column(type="String")]
-        value: Annotated[int, ch.Column(type="Int32")]
+        name: str
+        value: int
 
-    # define tables
-    table = ch.Table(Event, engine=ch.engines.MergeTree(order_by="name"))
+    # define a table
+    table = Table(Event)
 
     async with client:
         # create table
-        admin = ch.Admin(client)
+        admin = Admin(client)
         await admin.create_table(table)
 
-        # insert
-        writer = ch.Writer(client, table)
+        # insert event data
+        writer = Writer(client, table)
         async with writer:
             await writer.insert(Event(name="first", value=1))
             await writer.insert(Event(name="second", value=2))
 
-        # build query
-        query = ch.Query(table).filter(table.name == "test_event")
-
-        # read
-        reader = ch.Reader(client, query, model=Event)
-        results = reader.query()
-
+        # stream event data
+        reader = Reader(client, table, model=Event)
+        results = await reader.stream()
         async for row in results:
             print(row)
         # Event(name="first", value=1)
         # Event(name="second", value=2)
 
-        # aggregate
-        query = ch.Query(table).aggregate(res=F.sum(table.value))
-        reader = ch.Reader(client, query)
-        results = reader.query()
+        # aggregate using query builder
+        query = Query(table).aggregate(res=F.sum(table.value))
+
+        # query event analytics
+        reader = Reader(client, query)
+        results = await reader.query()
         print(results)
         # [{"res": 3}]
 
@@ -85,6 +79,7 @@ if __name__ == "__main__":
 
     asyncio.run(main())
 ```
+---
 
 ## License
 [MIT License](LICENSE)
