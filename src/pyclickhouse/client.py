@@ -35,10 +35,14 @@ class Client(AiohttpAsyncClient):
         )
 
 
-def create_async_client(**kwargs: Any) -> Client:
+async def create_async_client(**kwargs: Any) -> Client:
     """
     Create a new ClickHouse client.
 
     Refer to `clickhouse_connect.create_async_client` for more details.
     """
-    return Client(**kwargs)
+    client = Client(**kwargs)
+
+    await client._initialize()
+
+    return client
