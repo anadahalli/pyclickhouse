@@ -10,14 +10,12 @@ nav = [
   { "Concepts" = [
       # "concepts/index.md",
       "concepts/client.md",
-      "concepts/admin.md",
-      "concepts/reader.md",
-      "concepts/writer.md",
-      "concepts/query.md",
       "concepts/table.md",
       "concepts/view.md",
-      "concepts/engine.md",
-      "concepts/registry.md",
+      "concepts/admin.md",
+      "concepts/writer.md",
+      "concepts/query.md",
+      "concepts/reader.md",
   ]},
   { "References" = [
       # "references/index.md",
@@ -111,7 +109,6 @@ inventories = ["https://docs.python.org/3/objects.inv"]
 paths = ["src/pyclickhouse"]
 
 [project.plugins.mkdocstrings.handlers.python.options]
-filters = ["!^_"]
 docstring_style = "google"
 docstring_section_style = "table"
 show_if_no_docstring = false
@@ -124,3 +121,4 @@ show_symbol_type_toc = true
 type_parameter_headings = true
 merge_init_into_class = true
 # members = false
+# filters = ["!^_"]

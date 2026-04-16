@@ -1,5 +1,5 @@
 ---
-title: Query Builder
+title: Query 
 ---
 
 Query builder using [PRQL](https://prql-lang.org/) to create expressive and flexible analytics queries.

@@ -1,5 +1,5 @@
 ---
-title: Async Client
+title: Client
 ---
 
 The `Client` is the main async interface for connecting to and interacting with ClickHouse. 
