@@ -9,9 +9,7 @@ license-files = ["LICENSE"]
 requires-python = ">=3.12"
 
 dependencies = [
-    "asynch>=0.3.1",
     "clickhouse-connect[async]==0.12.0rc1",
-    "clickhouse-driver>=0.2.10",
     "loguru>=0.7.3",
     "prqlc>=0.13.10",
     "pydantic>=2.12.5",
@@ -43,6 +41,10 @@ dev = [
     "ipython>=9.10.0",
     "jinja2>=3.1.6",
     "jupyter>=1.1.1",
+    "pytest>=9.0.3",
+    "pytest-asyncio>=1.3.0",
+    "pytest-cov>=7.1.0",
+    "pytest-watcher>=0.6.3",
     "ruff>=0.15.4",
     "ty>=0.0.19",
 ]
@@ -71,6 +73,11 @@ addopts = [
 ]
 filterwarnings = [
     # "ignore:The 'u' type code is deprecated and will be removed in Python 3.16",
+]
+
+[tool.coverage.run]
+omit = [
+    "src/pyclickhouse/functions.py"
 ]
 
 [tool.uv.build-backend]

@@ -4,10 +4,10 @@ default:
 install:
     uv sync --group dev
 
-test:
-    uv run pytest src
+dev:
+    uv run ptw src/
 
-coverage:
+test:
     uv run pytest --cov=src tests/
 
 check:
@@ -16,9 +16,6 @@ check:
 
 format:
     uv run ruff format src
-
-fix:
-    uv run ruff fix src
 
 docs-serve:
     uv run zensical serve
