@@ -31,28 +31,25 @@ class TestReader:
         )
 
         query = Query(table).sort(table.value)
-        reader = Reader(client, query, stream=True)
+        reader = Reader(client, query)
         assert reader.read_rows == 0
-        result = reader.query()
-        async for item in result:
-            pass
+        await reader.query()
         assert reader.read_rows == 100
 
     async def test_reader(self, client: Client) -> None:
         query = Query("system.numbers").select("number").take(3)
+
         # non-stream
-        reader = Reader(client, query, stream=False)
+        reader = Reader(client, query)
         assert reader.read_rows == 0
-        result = reader.query()
-        data = []
-        async for item in result:
-            data.append(item)
+        data = await reader.query()
         assert data == [{"number": 0}, {"number": 1}, {"number": 2}]
         assert reader.read_rows == 3
+
         # stream
-        reader = Reader(client, query, stream=True)
+        reader = Reader(client, query)
         assert reader.read_rows == 0
-        result = reader.query()
+        result = await reader.stream()
         data = []
         async for item in result:
             data.append(item)
@@ -64,9 +61,9 @@ class TestReader:
             number: int
 
         query = Query("system.numbers").select("number").take(2)
-        reader = Reader(client, query, stream=True, model=Number)
+        reader = Reader(client, query, model=Number)
         assert reader.read_rows == 0
-        result = reader.query()
+        result = await reader.stream()
         data = []
         async for item in result:
             data.append(item)
@@ -78,9 +75,9 @@ class TestReader:
             max: int
 
         query = "SELECT number FROM system.numbers WHERE number < {max:Int8}"
-        reader = Reader(client, query, stream=True, model=Number, parameters=Params)
+        reader = Reader(client, query, model=Number, parameters=Params)
         assert reader.read_rows == 0
-        result = reader.query(Params(max=3))
+        result = await reader.stream(Params(max=3))
         data = []
         async for item in result:
             data.append(item)
