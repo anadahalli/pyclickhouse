@@ -7,48 +7,34 @@ from pyclickhouse.settings import Settings
 
 
 class Client(AiohttpAsyncClient):
-    pass
+    def __init__(self, **kwargs: Any) -> None:
+        client_settings = Settings(**kwargs)
+        client_kwargs = client_settings.client_kwargs()
+
+        host, username, password, port, database, interface = _parse_connection_params(
+            host=client_settings.host,
+            port=client_settings.port,
+            username=client_settings.username,
+            password=client_settings.password,
+            database=client_settings.database,
+            interface=client_settings.interface,
+            secure=client_settings.secure,
+            dsn=client_settings.dsn,
+            kwargs=client_kwargs,
+        )
+
+        super().__init__(
+            dsn=None,
+            interface=interface,
+            host=host,
+            port=port,
+            username=username,
+            password=password,
+            database=database,
+            **client_kwargs,
+        )
 
 
 def create_async_client(**kwargs: Any) -> Client:
     """Create a new ClickHouse client."""
-
-    overrides = {k: v for k, v in kwargs.items() if k in Settings.model_fields}
-    client_settings = Settings(**overrides)
-    client_kwargs = client_settings.model_dump(
-        exclude={
-            "host",
-            "port",
-            "username",
-            "password",
-            "database",
-            "interface",
-            "secure",
-            "dsn",
-        }
-    )
-
-    host, username, password, port, database, interface = _parse_connection_params(
-        host=client_settings.host,
-        port=client_settings.port,
-        username=client_settings.username,
-        password=client_settings.password,
-        database=client_settings.database,
-        interface=client_settings.interface,
-        secure=client_settings.secure,
-        dsn=client_settings.dsn,
-        kwargs=client_kwargs,
-    )
-
-    client = Client(
-        dsn=None,
-        interface=interface,
-        host=host,
-        port=port,
-        username=username,
-        password=password,
-        database=database,
-        **client_kwargs,
-    )
-
-    return client
+    return Client(**kwargs)

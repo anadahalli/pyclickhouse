@@ -41,3 +41,17 @@ class Settings(BaseSettings):
     autogenerate_session_id: bool | None = None
     autogenerate_query_id: bool | None = None
     form_encode_query_params: bool = False
+
+    def client_kwargs(self) -> dict[str, Any]:
+        return self.model_dump(
+            exclude={
+                "host",
+                "port",
+                "username",
+                "password",
+                "database",
+                "interface",
+                "secure",
+                "dsn",
+            }
+        )

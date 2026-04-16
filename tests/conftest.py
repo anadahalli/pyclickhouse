@@ -4,7 +4,7 @@ from pytest import fixture
 from testcontainers.core.container import DockerContainer
 from testcontainers.core.wait_strategies import HttpWaitStrategy
 
-from pyclickhouse.client import Client, create_async_client
+from pyclickhouse.client import Client
 
 CLICKHOUSE_IMAGE = "clickhouse/clickhouse-server:latest"
 
@@ -39,7 +39,5 @@ def clickhouse() -> Iterator[ClickHouseContainer]:
 
 @fixture
 async def client(clickhouse: ClickHouseContainer) -> AsyncIterator[Client]:
-    async_client = create_async_client(**clickhouse.get_config())
-
-    async with async_client:
-        yield async_client
+    async with Client(**clickhouse.get_config()) as client:
+        yield client
