@@ -19,6 +19,9 @@ The Query builder supports the following operations:
 - **group** — Group rows and aggregate by groups
 - **sort** — Order rows by expressions
 - **take** — Limit and offset rows
+- **join** — Join tables based on conditions
+- **window** — Apply window functions for running totals and analytics
+- **exclude** — Remove specific columns from results
 
 ---
 
@@ -202,6 +205,148 @@ query = Query(users).take(start=100)
 # Take up to row n
 query = Query(users).take(end=50)
 # SELECT * FROM users LIMIT 50
+```
+
+### Join
+
+Join the current table with another table based on a join condition.
+
+```py
+from pyclickhouse import Query, Table
+
+class User(BaseModel):
+    id: int
+    name: str
+
+class Order(BaseModel):
+    user_id: int
+    amount: float
+
+users = Table(model=User, name="users")
+orders = Table(model=Order, name="orders")
+
+# Inner join (default)
+query = Query(orders).join(users, orders.user_id == users.id)
+# SELECT orders.*, users.* FROM orders INNER JOIN users ON orders.user_id = users.id
+
+# Explicit inner join
+query = Query(orders).join(users, orders.user_id == users.id, side="inner")
+# SELECT orders.*, users.* FROM orders INNER JOIN users ON orders.user_id = users.id
+
+# Left join (all rows from left table)
+query = Query(users).join(orders, users.id == orders.user_id, side="left")
+# SELECT users.*, orders.* FROM users LEFT OUTER JOIN orders ON users.id = orders.user_id
+
+# Right join (all rows from right table)
+query = Query(users).join(orders, users.id == orders.user_id, side="right")
+# SELECT users.*, orders.* FROM users RIGHT OUTER JOIN orders ON users.id = orders.user_id
+
+# Full join (all rows from both tables)
+query = Query(users).join(orders, users.id == orders.user_id, side="full")
+# SELECT users.*, orders.* FROM users FULL JOIN orders ON users.id = orders.user_id
+```
+
+#### Join Types
+
+- **inner** (default) — Only matching rows from both tables
+- **left** — All rows from left table, matching rows from right table
+- **right** — All rows from right table, matching rows from left table
+- **full** — All rows from both tables
+
+#### Multiple Join Conditions
+
+```py
+# Join with AND condition
+query = Query(orders).join(
+    users,
+    (orders.user_id == users.id) & (users.active == 1)
+)
+# SELECT orders.*, users.* FROM orders INNER JOIN users ON orders.user_id = users.id AND users.active = 1
+
+# Join with OR condition
+query = Query(orders).join(
+    users,
+    (orders.user_id == users.id) | (orders.customer_name == users.name)
+)
+# SELECT orders.*, users.* FROM orders INNER JOIN users ON orders.user_id = users.id OR orders.customer_name = users.name
+```
+
+#### Join with Selection and Filtering
+
+```py
+# Select specific columns after join
+query = Query(orders).join(
+    users,
+    orders.user_id == users.id,
+    side="left"
+).select(
+    orders.id,
+    orders.amount,
+    user_name=users.name
+)
+# SELECT orders.id, orders.amount, users.name AS user_name 
+# FROM orders LEFT OUTER JOIN users ON orders.user_id = users.id
+
+# Filter after join
+query = Query(orders).join(
+    users,
+    orders.user_id == users.id
+).filter(
+    orders.amount > 100
+)
+# SELECT orders.*, users.* FROM orders 
+# INNER JOIN users ON orders.user_id = users.id 
+# WHERE orders.amount > 100
+```
+
+#### Chaining Multiple Joins
+
+```py
+class Product(BaseModel):
+    id: int
+    name: str
+    category_id: int
+
+class Category(BaseModel):
+    id: int
+    name: str
+
+products = Table(model=Product, name="products")
+categories = Table(model=Category, name="categories")
+
+# Join orders with users, then with products
+query = Query(orders).join(
+    users,
+    orders.user_id == users.id
+).join(
+    products,
+    orders.product_id == products.id
+).join(
+    categories,
+    products.category_id == categories.id
+)
+# SELECT orders.*, users.*, products.*, categories.*
+# FROM orders
+# INNER JOIN users ON orders.user_id = users.id
+# INNER JOIN products ON orders.product_id = products.id
+# INNER JOIN categories ON products.category_id = categories.id
+```
+
+#### Join with Aggregation
+
+```py
+# Aggregate after join
+query = Query(orders).join(
+    users,
+    orders.user_id == users.id
+).group(
+    users.id,
+    total_amount=Aggregate(F.sum(orders.amount)),
+    order_count=Aggregate(F.count())
+)
+# SELECT users.id, sum(orders.amount) AS total_amount, count() AS order_count
+# FROM orders INNER JOIN users ON orders.user_id = users.id
+# GROUP BY users.id
 ```
 
 ### Aggregate
@@ -529,6 +674,109 @@ Window(range=(0, None))        # Current row to all following rows
 Window(rows=(-10, -1))         # 10 rows before (excluding current)
 Window(rows=(1, 10))           # Next 10 rows (excluding current)
 Window(rows=(None, None))      # All rows
+```
+
+### Exclude
+
+Remove specific columns from the result set. Exclude only works after a `select()`, `derive()`, or `group()` step that explicitly defines which columns to include.
+
+```py
+# Exclude with select
+query = Query(users).select(
+    users.id,
+    users.name,
+    users.email,
+    users.password_hash
+).exclude(
+    users.password_hash
+)
+# SELECT id, name, email FROM users
+
+# Exclude multiple columns
+query = Query(users).select(
+    users.id,
+    users.name,
+    users.email,
+    users.password_hash,
+    users.api_key
+).exclude(
+    users.password_hash,
+    users.api_key
+)
+# SELECT id, name, email FROM users
+
+# Exclude with derive
+query = Query(products).select(
+    products.id,
+    products.name,
+    products.price
+).derive(
+    discounted=products.price * 0.9,
+    tax=products.price * 0.1
+).exclude(
+    products.price
+)
+# SELECT id, name, discounted, tax FROM products
+
+# Exclude with group
+query = Query(orders).group(
+    orders.customer_id,
+    customer_name=orders.customer_name,
+    total_orders=Aggregate(F.count()),
+    total_amount=Aggregate(F.sum(orders.amount))
+).exclude(
+    customer_name
+)
+# SELECT customer_id, count() AS total_orders, sum(amount) AS total_amount FROM orders GROUP BY customer_id
+
+# Exclude with aggregation
+query = Query(events).select(
+    events.user_id,
+    events.event_type,
+    events.timestamp,
+    events.raw_data
+).filter(
+    events.event_type == "click"
+).exclude(
+    events.raw_data
+)
+# SELECT user_id, event_type, timestamp FROM events WHERE event_type = 'click'
+```
+
+#### Use Cases for Exclude
+
+- **Sensitive Data** — Remove password hashes, API keys, tokens
+- **Intermediate Columns** — Remove columns only needed for filtering or calculations
+- **Large Data** — Exclude large text or binary fields not needed in results
+- **Data Privacy** — Filter out personally identifiable information (PII)
+
+```py
+# Remove sensitive information
+query = Query(users).select(
+    users.id,
+    users.name,
+    users.email,
+    users.phone,
+    users.ssn,
+    users.password_hash
+).exclude(
+    users.ssn,
+    users.password_hash
+)
+# SELECT id, name, email, phone FROM users
+
+# Select all columns from one table, exclude specific ones
+query = Query(products).select(
+    products.id,
+    products.name,
+    products.description,
+    products.internal_notes,
+    products.supplier_info
+).exclude(
+    products.internal_notes,
+    products.supplier_info
+)
+# SELECT id, name, description FROM products
 ```
 
 ---
@@ -901,6 +1149,171 @@ query = Query(sales).group(
 print(str(query))
 # SELECT region, date, sum(amount) AS daily_total, avg(amount) OVER (ROWS BETWEEN 5 PRECEDING AND CURRENT ROW) AS moving_avg_region
 # FROM sales GROUP BY region, date
+```
+
+### Example 9: Join Operations
+
+```py
+from pyclickhouse import Query, Table, F, Aggregate
+from pydantic import BaseModel
+
+class User(BaseModel):
+    id: int
+    name: str
+    email: str
+
+class Order(BaseModel):
+    id: int
+    user_id: int
+    amount: float
+    created_at: str
+
+class Product(BaseModel):
+    id: int
+    order_id: int
+    name: str
+    price: float
+
+users = Table(model=User, name="users")
+orders = Table(model=Order, name="orders")
+products = Table(model=Product, name="products")
+
+# Inner join (only matching records)
+query = Query(orders).join(users, orders.user_id == users.id)
+print(str(query))
+# SELECT orders.*, users.* FROM orders INNER JOIN users ON orders.user_id = users.id
+
+# Left join (keep all orders, even without users)
+query = Query(orders).join(users, orders.user_id == users.id, side="left")
+print(str(query))
+# SELECT orders.*, users.* FROM orders LEFT OUTER JOIN users ON orders.user_id = users.id
+
+# Join with multiple conditions
+query = Query(orders).join(
+    users,
+    (orders.user_id == users.id) & (users.email.is_not_in(["invalid@test.com"]))
+)
+print(str(query))
+# SELECT orders.*, users.* FROM orders INNER JOIN users ON orders.user_id = users.id AND users.email NOT IN ('invalid@test.com')
+
+# Chaining multiple joins
+query = Query(orders).join(
+    users,
+    orders.user_id == users.id
+).join(
+    products,
+    orders.id == products.order_id
+).select(
+    orders.id,
+    user_name=users.name,
+    product_name=products.name,
+    orders.amount
+)
+print(str(query))
+# SELECT orders.id, users.name AS user_name, products.name AS product_name, orders.amount
+# FROM orders
+# INNER JOIN users ON orders.user_id = users.id
+# INNER JOIN products ON orders.id = products.order_id
+
+# Join with aggregation (order totals with user info)
+query = Query(orders).join(
+    users,
+    orders.user_id == users.id
+).group(
+    users.id,
+    user_name=users.name,
+    total_spent=Aggregate(F.sum(orders.amount)),
+    order_count=Aggregate(F.count()),
+    avg_order_value=Aggregate(F.avg(orders.amount))
+).sort(-F.sum(orders.amount)).take(10)
+
+print(str(query))
+# SELECT users.id, users.name AS user_name, sum(orders.amount) AS total_spent, count() AS order_count, avg(orders.amount) AS avg_order_value
+# FROM orders INNER JOIN users ON orders.user_id = users.id
+# GROUP BY users.id, users.name ORDER BY sum(orders.amount) DESC LIMIT 10
+```
+
+### Example 10: Exclude Sensitive Columns
+
+```py
+from pyclickhouse import Query, Table
+from pydantic import BaseModel
+
+class User(BaseModel):
+    id: int
+    name: str
+    email: str
+    phone: str
+    ssn: str
+    password_hash: str
+    api_key: str
+
+users = Table(model=User, name="users")
+
+# Remove sensitive personal information
+query = Query(users).select(
+    users.id,
+    users.name,
+    users.email,
+    users.phone,
+    users.ssn,
+    users.password_hash,
+    users.api_key
+).exclude(
+    users.ssn,
+    users.password_hash,
+    users.api_key
+)
+
+print(str(query))
+# SELECT id, name, email, phone FROM users
+
+# Exclude intermediate calculation columns
+class Product(BaseModel):
+    id: int
+    name: str
+    cost: float
+    markup_percent: float
+    base_price: float
+    tax_rate: float
+    final_price: float
+
+products = Table(model=Product, name="products")
+
+query = Query(products).select(
+    products.id,
+    products.name,
+    products.cost,
+    products.base_price,
+    products.tax_rate,
+    products.final_price
+).exclude(
+    products.cost,
+    products.tax_rate
+)
+
+print(str(query))
+# SELECT id, name, base_price, final_price FROM products
+
+# Exclude with filtering and derived columns
+query = Query(users).filter(
+    users.email.is_not_in(["test@example.com", "admin@example.com"])
+).select(
+    users.id,
+    users.name,
+    users.email,
+    users.password_hash,
+    users.created_at,
+    users.last_login,
+    users.internal_notes
+).exclude(
+    users.password_hash,
+    users.internal_notes
+)
+
+print(str(query))
+# SELECT id, name, email, created_at, last_login FROM users
+# WHERE email NOT IN ('test@example.com', 'admin@example.com')
 ```
 
 ---
