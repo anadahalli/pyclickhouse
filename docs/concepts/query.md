@@ -206,7 +206,11 @@ query = Query(users).take(end=50)
 
 ### Aggregate
 
-Summarize multiple rows into a single aggregate value. **Note: Do NOT use `Aggregate()` wrapper in `aggregate()` method.**
+Summarize the entire result set into aggregate values. Produces a single row with aggregate functions applied to all rows.
+
+**Important:** Do NOT use the `Aggregate()` wrapper in the `aggregate()` method. Use `Aggregate()` only in the `group()` method to distinguish aggregate functions from grouping columns.
+
+#### Basic Aggregation
 
 ```py
 from pyclickhouse import F
@@ -215,50 +219,110 @@ from pyclickhouse import F
 query = Query(users).aggregate(F.count())
 # SELECT count() FROM users
 
-# Named aggregate
+# Count with alias
 query = Query(users).aggregate(
-    total_users=F.sum(users.id)
+    total_users=F.count()
 )
-# SELECT sum(id) AS total_users FROM users
+# SELECT count() AS total_users FROM users
 
-# Multiple aggregates (NO Aggregate wrapper needed)
+# Sum specific column
+query = Query(users).aggregate(
+    total_ids=F.sum(users.id)
+)
+# SELECT sum(id) AS total_ids FROM users
+```
+
+#### Multiple Aggregates
+
+```py
+# Multiple aggregates - NO Aggregate wrapper needed
 query = Query(orders).aggregate(
     order_count=F.count(),
     total_amount=F.sum(orders.amount),
-    avg_amount=F.avg(orders.amount)
+    avg_amount=F.avg(orders.amount),
+    min_amount=F.min(orders.amount),
+    max_amount=F.max(orders.amount)
 )
-# SELECT count(), sum(amount) AS total_amount, avg(amount) AS avg_amount FROM orders
+# SELECT count() AS order_count, sum(amount) AS total_amount, avg(amount) AS avg_amount, min(amount) AS min_amount, max(amount) AS max_amount FROM orders
+```
 
-# Aggregate with count on specific column
-query = Query(users).aggregate(
-    unique_users=F.uniq(users.id)
+#### Common Aggregate Functions
+
+```py
+# Count rows
+F.count()
+
+# Count non-null values
+F.count(users.id)
+
+# Unique count
+F.uniq(users.id)
+
+# Sum, average, min, max
+F.sum(orders.amount)
+F.avg(orders.amount)
+F.min(metrics.value)
+F.max(metrics.value)
+
+# Array aggregation (collect values)
+F.groupArray(items.name)
+
+# Conditional aggregation
+F.sumIf(orders.amount, orders.status == "completed")
+F.countIf(users.id, users.active == 1)
+```
+
+#### Aggregate on Entire Table
+
+```py
+# Get stats for all records
+query = Query(products).aggregate(
+    product_count=F.count(),
+    avg_price=F.avg(products.price),
+    min_price=F.min(products.price),
+    max_price=F.max(products.price)
 )
-# SELECT uniq(id) AS unique_users FROM users
+# SELECT count() AS product_count, avg(price) AS avg_price, min(price) AS min_price, max(price) AS max_price FROM products
 ```
 
 ### Group
 
-Group rows by one or more columns and optionally aggregate. **Use `Aggregate()` wrapper here to distinguish aggregation expressions from grouping columns.**
+Group rows by one or more columns and optionally aggregate. Produces one row per unique grouping value.
+
+**Critical:** Use the `Aggregate()` wrapper to distinguish aggregate functions from grouping columns. Without it, the expression is treated as a grouping column.
+
+#### Basic Grouping
 
 ```py
 from pyclickhouse import Aggregate, F
 
-# Group without aggregation
+# Group by single column
 query = Query(users).group(users.name)
 # SELECT name FROM users GROUP BY name
 
-# Group with custom name
+# Group with column alias
 query = Query(users).group(user_name=users.name)
 # SELECT name AS user_name FROM users GROUP BY name
 
-# Group with aggregation (REQUIRES Aggregate wrapper)
+# Group by multiple columns
+query = Query(events).group(
+    events.user_id,
+    events.event_type
+)
+# SELECT user_id, event_type FROM events GROUP BY user_id, event_type
+```
+
+#### Grouping with Aggregates
+
+```py
+# IMPORTANT: Use Aggregate() wrapper to mark aggregate functions
 query = Query(orders).group(
     orders.customer_id,
     Aggregate(F.count())
 )
 # SELECT customer_id, count() FROM orders GROUP BY customer_id
 
-# Group with named aggregates (REQUIRES Aggregate wrapper)
+# Named aggregates (REQUIRES Aggregate wrapper)
 query = Query(orders).group(
     orders.customer_id,
     total_orders=Aggregate(F.count()),
@@ -266,14 +330,205 @@ query = Query(orders).group(
 )
 # SELECT customer_id, count() AS total_orders, sum(amount) AS total_amount FROM orders GROUP BY customer_id
 
-# Group by multiple columns with aggregates
+# Multiple group columns with multiple aggregates
 query = Query(sales).group(
     sales.date,
     sales.region,
-    count=Aggregate(F.count()),
-    total=Aggregate(F.sum(sales.amount))
+    order_count=Aggregate(F.count()),
+    total_sales=Aggregate(F.sum(sales.amount)),
+    avg_sale=Aggregate(F.avg(sales.amount)),
+    max_sale=Aggregate(F.max(sales.amount))
 )
-# SELECT date, region, count(), sum(amount) AS total FROM sales GROUP BY date, region
+# SELECT date, region, count() AS order_count, sum(amount) AS total_sales, avg(amount) AS avg_sale, max(amount) AS max_sale FROM sales GROUP BY date, region
+```
+
+#### Grouping with Computed Columns
+
+```py
+# Group by derived expressions (functions applied to columns)
+query = Query(events).group(
+    hour=F.toStartOfHour(events.timestamp),
+    event_type=events.type,
+    event_count=Aggregate(F.count()),
+    unique_users=Aggregate(F.uniq(events.user_id))
+)
+# SELECT toStartOfHour(timestamp) AS hour, type AS event_type, count() AS event_count, uniq(user_id) AS unique_users
+# FROM events GROUP BY toStartOfHour(timestamp), type
+```
+
+#### Common Aggregate Functions in Group
+
+```py
+# Count
+Aggregate(F.count())                              # Total rows
+Aggregate(F.count(column))                        # Non-null rows
+
+# Distinct count
+Aggregate(F.uniq(column))                         # Unique values
+
+# Sum, average, min, max
+Aggregate(F.sum(column))
+Aggregate(F.avg(column))
+Aggregate(F.min(column))
+Aggregate(F.max(column))
+
+# Array aggregation
+Aggregate(F.groupArray(column))                   # Collect all values
+
+# Conditional aggregation
+Aggregate(F.sumIf(column, condition))
+Aggregate(F.countIf(column, condition))
+```
+
+#### The Difference: Aggregate vs Group
+
+```py
+# aggregate() - one row for entire table
+query = Query(orders).aggregate(
+    total_orders=F.count(),
+    total_amount=F.sum(orders.amount)
+)
+# SELECT count() AS total_orders, sum(amount) AS total_amount FROM orders
+
+# group() - one row per group, REQUIRES Aggregate() wrapper
+query = Query(orders).group(
+    orders.customer_id,
+    total_orders=Aggregate(F.count()),
+    total_amount=Aggregate(F.sum(orders.amount))
+)
+# SELECT customer_id, count() AS total_orders, sum(amount) AS total_amount FROM orders GROUP BY customer_id
+```
+
+#### Group with Window Functions
+
+Apply window functions within a group aggregation using the `Window` class. Window functions compute aggregate values over a subset of rows defined by a range or row count.
+
+```py
+from pyclickhouse import Aggregate, Window, F
+
+# Group with window range specification
+query = Query(orders).group(
+    orders.customer_id,
+    total=Aggregate(F.sum(orders.amount)),
+    Window(range=(-2, 0))
+)
+# SELECT customer_id, sum(amount) OVER (RANGE BETWEEN 2 PRECEDING AND CURRENT ROW) AS total FROM orders GROUP BY customer_id
+
+# Group with window rows specification
+query = Query(events).group(
+    events.date,
+    events.type,
+    count=Aggregate(F.count()),
+    moving_avg=Aggregate(F.avg(events.value)),
+    Window(rows=(-3, 0))
+)
+# SELECT date, type, count() AS count, avg(value) OVER (ROWS BETWEEN 3 PRECEDING AND CURRENT ROW) AS moving_avg
+# FROM events GROUP BY date, type
+
+# Unbounded window (all rows before current row)
+query = Query(metrics).group(
+    metrics.metric_name,
+    cumulative=Aggregate(F.sum(metrics.value)),
+    Window(range=(None, 0))
+)
+# SELECT metric_name, sum(value) OVER (RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative
+# FROM metrics GROUP BY metric_name
+
+# Multiple aggregates with window
+query = Query(sales).group(
+    sales.region,
+    sales.date,
+    daily_sales=Aggregate(F.sum(sales.amount)),
+    running_total=Aggregate(F.sum(sales.amount)),
+    Window(range=(None, 0))
+)
+# SELECT region, date, sum(amount) AS daily_sales, sum(amount) OVER (RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_total
+# FROM sales GROUP BY region, date
+```
+
+**Window within Group Use Cases:**
+- **Running totals** — Cumulative sum with `range=(None, 0)`
+- **Moving averages** — Last N rows with `rows=(-N, 0)`
+- **Row numbering** — Applied within each group
+- **Ranking** — Within grouped partitions
+
+### Window
+
+Create window functions for running totals, moving averages, and row numbering. Window functions compute values based on a subset of rows within a partition.
+
+```py
+from pyclickhouse import Window, Aggregate, F
+
+# Window with range specification (default: current row)
+query = Query(metrics).window(
+    Window(range=(-2, 0)),
+    moving_total=Aggregate(F.sum(metrics.value))
+)
+# SELECT *, sum(value) OVER (RANGE BETWEEN 2 PRECEDING AND CURRENT ROW) AS moving_total FROM metrics
+
+# Window with rows specification
+query = Query(events).window(
+    Window(rows=(-3, 0)),
+    moving_avg=Aggregate(F.avg(events.amount))
+)
+# SELECT *, avg(amount) OVER (ROWS BETWEEN 3 PRECEDING AND CURRENT ROW) AS moving_avg FROM events
+
+# Unbounded window (all previous rows)
+query = Query(sales).window(
+    Window(range=(None, 0)),
+    cumulative_sales=Aggregate(F.sum(sales.amount))
+)
+# SELECT *, sum(amount) OVER (RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_sales FROM sales
+
+# Full window (all rows)
+query = Query(data).window(
+    Window(range=(None, None)),
+    total_percent=Aggregate(F.sum(data.value))
+)
+# SELECT *, sum(value) OVER (RANGE BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS total_percent FROM data
+
+# Window with current row only
+query = Query(records).window(
+    Window(rows=(0, 0)),
+    current_value=Aggregate(F.sum(records.amount))
+)
+# SELECT *, sum(amount) OVER (ROWS BETWEEN CURRENT ROW AND CURRENT ROW) AS current_value FROM records
+```
+
+#### Range vs Rows
+
+- **Range** — Logical distance based on values (useful for time-based windows)
+- **Rows** — Physical distance based on row count
+
+```py
+# RANGE BETWEEN: Groups rows by value distance
+query = Query(metrics).window(
+    Window(range=(-10, 10)),  # ±10 value units
+    count=Aggregate(F.count())
+)
+
+# ROWS BETWEEN: Groups by row count
+query = Query(metrics).window(
+    Window(rows=(-10, 10)),  # 10 rows before and after
+    count=Aggregate(F.count())
+)
+```
+
+#### Window Specifications
+
+Values in window tuples:
+- **Negative numbers** — PRECEDING (before current row)
+- **Positive numbers** — FOLLOWING (after current row)
+- **Zero** — CURRENT ROW
+- **None** — UNBOUNDED (start/end of partition)
+
+```py
+Window(range=(-5, 5))          # 5 before to 5 after
+Window(range=(None, 0))        # All previous rows including current
+Window(range=(0, None))        # Current row to all following rows
+Window(rows=(-10, -1))         # 10 rows before (excluding current)
+Window(rows=(1, 10))           # Next 10 rows (excluding current)
+Window(rows=(None, None))      # All rows
 ```
 
 ---
@@ -577,30 +832,242 @@ print(str(query))
 # SELECT *, price * quantity AS total_value, length(name) AS name_length, round(price, 2) AS price_rounded FROM products
 ```
 
----
-
-## Aggregate vs Group
-
-Key difference:
-
-- **`aggregate()`** — Summarizes the entire result set into one row. **No `Aggregate()` wrapper needed.**
-- **`group()`** — Summarizes results per group. **Use `Aggregate()` wrapper to mark aggregate functions.**
+### Example 7: Window Functions - Running Totals
 
 ```py
-# aggregate() - one row total
+from pyclickhouse import Query, Table, Window, Aggregate, F
+
+class Transaction(BaseModel):
+    date: str
+    amount: float
+
+transactions = Table(model=Transaction, name="transactions")
+
+# Running total (cumulative sum) across all rows
+query = Query(transactions).window(
+    Window(range=(None, 0)),
+    cumulative_amount=Aggregate(F.sum(transactions.amount))
+).sort(transactions.date)
+
+print(str(query))
+# SELECT *, sum(amount) OVER (RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative_amount 
+# FROM transactions ORDER BY date
+
+# Moving average (average of last 3 rows)
+query = Query(transactions).window(
+    Window(rows=(-3, 0)),
+    moving_avg=Aggregate(F.avg(transactions.amount))
+)
+
+print(str(query))
+# SELECT *, avg(amount) OVER (ROWS BETWEEN 3 PRECEDING AND CURRENT ROW) AS moving_avg FROM transactions
+```
+
+### Example 8: Group with Window Functions - Per-Group Running Totals
+
+```py
+from pyclickhouse import Query, Table, Window, Aggregate, F
+
+class Sale(BaseModel):
+    region: str
+    date: str
+    amount: float
+
+sales = Table(model=Sale, name="sales")
+
+# Running total per region
+query = Query(sales).group(
+    sales.region,
+    sales.date,
+    daily_sales=Aggregate(F.sum(sales.amount)),
+    region_running_total=Aggregate(F.sum(sales.amount)),
+    Window(range=(None, 0))
+).sort(sales.region, sales.date)
+
+print(str(query))
+# SELECT region, date, sum(amount) AS daily_sales,
+#        sum(amount) OVER (RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS region_running_total
+# FROM sales GROUP BY region, date ORDER BY region, date
+
+# Running average within each region (last 5 days)
+query = Query(sales).group(
+    sales.region,
+    sales.date,
+    daily_total=Aggregate(F.sum(sales.amount)),
+    moving_avg_region=Aggregate(F.avg(sales.amount)),
+    Window(rows=(-5, 0))
+)
+
+print(str(query))
+# SELECT region, date, sum(amount) AS daily_total, avg(amount) OVER (ROWS BETWEEN 5 PRECEDING AND CURRENT ROW) AS moving_avg_region
+# FROM sales GROUP BY region, date
+```
+
+---
+
+## Aggregate vs Group vs Window
+
+Understanding the differences between these three operations is crucial for writing correct queries.
+
+### Comparison Table
+
+| Feature | `aggregate()` | `group()` | `window()` |
+|---------|--------------|----------|-----------|
+| **Output rows** | Single row | One per group | One per input row |
+| **Use case** | Summarize all data | Summarize per group | Ranking, running totals |
+| **Aggregate wrapper** | NO wrapper | YES wrapper | YES wrapper |
+| **Partitioning** | Entire table | By GROUP BY columns | Implicit or explicit |
+| **Example** | Total sales | Sales per region | Running total per region |
+
+### Aggregate: Summarize Entire Table
+
+`aggregate()` produces a **single row** summarizing all input data. Do NOT use the `Aggregate()` wrapper.
+
+```py
+# Count total orders
+query = Query(orders).aggregate(F.count())
+# SELECT count() FROM orders
+# Output: 1 row with total count
+
+# Multiple aggregate metrics
 query = Query(orders).aggregate(
     total_orders=F.count(),
-    total_amount=F.sum(orders.amount)
+    total_amount=F.sum(orders.amount),
+    avg_amount=F.avg(orders.amount),
+    max_amount=F.max(orders.amount)
 )
-# SELECT count() AS total_orders, sum(amount) AS total_amount FROM orders
+# SELECT count() AS total_orders, sum(amount) AS total_amount, avg(amount) AS avg_amount, max(amount) AS max_amount FROM orders
+# Output: 1 row with all metrics
+```
 
-# group() - one row per group
+### Group: Summarize by Categories
+
+`group()` produces **one row per unique group**. MUST use the `Aggregate()` wrapper to mark aggregate functions.
+
+```py
+# Group by customer (one row per customer)
 query = Query(orders).group(
     orders.customer_id,
     total_orders=Aggregate(F.count()),
     total_amount=Aggregate(F.sum(orders.amount))
 )
 # SELECT customer_id, count() AS total_orders, sum(amount) AS total_amount FROM orders GROUP BY customer_id
+# Output: N rows (one per customer)
+
+# Group by date and region
+query = Query(sales).group(
+    sales.date,
+    sales.region,
+    daily_sales=Aggregate(F.sum(sales.amount)),
+    transaction_count=Aggregate(F.count())
+)
+# SELECT date, region, sum(amount) AS daily_sales, count() AS transaction_count 
+# FROM sales GROUP BY date, region
+# Output: N rows (one per unique date+region combination)
+```
+
+### Window: Per-Row Aggregates with Context
+
+`window()` produces **one row per input row** with aggregate values computed over a window of rows. MUST use the `Aggregate()` wrapper.
+
+```py
+# Running total for each row (cumulative sum)
+query = Query(sales).window(
+    Window(range=(None, 0)),
+    running_total=Aggregate(F.sum(sales.amount))
+)
+# SELECT *, sum(amount) OVER (RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS running_total FROM sales
+# Output: Same number of rows as input, with running total
+
+# Moving average (last 3 rows)
+query = Query(metrics).window(
+    Window(rows=(-3, 0)),
+    moving_avg=Aggregate(F.avg(metrics.value))
+)
+# SELECT *, avg(value) OVER (ROWS BETWEEN 3 PRECEDING AND CURRENT ROW) AS moving_avg FROM metrics
+# Output: Same number of rows as input, with moving average
+```
+
+### Group with Window: Grouped Running Totals
+
+Combine `group()` with `Window()` to get running totals **per group**:
+
+```py
+# Running total per customer
+query = Query(orders).group(
+    orders.customer_id,
+    order_amount=Aggregate(F.sum(orders.amount)),
+    cumulative=Aggregate(F.sum(orders.amount)),
+    Window(range=(None, 0))
+)
+# SELECT customer_id, sum(amount) AS order_amount, 
+#        sum(amount) OVER (RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS cumulative
+# FROM orders GROUP BY customer_id
+# Output: One row per customer with daily amount and running total
+
+# Hourly sales with daily running total
+query = Query(sales).group(
+    sales.date,
+    sales.hour,
+    hourly_sales=Aggregate(F.sum(sales.amount)),
+    daily_running_total=Aggregate(F.sum(sales.amount)),
+    Window(range=(None, 0))
+)
+# SELECT date, hour, sum(amount) AS hourly_sales,
+#        sum(amount) OVER (RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW) AS daily_running_total
+# FROM sales GROUP BY date, hour
+# Output: One row per hour, with cumulative total within each day
+```
+
+### Side-by-Side Example
+
+```py
+from pyclickhouse import Query, Table, F, Aggregate, Window
+from pydantic import BaseModel
+
+class Sale(BaseModel):
+    date: str
+    amount: float
+
+sales = Table(model=Sale, name="sales")
+
+# 1. Aggregate: Total across all days
+q1 = Query(sales).aggregate(
+    total_sales=F.sum(sales.amount)
+)
+# Output: | total_sales |
+#         | 1000        |
+
+# 2. Group: Total per day
+q2 = Query(sales).group(
+    sales.date,
+    daily_sales=Aggregate(F.sum(sales.amount))
+)
+# Output: | date       | daily_sales |
+#         | 2024-01-01 | 100         |
+#         | 2024-01-02 | 150         |
+#         | 2024-01-03 | 250         |
+
+# 3. Window: Each row with running total
+q3 = Query(sales).window(
+    Window(range=(None, 0)),
+    cumulative=Aggregate(F.sum(sales.amount))
+)
+# Output: | date       | amount | cumulative |
+#         | 2024-01-01 | 100    | 100        |
+#         | 2024-01-02 | 150    | 250        |
+#         | 2024-01-03 | 250    | 500        |
+
+# 4. Group + Window: Per-day running total
+q4 = Query(sales).group(
+    sales.date,
+    Aggregate(F.sum(sales.amount)),
+    Window(range=(None, 0))
+)
+# Output: | date       | sum(amount) | sum(...) OVER (...) |
+#         | 2024-01-01 | 100         | 100                 |
+#         | 2024-01-02 | 150         | 250                 |
+#         | 2024-01-03 | 250         | 500                 |
 ```
 
 ---

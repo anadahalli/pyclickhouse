@@ -1,7 +1,11 @@
 ::: fields.Column
 
-::: fields.Param
+::: fields.Expression
+
+::: fields.Function
+
 ::: fields.Aggregate
 
-::: fields.Expression
-::: fields.Function
+::: fields.Param
+
+::: fields.Window

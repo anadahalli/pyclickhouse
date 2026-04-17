@@ -5,8 +5,8 @@
         - compile
         - select
         - derive
-        - sort
         - filter
+        - sort
         - aggregate
         - group
         - take
