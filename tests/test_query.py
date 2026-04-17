@@ -226,6 +226,78 @@ class TestQuery:
             == "SELECT model.*, other.* FROM model FULL JOIN other ON model.name = other.name"
         )
 
+        # right join
+        s = q.join(other, (table.name == other.name), side="right")
+        assert s.pipeline == [
+            "from model",
+            "join side:right other (model.name == other.name)",
+        ]
+        assert (
+            str(s)
+            == "SELECT model.*, other.* FROM model RIGHT OUTER JOIN other ON model.name = other.name"
+        )
+
+        # join with string relation
+        s = q.join("other", (table.name == other.name))
+        assert s.pipeline == [
+            "from model",
+            "join side:inner other (model.name == other.name)",
+        ]
+        assert (
+            str(s)
+            == "SELECT model.*, other.* FROM model INNER JOIN other ON model.name = other.name"
+        )
+
+        # join chained with other operations
+        s = q.join(other, (table.name == other.name)).filter(table.value > 10)
+        assert s.pipeline == [
+            "from model",
+            "join side:inner other (model.name == other.name)",
+            "filter (model.value > 10)",
+        ]
+        assert (
+            str(s)
+            == "SELECT model.*, other.* FROM model INNER JOIN other ON model.name = other.name WHERE model.value > 10"
+        )
+
+        # multiple joins
+        other2 = Table(Model, name="other2")
+        s = q.join(other, (table.name == other.name)).join(
+            other2, (table.value == other2.value)
+        )
+        assert s.pipeline == [
+            "from model",
+            "join side:inner other (model.name == other.name)",
+            "join side:inner other2 (model.value == other2.value)",
+        ]
+        assert (
+            str(s)
+            == "SELECT model.*, other.*, other2.* FROM model INNER JOIN other ON model.name = other.name INNER JOIN other2 ON model.value = other2.value"
+        )
+
+        # join with select
+        s = q.join(other, (table.name == other.name)).select(table.name, other.value)
+        assert s.pipeline == [
+            "from model",
+            "join side:inner other (model.name == other.name)",
+            "select {model.name, other.value}",
+        ]
+        assert (
+            str(s)
+            == "SELECT model.name, other.value FROM model INNER JOIN other ON model.name = other.name"
+        )
+
+        # join with multiple conditions
+        s = q.join(other, (table.name == other.name) & (table.value == other.value))
+        assert s.pipeline == [
+            "from model",
+            "join side:inner other (model.name == other.name && model.value == other.value)",
+        ]
+        assert (
+            str(s)
+            == "SELECT model.*, other.* FROM model INNER JOIN other ON model.name = other.name AND model.value = other.value"
+        )
+
     def test_query_exclude(self) -> None:
         q = Query(table)
 
