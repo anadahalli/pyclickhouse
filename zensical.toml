@@ -2,13 +2,14 @@
 site_name = "pyclickhouse"
 site_description = "Python async ClickHouse ORM using Pydantic"
 site_author = "Ashwath Nadahalli <anadahalli@gmail.com>"
-# site_url = ""
+site_url = "https://anadahalli.github.io/pyclickhouse/"
+repo_url = "https://github.com/anadahalli/pyclickhouse"
+repo_name = "anadahalli/pyclickhouse"
 copyright = "Copyright &copy; 2026 The authors"
 
 nav = [
   { "Overview" = "index.md" },
   { "Concepts" = [
-      # "concepts/index.md",
       "concepts/client.md",
       "concepts/table.md",
       "concepts/view.md",
@@ -18,7 +19,6 @@ nav = [
       "concepts/reader.md",
   ]},
   { "References" = [
-      # "references/index.md",
       "references/settings.md",
       "references/client.md",
       "references/admin.md",
@@ -85,13 +85,15 @@ toggle.name = "Switch to light mode"
 text = "Inter"
 code = "Jetbrains Mono"
 
-#[project.theme.icon]
-#logo = "lucide/smile"
-#repo = "lucide/smile"
+[project.theme.icon]
+logo = "fontawesome/solid/database"
+repo = "fontawesome/brands/github"
 
-#[[project.extra.social]]
-#icon = "fontawesome/brands/github"
-#link = "https://github.com/user/repo"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/anadahalli/pyclickhouse"
+name = "GitHub"
 
 [project.markdown_extensions.pymdownx.highlight]
 anchor_linenums = true
