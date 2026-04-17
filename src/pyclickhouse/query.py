@@ -1,13 +1,11 @@
 from dataclasses import dataclass, field, replace
-from typing import TYPE_CHECKING, Any, Self
+from typing import Any, Literal, Self
 
 import prqlc
 
-from pyclickhouse.fields import Aggregate
-
-if TYPE_CHECKING:
-    from pyclickhouse.table import Table
-    from pyclickhouse.view import View
+from pyclickhouse.fields import Aggregate, Expression, Function, Window
+from pyclickhouse.table import Table
+from pyclickhouse.view import View
 
 options = prqlc.CompileOptions(
     target="sql.clickhouse",
@@ -30,7 +28,15 @@ class Query:
 
     def __post_init__(self) -> None:
         if not self.pipeline:
-            step = f"from {self.table}"
+            if isinstance(self.table, View):
+                if self.table.table:
+                    step = f"from {self.table.table.get_name()}"
+                else:
+                    step = f"from {self.table.get_name()}"
+            elif isinstance(self.table, Table):
+                step = f"from {self.table.get_name()}"
+            else:
+                step = f"from {self.table}"
             self.pipeline.append(step)
 
     def build(self) -> str:
@@ -74,8 +80,8 @@ class Query:
     def _copy(self, step: str) -> Self:
         return replace(self, pipeline=[*self.pipeline, step])
 
-    def _join(self, items: list[str]) -> str:
-        return ", ".join(items)
+    def _join(self, items: list[str], join_key: str = ", ") -> str:
+        return join_key.join(items)
 
     def select(self, *args: Any, **kwargs: Any) -> Self:
         """Select columns from the table.
@@ -88,7 +94,6 @@ class Query:
             A new `Query` with the select step added.
         """
         if items := [*self._from_args(*args), *self._from_kwargs(**kwargs)]:
-            print(items)
             step = f"select {{{self._join(items)}}}"
             return self._copy(step)
         raise ValueError("select requires at least one argument")
@@ -152,8 +157,8 @@ class Query:
         """Group the table by the given columns and aggregate.
 
         Args:
-            *args: Column names to group by.
-            **kwargs: Aggregate name-expression pairs.
+            *args: Expression or Aggregate to group.
+            **kwargs: Expression or Aggregate to group.
 
         Returns:
             A new `Query` with the group step added.
@@ -211,19 +216,78 @@ class Query:
         step = f"take {range}"
         return self._copy(step)
 
-    def window(
+    def join(
         self,
-        rows: Any,
-        range: Any,
-        expanding: bool | None = None,
-        rolling: int | None = None,
-        *,
-        pipeline: Any | None = None,
+        rel: Table | View | str,
+        condition: Expression | str,
+        side: Literal["inner", "left", "right", "full"] = "inner",
     ) -> Self:
-        raise NotImplementedError()
+        """Join the table with another table.
 
-    def join(self) -> Self:
-        raise NotImplementedError()
+        Args:
+            rel: The table to join with.
+            condition: The join condition expression.
+            side: The type of join to perform. Defaults to "inner".
 
-    def exclude(self) -> Self:
-        raise NotImplementedError()
+        Returns:
+            A new `Query` with the join step added.
+        """
+        step = f"join side:{side} {str(rel)} ({str(condition)})"
+        return self._copy(step)
+
+    def exclude(self, *args: Any) -> Self:
+        """
+        Exclude columns from the table.
+
+        Exclude only works when there is a previous select/derive/group step that defines the columns to select.
+
+        Args:
+            *args: Column names to exclude.
+
+        Returns:
+            A new `Query` with the exclude step added.
+        """
+        if items := [*self._from_args(*args)]:
+            step = f"select !{{{self._join(items)}}}"
+            return self._copy(step)
+        raise ValueError("exclude requires at least one argument")
+
+    def window(self, *args: Any, **kwargs: Any) -> Self:
+        """
+        Create a window aggregation over the table.
+
+        Args:
+            *args: Window to apply.
+            **kwargs: Aggregate to apply.
+
+        Returns:
+            A new `Query` with the window step added.
+        """
+
+        windows: list[str] = []
+        derives: list[str] = []
+
+        for arg in args:
+            if isinstance(arg, Window):
+                windows.append(self._stringify(arg))
+
+        if len(windows) == 0:
+            raise ValueError("window requires at least one Window argument")
+
+        if len(windows) > 1:
+            raise ValueError("window only accepts one Window argument")
+
+        window_expr = str(windows[0])
+
+        for name, arg in kwargs.items():
+            if isinstance(arg, Aggregate):
+                if isinstance(arg.value, Function):
+                    expr = arg.value.to_sql(s_string=False)
+                expr = f"s'{expr} {window_expr}'"
+                derives.append(f"{name} = {expr}")
+
+        if len(derives) == 0:
+            raise ValueError("window requires at least one Aggregate keyword argument")
+
+        step = f"derive {{{self._join(derives)}}}"
+        return self._copy(step)

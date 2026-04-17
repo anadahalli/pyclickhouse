@@ -247,9 +247,9 @@ class Function:
 
 
 class Aggregate:
-    """ClickHouse Aggregate function used in group by expressions.
+    """ClickHouse Aggregate function used in group and window pipelines.
 
-    Used to distinguish between aggregate and non-aggregate functions in group by.
+    Used to distinguish between aggregate and non-aggregate expressions in group and and window.
 
     Examples:
         >>> Aggregate("value")
@@ -265,3 +265,64 @@ class Aggregate:
         # if isinstance(self.value, Function):
         #     return self.value.to_sql()
         return str(self.value)
+
+
+class Window:
+    """
+    ClickHouse window specification used in window pipelines.
+
+    Args:
+        range: tuple of (start, end) for range window. Start and end can be None, which represents unbounded. Cannot be specified with rows.
+        rows: tuple of (start, end) for rows window. Start and end can be None, which represents unbounded. Cannot be specified with range.
+    """
+
+    def __init__(
+        self,
+        *,
+        range: tuple[int | None, int | None] | None = None,
+        rows: tuple[int | None, int | None] | None = None,
+    ) -> None:
+        if range is not None and rows is not None:
+            raise ValueError("Cannot specify both range and rows in a window")
+        if range is None and rows is None:
+            raise ValueError("Must specify either range or rows in a window")
+        self.range = range
+        self.rows = rows
+
+    def __str__(self) -> str:
+        return self.to_sql()
+
+    def to_window(
+        self,
+        type: str,
+        start: int | None = None,
+        end: int | None = None,
+    ) -> str:
+        if start is None:
+            start_expr = "UNBOUNDED PRECEDING"
+        elif start == 0:
+            start_expr = "CURRENT ROW"
+        elif start < 0:
+            start_expr = f"{abs(start)} PRECEDING"
+        else:
+            start_expr = f"{start} FOLLOWING"
+        if end is None:
+            end_expr = "UNBOUNDED FOLLOWING"
+        elif end == 0:
+            end_expr = "CURRENT ROW"
+        elif end < 0:
+            end_expr = f"{abs(end)} PRECEDING"
+        else:
+            end_expr = f"{end} FOLLOWING"
+        return f"{type} BETWEEN {start_expr} AND {end_expr}"
+
+    def to_sql(self) -> str:
+        if self.range is not None:
+            start, end = self.range
+            window = self.to_window("RANGE", self.range[0], self.range[1])
+        elif self.rows is not None:
+            start, end = self.rows
+            window = self.to_window("ROWS", start, end)
+        else:
+            raise ValueError("Invalid window specification")
+        return f"OVER ({window})"

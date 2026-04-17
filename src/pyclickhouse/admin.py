@@ -11,7 +11,7 @@ from pyclickhouse.utils import comma_join, create_model_from_sql, logger
 from pyclickhouse.view import View
 
 if TYPE_CHECKING:
-    from .client import Client
+    from pyclickhouse.client import Client
 
 
 class AdminError(Exception):

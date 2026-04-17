@@ -1,7 +1,11 @@
-from pyclickhouse.query import Query
+from typing import TYPE_CHECKING
+
 from pyclickhouse.registry import Registry, default_registry
 from pyclickhouse.table import Table
 from pyclickhouse.types import Lifecycle
+
+if TYPE_CHECKING:
+    from pyclickhouse.query import Query
 
 
 class View:

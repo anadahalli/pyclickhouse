@@ -1,7 +1,7 @@
 import pytest
 from pydantic import BaseModel
 
-from pyclickhouse.fields import Aggregate, Param
+from pyclickhouse.fields import Aggregate, Param, Window
 from pyclickhouse.functions import F
 from pyclickhouse.query import Query
 from pyclickhouse.table import Table
@@ -177,3 +177,135 @@ class TestQuery:
         s = q.filter(table.name == Param("name"))
         assert s.pipeline == ["from model", "filter (model.name == s'{{name:String}}')"]
         assert str(s) == "SELECT * FROM model WHERE name = {name:String}"
+
+    def test_query_join(self) -> None:
+        q = Query(table)
+        other = Table(Model, name="other")
+
+        # default join
+        s = q.join(other, (table.name == other.name))
+        assert s.pipeline == [
+            "from model",
+            "join side:inner other (model.name == other.name)",
+        ]
+        assert (
+            str(s)
+            == "SELECT model.*, other.* FROM model INNER JOIN other ON model.name = other.name"
+        )
+
+        # inner join
+        s = q.join(other, (table.name == other.name), side="inner")
+        assert s.pipeline == [
+            "from model",
+            "join side:inner other (model.name == other.name)",
+        ]
+        assert (
+            str(s)
+            == "SELECT model.*, other.* FROM model INNER JOIN other ON model.name = other.name"
+        )
+
+        # left join
+        s = q.join(other, (table.name == other.name), side="left")
+        assert s.pipeline == [
+            "from model",
+            "join side:left other (model.name == other.name)",
+        ]
+        assert (
+            str(s)
+            == "SELECT model.*, other.* FROM model LEFT OUTER JOIN other ON model.name = other.name"
+        )
+
+        # full join
+        s = q.join(other, (table.name == other.name), side="full")
+        assert s.pipeline == [
+            "from model",
+            "join side:full other (model.name == other.name)",
+        ]
+        assert (
+            str(s)
+            == "SELECT model.*, other.* FROM model FULL JOIN other ON model.name = other.name"
+        )
+
+    def test_query_exclude(self) -> None:
+        q = Query(table)
+
+        # exclude with select
+        s = q.select(table.name, table.value).exclude(table.value)
+        assert s.pipeline == [
+            "from model",
+            "select {model.name, model.value}",
+            "select !{model.value}",
+        ]
+        assert str(s) == "SELECT name FROM model"
+
+        # exclude with group
+        s = q.group(table.name, val=Aggregate(F.count(table.value))).exclude(table.name)
+        assert s.pipeline == [
+            "from model",
+            "group {model.name} (aggregate {val = s'count(model.value)'})",
+            "select !{model.name}",
+        ]
+        assert str(s) == "SELECT count(model.value) AS val FROM model GROUP BY name"
+
+    def test_query_window(self) -> None:
+        q = Query(table)
+
+        with pytest.raises(ValueError):
+            q.window(Window())
+
+        with pytest.raises(ValueError):
+            q.window(Window(range=(1, 2), rows=(1, 2)))
+
+        # range
+        s = q.window(
+            Window(range=(-2, 0)),
+            total=Aggregate(F.count(table.value)),
+        )
+        assert s.pipeline == [
+            "from model",
+            "derive {total = s'count(model.value) OVER (RANGE BETWEEN 2 PRECEDING AND CURRENT ROW)'}",
+        ]
+        assert (
+            str(s)
+            == "SELECT *, count(model.value) OVER (RANGE BETWEEN 2 PRECEDING AND CURRENT ROW) AS total FROM model"
+        )
+
+        s = q.window(
+            Window(range=(None, 1)),
+            total=Aggregate(F.count(table.value)),
+        )
+        assert s.pipeline == [
+            "from model",
+            "derive {total = s'count(model.value) OVER (RANGE BETWEEN UNBOUNDED PRECEDING AND 1 FOLLOWING)'}",
+        ]
+        assert (
+            str(s)
+            == "SELECT *, count(model.value) OVER (RANGE BETWEEN UNBOUNDED PRECEDING AND 1 FOLLOWING) AS total FROM model"
+        )
+
+        # rows
+        s = q.window(
+            Window(rows=(2, 4)),
+            average=Aggregate(F.avg(table.value)),
+        )
+        assert s.pipeline == [
+            "from model",
+            "derive {average = s'avg(model.value) OVER (ROWS BETWEEN 2 FOLLOWING AND 4 FOLLOWING)'}",
+        ]
+        assert (
+            str(s)
+            == "SELECT *, avg(model.value) OVER (ROWS BETWEEN 2 FOLLOWING AND 4 FOLLOWING) AS average FROM model"
+        )
+
+        s = q.window(
+            Window(rows=(-4, None)),
+            average=Aggregate(F.avg(table.value)),
+        )
+        assert s.pipeline == [
+            "from model",
+            "derive {average = s'avg(model.value) OVER (ROWS BETWEEN 4 PRECEDING AND UNBOUNDED FOLLOWING)'}",
+        ]
+        assert (
+            str(s)
+            == "SELECT *, avg(model.value) OVER (ROWS BETWEEN 4 PRECEDING AND UNBOUNDED FOLLOWING) AS average FROM model"
+        )
