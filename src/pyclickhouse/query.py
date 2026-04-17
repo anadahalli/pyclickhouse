@@ -62,13 +62,6 @@ class Query:
         return self.compile()
 
     def _stringify(self, value: Any) -> str:
-        # if isinstance(value, Aggregate):
-        #     return str(value)
-        # if isinstance(value, Expression):
-        #     return str(value)
-        # if isinstance(value, Function):
-        #     # return value.to_sql()
-        #     return value.to_sql()
         return str(value)
 
     def _from_args(self, *args: Any) -> list[str]:
@@ -154,7 +147,7 @@ class Query:
         raise ValueError("aggregate requires at least one argument")
 
     def group(self, *args: Any, **kwargs: Any) -> Self:
-        """Group the table by the given columns and aggregate.
+        """Group the table by the given expressions and aggregates.
 
         Args:
             *args: Expression or Aggregate to group.
