@@ -150,28 +150,58 @@ class Query:
         """Group the table by the given expressions and aggregates.
 
         Args:
-            *args: Expression or Aggregate to group.
+            *args: Expression, Aggregate, or Window to group.
             **kwargs: Expression or Aggregate to group.
 
         Returns:
             A new `Query` with the group step added.
         """
         groups: list[str] = []
-        aggregates: list[str] = []
+        aggregates: list[tuple[str | None, Aggregate]] = []
+        window_expr: str | None = None
 
         for col in args:
-            if isinstance(col, Aggregate):
-                aggregates.append(self._stringify(col))
+            if isinstance(col, Window):
+                if window_expr is not None:
+                    raise ValueError("group only accepts one Window argument")
+                window_expr = str(col)
+            elif isinstance(col, Aggregate):
+                aggregates.append((None, col))
             else:
                 groups.append(self._stringify(col))
+
         for name, col in kwargs.items():
-            if isinstance(col, Aggregate):
-                aggregates.append(f"{name} = {self._stringify(col)}")
+            if isinstance(col, Window):
+                if window_expr is not None:
+                    raise ValueError("group only accepts one Window argument")
+                window_expr = str(col)
+            elif isinstance(col, Aggregate):
+                aggregates.append((name, col))
             else:
                 groups.append(f"{name} = {self._stringify(col)}")
 
+        if window_expr and len(aggregates) == 0:
+            raise ValueError(
+                "group requires at least one Aggregate when Window is specified"
+            )
+
         group = f"group {{{self._join(groups)}}}"
-        aggregate = f"aggregate {{{self._join(aggregates)}}}"
+
+        agg_strs: list[str] = []
+        for name, agg in aggregates:
+            agg_str = self._stringify(agg)
+
+            # Apply window if provided and agg value is a Function
+            if window_expr and isinstance(agg.value, Function):
+                expr = agg.value.to_sql(s_string=False)
+                agg_str = f"s'{expr} {window_expr}'"
+
+            if name:
+                agg_strs.append(f"{name} = {agg_str}")
+            else:
+                agg_strs.append(agg_str)
+
+        aggregate = f"aggregate {{{self._join(agg_strs)}}}"
         step = f"{group} ({aggregate})"
         return self._copy(step)
 

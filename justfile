@@ -5,7 +5,7 @@ install:
     uv sync --group dev
 
 dev:
-    uv run ptw src/
+    uv run ptw .
 
 test:
     uv run pytest --cov=src tests/

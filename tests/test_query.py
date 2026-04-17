@@ -247,6 +247,97 @@ class TestQuery:
         ]
         assert str(s) == "SELECT count(model.value) AS val FROM model GROUP BY name"
 
+    def test_query_group_with_window(self) -> None:
+        q = Query(table)
+
+        # group with window - range
+        s = q.group(
+            table.name,
+            Window(range=(-2, 0)),
+            total=Aggregate(F.count(table.value)),
+        )
+        assert s.pipeline == [
+            "from model",
+            "group {model.name} (aggregate {total = s'count(model.value) OVER (RANGE BETWEEN 2 PRECEDING AND CURRENT ROW)'})",
+        ]
+        assert (
+            str(s)
+            == "SELECT name, count(model.value) OVER (RANGE BETWEEN 2 PRECEDING AND CURRENT ROW) AS total FROM model GROUP BY name"
+        )
+
+        # group with window - range with unbounded
+        s = q.group(
+            table.name,
+            Window(range=(None, 1)),
+            total=Aggregate(F.sum(table.value)),
+        )
+        assert s.pipeline == [
+            "from model",
+            "group {model.name} (aggregate {total = s'sum(model.value) OVER (RANGE BETWEEN UNBOUNDED PRECEDING AND 1 FOLLOWING)'})",
+        ]
+        assert (
+            str(s)
+            == "SELECT name, sum(model.value) OVER (RANGE BETWEEN UNBOUNDED PRECEDING AND 1 FOLLOWING) AS total FROM model GROUP BY name"
+        )
+
+        # group with window - rows
+        s = q.group(
+            table.name,
+            Window(rows=(2, 4)),
+            average=Aggregate(F.avg(table.value)),
+        )
+        assert s.pipeline == [
+            "from model",
+            "group {model.name} (aggregate {average = s'avg(model.value) OVER (ROWS BETWEEN 2 FOLLOWING AND 4 FOLLOWING)'})",
+        ]
+        assert (
+            str(s)
+            == "SELECT name, avg(model.value) OVER (ROWS BETWEEN 2 FOLLOWING AND 4 FOLLOWING) AS average FROM model GROUP BY name"
+        )
+
+        # group with window - rows with unbounded
+        s = q.group(
+            table.name,
+            Window(rows=(-4, None)),
+            average=Aggregate(F.avg(table.value)),
+        )
+        assert s.pipeline == [
+            "from model",
+            "group {model.name} (aggregate {average = s'avg(model.value) OVER (ROWS BETWEEN 4 PRECEDING AND UNBOUNDED FOLLOWING)'})",
+        ]
+        assert (
+            str(s)
+            == "SELECT name, avg(model.value) OVER (ROWS BETWEEN 4 PRECEDING AND UNBOUNDED FOLLOWING) AS average FROM model GROUP BY name"
+        )
+
+        # group with multiple aggregates and window
+        s = q.group(
+            table.name,
+            Window(range=(0, 0)),
+            count=Aggregate(F.count()),
+            total=Aggregate(F.sum(table.value)),
+        )
+        assert s.pipeline == [
+            "from model",
+            "group {model.name} (aggregate {count = s'count() OVER (RANGE BETWEEN CURRENT ROW AND CURRENT ROW)', total = s'sum(model.value) OVER (RANGE BETWEEN CURRENT ROW AND CURRENT ROW)'})",
+        ]
+
+        # group with window but no aggregates should raise
+        with pytest.raises(ValueError):
+            q.group(
+                table.name,
+                Window(range=(0, 0)),
+            )
+
+        # group with multiple windows should raise
+        with pytest.raises(ValueError):
+            q.group(
+                table.name,
+                Window(range=(0, 0)),
+                Window(rows=(1, 1)),
+                total=Aggregate(F.count()),
+            )
+
     def test_query_window(self) -> None:
         q = Query(table)
 
