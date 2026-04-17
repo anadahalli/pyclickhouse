@@ -11,7 +11,8 @@ A modern async Python ORM for ClickHouse using Pydantic.
 * **Reader** to query and stream results with validation
 
 ## Documentation
-Documentation is available at [docs/](/)
+
+Documentation is available at [https://anadahalli.github.io/pyclickhouse/](https://anadahalli.github.io/pyclickhouse/)
 
 ---
 
