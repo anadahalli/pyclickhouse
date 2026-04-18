@@ -18,20 +18,26 @@ type Data[T] = T | dict[str, Any]
 type DataStream = AsyncGenerator[Data, None]
 
 
+class ReaderError(Exception):
+    """Raised when a reader encounters an error."""
+
+    pass
+
+
 class Reader[T: BaseModel, R: BaseModel]:
     """Reads data from the ClickHouse database using a given query."""
 
-    client: Client
     select: Select
     model: type[T] | None
     parameters: type[R] | None
-    context: QueryContext | None
+    _client: Client | None
+    _context: QueryContext | None
 
     def __init__(
         self,
-        client: Client,
         select: Select,
         *,
+        client: Client | None = None,
         model: type[T] | None = None,
         parameters: type[R] | None = None,
         max_block_size: int = 65536,
@@ -51,7 +57,6 @@ class Reader[T: BaseModel, R: BaseModel]:
             transport_settings: The transport settings to use for the insert. Defaults to None.
         """
 
-        self.client = client
         self.select = select
         self.model = model
         self.parameters = parameters
@@ -59,16 +64,23 @@ class Reader[T: BaseModel, R: BaseModel]:
         self.settings = settings
         self.transport_settings = transport_settings
 
+        self._client = client
+        self._context = None
+
         self._read_rows: int = 0
-        self.context = None
 
     @property
     def read_rows(self) -> int:
         """Returns the number of rows read from the database."""
         return self._read_rows
 
-    def _create_context(self) -> QueryContext:
-        return self.client.create_query_context(
+    def bind(self, client: Client) -> None:
+        if self._client is not None:
+            raise ReaderError("Client is already set")
+        self._client = client
+
+    def _create_context(self, client: Client) -> QueryContext:
+        return client.create_query_context(
             query=self._get_query_string(self.select),
             parameters={},
             settings=self.settings,
@@ -113,20 +125,26 @@ class Reader[T: BaseModel, R: BaseModel]:
         return parameters
 
     async def _query(self, parameters: Parameters = None) -> QueryResult:
-        if self.context is None:
-            self.context = self._create_context()
+        if self._client is None:
+            raise ReaderError("Client is not set")
 
-        return await self.client.query(
-            context=self.context,
+        if self._context is None:
+            self._context = self._create_context(self._client)
+
+        return await self._client.query(
+            context=self._context,
             parameters=parameters,
         )
 
     async def _query_stream(self, parameters: Parameters = None) -> StreamContext:
-        if self.context is None:
-            self.context = self._create_context()
+        if self._client is None:
+            raise ReaderError("Client is not set")
 
-        return await self.client.query_row_block_stream(
-            context=self.context,
+        if self._context is None:
+            self._context = self._create_context(self._client)
+
+        return await self._client.query_row_block_stream(
+            context=self._context,
             parameters=parameters,
         )
 
