@@ -10,19 +10,25 @@ if TYPE_CHECKING:
     from pyclickhouse.client import Client
 
 
+class WriterError(Exception):
+    """Raised when a writer encounters an error."""
+
+    pass
+
+
 class Writer[T: BaseModel]:
     """Writer for inserting data into a ClickHouse table."""
 
-    client: Client
     table: Table[T]
     model: type[T]
-    context: InsertContext | None
+    _client: Client | None
+    _context: InsertContext | None
 
     def __init__(
         self,
-        client: Client,
         table: Table[T],
         *,
+        client: Client | None = None,
         batch: bool = True,
         batch_size: int = 1000,
         database: str | None = None,
@@ -33,8 +39,8 @@ class Writer[T: BaseModel]:
         Initializes a new Writer instance.
 
         Args:
-            client: The ClickHouse client.
             table: The table to write to.
+            client: The ClickHouse client.
             batch: Whether to batch insert records. Defaults to True.
             batch_size: The number of records to insert in a batch. Defaults to 1000.
             database: The database to write to. Defaults to the database of the client.
@@ -42,7 +48,6 @@ class Writer[T: BaseModel]:
             transport_settings: The transport settings to use for the insert. Defaults to None.
         """
 
-        self.client = client
         self.table = table
         self.batch = batch
         self.batch_size = batch_size
@@ -50,7 +55,8 @@ class Writer[T: BaseModel]:
         self.settings = settings
         self.transport_settings = transport_settings
 
-        self.context = None
+        self._client = client
+        self._context = None
 
         self.model = table.get_model()
         self.columns = [col.name for col in table.get_columns().values()]
@@ -58,13 +64,13 @@ class Writer[T: BaseModel]:
         self._queue: deque[Sequence[Any]] = deque()
         self._written_rows: int = 0
 
-    async def _create_context(self) -> InsertContext:
+    async def _create_context(self, client: Client) -> InsertContext:
         table_name = self.table.get_name()
         table_columns = list(self.table.get_columns().values())
         column_names = [col.name for col in table_columns]
         column_type_names = [col.type for col in table_columns]
 
-        context = await self.client.create_insert_context(
+        context = await client.create_insert_context(
             table=table_name,
             database=self.database,
             column_names=column_names,
@@ -81,6 +87,11 @@ class Writer[T: BaseModel]:
 
     async def __aexit__(self, *args: Any, **kwargs: Any) -> None:
         await self.flush()
+
+    def bind(self, client: Client) -> None:
+        if self._client is not None:
+            raise WriterError("Client is already set")
+        self._client = client
 
     @property
     def written_rows(self) -> int:
@@ -101,13 +112,20 @@ class Writer[T: BaseModel]:
         return [self._queue.popleft() for _ in range(count)]
 
     async def _insert_batch(self, data: Sequence[Sequence[Any]]) -> None:
-        if self.context is None:
-            self.context = await self._create_context()
-        self.context.data = data
-        summary = await self.client.data_insert(context=self.context)
+        if self._client is None:
+            raise WriterError("Client is not set")
+
+        if self._context is None:
+            self._context = await self._create_context(self._client)
+
+        self._context.data = data
+        summary = await self._client.data_insert(context=self._context)
         self._written_rows += summary.written_rows
 
     async def _flush_batch(self) -> None:
+        if self._client is None:
+            raise WriterError("Client is not set")
+
         batch = self._get_next_batch()
         await self._insert_batch(batch)
 

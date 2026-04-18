@@ -4,19 +4,15 @@ from clickhouse_connect.driver.summary import QuerySummary
 from pydantic import BaseModel
 from pytest import fixture, raises
 
-from pyclickhouse import (
-    Admin,
-    Client,
-    Registry,
-    Table,
-    Writer,
-)
+from pyclickhouse import Admin, Client, Registry, Table
+from pyclickhouse.writer import Writer, WriterError
 
 
 @fixture
 def mock_client() -> MagicMock:
     client = MagicMock()
-    client.create_insert_context = AsyncMock()
+    context = MagicMock()
+    client.create_insert_context = AsyncMock(return_value=context)
     insert = AsyncMock()
     insert.return_value = QuerySummary({"written_rows": 1})
     client.data_insert = insert
@@ -35,15 +31,6 @@ table = Table(Data, name="writer", registry=registry)
 class TestWriter:
     async def test_writer_init(self, mock_client: MagicMock) -> None:
         writer = Writer(client=mock_client, table=table)
-        # mock_client.create_insert_context.assert_called_once_with(
-        #     table="writer",
-        #     database=None,
-        #     column_names=["name", "value"],
-        #     column_type_names=["String", "Int64"],
-        #     column_oriented=False,
-        #     settings=None,
-        #     transport_settings=None,
-        # )
         assert writer.table == table
         assert writer.batch is True
         assert writer.batch_size == 1000
@@ -96,13 +83,33 @@ class TestWriter:
         assert writer.queue_size == 0
         assert writer.written_rows == 100
 
+    async def test_writer_without_client(self, mock_client: MagicMock) -> None:
+        writer = Writer(table=table, batch=True)
+        assert writer._client is None
+        assert writer.queue_size == 0
+
+        await writer.insert(Data(name="one", value=1))
+        assert writer.queue_size == 1
+        with raises(WriterError):
+            await writer.flush()
+
+        writer.bind(mock_client)
+        assert writer._client is not None
+
+        mock_client.data_insert.return_value = QuerySummary({"written_rows": 2})
+        await writer.insert(Data(name="two", value=2))
+        assert writer.queue_size == 2
+        await writer.flush()
+        assert writer.queue_size == 0
+        assert writer.written_rows == 2
+
     async def test_writer_integration(self, client: Client) -> None:
         # create tables
         admin = Admin(client)
         await admin.create_all(registry)
 
         batch_size = 100
-        writer = Writer(client, table, batch_size=batch_size)
+        writer = Writer(table, client=client, batch_size=batch_size)
 
         async with writer:
             for i in range(batch_size - 1):
